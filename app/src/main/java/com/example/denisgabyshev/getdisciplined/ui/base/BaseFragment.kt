@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment
 /**
  * Created by denisgabyshev on 10/09/2017.
  */
-class BaseFragment : Fragment(), MvpView {
+abstract class BaseFragment : Fragment(), MvpView {
     lateinit var activity: BaseActivity
 
     override fun onAttach(context: Context) {
