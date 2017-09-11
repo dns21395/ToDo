@@ -1,8 +1,10 @@
 package com.example.denisgabyshev.getdisciplined.di.module
 
+import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import com.example.denisgabyshev.getdisciplined.di.ActivityContext
 import com.example.denisgabyshev.getdisciplined.di.PerActivity
+import com.example.denisgabyshev.getdisciplined.ui.splash.SplashMvpPresenter
 import com.example.denisgabyshev.getdisciplined.ui.splash.SplashMvpView
 import com.example.denisgabyshev.getdisciplined.ui.splash.SplashPresenter
 import com.example.denisgabyshev.getdisciplined.utils.rx.AppSchedulerProvider
@@ -18,20 +20,20 @@ class ActivityModule(private val activity: AppCompatActivity) {
 
     @Provides
     @ActivityContext
-    fun provideContext() = activity
+    fun provideContext(): Context = activity
 
     @Provides
-    fun provideActivity() = activity
+    fun provideActivity(): AppCompatActivity = activity
 
     @Provides
-    fun provideCompositeDisposable() = CompositeDisposable()
+    fun provideCompositeDisposable(): CompositeDisposable = CompositeDisposable()
 
     @Provides
-    fun provideSchedulerProvider() = AppSchedulerProvider()
+    fun provideSchedulerProvider(): AppSchedulerProvider = AppSchedulerProvider()
 
     @Provides
     @PerActivity
-    fun provideSplashPresenter(presenter: SplashPresenter<SplashMvpView>) = presenter
+    fun provideSplashPresenter(presenter: SplashPresenter<SplashMvpView>): SplashMvpPresenter<SplashMvpView> = presenter
 
 
 

@@ -16,6 +16,9 @@ constructor(dataManager: DataManager?,
             compositeDisposable: CompositeDisposable?) :
         BasePresenter<V>(dataManager, schedulerProvider, compositeDisposable), SplashMvpPresenter<V>{
 
+    override fun onAttach(mvpView: V) {
+        super.onAttach(mvpView)
+    }
 
 
 
