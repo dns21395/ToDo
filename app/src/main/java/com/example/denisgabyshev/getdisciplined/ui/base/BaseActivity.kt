@@ -22,11 +22,6 @@ abstract class BaseActivity : AppCompatActivity(), MvpView {
                 .activityModule(ActivityModule(this))
                 .applicationComponent(app.component())
                 .build()
-
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
     }
 
     override fun showToast(message: String) {
@@ -36,6 +31,8 @@ abstract class BaseActivity : AppCompatActivity(), MvpView {
     override fun hideKeyboard() {
         KeyboardUtils.hideSoftInput(this)
     }
+
+
 
 
 

@@ -8,7 +8,7 @@ import javax.inject.Inject
 class SplashActivity : BaseActivity(), SplashMvpView {
 
 
-   // @Inject lateinit var presenter: SplashMvpPresenter<SplashMvpView, SplashMvpInteractor>
+
 
     override fun openSettingsActivity() {
 
@@ -18,6 +18,7 @@ class SplashActivity : BaseActivity(), SplashMvpView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        activityComponent.inject(this)
 
 
 

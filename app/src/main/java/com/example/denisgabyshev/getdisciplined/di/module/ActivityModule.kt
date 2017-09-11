@@ -3,7 +3,6 @@ package com.example.denisgabyshev.getdisciplined.di.module
 import android.support.v7.app.AppCompatActivity
 import com.example.denisgabyshev.getdisciplined.di.ActivityContext
 import com.example.denisgabyshev.getdisciplined.di.PerActivity
-import com.example.denisgabyshev.getdisciplined.ui.splash.SplashMvpInteractor
 import com.example.denisgabyshev.getdisciplined.ui.splash.SplashMvpView
 import com.example.denisgabyshev.getdisciplined.ui.splash.SplashPresenter
 import com.example.denisgabyshev.getdisciplined.utils.rx.AppSchedulerProvider
@@ -32,7 +31,9 @@ class ActivityModule(private val activity: AppCompatActivity) {
 
     @Provides
     @PerActivity
-    fun provideSplashPresenter(presenter: SplashPresenter<SplashMvpView, SplashMvpInteractor>) = presenter
+    fun provideSplashPresenter(presenter: SplashPresenter<SplashMvpView>) = presenter
+
+
 
 
 
