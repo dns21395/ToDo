@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class SplashActivity : BaseActivity(), SplashMvpView {
 
-    //@Inject lateinit var presenter : SplashMvpPresenter<SplashMvpView>
+    @Inject lateinit var presenter : SplashMvpPresenter<SplashMvpView>
 
     override fun openSettingsActivity() {
 

@@ -8,6 +8,7 @@ import com.example.denisgabyshev.getdisciplined.ui.splash.SplashMvpPresenter
 import com.example.denisgabyshev.getdisciplined.ui.splash.SplashMvpView
 import com.example.denisgabyshev.getdisciplined.ui.splash.SplashPresenter
 import com.example.denisgabyshev.getdisciplined.utils.rx.AppSchedulerProvider
+import com.example.denisgabyshev.getdisciplined.utils.rx.SchedulerProvider
 import dagger.Module
 import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
@@ -29,14 +30,9 @@ class ActivityModule(private val activity: AppCompatActivity) {
     fun provideCompositeDisposable(): CompositeDisposable = CompositeDisposable()
 
     @Provides
-    fun provideSchedulerProvider(): AppSchedulerProvider = AppSchedulerProvider()
+    fun provideSchedulerProvider(): SchedulerProvider = AppSchedulerProvider()
 
     @Provides
     @PerActivity
     fun provideSplashPresenter(presenter: SplashPresenter<SplashMvpView>): SplashMvpPresenter<SplashMvpView> = presenter
-
-
-
-
-
 }
