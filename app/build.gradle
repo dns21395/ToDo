@@ -30,7 +30,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.android.support:appcompat-v7:26.0.2'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     // Android
@@ -41,6 +41,11 @@ dependencies {
     compile 'com.android.support:design:26.0.2'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
+
+    // Room
+    compile 'android.arch.persistence.room:runtime:1.0.0-alpha1'
+    compile 'android.arch.persistence.room:rxjava2:1.0.0-alpha1'
+    kapt "android.arch.persistence.room:compiler:1.0.0-alpha1"
 
     // Anko
     compile "org.jetbrains.anko:anko:0.10.1"
