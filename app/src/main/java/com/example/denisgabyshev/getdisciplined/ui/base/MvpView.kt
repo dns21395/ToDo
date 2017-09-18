@@ -1,8 +1,10 @@
 package com.example.denisgabyshev.getdisciplined.ui.base
 
 import android.content.Context
+import android.graphics.Typeface
 import android.support.v7.widget.AppCompatDrawableManager
 import android.widget.ImageView
+import android.widget.TextView
 import java.util.*
 
 /**
@@ -17,5 +19,5 @@ interface MvpView {
 
     fun transparentStatusBar()
 
-
+    fun TextView.setFont(fontPath : String)
 }

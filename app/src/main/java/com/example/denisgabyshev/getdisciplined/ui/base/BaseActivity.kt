@@ -1,6 +1,7 @@
 package com.example.denisgabyshev.getdisciplined.ui.base
 
 import android.content.Context
+import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
@@ -8,6 +9,7 @@ import android.support.v7.widget.AppCompatDrawableManager
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
+import android.widget.TextView
 import com.example.denisgabyshev.getdisciplined.di.component.ActivityComponent
 import com.example.denisgabyshev.getdisciplined.di.component.DaggerActivityComponent
 import com.example.denisgabyshev.getdisciplined.di.module.ActivityModule
@@ -41,5 +43,9 @@ abstract class BaseActivity : AppCompatActivity(), MvpView {
 
     override fun transparentStatusBar() {
         window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+    }
+
+    override fun TextView.setFont(fontPath: String) {
+        typeface = Typeface.createFromAsset(context.assets, fontPath)
     }
 }

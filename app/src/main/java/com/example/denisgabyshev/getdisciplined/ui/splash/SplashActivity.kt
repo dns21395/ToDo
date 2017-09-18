@@ -22,8 +22,9 @@ class SplashActivity : BaseActivity(), SplashMvpView {
 
         background.imageBackground(R.drawable.splash_background)
 
-
         transparentStatusBar()
+
+        splashTitle.setFont("fonts/parisien_night.otf")
     }
 
     override fun onDestroy() {
