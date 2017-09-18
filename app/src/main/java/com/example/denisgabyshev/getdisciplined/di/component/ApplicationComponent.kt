@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.example.denisgabyshev.getdisciplined.App
 import com.example.denisgabyshev.getdisciplined.data.DataManager
+import com.example.denisgabyshev.getdisciplined.data.db.AppDatabase
 import com.example.denisgabyshev.getdisciplined.di.ApplicationContext
 import com.example.denisgabyshev.getdisciplined.di.module.ApplicationModule
 import dagger.Component
@@ -23,4 +24,6 @@ interface ApplicationComponent {
     fun application(): Application
 
     fun getDataManager(): DataManager
+
+    fun getAppDatabase(): AppDatabase
 }

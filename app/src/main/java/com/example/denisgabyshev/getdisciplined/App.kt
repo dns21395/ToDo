@@ -14,10 +14,6 @@ import javax.inject.Inject
  */
 class App : Application() {
 
-    companion object {
-        var database: AppDatabase? = null
-    }
-
     @Inject lateinit var dataManager: DataManager
 
      private val applicationComponent: ApplicationComponent by lazy {
@@ -29,9 +25,8 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        applicationComponent.inject(this)
 
-        App.database = Room.databaseBuilder(this, AppDatabase::class.java, "we-need-db").build()
+        applicationComponent.inject(this)
     }
 
     fun component() = applicationComponent

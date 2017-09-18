@@ -1,9 +1,12 @@
 package com.example.denisgabyshev.getdisciplined.di.module
 
 import android.app.Application
+import android.arch.persistence.room.Room
 import android.content.Context
+import com.example.denisgabyshev.getdisciplined.App
 import com.example.denisgabyshev.getdisciplined.data.AppDataManager
 import com.example.denisgabyshev.getdisciplined.data.DataManager
+import com.example.denisgabyshev.getdisciplined.data.db.AppDatabase
 import com.example.denisgabyshev.getdisciplined.di.ApplicationContext
 import dagger.Module
 import dagger.Provides
@@ -24,5 +27,9 @@ class ApplicationModule(private val application: Application) {
     @Provides
     @Singleton
     fun provideDataManager(appDataManager: AppDataManager): DataManager = appDataManager
+
+    @Provides
+    fun providateAppDatabase(): AppDatabase = Room.databaseBuilder(application, AppDatabase::class.java, "we-need-db").build()
+
 
 }
