@@ -17,7 +17,7 @@ interface TaskDao {
     @Query("SELECT COUNT(task.id) FROM task "
             + " INNER JOIN date ON date.id = :dateId")
     fun getTaskCount(dateId: Long): Int
-    
+
     @Insert
     fun insert(task: Task)
 
