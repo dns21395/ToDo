@@ -29,7 +29,7 @@ class ApplicationModule(private val application: Application) {
     fun provideDataManager(appDataManager: AppDataManager): DataManager = appDataManager
 
     @Provides
-    fun providateAppDatabase(): AppDatabase = Room.databaseBuilder(application, AppDatabase::class.java, "we-need-db").build()
+    fun provideAppDatabase(): AppDatabase = Room.databaseBuilder(application, AppDatabase::class.java, "we-need-db").build()
 
 
 }
