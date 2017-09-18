@@ -15,5 +15,7 @@ interface MvpView {
 
     fun ImageView.imageBackground(drawable: Int)
 
+    fun transparentStatusBar()
+
 
 }

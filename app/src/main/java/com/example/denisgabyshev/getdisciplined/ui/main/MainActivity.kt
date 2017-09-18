@@ -1,9 +1,14 @@
 package com.example.denisgabyshev.getdisciplined.ui.main
 
 import android.os.Bundle
+import android.view.View
 import com.example.denisgabyshev.getdisciplined.R
 import com.example.denisgabyshev.getdisciplined.ui.base.BaseActivity
 import javax.inject.Inject
+import android.view.View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+import android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+
+
 
 
 /**
@@ -18,5 +23,6 @@ class MainActivity : BaseActivity(), MainMvpView {
         setContentView(R.layout.activity_main)
 
         activityComponent.inject(this)
+
     }
 }

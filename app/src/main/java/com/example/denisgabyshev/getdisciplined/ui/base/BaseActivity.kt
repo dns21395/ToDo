@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.AppCompatDrawableManager
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import com.example.denisgabyshev.getdisciplined.di.component.ActivityComponent
@@ -36,5 +37,9 @@ abstract class BaseActivity : AppCompatActivity(), MvpView {
 
     override fun ImageView.imageBackground(drawable: Int) {
         setImageDrawable(AppCompatDrawableManager.get().getDrawable(context, drawable))
+    }
+
+    override fun transparentStatusBar() {
+        window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
     }
 }

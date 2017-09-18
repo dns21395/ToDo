@@ -1,6 +1,7 @@
 package com.example.denisgabyshev.getdisciplined.ui.splash
 
 import android.os.Bundle
+import android.view.View
 import com.example.denisgabyshev.getdisciplined.R
 import com.example.denisgabyshev.getdisciplined.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_splash.*
@@ -20,6 +21,9 @@ class SplashActivity : BaseActivity(), SplashMvpView {
         activityComponent.inject(this)
 
         background.imageBackground(R.drawable.splash_background)
+
+
+        transparentStatusBar()
     }
 
     override fun onDestroy() {
