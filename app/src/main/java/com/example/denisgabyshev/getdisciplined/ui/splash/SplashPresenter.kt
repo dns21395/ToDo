@@ -18,6 +18,8 @@ constructor(dataManager: DataManager?,
 
     override fun onAttach(mvpView: V) {
         super.onAttach(mvpView)
+
+        mvpView.openMainActivity()
     }
 
 

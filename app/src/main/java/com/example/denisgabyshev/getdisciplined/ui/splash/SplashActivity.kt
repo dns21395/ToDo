@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.example.denisgabyshev.getdisciplined.R
 import com.example.denisgabyshev.getdisciplined.ui.base.BaseActivity
+import com.example.denisgabyshev.getdisciplined.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_splash.*
 import javax.inject.Inject
 
@@ -11,8 +12,10 @@ class SplashActivity : BaseActivity(), SplashMvpView {
 
     @Inject lateinit var presenter : SplashMvpPresenter<SplashMvpView>
 
-    override fun openSettingsActivity() {
-
+    override fun openMainActivity() {
+        val intent = MainActivity.getStartIntent(this)
+        startActivity(intent)
+        finish()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +28,8 @@ class SplashActivity : BaseActivity(), SplashMvpView {
         transparentStatusBar()
 
         splashTitle.setFont("fonts/parisien_night.otf")
+
+        presenter.onAttach(this)
     }
 
     override fun onDestroy() {

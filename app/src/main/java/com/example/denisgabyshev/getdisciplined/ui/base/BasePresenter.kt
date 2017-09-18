@@ -22,7 +22,5 @@ constructor(var dataManager: DataManager?,
     override fun onDetach() {
         compositeDisposable?.dispose()
         mvpView = null
-
     }
-
 }

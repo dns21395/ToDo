@@ -1,5 +1,7 @@
 package com.example.denisgabyshev.getdisciplined.ui.main
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.example.denisgabyshev.getdisciplined.R
@@ -18,11 +20,18 @@ class MainActivity : BaseActivity(), MainMvpView {
 
     @Inject lateinit var presenter: MainMvpPresenter<MainMvpView>
 
+    companion object {
+        fun getStartIntent(context: Context): Intent =
+                Intent(context, MainActivity::class.java)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         activityComponent.inject(this)
 
+
+        presenter.onAttach(this)
     }
 }
