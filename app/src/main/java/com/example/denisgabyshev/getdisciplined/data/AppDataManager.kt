@@ -17,9 +17,9 @@ import javax.inject.Singleton
  * Created by denisgabyshev on 11/09/2017.
  */
 @Singleton
-class AppDataManager @Inject constructor(@ApplicationContext val context: Context, val database: AppDatabase) : DataManager {
+class AppDataManager @Inject constructor(@ApplicationContext val context: Context, private val database: AppDatabase) : DataManager {
     override fun addDate() {
-        val date = Date(0, Date().toString())
+        val date = Date(0, Date().time.toString())
 
         Single.fromCallable {
             database.dateDao().insert(date)
@@ -40,5 +40,9 @@ class AppDataManager @Inject constructor(@ApplicationContext val context: Contex
 
         }
     }
+
+
+
+
 
 }
