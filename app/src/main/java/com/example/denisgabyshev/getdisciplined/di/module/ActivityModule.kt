@@ -4,6 +4,9 @@ import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import com.example.denisgabyshev.getdisciplined.di.ActivityContext
 import com.example.denisgabyshev.getdisciplined.di.PerActivity
+import com.example.denisgabyshev.getdisciplined.ui.main.MainMvpPresenter
+import com.example.denisgabyshev.getdisciplined.ui.main.MainMvpView
+import com.example.denisgabyshev.getdisciplined.ui.main.MainPresenter
 import com.example.denisgabyshev.getdisciplined.ui.splash.SplashMvpPresenter
 import com.example.denisgabyshev.getdisciplined.ui.splash.SplashMvpView
 import com.example.denisgabyshev.getdisciplined.ui.splash.SplashPresenter
@@ -35,4 +38,8 @@ class ActivityModule(private val activity: AppCompatActivity) {
     @Provides
     @PerActivity
     fun provideSplashPresenter(presenter: SplashPresenter<SplashMvpView>): SplashMvpPresenter<SplashMvpView> = presenter
+
+    @Provides
+    @PerActivity
+    fun provideMainPresenter(presenter: MainPresenter<MainMvpView>): MainMvpPresenter<MainMvpView> = presenter
 }

@@ -1,5 +1,6 @@
 package com.example.denisgabyshev.getdisciplined.utils
 
+import android.widget.ImageView
 import java.util.*
 
 /**
@@ -16,4 +17,6 @@ class AppUtils {
                     userDate.get(Calendar.DAY_OF_YEAR) == currentDate.get(Calendar.DAY_OF_YEAR)
         }
     }
+
+
 }

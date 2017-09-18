@@ -4,7 +4,9 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.AppCompatDrawableManager
 import android.view.inputmethod.InputMethodManager
+import android.widget.ImageView
 import com.example.denisgabyshev.getdisciplined.di.component.ActivityComponent
 import com.example.denisgabyshev.getdisciplined.di.component.DaggerActivityComponent
 import com.example.denisgabyshev.getdisciplined.di.module.ActivityModule
@@ -32,9 +34,7 @@ abstract class BaseActivity : AppCompatActivity(), MvpView {
         KeyboardUtils.hideSoftInput(this)
     }
 
-
-
-
-
-
+    override fun ImageView.imageBackground(drawable: Int) {
+        setImageDrawable(AppCompatDrawableManager.get().getDrawable(context, drawable))
+    }
 }
