@@ -7,6 +7,9 @@ import com.example.denisgabyshev.getdisciplined.di.PerActivity
 import com.example.denisgabyshev.getdisciplined.ui.main.MainMvpPresenter
 import com.example.denisgabyshev.getdisciplined.ui.main.MainMvpView
 import com.example.denisgabyshev.getdisciplined.ui.main.MainPresenter
+import com.example.denisgabyshev.getdisciplined.ui.main.task.TaskMvpPresenter
+import com.example.denisgabyshev.getdisciplined.ui.main.task.TaskMvpView
+import com.example.denisgabyshev.getdisciplined.ui.main.task.TaskPresenter
 import com.example.denisgabyshev.getdisciplined.ui.splash.SplashMvpPresenter
 import com.example.denisgabyshev.getdisciplined.ui.splash.SplashMvpView
 import com.example.denisgabyshev.getdisciplined.ui.splash.SplashPresenter
@@ -42,4 +45,7 @@ class ActivityModule(private val activity: AppCompatActivity) {
     @Provides
     @PerActivity
     fun provideMainPresenter(presenter: MainPresenter<MainMvpView>): MainMvpPresenter<MainMvpView> = presenter
+
+    @Provides
+    fun provideTaskMvpPresenter(presenter: TaskPresenter<TaskMvpView>): TaskMvpPresenter<TaskMvpView> = presenter
 }

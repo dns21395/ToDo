@@ -1,7 +1,15 @@
 package com.example.denisgabyshev.getdisciplined.ui.base
 
 import android.content.Context
+import android.graphics.Typeface
 import android.support.v4.app.Fragment
+import android.support.v7.widget.AppCompatDrawableManager
+import android.view.WindowManager
+import android.widget.ImageView
+import android.widget.TextView
+import com.example.denisgabyshev.getdisciplined.utils.KeyboardUtils
+import org.jetbrains.anko.support.v4.toast
+import org.jetbrains.anko.toast
 
 /**
  * Created by denisgabyshev on 10/09/2017.
@@ -17,11 +25,23 @@ abstract class BaseFragment : Fragment(), MvpView {
         }
     }
 
-    override fun hideKeyboard() {
-
+    override fun showToast(message: String) {
+        toast(message)
     }
 
-    override fun showToast(message: String) {
+    override fun hideKeyboard() {
+        KeyboardUtils.hideSoftInput(activity)
+    }
 
+    override fun ImageView.imageBackground(drawable: Int) {
+        setImageDrawable(AppCompatDrawableManager.get().getDrawable(context, drawable))
+    }
+
+    override fun transparentStatusBar() {
+        activity.window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+    }
+
+    override fun TextView.setFont(fontPath: String) {
+        typeface = Typeface.createFromAsset(context.assets, fontPath)
     }
 }
