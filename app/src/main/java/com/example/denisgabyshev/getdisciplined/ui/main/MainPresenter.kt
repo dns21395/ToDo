@@ -16,5 +16,7 @@ constructor(dataManager: DataManager?,
         BasePresenter<V>(dataManager, schedulerProvider, compositeDisposable), MainMvpPresenter<V>{
     override fun onAttach(mvpView: V) {
         super.onAttach(mvpView)
+
+        mvpView.setTaskFragment()
     }
 }

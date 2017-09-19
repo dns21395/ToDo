@@ -9,15 +9,13 @@ import com.example.denisgabyshev.getdisciplined.ui.base.BaseActivity
 import javax.inject.Inject
 import android.view.View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
 import android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-
-
+import com.example.denisgabyshev.getdisciplined.ui.main.task.TaskFragment
 
 
 /**
  * Created by denisgabyshev on 18/09/2017.
  */
 class MainActivity : BaseActivity(), MainMvpView {
-
     @Inject lateinit var presenter: MainMvpPresenter<MainMvpView>
 
     companion object {
@@ -33,5 +31,9 @@ class MainActivity : BaseActivity(), MainMvpView {
 
 
         presenter.onAttach(this)
+    }
+
+    override fun setTaskFragment() {
+        supportFragmentManager.beginTransaction().replace(R.id.frameLayout, TaskFragment()).commitNowAllowingStateLoss()
     }
 }
