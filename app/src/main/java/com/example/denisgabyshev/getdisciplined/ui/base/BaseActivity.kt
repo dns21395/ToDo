@@ -48,4 +48,6 @@ abstract class BaseActivity : AppCompatActivity(), MvpView {
     override fun TextView.setFont(fontPath: String) {
         typeface = Typeface.createFromAsset(context.assets, fontPath)
     }
+
+    protected abstract fun setUp()
 }

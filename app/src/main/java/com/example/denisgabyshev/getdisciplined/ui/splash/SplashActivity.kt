@@ -9,7 +9,6 @@ import kotlinx.android.synthetic.main.activity_splash.*
 import javax.inject.Inject
 
 class SplashActivity : BaseActivity(), SplashMvpView {
-
     @Inject lateinit var presenter : SplashMvpPresenter<SplashMvpView>
 
     override fun openMainActivity() {
@@ -34,6 +33,10 @@ class SplashActivity : BaseActivity(), SplashMvpView {
 
     override fun onDestroy() {
         super.onDestroy()
+    }
+
+    override fun setUp() {
+
     }
 
 
