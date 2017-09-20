@@ -11,7 +11,7 @@ import javax.inject.Inject
  * Created by denisgabyshev on 11/09/2017.
  */
 class SplashPresenter<V : SplashMvpView> @Inject
-constructor(dataManager: DataManager?,
+constructor(dataManager: DataManager,
             schedulerProvider: SchedulerProvider?,
             compositeDisposable: CompositeDisposable?) :
         BasePresenter<V>(dataManager, schedulerProvider, compositeDisposable), SplashMvpPresenter<V>{

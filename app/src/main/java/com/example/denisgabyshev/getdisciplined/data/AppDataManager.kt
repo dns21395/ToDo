@@ -5,11 +5,16 @@ import com.example.denisgabyshev.getdisciplined.data.db.AppDatabase
 import com.example.denisgabyshev.getdisciplined.data.db.model.Date
 import com.example.denisgabyshev.getdisciplined.data.db.model.Task
 import com.example.denisgabyshev.getdisciplined.di.ApplicationContext
+import com.example.denisgabyshev.getdisciplined.utils.rx.SchedulerProvider
+import io.reactivex.Flowable
+import io.reactivex.Observable
+import io.reactivex.Observer
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.doAsync
-import java.util.*
+import java.util.Date.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -17,12 +22,14 @@ import javax.inject.Singleton
  * Created by denisgabyshev on 11/09/2017.
  */
 @Singleton
-class AppDataManager @Inject constructor(@ApplicationContext val context: Context, private val database: AppDatabase) : DataManager {
-    override fun addDate() {
-        val date = Date(0, Date().time.toString())
+class AppDataManager @Inject constructor(@ApplicationContext val context: Context,
+                                         private val database: AppDatabase,
+                                         private val scheduler: SchedulerProvider) : DataManager {
+    override fun addDate(date: Long) {
+        val _date = Date(0, date)
 
         Single.fromCallable {
-            database.dateDao().insert(date)
+            database.dateDao().insert(_date)
         }.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe()
     }
@@ -35,11 +42,14 @@ class AppDataManager @Inject constructor(@ApplicationContext val context: Contex
 
             Single.fromCallable {
                 database.taskDao().insert(_task)
-            }.subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread()).subscribe()
+            }.subscribeOn(scheduler.io())
+                    .observeOn(scheduler.ui()).subscribe()
 
         }
     }
+
+     override fun getDateId(date: Long): Flowable<Int> =
+             database.dateDao().getDateId(date)
 
 
 

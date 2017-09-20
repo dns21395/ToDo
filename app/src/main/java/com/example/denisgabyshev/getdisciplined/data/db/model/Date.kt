@@ -10,5 +10,5 @@ import android.arch.persistence.room.PrimaryKey
 data class Date (
         @PrimaryKey(autoGenerate = true)
         val id: Long,
-        val date: String = ""
+        val date: Long
 )

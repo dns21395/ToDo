@@ -36,9 +36,6 @@ class ActivityModule(private val activity: AppCompatActivity) {
     fun provideCompositeDisposable(): CompositeDisposable = CompositeDisposable()
 
     @Provides
-    fun provideSchedulerProvider(): SchedulerProvider = AppSchedulerProvider()
-
-    @Provides
     @PerActivity
     fun provideSplashPresenter(presenter: SplashPresenter<SplashMvpView>): SplashMvpPresenter<SplashMvpView> = presenter
 

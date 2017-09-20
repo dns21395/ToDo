@@ -9,7 +9,9 @@ import com.example.denisgabyshev.getdisciplined.R
 import com.example.denisgabyshev.getdisciplined.ui.base.BaseActivity
 import javax.inject.Inject
 import com.example.denisgabyshev.getdisciplined.ui.main.task.TaskFragment
+import com.example.denisgabyshev.getdisciplined.utils.ScreenUtils
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.topPadding
 
 
 /**
@@ -42,7 +44,12 @@ class MainActivity : BaseActivity(), MainMvpView {
     }
 
     override fun setUp() {
+        transparentStatusBar()
+
+        appBar.topPadding = ScreenUtils.getStatusBarHeight(this)
+
         setSupportActionBar(toolbar)
+        supportActionBar?.title = ""
 
         drawerToggle = object : ActionBarDrawerToggle(
                 this,
@@ -66,6 +73,7 @@ class MainActivity : BaseActivity(), MainMvpView {
     }
 
     fun setupNavMenu() {
+        navigationView.setPadding(0, ScreenUtils.getStatusBarHeight(this), 0, 0)
         navigationView.setNavigationItemSelectedListener {
             when(it.itemId) {
                 R.id.todo -> {

@@ -10,7 +10,7 @@ import javax.inject.Inject
  * Created by denisgabyshev on 18/09/2017.
  */
 class MainPresenter<V : MainMvpView> @Inject
-constructor(dataManager: DataManager?,
+constructor(dataManager: DataManager,
             schedulerProvider: SchedulerProvider?,
             compositeDisposable: CompositeDisposable?) :
         BasePresenter<V>(dataManager, schedulerProvider, compositeDisposable), MainMvpPresenter<V>{

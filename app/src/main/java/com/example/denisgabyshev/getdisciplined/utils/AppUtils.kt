@@ -1,6 +1,7 @@
 package com.example.denisgabyshev.getdisciplined.utils
 
 import android.widget.ImageView
+import kotlinx.android.synthetic.main.fragment_tasks.*
 import java.util.*
 
 /**
@@ -8,15 +9,18 @@ import java.util.*
  */
 class AppUtils {
     companion object {
-        fun isToday(date: Long): Boolean {
-            val userDate = {Calendar.getInstance().time = Date(date)} as Calendar
+        fun isToday(date: Long): Boolean = getToday() == date
 
-            val currentDate = {Calendar.getInstance().time = Date()} as Calendar
-
-            return userDate.get(Calendar.YEAR) == currentDate.get(Calendar.YEAR) &&
-                    userDate.get(Calendar.DAY_OF_YEAR) == currentDate.get(Calendar.DAY_OF_YEAR)
+        fun getToday(): Long {
+            val day = Date()
+            val calendar = Calendar.getInstance()
+            calendar.time = day
+            return "${calendar.get(Calendar.YEAR)}${calendar.get(Calendar.DAY_OF_YEAR)}".toLong()
         }
     }
+
+
+
 
 
 }

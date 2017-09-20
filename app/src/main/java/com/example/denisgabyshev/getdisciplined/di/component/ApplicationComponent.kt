@@ -7,6 +7,7 @@ import com.example.denisgabyshev.getdisciplined.data.DataManager
 import com.example.denisgabyshev.getdisciplined.data.db.AppDatabase
 import com.example.denisgabyshev.getdisciplined.di.ApplicationContext
 import com.example.denisgabyshev.getdisciplined.di.module.ApplicationModule
+import com.example.denisgabyshev.getdisciplined.utils.rx.SchedulerProvider
 import dagger.Component
 import javax.inject.Singleton
 
@@ -26,4 +27,6 @@ interface ApplicationComponent {
     fun getDataManager(): DataManager
 
     fun getAppDatabase(): AppDatabase
+
+    fun getSchedulerProvider(): SchedulerProvider
 }

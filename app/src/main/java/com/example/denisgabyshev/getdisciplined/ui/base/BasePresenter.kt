@@ -2,6 +2,7 @@ package com.example.denisgabyshev.getdisciplined.ui.base
 
 import com.example.denisgabyshev.getdisciplined.data.DataManager
 import com.example.denisgabyshev.getdisciplined.utils.rx.SchedulerProvider
+import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
@@ -9,7 +10,7 @@ import javax.inject.Inject
  * Created by denisgabyshev on 11/09/2017.
  */
 open class BasePresenter<V : MvpView> @Inject
-constructor(var dataManager: DataManager?,
+constructor(var dataManager: DataManager,
             var schedulerProvider: SchedulerProvider?,
             var compositeDisposable: CompositeDisposable?) : MvpPresenter<V> {
 

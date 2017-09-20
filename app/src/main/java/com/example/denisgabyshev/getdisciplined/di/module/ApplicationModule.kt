@@ -8,6 +8,8 @@ import com.example.denisgabyshev.getdisciplined.data.AppDataManager
 import com.example.denisgabyshev.getdisciplined.data.DataManager
 import com.example.denisgabyshev.getdisciplined.data.db.AppDatabase
 import com.example.denisgabyshev.getdisciplined.di.ApplicationContext
+import com.example.denisgabyshev.getdisciplined.utils.rx.AppSchedulerProvider
+import com.example.denisgabyshev.getdisciplined.utils.rx.SchedulerProvider
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -30,6 +32,9 @@ class ApplicationModule(private val application: Application) {
 
     @Provides
     fun provideAppDatabase(): AppDatabase = Room.databaseBuilder(application, AppDatabase::class.java, "we-need-db").build()
+
+    @Provides
+    fun provideSchedulerProvider(): SchedulerProvider = AppSchedulerProvider()
 
 
 }
