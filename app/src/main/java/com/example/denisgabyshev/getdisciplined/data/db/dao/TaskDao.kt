@@ -14,6 +14,9 @@ interface TaskDao {
     @Query("SELECT * FROM task")
     fun getAllTasks(): Flowable<List<Task>>
 
+    @Query("SELECT * FROM task WHERE dateId = :date")
+    fun getTasksByDayId(date: Long): Flowable<List<Task>>
+
     @Query("SELECT COUNT(task.id) FROM task "
             + " INNER JOIN date ON date.id = :dateId")
     fun getTaskCount(dateId: Long): Int

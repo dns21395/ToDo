@@ -2,6 +2,7 @@ package com.example.denisgabyshev.getdisciplined.ui.main.task
 
 import android.util.Log
 import com.example.denisgabyshev.getdisciplined.data.DataManager
+import com.example.denisgabyshev.getdisciplined.data.db.model.Task
 import com.example.denisgabyshev.getdisciplined.ui.base.BasePresenter
 import com.example.denisgabyshev.getdisciplined.utils.AppUtils
 import com.example.denisgabyshev.getdisciplined.utils.rx.SchedulerProvider
@@ -41,7 +42,26 @@ class TaskPresenter<V : TaskMvpView> @Inject constructor(dataManager: DataManage
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
-                    mvpView?.setToolbar(it[0].date)
+                    if(it.isNotEmpty()) {
+                        val date = it[0].date
+
+                        mvpView?.setToolbar(date)
+                        getTasksByDate(date)
+                    }
                 })
     }
+
+    override fun getTasksByDate(dateId: Long) {
+        compositeDisposable?.add(dataManager.getTasksByDayId(dateId).subscribe {
+            mvpView?.setTasksList(it as ArrayList<Task>)
+        })
+    }
+
+
+
+
+
+
+
+
 }

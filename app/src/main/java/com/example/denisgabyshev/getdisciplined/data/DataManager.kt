@@ -1,6 +1,7 @@
 package com.example.denisgabyshev.getdisciplined.data
 
 import com.example.denisgabyshev.getdisciplined.data.db.model.Date
+import com.example.denisgabyshev.getdisciplined.data.db.model.Task
 import io.reactivex.Flowable
 
 
@@ -14,6 +15,6 @@ interface DataManager{
 
     fun getDateId(date: Long): Flowable<List<Date>>
 
-
+    fun getTasksByDayId(date: Long): Flowable<List<Task>>
 
 }

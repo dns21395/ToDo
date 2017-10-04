@@ -10,4 +10,6 @@ interface TaskMvpPresenter<V : TaskMvpView> : MvpPresenter<V> {
     fun insertToday()
 
     fun isTodayExist()
+
+    fun getTasksByDate(dateId: Long)
 }

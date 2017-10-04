@@ -48,6 +48,8 @@ class AppDataManager @Inject constructor(@ApplicationContext val context: Contex
                 database.dateDao().getDateId(date)
 
 
+    override fun getTasksByDayId(date: Long): Flowable<List<Task>> =
+            database.taskDao().getTasksByDayId(date)
 
 
 
