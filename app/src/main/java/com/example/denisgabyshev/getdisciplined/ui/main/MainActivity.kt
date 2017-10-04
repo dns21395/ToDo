@@ -87,4 +87,8 @@ class MainActivity : BaseActivity(), MainMvpView {
             }
         }
     }
+
+    override fun setToolbarText(date: String) {
+        toolbar.title = date
+    }
 }

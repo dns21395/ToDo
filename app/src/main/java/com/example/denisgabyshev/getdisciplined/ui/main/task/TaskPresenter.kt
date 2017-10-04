@@ -41,7 +41,7 @@ class TaskPresenter<V : TaskMvpView> @Inject constructor(dataManager: DataManage
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
-                    mvpView?.setTextView("${it[0].date}")
+                    mvpView?.setToolbar(it[0].date)
                 })
     }
 }

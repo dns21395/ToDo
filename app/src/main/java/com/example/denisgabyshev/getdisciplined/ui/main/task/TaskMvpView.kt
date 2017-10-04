@@ -7,4 +7,6 @@ import com.example.denisgabyshev.getdisciplined.ui.base.MvpView
  */
 interface TaskMvpView : MvpView {
     fun setTextView(message: String)
+
+    fun setToolbar(date: Long)
 }

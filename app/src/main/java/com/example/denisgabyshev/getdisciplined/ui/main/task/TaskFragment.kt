@@ -5,12 +5,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.denisgabyshev.getdisciplined.App
 import com.example.denisgabyshev.getdisciplined.R
 import com.example.denisgabyshev.getdisciplined.ui.base.BaseFragment
+import com.example.denisgabyshev.getdisciplined.ui.main.MainActivity
+import com.example.denisgabyshev.getdisciplined.ui.main.MainMvpPresenter
+import com.example.denisgabyshev.getdisciplined.ui.main.MainMvpView
 import com.example.denisgabyshev.getdisciplined.utils.AppUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_tasks.*
+import org.jetbrains.anko.support.v4.act
 import org.jetbrains.anko.support.v4.toast
 import java.util.*
 import javax.inject.Inject
@@ -27,12 +32,17 @@ class TaskFragment : BaseFragment(), TaskMvpView {
 
     @Inject lateinit var presenter: TaskMvpPresenter<TaskMvpView>
 
+
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity.activityComponent.inject(this)
         presenter.onAttach(this)
 
         presenter.isTodayExist()
+    }
+
+    override fun setToolbar(date: Long) {
+        (activity as MainActivity).setToolbarText(AppUtils.makeDate(date))
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
