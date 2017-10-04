@@ -1,7 +1,8 @@
 package com.example.denisgabyshev.getdisciplined.data
 
+import com.example.denisgabyshev.getdisciplined.data.db.model.Date
 import io.reactivex.Flowable
-import io.reactivex.Observable
+
 
 /**
  * Created by denisgabyshev on 11/09/2017.
@@ -11,7 +12,7 @@ interface DataManager{
 
     fun addTask(dateId: Long, task: String)
 
-    fun getDateId(date: Long): Flowable<Int>
+    fun getDateId(date: Long): Flowable<List<Date>>
 
 
 

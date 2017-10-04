@@ -29,18 +29,10 @@ class TaskFragment : BaseFragment(), TaskMvpView {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         activity.activityComponent.inject(this)
-
         presenter.onAttach(this)
 
-        button.setOnClickListener {
-            presenter.onButtonClick()
-        }
-
-        insert.setOnClickListener {
-            presenter.insertToday()
-        }
+        presenter.isTodayExist()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =

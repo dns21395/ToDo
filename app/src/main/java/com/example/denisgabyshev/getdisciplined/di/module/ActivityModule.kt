@@ -45,4 +45,7 @@ class ActivityModule(private val activity: AppCompatActivity) {
 
     @Provides
     fun provideTaskMvpPresenter(presenter: TaskPresenter<TaskMvpView>): TaskMvpPresenter<TaskMvpView> = presenter
+
+    @Provides
+    fun provideSchedulerManager(): SchedulerProvider = AppSchedulerProvider()
 }

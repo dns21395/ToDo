@@ -33,8 +33,4 @@ class ApplicationModule(private val application: Application) {
     @Provides
     fun provideAppDatabase(): AppDatabase = Room.databaseBuilder(application, AppDatabase::class.java, "we-need-db").build()
 
-    @Provides
-    fun provideSchedulerProvider(): SchedulerProvider = AppSchedulerProvider()
-
-
 }

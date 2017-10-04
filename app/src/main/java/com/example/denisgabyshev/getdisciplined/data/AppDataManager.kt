@@ -6,10 +6,7 @@ import com.example.denisgabyshev.getdisciplined.data.db.model.Date
 import com.example.denisgabyshev.getdisciplined.data.db.model.Task
 import com.example.denisgabyshev.getdisciplined.di.ApplicationContext
 import com.example.denisgabyshev.getdisciplined.utils.rx.SchedulerProvider
-import io.reactivex.Flowable
-import io.reactivex.Observable
-import io.reactivex.Observer
-import io.reactivex.Single
+import io.reactivex.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -23,8 +20,7 @@ import javax.inject.Singleton
  */
 @Singleton
 class AppDataManager @Inject constructor(@ApplicationContext val context: Context,
-                                         private val database: AppDatabase,
-                                         private val scheduler: SchedulerProvider) : DataManager {
+                                         private val database: AppDatabase) : DataManager {
     override fun addDate(date: Long) {
         val _date = Date(0, date)
 
@@ -42,14 +38,14 @@ class AppDataManager @Inject constructor(@ApplicationContext val context: Contex
 
             Single.fromCallable {
                 database.taskDao().insert(_task)
-            }.subscribeOn(scheduler.io())
-                    .observeOn(scheduler.ui()).subscribe()
+            }.subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread()).subscribe()
 
         }
     }
 
-     override fun getDateId(date: Long): Flowable<Int> =
-             database.dateDao().getDateId(date)
+     override fun getDateId(date: Long): Flowable<List<Date>> =
+                database.dateDao().getDateId(date)
 
 
 

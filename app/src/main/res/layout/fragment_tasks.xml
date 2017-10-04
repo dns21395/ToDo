@@ -3,22 +3,11 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/someText"
-        android:layout_below="@id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/insert"
-        android:text="insert"
-        android:layout_below="@id/someText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    
 
 </RelativeLayout>

@@ -22,18 +22,26 @@ class TaskPresenter<V : TaskMvpView> @Inject constructor(dataManager: DataManage
                                                          schedulerProvider: SchedulerProvider,
                                                          compositeDisposable: CompositeDisposable) :
         BasePresenter<V>(dataManager, schedulerProvider, compositeDisposable), TaskMvpPresenter<V> {
+
+    private val TAG = "TaskPresenter"
+
     override fun insertToday() {
         doAsync {
             dataManager.addDate(AppUtils.getToday())
         }
     }
 
-    override fun onButtonClick() {
+    override fun isTodayExist() {
+        compositeDisposable?.add(dataManager.getDateId(AppUtils.getToday()).subscribe {
+            if(it.isEmpty()) {
+                insertToday()
+            }
+        })
         compositeDisposable?.add(  dataManager.getDateId(AppUtils.getToday())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
-                     mvpView?.setTextView(it.toString())
+                    mvpView?.setTextView("${it[0].date}")
                 })
     }
 }

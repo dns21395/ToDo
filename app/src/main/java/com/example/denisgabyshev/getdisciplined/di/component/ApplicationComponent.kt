@@ -28,5 +28,4 @@ interface ApplicationComponent {
 
     fun getAppDatabase(): AppDatabase
 
-    fun getSchedulerProvider(): SchedulerProvider
 }
