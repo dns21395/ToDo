@@ -11,6 +11,7 @@ import javax.inject.Inject
 import com.example.denisgabyshev.getdisciplined.ui.main.task.TaskFragment
 import com.example.denisgabyshev.getdisciplined.utils.ScreenUtils
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.bottomPadding
 import org.jetbrains.anko.topPadding
 
 
@@ -31,6 +32,7 @@ class MainActivity : BaseActivity(), MainMvpView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
         activityComponent.inject(this)
 
 
@@ -45,8 +47,6 @@ class MainActivity : BaseActivity(), MainMvpView {
 
     override fun setUp() {
         transparentStatusBar()
-
-        appBar.topPadding = ScreenUtils.getStatusBarHeight(this)
 
         setSupportActionBar(toolbar)
         supportActionBar?.title = ""

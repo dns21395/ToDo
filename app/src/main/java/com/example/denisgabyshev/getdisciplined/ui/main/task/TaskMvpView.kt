@@ -12,4 +12,8 @@ interface TaskMvpView : MvpView {
     fun setTasksList(array: ArrayList<Task>)
 
     fun setFragment()
+
+    fun showAddTaskView()
+
+    fun hideAddTaskView()
 }

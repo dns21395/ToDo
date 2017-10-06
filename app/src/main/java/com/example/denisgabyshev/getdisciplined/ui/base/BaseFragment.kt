@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Typeface
 import android.support.v4.app.Fragment
 import android.support.v7.widget.AppCompatDrawableManager
+import android.view.View
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
@@ -38,7 +39,7 @@ abstract class BaseFragment : Fragment(), MvpView {
     }
 
     override fun transparentStatusBar() {
-        activity.window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+       // activity.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE ; View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
     }
 
     override fun TextView.setFont(fontPath: String) {

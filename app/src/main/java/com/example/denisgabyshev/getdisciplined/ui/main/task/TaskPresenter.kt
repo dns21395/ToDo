@@ -24,6 +24,7 @@ class TaskPresenter<V : TaskMvpView> @Inject constructor(dataManager: DataManage
                                                          compositeDisposable: CompositeDisposable) :
         BasePresenter<V>(dataManager, schedulerProvider, compositeDisposable), TaskMvpPresenter<V> {
 
+
     private val TAG = "TaskPresenter"
 
     override fun insertToday() {
@@ -31,6 +32,7 @@ class TaskPresenter<V : TaskMvpView> @Inject constructor(dataManager: DataManage
             dataManager.addDate(AppUtils.getToday())
         }
     }
+
 
     override fun isTodayExist() {
         compositeDisposable?.add(dataManager.getDateId(AppUtils.getToday()).subscribe {
@@ -56,6 +58,12 @@ class TaskPresenter<V : TaskMvpView> @Inject constructor(dataManager: DataManage
             mvpView?.setTasksList(it as ArrayList<Task>)
         })
     }
+
+    override fun addTask() {
+        dataManager.addTask(3, "world")
+    }
+
+
 
 
 

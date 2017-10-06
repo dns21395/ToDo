@@ -1,6 +1,7 @@
 package com.example.denisgabyshev.getdisciplined.ui.main.task
 
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import kotlinx.android.synthetic.main.task_item.view.*
  * Created by denisgabyshev on 04/10/2017.
  */
 class TaskAdapter(val day: Long) : RecyclerView.Adapter<TaskViewHolder>() {
+    private val TAG = "TaskAdapter"
 
     private var tasks = ArrayList<Task>()
 
@@ -27,6 +29,7 @@ class TaskAdapter(val day: Long) : RecyclerView.Adapter<TaskViewHolder>() {
         TaskViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.task_item, parent, false))
 
     fun setArray(taskArray: ArrayList<Task>) {
+        Log.d(TAG, "${taskArray}")
         tasks = taskArray
         notifyDataSetChanged()
     }
