@@ -3,36 +3,31 @@
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawerLayout"
-    android:fitsSystemWindows="true"
 
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <android.support.design.widget.CoordinatorLayout
-        android:fitsSystemWindows="true"
         android:id="@+id/cl_root_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
         <android.support.design.widget.AppBarLayout
+            android:id="@+id/appBar"
             android:fitsSystemWindows="true"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                    android:id="@+id/appBar"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:elevation="5dp">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
                     <android.support.design.widget.CollapsingToolbarLayout
                         android:fitsSystemWindows="true"
                         android:id="@+id/collapsingToolbar"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="350dp"
                         app:layout_scrollFlags="scroll|exitUntilCollapsed"
                         app:contentScrim="?attr/colorPrimary"
-                        app:expandedTitleMarginStart="48dp"
-                        app:expandedTitleMarginEnd="64dp">
+                        app:expandedTitleTextAppearance="@android:color/transparent">
 
                         <ImageView
                             android:fitsSystemWindows="true"
@@ -42,11 +37,20 @@
                             android:layout_width="match_parent"
                             android:layout_height="350dp" />
 
-                    <android.support.v7.widget.Toolbar
+                        <ImageView
+                            android:alpha="0.3"
+                            android:fitsSystemWindows="true"
+                            app:layout_collapseMode="parallax"
+                            android:background="@android:color/black"
+                            android:layout_width="match_parent"
+                            android:layout_height="350dp" />
+
+
+                        <android.support.v7.widget.Toolbar
                         app:layout_collapseMode="pin"
                         android:id="@+id/toolbar"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="?attr/actionBarSize"
                         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                          />
 
@@ -60,7 +64,6 @@
                     android:id="@+id/frameLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
-
 
     </android.support.design.widget.CoordinatorLayout>
 

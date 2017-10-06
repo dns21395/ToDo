@@ -48,6 +48,10 @@ class MainActivity : BaseActivity(), MainMvpView {
     override fun setUp() {
         transparentStatusBar()
 
+
+        //appBar.topPadding = ScreenUtils.getStatusBarHeight(this)
+
+
         setSupportActionBar(toolbar)
         supportActionBar?.title = ""
 
