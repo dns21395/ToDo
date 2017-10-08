@@ -7,7 +7,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <android.support.design.widget.CoordinatorLayout
+        android:fitsSystemWindows="true"
         android:id="@+id/cl_root_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -26,8 +31,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="350dp"
                         app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                        app:contentScrim="?attr/colorPrimary"
-                        app:expandedTitleTextAppearance="@android:color/transparent">
+                        app:contentScrim="?attr/colorPrimary">
 
                         <ImageView
                             android:fitsSystemWindows="true"
@@ -51,21 +55,47 @@
                         android:id="@+id/toolbar"
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize"
-                        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                         />
+                            android:background="@android:color/transparent"
+                        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+                        <include
+                            android:id="@+id/toolbarHeaderView"
+                            layout="@layout/activity_main_header"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            />
+
+                        </android.support.v7.widget.Toolbar>
+
+
 
                     </android.support.design.widget.CollapsingToolbarLayout>
 
 
                 </android.support.design.widget.AppBarLayout>
 
-                <FrameLayout
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                    android:id="@+id/frameLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+
+        <include
+            android:id="@+id/float_header_view"
+            layout="@layout/activity_main_header_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/scrollView"
+            app:layout_behavior="com.example.denisgabyshev.getdisciplined.ui.main.ToolbarHeaderBehaviour" />
+
+
+            <FrameLayout
+                android:clipToPadding="false"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:id="@+id/frameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
     </android.support.design.widget.CoordinatorLayout>
+
+    </RelativeLayout>
+
 
 
     <android.support.design.widget.NavigationView
@@ -79,6 +109,7 @@
     app:itemIconTint="@color/black_effective"
     app:itemTextColor="@color/black_effective"
     app:menu="@menu/drawer"/>
+
 
 
 </android.support.v4.widget.DrawerLayout>

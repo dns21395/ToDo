@@ -3,6 +3,7 @@ package com.example.denisgabyshev.getdisciplined.ui.main
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.AppBarLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.View
 import com.example.denisgabyshev.getdisciplined.R
@@ -18,10 +19,14 @@ import org.jetbrains.anko.topPadding
 /**
  * Created by denisgabyshev on 18/09/2017.
  */
-class MainActivity : BaseActivity(), MainMvpView {
+class MainActivity : BaseActivity(), MainMvpView, AppBarLayout.OnOffsetChangedListener {
+
+
     @Inject lateinit var presenter: MainMvpPresenter<MainMvpView>
 
     lateinit var drawerToggle: ActionBarDrawerToggle
+
+    private var isHideToolbarView = false
 
     companion object {
         fun getStartIntent(context: Context): Intent =
@@ -48,11 +53,13 @@ class MainActivity : BaseActivity(), MainMvpView {
     override fun setUp() {
         transparentStatusBar()
 
+        appBar.addOnOffsetChangedListener(this)
 
         //appBar.topPadding = ScreenUtils.getStatusBarHeight(this)
 
-
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         supportActionBar?.title = ""
 
         drawerToggle = object : ActionBarDrawerToggle(
@@ -93,6 +100,20 @@ class MainActivity : BaseActivity(), MainMvpView {
     }
 
     override fun setToolbarText(date: String) {
-        toolbar.title = date
+        //toolbar.title = date
+    }
+
+    override fun onOffsetChanged(appBarLayout: AppBarLayout, offset: Int) {
+        val maxScroll = appBarLayout.totalScrollRange
+        val percentage = Math.abs(offset).toFloat() / maxScroll.toFloat()
+
+        if (percentage == 1f && isHideToolbarView) {
+            toolbarHeaderView.visibility = View.VISIBLE
+            isHideToolbarView = !isHideToolbarView
+
+        } else if (percentage < 1f && !isHideToolbarView) {
+            toolbarHeaderView.visibility = View.GONE
+            isHideToolbarView = !isHideToolbarView
+        }
     }
 }
