@@ -37,9 +37,7 @@ class MainActivity : BaseActivity(), MainMvpView, AppBarLayout.OnOffsetChangedLi
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         activityComponent.inject(this)
-
 
         presenter.onAttach(this)
 
@@ -54,9 +52,7 @@ class MainActivity : BaseActivity(), MainMvpView, AppBarLayout.OnOffsetChangedLi
         transparentStatusBar()
 
         appBar.addOnOffsetChangedListener(this)
-
-        //appBar.topPadding = ScreenUtils.getStatusBarHeight(this)
-
+        
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 

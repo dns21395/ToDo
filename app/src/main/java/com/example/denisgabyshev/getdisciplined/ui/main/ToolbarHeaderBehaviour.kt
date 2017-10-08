@@ -51,12 +51,14 @@ class ToolbarHeaderBehaviour(val mContext: Context?, attrs: AttributeSet?) : Coo
         val params = child.layoutParams as CoordinatorLayout.LayoutParams
 
         if(Math.abs(dependency.y) >= maxScroll / 2) {
-            val layoutPercentage = (Math.abs(dependency.getY()) - (maxScroll / 2)) / Math.abs(maxScroll / 2)
-            params.leftMargin = ((layoutPercentage * mEndMarginLeft) + mStartMarginLeft).toInt()
+            val layoutPercentage = (Math.abs(dependency.y) - (maxScroll / 2)) / Math.abs(maxScroll / 2)
+            params.leftMargin = ((layoutPercentage * mEndMarginLeft).toInt() + mStartMarginLeft)
             child.setTextSize(getTranslationOffset(mTitleStartSize, mTitleEndSize, layoutPercentage))
         } else {
             params.leftMargin = mStartMarginLeft
         }
+        params.rightMargin = mMarginRight
+
 
 
         child.layoutParams = params
