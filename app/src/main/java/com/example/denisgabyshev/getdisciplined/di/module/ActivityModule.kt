@@ -10,6 +10,9 @@ import com.example.denisgabyshev.getdisciplined.ui.main.MainPresenter
 import com.example.denisgabyshev.getdisciplined.ui.main.task.TaskMvpPresenter
 import com.example.denisgabyshev.getdisciplined.ui.main.task.TaskMvpView
 import com.example.denisgabyshev.getdisciplined.ui.main.task.TaskPresenter
+import com.example.denisgabyshev.getdisciplined.ui.main.task.add.AddMvpPresenter
+import com.example.denisgabyshev.getdisciplined.ui.main.task.add.AddMvpView
+import com.example.denisgabyshev.getdisciplined.ui.main.task.add.AddPresenter
 import com.example.denisgabyshev.getdisciplined.ui.splash.SplashMvpPresenter
 import com.example.denisgabyshev.getdisciplined.ui.splash.SplashMvpView
 import com.example.denisgabyshev.getdisciplined.ui.splash.SplashPresenter
@@ -48,4 +51,7 @@ class ActivityModule(private val activity: AppCompatActivity) {
 
     @Provides
     fun provideSchedulerManager(): SchedulerProvider = AppSchedulerProvider()
+
+    @Provides
+    fun provideAddMvpPresenter(presenter: AddPresenter<AddMvpView>): AddMvpPresenter<AddMvpView> = presenter
 }

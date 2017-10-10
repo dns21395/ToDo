@@ -1,4 +1,4 @@
-package com.example.denisgabyshev.getdisciplined.ui.main
+package com.example.denisgabyshev.getdisciplined.ui.main.task.toolbar
 
 import android.content.Context
 import android.util.AttributeSet

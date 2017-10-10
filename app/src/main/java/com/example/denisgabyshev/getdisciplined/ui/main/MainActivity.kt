@@ -90,10 +90,5 @@ class MainActivity : BaseActivity(), MainMvpView {
         } else {
             super.onBackPressed()
         }
-
     }
-
-
-
-
 }

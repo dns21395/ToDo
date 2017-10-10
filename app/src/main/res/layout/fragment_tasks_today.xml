@@ -70,10 +70,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/scrollView"
-            app:layout_behavior="com.example.denisgabyshev.getdisciplined.ui.main.ToolbarHeaderBehaviour" />
+            app:layout_behavior="com.example.denisgabyshev.getdisciplined.ui.main.task.toolbar.ToolbarHeaderBehaviour" />
 
 
         <android.support.v7.widget.RecyclerView
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:id="@+id/taskList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>

@@ -42,11 +42,6 @@ class TaskFragment : BaseFragment(), TaskMvpView, AppBarLayout.OnOffsetChangedLi
         super.onViewCreated(view, savedInstanceState)
         activity.activityComponent.inject(this)
         presenter.onAttach(this)
-        presenter.isTodayExist()
-
-        setHasOptionsMenu(true)
-
-        setFragment()
     }
 
     override fun setToolbar(date: Long) {
@@ -65,6 +60,10 @@ class TaskFragment : BaseFragment(), TaskMvpView, AppBarLayout.OnOffsetChangedLi
     }
 
     override fun setFragment() {
+        setHasOptionsMenu(true)
+
+        presenter.isTodayExist()
+
         appBar.addOnOffsetChangedListener(this)
 
         activity.setSupportActionBar(toolbar)

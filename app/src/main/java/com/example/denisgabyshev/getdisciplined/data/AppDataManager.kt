@@ -1,6 +1,7 @@
 package com.example.denisgabyshev.getdisciplined.data
 
 import android.content.Context
+import android.util.Log
 import com.example.denisgabyshev.getdisciplined.data.db.AppDatabase
 import com.example.denisgabyshev.getdisciplined.data.db.model.Date
 import com.example.denisgabyshev.getdisciplined.data.db.model.Task
@@ -21,8 +22,12 @@ import javax.inject.Singleton
 @Singleton
 class AppDataManager @Inject constructor(@ApplicationContext val context: Context,
                                          private val database: AppDatabase) : DataManager {
+    private val TAG = "AppDataManager"
+
     override fun addDate(date: Long) {
         val _date = Date(0, date)
+
+
 
         Single.fromCallable {
             database.dateDao().insert(_date)

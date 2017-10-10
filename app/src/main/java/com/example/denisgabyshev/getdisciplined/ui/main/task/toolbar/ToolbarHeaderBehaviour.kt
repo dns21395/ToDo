@@ -1,13 +1,11 @@
-package com.example.denisgabyshev.getdisciplined.ui.main
+package com.example.denisgabyshev.getdisciplined.ui.main.task.toolbar
 
 import android.content.Context
 import android.support.design.widget.AppBarLayout
 import android.support.design.widget.CoordinatorLayout
 import android.util.AttributeSet
-import android.util.Log
 import android.util.TypedValue
 import android.view.View
-import android.widget.Toolbar
 import com.example.denisgabyshev.getdisciplined.R
 
 /**

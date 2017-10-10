@@ -1,5 +1,6 @@
 package com.example.denisgabyshev.getdisciplined.ui.main.task
 
+import android.util.Log
 import com.example.denisgabyshev.getdisciplined.data.DataManager
 import com.example.denisgabyshev.getdisciplined.data.db.model.Task
 import com.example.denisgabyshev.getdisciplined.ui.base.BasePresenter
@@ -22,6 +23,11 @@ class TaskPresenter<V : TaskMvpView> @Inject constructor(dataManager: DataManage
 
     private val TAG = "TaskPresenter"
 
+    override fun onAttach(mvpView: V) {
+        super.onAttach(mvpView)
+        mvpView.setFragment()
+    }
+
     override fun insertToday() {
         doAsync {
             dataManager.addDate(AppUtils.getToday())
@@ -41,22 +47,26 @@ class TaskPresenter<V : TaskMvpView> @Inject constructor(dataManager: DataManage
                 .subscribe {
                     if(it.isNotEmpty()) {
                         val date = it[0].date
+                        val dateId = it[0].id
 
                         mvpView?.setToolbar(date)
-                        getTasksByDate(date)
+                        getTasksByDate(dateId)
                     }
                 })
     }
 
     override fun getTasksByDate(dateId: Long) {
-        compositeDisposable?.add(dataManager.getTasksByDayId(dateId).subscribe {
+        compositeDisposable?.add(dataManager.getTasksByDayId(dateId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    for(item in it) {
+                        Log.d(TAG, "item : $item")
+                    }
             mvpView?.updateTasksList(it as ArrayList<Task>)
         })
     }
 
-    override fun addTask() {
-        dataManager.addTask(3, "world")
-    }
 
 
 

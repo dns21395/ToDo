@@ -13,5 +13,4 @@ interface TaskMvpPresenter<V : TaskMvpView> : MvpPresenter<V> {
 
     fun getTasksByDate(dateId: Long)
 
-    fun addTask()
 }
