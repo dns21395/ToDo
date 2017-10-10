@@ -4,29 +4,35 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
+import android.support.v4.app.Fragment
 import android.support.v7.app.ActionBarDrawerToggle
+import android.util.Log
+import android.view.Gravity
 import android.view.View
+import android.view.WindowManager
+import android.widget.FrameLayout
+import android.widget.RelativeLayout
 import com.example.denisgabyshev.getdisciplined.R
 import com.example.denisgabyshev.getdisciplined.ui.base.BaseActivity
 import javax.inject.Inject
 import com.example.denisgabyshev.getdisciplined.ui.main.task.TaskFragment
+import com.example.denisgabyshev.getdisciplined.ui.main.task.add.AddFragment
 import com.example.denisgabyshev.getdisciplined.utils.ScreenUtils
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.bottomPadding
-import org.jetbrains.anko.topPadding
+import kotlinx.android.synthetic.main.activity_main_header.view.*
+import kotlinx.android.synthetic.main.fragment_tasks_today.*
 
 
 /**
  * Created by denisgabyshev on 18/09/2017.
  */
-class MainActivity : BaseActivity(), MainMvpView, AppBarLayout.OnOffsetChangedListener {
-
+class MainActivity : BaseActivity(), MainMvpView {
+    private val TAG = "MainActivity"
 
     @Inject lateinit var presenter: MainMvpPresenter<MainMvpView>
 
     lateinit var drawerToggle: ActionBarDrawerToggle
 
-    private var isHideToolbarView = false
 
     companion object {
         fun getStartIntent(context: Context): Intent =
@@ -50,38 +56,19 @@ class MainActivity : BaseActivity(), MainMvpView, AppBarLayout.OnOffsetChangedLi
 
     override fun setUp() {
         transparentStatusBar()
-
-        appBar.addOnOffsetChangedListener(this)
-        
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        supportActionBar?.title = ""
-
-        drawerToggle = object : ActionBarDrawerToggle(
-                this,
-                drawerLayout,
-                toolbar,
-                R.string.open_drawer,
-                R.string.close_drawer) {
-            override fun onDrawerOpened(drawerView: View?) {
-                super.onDrawerOpened(drawerView)
-                hideKeyboard()
-            }
-
-            override fun onDrawerClosed(drawerView: View?) {
-                super.onDrawerClosed(drawerView)
-            }
-        }
-
-        drawerLayout.addDrawerListener(drawerToggle)
-        drawerToggle.syncState()
         setupNavMenu()
+
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+    }
+
+    override fun openDrawer() {
+        drawerLayout.openDrawer(Gravity.START)
     }
 
     fun setupNavMenu() {
         navigationView.setPadding(0, ScreenUtils.getStatusBarHeight(this), 0, 0)
         navigationView.setNavigationItemSelectedListener {
+            drawerLayout.closeDrawers()
             when(it.itemId) {
                 R.id.todo -> {
                     showToast("todo")
@@ -95,21 +82,18 @@ class MainActivity : BaseActivity(), MainMvpView, AppBarLayout.OnOffsetChangedLi
         }
     }
 
-    override fun setToolbarText(date: String) {
-        //toolbar.title = date
-    }
+    override fun onBackPressed() {
+        val taskFragment: TaskFragment? = supportFragmentManager.findFragmentById(R.id.frameLayout) as TaskFragment
 
-    override fun onOffsetChanged(appBarLayout: AppBarLayout, offset: Int) {
-        val maxScroll = appBarLayout.totalScrollRange
-        val percentage = Math.abs(offset).toFloat() / maxScroll.toFloat()
-
-        if (percentage == 1f && isHideToolbarView) {
-            toolbarHeaderView.visibility = View.VISIBLE
-            isHideToolbarView = !isHideToolbarView
-
-        } else if (percentage < 1f && !isHideToolbarView) {
-            toolbarHeaderView.visibility = View.GONE
-            isHideToolbarView = !isHideToolbarView
+        if(taskFragment?.frameAddTask != null) {
+            taskFragment.hideAddTaskView()
+        } else {
+            super.onBackPressed()
         }
+
     }
+
+
+
+
 }

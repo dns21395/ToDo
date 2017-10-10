@@ -1,7 +1,6 @@
 package com.example.denisgabyshev.getdisciplined.utils
 
 import android.widget.ImageView
-import kotlinx.android.synthetic.main.fragment_tasks.*
 import java.util.*
 
 /**

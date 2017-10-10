@@ -8,4 +8,5 @@ import com.example.denisgabyshev.getdisciplined.ui.base.MvpPresenter
  */
 @PerActivity
 interface SplashMvpPresenter<V : SplashMvpView> : MvpPresenter<V>  {
+
 }

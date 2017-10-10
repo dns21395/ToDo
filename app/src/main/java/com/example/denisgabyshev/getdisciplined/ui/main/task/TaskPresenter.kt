@@ -1,18 +1,13 @@
 package com.example.denisgabyshev.getdisciplined.ui.main.task
 
-import android.util.Log
 import com.example.denisgabyshev.getdisciplined.data.DataManager
 import com.example.denisgabyshev.getdisciplined.data.db.model.Task
 import com.example.denisgabyshev.getdisciplined.ui.base.BasePresenter
 import com.example.denisgabyshev.getdisciplined.utils.AppUtils
 import com.example.denisgabyshev.getdisciplined.utils.rx.SchedulerProvider
-import io.reactivex.Observable
-import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.fragment_tasks.*
 import org.jetbrains.anko.doAsync
 import javax.inject.Inject
 
@@ -55,7 +50,7 @@ class TaskPresenter<V : TaskMvpView> @Inject constructor(dataManager: DataManage
 
     override fun getTasksByDate(dateId: Long) {
         compositeDisposable?.add(dataManager.getTasksByDayId(dateId).subscribe {
-            mvpView?.setTasksList(it as ArrayList<Task>)
+            mvpView?.updateTasksList(it as ArrayList<Task>)
         })
     }
 

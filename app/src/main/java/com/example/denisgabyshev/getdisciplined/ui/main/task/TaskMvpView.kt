@@ -9,7 +9,7 @@ import com.example.denisgabyshev.getdisciplined.ui.base.MvpView
 interface TaskMvpView : MvpView {
     fun setToolbar(date: Long)
 
-    fun setTasksList(array: ArrayList<Task>)
+    fun updateTasksList(array: ArrayList<Task>)
 
     fun setFragment()
 

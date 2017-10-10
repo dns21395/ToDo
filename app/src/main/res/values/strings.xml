@@ -4,4 +4,5 @@
     <string name="open_drawer">Drawer Open</string>
     <string name="close_drawer">Drawer Close</string>
     <string name="add_to_do">Add a to-do</string>
+    <string name="menu">Menu</string>
 </resources>

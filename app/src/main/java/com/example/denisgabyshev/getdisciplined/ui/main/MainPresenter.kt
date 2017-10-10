@@ -20,5 +20,8 @@ constructor(dataManager: DataManager,
         mvpView.setTaskFragment()
     }
 
+    override fun onDrawerClick() {
+        mvpView?.openDrawer()
+    }
 
 }

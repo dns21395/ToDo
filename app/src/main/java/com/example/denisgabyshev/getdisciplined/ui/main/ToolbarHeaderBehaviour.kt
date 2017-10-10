@@ -41,6 +41,12 @@ class ToolbarHeaderBehaviour(val mContext: Context?, attrs: AttributeSet?) : Coo
     override fun onDependentViewChanged(parent: CoordinatorLayout?, child: ToolbarHeader, dependency: View?): Boolean {
         shouldInitProperties()
 
+        textAnimationControl(child, dependency)
+
+        return true
+    }
+
+    private fun textAnimationControl(child: ToolbarHeader, dependency: View?) {
         val maxScroll = (dependency as AppBarLayout).totalScrollRange
         val percentage = Math.abs(dependency.getY()) / maxScroll.toFloat()
 
@@ -59,13 +65,8 @@ class ToolbarHeaderBehaviour(val mContext: Context?, attrs: AttributeSet?) : Coo
         }
         params.rightMargin = mMarginRight
 
-
-
         child.layoutParams = params
         child.y = childPosition
-
-
-        return true
     }
 
     private fun getTranslationOffset(expandedOffset: Float, collapsedOffset: Float, ratio: Float): Float =
