@@ -10,8 +10,8 @@ import javax.inject.Inject
  * Created by denisgabyshev on 19/09/2017.
  */
 class TaskPresenter<V : TaskMvpView> @Inject constructor(dataManager: DataManager,
-                                                                                                                     schedulerProvider: SchedulerProvider,
-                                                                                                                     compositeDisposable: CompositeDisposable) :
+                                                         schedulerProvider: SchedulerProvider,
+                                                         compositeDisposable: CompositeDisposable) :
         BaseTaskPresenter<V>(dataManager, schedulerProvider, compositeDisposable), TaskMvpPresenter<V> {
 
     private val TAG = "TaskPresenter"

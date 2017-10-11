@@ -1,41 +1,41 @@
-package com.example.denisgabyshev.getdisciplined.ui.main.task.today
+package com.example.denisgabyshev.getdisciplined.ui.main.task.list
 
 import android.os.Bundle
-import android.support.design.widget.AppBarLayout
 import android.support.v7.widget.LinearLayoutManager
-import android.view.*
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import com.example.denisgabyshev.getdisciplined.R
 import com.example.denisgabyshev.getdisciplined.ui.main.MainMvpPresenter
 import com.example.denisgabyshev.getdisciplined.ui.main.MainMvpView
 import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskFragment
-import com.example.denisgabyshev.getdisciplined.utils.AppUtils
-import kotlinx.android.synthetic.main.fragment_tasks_today.*
+import kotlinx.android.synthetic.main.fragment_tasks_todo.*
 import javax.inject.Inject
 
 /**
- * Created by denisgabyshev on 19/09/2017.
+ * Created by denisgabyshev on 11/10/2017.
  */
-class TaskFragment : BaseTaskFragment(), TaskMvpView {
-    private val TAG = "TaskFragment"
+class ToDoListFragment : BaseTaskFragment(), ToDoListMvpView {
+    private val TAG = "ToDListFragment"
 
-    @Inject lateinit var presenter: TaskMvpPresenter<TaskMvpView>
+    @Inject lateinit var presenter: ToDoListMvpPresenter<ToDoListMvpView>
     @Inject lateinit var mainPresenter: MainMvpPresenter<MainMvpView>
-
-    private var isHideToolbarView = false
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         activity.activityComponent.inject(this)
         presenter.onAttach(this)
     }
 
-    override fun setToolbar(title: Long) {
-        collapseToolbar.title = "My Day"
-        collapseToolbar.subtitle = AppUtils.makeDate(title)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            inflater.inflate(R.layout.fragment_tasks_today, container, false)
+            inflater.inflate(R.layout.fragment_tasks_todo, container, false)
+
+    override fun setToolbar(title: Long) {
+        collapseToolbar.title = "My List"
+    }
 
     override fun setFragment() {
         setHasOptionsMenu(true)
@@ -66,16 +66,4 @@ class TaskFragment : BaseTaskFragment(), TaskMvpView {
 
         return super.onOptionsItemSelected(item)
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }

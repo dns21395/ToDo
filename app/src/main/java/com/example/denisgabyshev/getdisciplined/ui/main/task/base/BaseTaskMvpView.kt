@@ -14,4 +14,6 @@ interface BaseTaskMvpView : MvpView {
     fun updateTasksList(array: ArrayList<Task>)
 
     fun setToolbar(title: Long)
+
+    fun setFragment()
 }

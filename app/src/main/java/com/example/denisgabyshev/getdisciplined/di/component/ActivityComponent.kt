@@ -5,6 +5,7 @@ import com.example.denisgabyshev.getdisciplined.di.module.ActivityModule
 import com.example.denisgabyshev.getdisciplined.ui.main.MainActivity
 import com.example.denisgabyshev.getdisciplined.ui.main.task.today.TaskFragment
 import com.example.denisgabyshev.getdisciplined.ui.main.task.add.AddFragment
+import com.example.denisgabyshev.getdisciplined.ui.main.task.list.ToDoListFragment
 import com.example.denisgabyshev.getdisciplined.ui.splash.SplashActivity
 import dagger.Component
 
@@ -18,4 +19,5 @@ interface ActivityComponent {
     fun inject(mainActivity: MainActivity)
     fun inject(taskFragment: TaskFragment)
     fun inject(addFragment: AddFragment)
+    fun inject(toDoListFragment: ToDoListFragment)
 }

@@ -2,6 +2,7 @@ package com.example.denisgabyshev.getdisciplined.ui.main
 
 import com.example.denisgabyshev.getdisciplined.data.DataManager
 import com.example.denisgabyshev.getdisciplined.ui.base.BasePresenter
+import com.example.denisgabyshev.getdisciplined.ui.main.task.today.TaskFragment
 import com.example.denisgabyshev.getdisciplined.utils.rx.SchedulerProvider
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
@@ -17,7 +18,7 @@ constructor(dataManager: DataManager,
     override fun onAttach(mvpView: V) {
         super.onAttach(mvpView)
 
-        mvpView.setTaskFragment()
+        mvpView.setTaskFragment(TaskFragment())
     }
 
     override fun onDrawerClick() {

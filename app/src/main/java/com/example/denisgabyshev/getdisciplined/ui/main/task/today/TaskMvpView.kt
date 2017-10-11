@@ -8,5 +8,5 @@ import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskMvpVie
  * Created by denisgabyshev on 19/09/2017.
  */
 interface TaskMvpView : BaseTaskMvpView {
-    fun setFragment()
+
 }

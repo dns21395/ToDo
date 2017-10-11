@@ -6,6 +6,10 @@
             android:checked="true"
             android:icon="@drawable/check_circle_outline"
             android:title="todo" />
+        <item
+            android:id="@+id/list"
+            android:checked="true"
+            android:title="list" />
     </group>
 
 </menu>

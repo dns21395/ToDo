@@ -3,11 +3,13 @@ package com.example.denisgabyshev.getdisciplined.ui.main
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.Gravity
 import android.view.WindowManager
 import com.example.denisgabyshev.getdisciplined.R
 import com.example.denisgabyshev.getdisciplined.ui.base.BaseActivity
+import com.example.denisgabyshev.getdisciplined.ui.main.task.list.ToDoListFragment
 import javax.inject.Inject
 import com.example.denisgabyshev.getdisciplined.ui.main.task.today.TaskFragment
 import com.example.denisgabyshev.getdisciplined.utils.ScreenUtils
@@ -41,8 +43,8 @@ class MainActivity : BaseActivity(), MainMvpView {
         setUp()
     }
 
-    override fun setTaskFragment() {
-        supportFragmentManager.beginTransaction().replace(R.id.frameLayout, TaskFragment()).commitNowAllowingStateLoss()
+    override fun setTaskFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().replace(R.id.frameLayout, fragment).commitNowAllowingStateLoss()
     }
 
     override fun setUp() {
@@ -62,7 +64,11 @@ class MainActivity : BaseActivity(), MainMvpView {
             drawerLayout.closeDrawers()
             when(it.itemId) {
                 R.id.todo -> {
-                    showToast("todo")
+                    setTaskFragment(TaskFragment())
+                    true
+                }
+                R.id.list -> {
+                    setTaskFragment(ToDoListFragment())
                     true
                 }
                 else -> {
