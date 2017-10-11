@@ -1,4 +1,4 @@
-package com.example.denisgabyshev.getdisciplined.ui.main.task.toolbar
+package com.example.denisgabyshev.getdisciplined.ui.main.task.today.toolbar
 
 import android.content.Context
 import android.support.design.widget.AppBarLayout

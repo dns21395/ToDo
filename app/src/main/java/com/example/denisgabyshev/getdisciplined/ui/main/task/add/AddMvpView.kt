@@ -7,4 +7,6 @@ import com.example.denisgabyshev.getdisciplined.ui.base.MvpView
  */
 interface AddMvpView: MvpView {
     fun setFragment()
+
+    fun clearEditText()
 }

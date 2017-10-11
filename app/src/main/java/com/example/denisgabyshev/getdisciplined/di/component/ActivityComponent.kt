@@ -3,7 +3,7 @@ package com.example.denisgabyshev.getdisciplined.di.component
 import com.example.denisgabyshev.getdisciplined.di.PerActivity
 import com.example.denisgabyshev.getdisciplined.di.module.ActivityModule
 import com.example.denisgabyshev.getdisciplined.ui.main.MainActivity
-import com.example.denisgabyshev.getdisciplined.ui.main.task.TaskFragment
+import com.example.denisgabyshev.getdisciplined.ui.main.task.today.TaskFragment
 import com.example.denisgabyshev.getdisciplined.ui.main.task.add.AddFragment
 import com.example.denisgabyshev.getdisciplined.ui.splash.SplashActivity
 import dagger.Component

@@ -7,9 +7,9 @@ import com.example.denisgabyshev.getdisciplined.di.PerActivity
 import com.example.denisgabyshev.getdisciplined.ui.main.MainMvpPresenter
 import com.example.denisgabyshev.getdisciplined.ui.main.MainMvpView
 import com.example.denisgabyshev.getdisciplined.ui.main.MainPresenter
-import com.example.denisgabyshev.getdisciplined.ui.main.task.TaskMvpPresenter
-import com.example.denisgabyshev.getdisciplined.ui.main.task.TaskMvpView
-import com.example.denisgabyshev.getdisciplined.ui.main.task.TaskPresenter
+import com.example.denisgabyshev.getdisciplined.ui.main.task.today.TaskMvpPresenter
+import com.example.denisgabyshev.getdisciplined.ui.main.task.today.TaskMvpView
+import com.example.denisgabyshev.getdisciplined.ui.main.task.today.TaskPresenter
 import com.example.denisgabyshev.getdisciplined.ui.main.task.add.AddMvpPresenter
 import com.example.denisgabyshev.getdisciplined.ui.main.task.add.AddMvpView
 import com.example.denisgabyshev.getdisciplined.ui.main.task.add.AddPresenter

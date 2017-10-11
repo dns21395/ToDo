@@ -6,6 +6,8 @@ import com.example.denisgabyshev.getdisciplined.data.DataManager
 import com.example.denisgabyshev.getdisciplined.ui.base.BasePresenter
 import com.example.denisgabyshev.getdisciplined.utils.AppUtils
 import com.example.denisgabyshev.getdisciplined.utils.rx.SchedulerProvider
+import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.doAsync
@@ -30,13 +32,16 @@ class AddPresenter<V: AddMvpView> @Inject
 
     override fun addTask(taskText: String) {
         if(taskText.isNotEmpty()) {
-            doAsync {
+            Single.fromCallable {
                 dataManager.getDateId(AppUtils.getToday()).subscribe { dateId ->
-                    dataManager.addTask(dateId[0].id, taskText)
-                }
-            }
+                    dataManager.addTask(dateId[0].id, taskText.trim())
+                }}.subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe()
         } else {
             mvpView?.showToast("text is empty")
         }
+        mvpView?.clearEditText()
     }
+
 }

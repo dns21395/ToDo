@@ -32,5 +32,11 @@ class AddFragment : BaseFragment(), AddMvpView {
         addButton.setOnClickListener {
             presenter.addTask(textTask.text.toString())
         }
+
+        textTask.requestFocus()
+    }
+
+    override fun clearEditText() {
+        textTask.text.clear()
     }
 }
