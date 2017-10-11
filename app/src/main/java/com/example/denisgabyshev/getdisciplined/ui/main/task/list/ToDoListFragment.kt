@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import com.example.denisgabyshev.getdisciplined.R
+import com.example.denisgabyshev.getdisciplined.ui.main.MainActivity
 import com.example.denisgabyshev.getdisciplined.ui.main.MainMvpPresenter
 import com.example.denisgabyshev.getdisciplined.ui.main.MainMvpView
 import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskFragment
@@ -34,7 +35,7 @@ class ToDoListFragment : BaseTaskFragment(), ToDoListMvpView {
             inflater.inflate(R.layout.fragment_tasks_todo, container, false)
 
     override fun setToolbar(title: Long) {
-        collapseToolbar.title = "My List"
+        activity.supportActionBar?.title = "My List"
     }
 
     override fun setFragment() {
@@ -45,9 +46,7 @@ class ToDoListFragment : BaseTaskFragment(), ToDoListMvpView {
         activity.setSupportActionBar(toolbar)
         activity.supportActionBar?.title = ""
 
-        activity.supportActionBar?.setHomeAsUpIndicator(R.drawable.menu)
-        activity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        activity.supportActionBar?.setHomeButtonEnabled(true)
+        (activity as MainActivity).addToolbar()
 
         taskList.layoutManager = LinearLayoutManager(context)
         taskList.adapter = adapter

@@ -5,6 +5,7 @@ import android.support.design.widget.AppBarLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.view.*
 import com.example.denisgabyshev.getdisciplined.R
+import com.example.denisgabyshev.getdisciplined.ui.main.MainActivity
 import com.example.denisgabyshev.getdisciplined.ui.main.MainMvpPresenter
 import com.example.denisgabyshev.getdisciplined.ui.main.MainMvpView
 import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskFragment
@@ -45,9 +46,7 @@ class TaskFragment : BaseTaskFragment(), TaskMvpView {
         activity.setSupportActionBar(toolbar)
         activity.supportActionBar?.title = ""
 
-        activity.supportActionBar?.setHomeAsUpIndicator(R.drawable.menu)
-        activity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        activity.supportActionBar?.setHomeButtonEnabled(true)
+        (activity as MainActivity).addToolbar()
 
         taskList.layoutManager = LinearLayoutManager(context)
         taskList.adapter = adapter

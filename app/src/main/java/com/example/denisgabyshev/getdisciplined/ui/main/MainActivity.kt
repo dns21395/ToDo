@@ -20,6 +20,8 @@ import kotlinx.android.synthetic.main.activity_main.*
  * Created by denisgabyshev on 18/09/2017.
  */
 class MainActivity : BaseActivity(), MainMvpView {
+
+
     private val TAG = "MainActivity"
 
     @Inject lateinit var presenter: MainMvpPresenter<MainMvpView>
@@ -44,7 +46,7 @@ class MainActivity : BaseActivity(), MainMvpView {
     }
 
     override fun setTaskFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().replace(R.id.frameLayout, fragment).commitNowAllowingStateLoss()
+        supportFragmentManager.beginTransaction().replace(R.id.frameLayout, fragment).commit()
     }
 
     override fun setUp() {
@@ -88,4 +90,13 @@ class MainActivity : BaseActivity(), MainMvpView {
             super.onBackPressed()
         }
     }
+
+    override fun addToolbar() {
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.menu)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
+    }
+
+
+
 }

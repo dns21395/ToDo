@@ -11,6 +11,8 @@ interface MainMvpView : MvpView {
 
     fun openDrawer()
 
+    fun addToolbar()
+
 
 
 }
