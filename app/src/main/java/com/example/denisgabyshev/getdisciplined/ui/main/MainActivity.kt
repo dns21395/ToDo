@@ -91,11 +91,6 @@ class MainActivity : BaseActivity(), MainMvpView {
         }
     }
 
-    override fun addToolbar() {
-        supportActionBar?.setHomeAsUpIndicator(R.drawable.menu)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setHomeButtonEnabled(true)
-    }
 
 
 

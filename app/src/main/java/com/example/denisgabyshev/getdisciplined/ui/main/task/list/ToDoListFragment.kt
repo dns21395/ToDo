@@ -2,10 +2,7 @@ package com.example.denisgabyshev.getdisciplined.ui.main.task.list
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.example.denisgabyshev.getdisciplined.R
 import com.example.denisgabyshev.getdisciplined.ui.main.MainActivity
 import com.example.denisgabyshev.getdisciplined.ui.main.MainMvpPresenter
@@ -35,7 +32,7 @@ class ToDoListFragment : BaseTaskFragment(), ToDoListMvpView {
             inflater.inflate(R.layout.fragment_tasks_todo, container, false)
 
     override fun setToolbar(title: Long) {
-        activity.supportActionBar?.title = "My List"
+        toolbar.title = "My List"
     }
 
     override fun setFragment() {
@@ -43,11 +40,11 @@ class ToDoListFragment : BaseTaskFragment(), ToDoListMvpView {
 
         presenter.isTodayExist()
 
-        activity.setSupportActionBar(toolbar)
-        activity.supportActionBar?.title = ""
-
-        (activity as MainActivity).addToolbar()
-
+        toolbar.setNavigationIcon(R.drawable.menu)
+        toolbar.setNavigationOnClickListener {
+            mainPresenter.onDrawerClick()
+        }
+        
         taskList.layoutManager = LinearLayoutManager(context)
         taskList.adapter = adapter
 
@@ -57,12 +54,6 @@ class ToDoListFragment : BaseTaskFragment(), ToDoListMvpView {
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
-        if(item?.itemId == android.R.id.home) {
-            mainPresenter.onDrawerClick()
-        }
 
-        return super.onOptionsItemSelected(item)
-    }
 }

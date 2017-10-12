@@ -3,6 +3,7 @@ package com.example.denisgabyshev.getdisciplined.ui.main.task.today
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.*
 import com.example.denisgabyshev.getdisciplined.R
 import com.example.denisgabyshev.getdisciplined.ui.main.MainActivity
@@ -11,6 +12,7 @@ import com.example.denisgabyshev.getdisciplined.ui.main.MainMvpView
 import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskFragment
 import com.example.denisgabyshev.getdisciplined.utils.AppUtils
 import kotlinx.android.synthetic.main.fragment_tasks_today.*
+import org.jetbrains.anko.appcompat.v7.coroutines.onMenuItemClick
 import javax.inject.Inject
 
 /**
@@ -43,10 +45,10 @@ class TaskFragment : BaseTaskFragment(), TaskMvpView {
 
         presenter.isTodayExist()
 
-        activity.setSupportActionBar(toolbar)
-        activity.supportActionBar?.title = ""
-
-        (activity as MainActivity).addToolbar()
+        toolbar.setNavigationIcon(R.drawable.menu)
+        toolbar.setNavigationOnClickListener {
+                mainPresenter.onDrawerClick()
+        }
 
         taskList.layoutManager = LinearLayoutManager(context)
         taskList.adapter = adapter
@@ -57,14 +59,9 @@ class TaskFragment : BaseTaskFragment(), TaskMvpView {
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
-        if(item?.itemId == android.R.id.home) {
-            mainPresenter.onDrawerClick()
-        }
 
-        return super.onOptionsItemSelected(item)
-    }
+
 
 
 

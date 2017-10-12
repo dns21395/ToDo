@@ -25,8 +25,7 @@
                 app:contentScrim="?colorPrimary"
                 app:expandedSubtitleTextAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                app:subtitle="fine"
-                app:title="work">
+                app:fixPadding="true">
 
                 <ImageView
                     android:fitsSystemWindows="true"
@@ -48,11 +47,7 @@
                     app:layout_collapseMode="pin"
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="@android:color/transparent"
-                    app:layout_scrollFlags="scroll|exitUntilCollapsed"
-
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+                    android:layout_height="?attr/actionBarSize">
 
                 </android.support.v7.widget.Toolbar>
             </android.support.design.widget.SubtitleCollapsingToolbarLayout>
