@@ -1,5 +1,6 @@
 package com.example.denisgabyshev.getdisciplined.ui.main.task.today
 
+import android.graphics.Rect
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.v7.widget.LinearLayoutManager
@@ -12,6 +13,7 @@ import com.example.denisgabyshev.getdisciplined.ui.main.MainMvpView
 import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskFragment
 import com.example.denisgabyshev.getdisciplined.utils.AppUtils
 import kotlinx.android.synthetic.main.fragment_tasks_today.*
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 import org.jetbrains.anko.appcompat.v7.coroutines.onMenuItemClick
 import javax.inject.Inject
 
@@ -22,7 +24,6 @@ class TaskFragment : BaseTaskFragment(), TaskMvpView {
     private val TAG = "TaskFragment"
 
     @Inject lateinit var presenter: TaskMvpPresenter<TaskMvpView>
-    @Inject lateinit var mainPresenter: MainMvpPresenter<MainMvpView>
 
     private var isHideToolbarView = false
 
@@ -41,37 +42,11 @@ class TaskFragment : BaseTaskFragment(), TaskMvpView {
             inflater.inflate(R.layout.fragment_tasks_today, container, false)
 
     override fun setFragment() {
-        setHasOptionsMenu(true)
+        super.setFragment()
 
         presenter.isTodayExist()
 
-        toolbar.setNavigationIcon(R.drawable.menu)
-        toolbar.setNavigationOnClickListener {
-                mainPresenter.onDrawerClick()
-        }
 
-        taskList.layoutManager = LinearLayoutManager(context)
-        taskList.adapter = adapter
 
-        fab.setOnClickListener {
-            showAddTaskView()
-            fab.hide()
-        }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

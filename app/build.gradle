@@ -64,5 +64,8 @@ dependencies {
     // toolbar subtitle
     compile 'com.hendraanggrian:collapsingtoolbarlayout-subtitle:26.1.0'
 
+    // keyboard listener
+    compile 'net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:2.1.0'
+
 
 }

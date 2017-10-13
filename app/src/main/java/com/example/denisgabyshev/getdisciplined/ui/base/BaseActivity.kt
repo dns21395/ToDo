@@ -1,12 +1,15 @@
 package com.example.denisgabyshev.getdisciplined.ui.base
 
+import android.app.Service
 import android.content.Context
 import android.graphics.Color
+import android.graphics.Rect
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.AppCompatDrawableManager
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
@@ -19,6 +22,7 @@ import com.example.denisgabyshev.getdisciplined.di.module.ActivityModule
 import com.example.denisgabyshev.getdisciplined.utils.KeyboardUtils
 import com.example.denisgabyshev.getdisciplined.utils.app
 import com.readystatesoftware.systembartint.SystemBarTintManager
+import kotlinx.android.synthetic.main.fragment_tasks_today.*
 import org.jetbrains.anko.toast
 
 /**

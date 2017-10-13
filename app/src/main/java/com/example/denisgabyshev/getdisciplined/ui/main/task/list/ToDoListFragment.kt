@@ -9,6 +9,7 @@ import com.example.denisgabyshev.getdisciplined.ui.main.MainMvpPresenter
 import com.example.denisgabyshev.getdisciplined.ui.main.MainMvpView
 import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskFragment
 import kotlinx.android.synthetic.main.fragment_tasks_todo.*
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 import javax.inject.Inject
 
 /**
@@ -18,7 +19,6 @@ class ToDoListFragment : BaseTaskFragment(), ToDoListMvpView {
     private val TAG = "ToDListFragment"
 
     @Inject lateinit var presenter: ToDoListMvpPresenter<ToDoListMvpView>
-    @Inject lateinit var mainPresenter: MainMvpPresenter<MainMvpView>
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -36,24 +36,10 @@ class ToDoListFragment : BaseTaskFragment(), ToDoListMvpView {
     }
 
     override fun setFragment() {
-        setHasOptionsMenu(true)
+        super.setFragment()
 
         presenter.isTodayExist()
-
-        toolbar.setNavigationIcon(R.drawable.menu)
-        toolbar.setNavigationOnClickListener {
-            mainPresenter.onDrawerClick()
-        }
-        
-        taskList.layoutManager = LinearLayoutManager(context)
-        taskList.adapter = adapter
-
-        fab.setOnClickListener {
-            showAddTaskView()
-            fab.hide()
-        }
     }
-
 
 
 }

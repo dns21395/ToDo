@@ -9,4 +9,6 @@ interface AddMvpView: MvpView {
     fun setFragment()
 
     fun clearEditText()
+
+    fun addTaskAction()
 }
