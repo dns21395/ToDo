@@ -6,7 +6,7 @@
 
     <android.support.design.widget.CoordinatorLayout
         android:fitsSystemWindows="true"
-        android:id="@+id/cl_root_view"
+        android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -53,11 +53,14 @@
             </android.support.design.widget.SubtitleCollapsingToolbarLayout>
         </android.support.design.widget.AppBarLayout>
 
+
+
         <android.support.v7.widget.RecyclerView
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:id="@+id/taskList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+
 
 
     </android.support.design.widget.CoordinatorLayout>
@@ -70,6 +73,5 @@
         android:layout_alignParentBottom="true"
         android:layout_width="64dp"
         android:layout_height="64dp" />
-
 
 </RelativeLayout>

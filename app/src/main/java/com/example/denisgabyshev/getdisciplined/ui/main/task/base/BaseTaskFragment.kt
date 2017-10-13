@@ -1,6 +1,8 @@
 package com.example.denisgabyshev.getdisciplined.ui.main.task.base
 
 import android.graphics.Rect
+import android.support.design.widget.AppBarLayout
+import android.support.design.widget.CoordinatorLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.widget.FrameLayout
@@ -17,6 +19,7 @@ import com.example.denisgabyshev.getdisciplined.ui.main.task.add.AddFragment
 import com.example.denisgabyshev.getdisciplined.utils.AppUtils
 import kotlinx.android.synthetic.main.fragment_tasks_today.*
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
+import org.jetbrains.anko.padding
 import javax.inject.Inject
 
 /**
@@ -30,6 +33,7 @@ abstract class BaseTaskFragment: BaseFragment(), BaseTaskMvpView {
     private val TAG = "BaseTaskFragment"
 
     override fun showAddTaskView() {
+
         frameAddTask = FrameLayout(context)
         frameAddTask?.id = 1227
         val params: RelativeLayout.LayoutParams = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT)
@@ -41,14 +45,26 @@ abstract class BaseTaskFragment: BaseFragment(), BaseTaskMvpView {
 
         val transaction = childFragmentManager.beginTransaction()
         transaction.replace(frameAddTask!!.id, fragment).commit()
+
+        val paramsRV: RelativeLayout.LayoutParams = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT)
+        paramsRV.addRule(RelativeLayout.ABOVE, frameAddTask!!.id)
+
+        coordinatorLayout.layoutParams = paramsRV
+
+        taskList.setPadding(0, toolbar.height, 0, 0)
     }
 
     override fun hideAddTaskView() {
+        val paramsRV: RelativeLayout.LayoutParams = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT)
+        coordinatorLayout.layoutParams = paramsRV
+
         if(frameAddTask != null) {
             parentTasks.removeView(frameAddTask)
             frameAddTask = null
             fab.show()
         }
+
+        taskList.setPadding(0, 0, 0, 0)
     }
 
     override fun updateTasksList(array: ArrayList<Task>) {

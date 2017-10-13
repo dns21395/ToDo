@@ -60,9 +60,6 @@ class MainActivity : BaseActivity(), MainMvpView {
     override fun setUp() {
         transparentStatusBar()
         setupNavMenu()
-
-        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
-
     }
 
     override fun openDrawer() {
@@ -89,6 +86,8 @@ class MainActivity : BaseActivity(), MainMvpView {
             }
         }
     }
+
+
 
 
 

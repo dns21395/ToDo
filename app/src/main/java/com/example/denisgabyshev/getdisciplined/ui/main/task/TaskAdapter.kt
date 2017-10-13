@@ -34,7 +34,7 @@ class TaskAdapter(val linearLayoutManager: LinearLayoutManager) : RecyclerView.A
         tasks = taskArray
         notifyDataSetChanged()
 
-        linearLayoutManager.scrollToPosition(0)
+        linearLayoutManager.scrollToPosition(tasks.size)
 
 
     }
