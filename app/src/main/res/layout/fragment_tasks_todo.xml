@@ -64,6 +64,7 @@
     </android.support.design.widget.CoordinatorLayout>
 
     <android.support.design.widget.FloatingActionButton
+        android:src="@drawable/plus"
         android:id="@+id/fab"
         android:layout_margin="16dp"
         android:layout_alignParentRight="true"
