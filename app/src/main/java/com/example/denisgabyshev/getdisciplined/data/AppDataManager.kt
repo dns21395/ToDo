@@ -27,8 +27,6 @@ class AppDataManager @Inject constructor(@ApplicationContext val context: Contex
     override fun addDate(date: Long) {
         val _date = Date(0, date)
 
-
-
         Single.fromCallable {
             database.dateDao().insert(_date)
         }.subscribeOn(Schedulers.io())
@@ -36,17 +34,17 @@ class AppDataManager @Inject constructor(@ApplicationContext val context: Contex
     }
 
     override fun addTask(dateId: Long, task: String) {
-        doAsync {
-            val count = database.taskDao().getTaskCount(dateId)
 
-            val _task = Task(0, dateId, task, count)
+        val count = database.taskDao().getTaskCount(dateId)
 
-            Single.fromCallable {
-                database.taskDao().insert(_task)
-            }.subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread()).subscribe()
+        val _task = Task(0, dateId, task, count)
 
-        }
+        Single.fromCallable {
+            database.taskDao().insert(_task)
+        }.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe()
+
+
     }
 
      override fun getDateId(date: Long): Flowable<List<Date>> =

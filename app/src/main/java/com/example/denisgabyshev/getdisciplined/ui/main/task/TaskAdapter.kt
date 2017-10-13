@@ -1,5 +1,6 @@
 package com.example.denisgabyshev.getdisciplined.ui.main.task
 
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,7 +13,7 @@ import kotlinx.android.synthetic.main.task_item.view.*
 /**
  * Created by denisgabyshev on 04/10/2017.
  */
-class TaskAdapter(val day: Long) : RecyclerView.Adapter<TaskViewHolder>() {
+class TaskAdapter(val linearLayoutManager: LinearLayoutManager) : RecyclerView.Adapter<TaskViewHolder>() {
     private val TAG = "TaskAdapter"
 
     private var tasks = ArrayList<Task>()
@@ -32,6 +33,10 @@ class TaskAdapter(val day: Long) : RecyclerView.Adapter<TaskViewHolder>() {
         Log.d(TAG, "${taskArray}")
         tasks = taskArray
         notifyDataSetChanged()
+
+        linearLayoutManager.scrollToPosition(0)
+
+
     }
 
 }

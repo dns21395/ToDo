@@ -23,7 +23,7 @@ import javax.inject.Inject
  * Created by denisgabyshev on 11/10/2017.
  */
 abstract class BaseTaskFragment: BaseFragment(), BaseTaskMvpView {
-    var adapter = TaskAdapter(AppUtils.getToday())
+    var adapter: TaskAdapter? = null
 
     var frameAddTask: FrameLayout? = null
 
@@ -52,7 +52,7 @@ abstract class BaseTaskFragment: BaseFragment(), BaseTaskMvpView {
     }
 
     override fun updateTasksList(array: ArrayList<Task>) {
-        adapter.setArray(array)
+        adapter?.setArray(array)
     }
 
     override fun setFragment() {
@@ -63,7 +63,9 @@ abstract class BaseTaskFragment: BaseFragment(), BaseTaskMvpView {
             (activity as MainActivity).openDrawer()
         }
 
-        taskList.layoutManager = LinearLayoutManager(context)
+        val layoutManager = LinearLayoutManager(context)
+        taskList.layoutManager = layoutManager
+        adapter = TaskAdapter(layoutManager)
         taskList.adapter = adapter
 
         fab.setOnClickListener {
