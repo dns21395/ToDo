@@ -1,5 +1,7 @@
 package com.example.denisgabyshev.getdisciplined.ui.main.task
 
+import android.os.Handler
+import android.support.design.widget.AppBarLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -9,14 +11,19 @@ import android.view.ViewGroup
 import com.example.denisgabyshev.getdisciplined.R
 import com.example.denisgabyshev.getdisciplined.data.db.model.Task
 import kotlinx.android.synthetic.main.task_item.view.*
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.sdk25.coroutines.onScrollChange
 
 /**
  * Created by denisgabyshev on 04/10/2017.
  */
-class TaskAdapter(val linearLayoutManager: LinearLayoutManager) : RecyclerView.Adapter<TaskViewHolder>() {
+class TaskAdapter(val appBar: AppBarLayout, val recyclerView: RecyclerView) : RecyclerView.Adapter<TaskViewHolder>() {
     private val TAG = "TaskAdapter"
 
     private var tasks = ArrayList<Task>()
+
+
+
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         holder.bind(tasks[position])
@@ -30,15 +37,13 @@ class TaskAdapter(val linearLayoutManager: LinearLayoutManager) : RecyclerView.A
         TaskViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.task_item, parent, false))
 
     fun setArray(taskArray: ArrayList<Task>) {
-        Log.d(TAG, "${taskArray}")
         tasks = taskArray
+
         notifyDataSetChanged()
 
-        linearLayoutManager.scrollToPosition(tasks.size)
-
-
+        appBar.setExpanded(false)
+        recyclerView.smoothScrollToPosition(itemCount)
     }
-
 }
 
 class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

@@ -1,10 +1,13 @@
 package com.example.denisgabyshev.getdisciplined.ui.main.task.base
 
+import android.util.Log
 import com.example.denisgabyshev.getdisciplined.data.DataManager
 import com.example.denisgabyshev.getdisciplined.data.db.model.Task
 import com.example.denisgabyshev.getdisciplined.ui.base.BasePresenter
 import com.example.denisgabyshev.getdisciplined.utils.AppUtils
 import com.example.denisgabyshev.getdisciplined.utils.rx.SchedulerProvider
+import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -20,21 +23,30 @@ open class BaseTaskPresenter<V: BaseTaskMvpView> @Inject constructor(dataManager
         BasePresenter<V>(dataManager, schedulerProvider, compositeDisposable), BaseTaskMvpPresenter<V> {
 
 
+    private val TAG = "BaseTaskPresenter"
+
 
     override fun insertToday() {
-        doAsync {
-            dataManager.addDate(AppUtils.getToday())
-        }
+        Observable.just(AppUtils.getToday())
+                .observeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    dataManager.addDate(it)
+                }
     }
 
 
     override fun isTodayExist() {
-        compositeDisposable?.add(dataManager.getDateId(AppUtils.getToday()).subscribe {
+        dataManager.getDateId(AppUtils.getToday())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
             if(it.isEmpty()) {
                 insertToday()
             }
-        })
-        compositeDisposable?.add(  dataManager.getDateId(AppUtils.getToday())
+        }
+
+        dataManager.getDateId(AppUtils.getToday())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
@@ -45,15 +57,14 @@ open class BaseTaskPresenter<V: BaseTaskMvpView> @Inject constructor(dataManager
                         mvpView?.setToolbar(date)
                         getTasksByDate(dateId)
                     }
-                })
+                }
     }
 
     override fun getTasksByDate(dateId: Long) {
-        compositeDisposable?.add(dataManager.getTasksByDayId(dateId)
-                .subscribeOn(Schedulers.io())
+        dataManager.getTasksByDayId(dateId).toObservable()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
-                    mvpView?.updateTasksList(it as ArrayList<Task>)
-                })
+                   mvpView?.updateTasksList(it as ArrayList<Task>)
+                }
     }
 }

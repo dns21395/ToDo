@@ -18,6 +18,7 @@ import com.example.denisgabyshev.getdisciplined.ui.main.task.TaskAdapter
 import com.example.denisgabyshev.getdisciplined.ui.main.task.add.AddFragment
 import com.example.denisgabyshev.getdisciplined.utils.AppUtils
 import kotlinx.android.synthetic.main.fragment_tasks_today.*
+import kotlinx.android.synthetic.main.fragment_tasks_today.view.*
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 import org.jetbrains.anko.padding
 import javax.inject.Inject
@@ -29,6 +30,9 @@ abstract class BaseTaskFragment: BaseFragment(), BaseTaskMvpView {
     var adapter: TaskAdapter? = null
 
     var frameAddTask: FrameLayout? = null
+
+    val layoutManager = LinearLayoutManager(context)
+
 
     private val TAG = "BaseTaskFragment"
 
@@ -52,6 +56,9 @@ abstract class BaseTaskFragment: BaseFragment(), BaseTaskMvpView {
         coordinatorLayout.layoutParams = paramsRV
 
         taskList.setPadding(0, toolbar.height, 0, 0)
+
+        layoutManager.stackFromEnd = true
+
     }
 
     override fun hideAddTaskView() {
@@ -65,6 +72,8 @@ abstract class BaseTaskFragment: BaseFragment(), BaseTaskMvpView {
         }
 
         taskList.setPadding(0, 0, 0, 0)
+
+        layoutManager.stackFromEnd = false
     }
 
     override fun updateTasksList(array: ArrayList<Task>) {
@@ -79,9 +88,9 @@ abstract class BaseTaskFragment: BaseFragment(), BaseTaskMvpView {
             (activity as MainActivity).openDrawer()
         }
 
-        val layoutManager = LinearLayoutManager(context)
+
         taskList.layoutManager = layoutManager
-        adapter = TaskAdapter(layoutManager)
+        adapter = TaskAdapter(appBar, taskList)
         taskList.adapter = adapter
 
         fab.setOnClickListener {

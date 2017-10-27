@@ -36,7 +36,6 @@ class AddPresenter<V: AddMvpView> @Inject
                 dataManager.getDateId(AppUtils.getToday()).subscribe { dateId ->
                     dataManager.addTask(dateId[0].id, taskText.trim())
                 }}.subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
                     .subscribe()
         } else {
             mvpView?.showToast("text is empty")
