@@ -37,11 +37,14 @@ class TaskAdapter(val appBar: AppBarLayout, val recyclerView: RecyclerView) : Re
         TaskViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.task_item, parent, false))
 
     fun setArray(taskArray: ArrayList<Task>) {
+        if(tasks.size > 0) {
+            appBar.setExpanded(false)
+        }
+
         tasks = taskArray
 
         notifyDataSetChanged()
 
-        appBar.setExpanded(false)
         recyclerView.smoothScrollToPosition(itemCount)
     }
 }

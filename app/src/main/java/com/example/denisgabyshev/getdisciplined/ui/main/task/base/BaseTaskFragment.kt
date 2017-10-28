@@ -59,6 +59,8 @@ abstract class BaseTaskFragment: BaseFragment(), BaseTaskMvpView {
 
         layoutManager.stackFromEnd = true
 
+        appBar.setExpanded(false)
+
     }
 
     override fun hideAddTaskView() {
