@@ -1,27 +1,15 @@
 package com.example.denisgabyshev.getdisciplined.ui.main.task.base
 
-import android.graphics.Rect
-import android.support.design.widget.AppBarLayout
-import android.support.design.widget.CoordinatorLayout
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.widget.FrameLayout
 import android.widget.RelativeLayout
 import com.example.denisgabyshev.getdisciplined.R
 import com.example.denisgabyshev.getdisciplined.data.db.model.Task
 import com.example.denisgabyshev.getdisciplined.ui.base.BaseFragment
-import com.example.denisgabyshev.getdisciplined.ui.base.MvpView
 import com.example.denisgabyshev.getdisciplined.ui.main.MainActivity
-import com.example.denisgabyshev.getdisciplined.ui.main.MainMvpPresenter
-import com.example.denisgabyshev.getdisciplined.ui.main.MainMvpView
-import com.example.denisgabyshev.getdisciplined.ui.main.task.TaskAdapter
 import com.example.denisgabyshev.getdisciplined.ui.main.task.add.AddFragment
-import com.example.denisgabyshev.getdisciplined.utils.AppUtils
 import kotlinx.android.synthetic.main.fragment_tasks_today.*
-import kotlinx.android.synthetic.main.fragment_tasks_today.view.*
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
-import org.jetbrains.anko.padding
-import javax.inject.Inject
 
 /**
  * Created by denisgabyshev on 11/10/2017.
@@ -60,7 +48,6 @@ abstract class BaseTaskFragment: BaseFragment(), BaseTaskMvpView {
         layoutManager.stackFromEnd = true
 
         appBar.setExpanded(false)
-
     }
 
     override fun hideAddTaskView() {
@@ -103,7 +90,5 @@ abstract class BaseTaskFragment: BaseFragment(), BaseTaskMvpView {
         KeyboardVisibilityEvent.setEventListener(activity, {
             if(!it && frameAddTask != null) hideAddTaskView()
         })
-
     }
-
 }
