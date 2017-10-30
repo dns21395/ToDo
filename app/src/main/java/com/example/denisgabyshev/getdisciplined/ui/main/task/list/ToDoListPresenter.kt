@@ -13,8 +13,11 @@ class ToDoListPresenter<V : ToDoListMvpView> @Inject constructor(dataManager: Da
                                                                  schedulerProvider: SchedulerProvider,
                                                                  compositeDisposable: CompositeDisposable) :
         BaseTaskPresenter<V>(dataManager, schedulerProvider, compositeDisposable), ToDoListMvpPresenter<V> {
+
     override fun onAttach(mvpView: V) {
         super.onAttach(mvpView)
         mvpView.setFragment()
     }
+
+
 }

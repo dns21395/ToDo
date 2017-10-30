@@ -17,4 +17,6 @@ interface DataManager{
 
     fun getTasksByDayId(date: Long): Flowable<List<Task>>
 
+    fun updateTaskOrder(task: Task, order: Int)
+
 }

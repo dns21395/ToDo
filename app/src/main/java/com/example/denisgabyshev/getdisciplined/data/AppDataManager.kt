@@ -1,18 +1,13 @@
 package com.example.denisgabyshev.getdisciplined.data
 
 import android.content.Context
-import android.util.Log
 import com.example.denisgabyshev.getdisciplined.data.db.AppDatabase
 import com.example.denisgabyshev.getdisciplined.data.db.model.Date
 import com.example.denisgabyshev.getdisciplined.data.db.model.Task
 import com.example.denisgabyshev.getdisciplined.di.ApplicationContext
-import com.example.denisgabyshev.getdisciplined.utils.rx.SchedulerProvider
 import io.reactivex.*
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import org.jetbrains.anko.doAsync
-import java.util.Date.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -22,6 +17,7 @@ import javax.inject.Singleton
 @Singleton
 class AppDataManager @Inject constructor(@ApplicationContext val context: Context,
                                          private val database: AppDatabase) : DataManager {
+
     private val TAG = "AppDataManager"
 
     override fun addDate(date: Long) {
@@ -53,6 +49,16 @@ class AppDataManager @Inject constructor(@ApplicationContext val context: Contex
 
     override fun getTasksByDayId(date: Long): Flowable<List<Task>> =
             database.taskDao().getTasksByDayId(date)
+
+    override fun updateTaskOrder(task: Task, order: Int) {
+        task.taskOrder = order
+
+        Single.fromCallable {
+            database.taskDao().updateTask(task)
+        }.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe()
+
+    }
 
 
 

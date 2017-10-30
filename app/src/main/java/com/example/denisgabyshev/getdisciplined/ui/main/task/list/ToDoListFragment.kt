@@ -8,6 +8,7 @@ import com.example.denisgabyshev.getdisciplined.ui.main.MainActivity
 import com.example.denisgabyshev.getdisciplined.ui.main.MainMvpPresenter
 import com.example.denisgabyshev.getdisciplined.ui.main.MainMvpView
 import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskFragment
+import com.example.denisgabyshev.getdisciplined.ui.main.task.base.TaskAdapter
 import kotlinx.android.synthetic.main.fragment_tasks_todo.*
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 import javax.inject.Inject

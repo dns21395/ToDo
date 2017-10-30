@@ -7,6 +7,7 @@ import com.example.denisgabyshev.getdisciplined.data.DataManager
 import com.example.denisgabyshev.getdisciplined.data.db.AppDatabase
 import com.example.denisgabyshev.getdisciplined.di.ApplicationContext
 import com.example.denisgabyshev.getdisciplined.di.module.ApplicationModule
+import com.example.denisgabyshev.getdisciplined.ui.main.task.base.TaskAdapter
 import com.example.denisgabyshev.getdisciplined.utils.rx.SchedulerProvider
 import dagger.Component
 import javax.inject.Singleton
@@ -18,6 +19,7 @@ import javax.inject.Singleton
 @Component(modules = arrayOf(ApplicationModule::class))
 interface ApplicationComponent {
     fun inject(app: App)
+    fun inject(taskAdapter: TaskAdapter)
 
     @ApplicationContext
     fun context(): Context

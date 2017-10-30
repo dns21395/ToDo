@@ -18,8 +18,8 @@ import javax.inject.Inject
  * Created by denisgabyshev on 11/10/2017.
  */
 open class BaseTaskPresenter<V: BaseTaskMvpView> @Inject constructor(dataManager: DataManager,
-                                                                schedulerProvider: SchedulerProvider,
-                                                                compositeDisposable: CompositeDisposable) :
+                                                                     schedulerProvider: SchedulerProvider,
+                                                                     compositeDisposable: CompositeDisposable) :
         BasePresenter<V>(dataManager, schedulerProvider, compositeDisposable), BaseTaskMvpPresenter<V> {
 
 

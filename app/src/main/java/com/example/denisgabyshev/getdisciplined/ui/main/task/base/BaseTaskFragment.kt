@@ -79,7 +79,7 @@ abstract class BaseTaskFragment: BaseFragment(), BaseTaskMvpView {
 
 
         taskList.layoutManager = layoutManager
-        adapter = TaskAdapter(appBar, taskList)
+        adapter = TaskAdapter(appBar, taskList, context.applicationContext)
         taskList.adapter = adapter
 
         fab.setOnClickListener {

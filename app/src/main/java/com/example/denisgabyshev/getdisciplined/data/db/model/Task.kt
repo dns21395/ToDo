@@ -15,6 +15,6 @@ data class Task  (
         @PrimaryKey(autoGenerate = true)
         val id: Long,
         val dateId: Long,
-        val task: String,
-        val order: Int
+        var task: String,
+        var taskOrder: Int
 )
