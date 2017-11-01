@@ -19,4 +19,5 @@ interface DataManager{
 
     fun updateTaskOrder(task: Task, order: Int)
 
+    fun updateTaskStatus(task: Task)
 }

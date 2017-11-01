@@ -3,6 +3,7 @@ package com.example.denisgabyshev.getdisciplined.ui.main.task.base
 import android.graphics.Canvas
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
+import com.example.denisgabyshev.getdisciplined.R
 
 /**
  * Created by denisgabyshev on 29/10/2017.
@@ -20,7 +21,6 @@ class ItemTouchHelperCallback(val adapter: TaskAdapter) : ItemTouchHelper.Callba
         return true
     }
 
-
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) =
             adapter.onItemSwipe(viewHolder.adapterPosition)
 
@@ -35,6 +35,8 @@ class ItemTouchHelperCallback(val adapter: TaskAdapter) : ItemTouchHelper.Callba
             super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
         }
     }
+
+
 
     override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
         if (actionState != ItemTouchHelper.ACTION_STATE_IDLE) {

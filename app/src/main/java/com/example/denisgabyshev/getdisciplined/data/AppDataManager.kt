@@ -57,7 +57,13 @@ class AppDataManager @Inject constructor(@ApplicationContext val context: Contex
             database.taskDao().updateTask(task)
         }.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe()
+    }
 
+    override fun updateTaskStatus(task: Task) {
+        Single.fromCallable {
+            database.taskDao().updateTask(task)
+        }.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe()
     }
 
 
