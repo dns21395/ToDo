@@ -2,14 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group>
         <item
+            android:id="@+id/myday"
+            android:checked="true"
+            android:icon="@drawable/myday"
+            android:title="@string/myday" />
+        <item
             android:id="@+id/todo"
             android:checked="true"
-            android:icon="@drawable/check_circle_outline"
-            android:title="todo" />
-        <item
-            android:id="@+id/list"
-            android:checked="true"
-            android:title="list" />
+            android:icon="@drawable/todo"
+            android:title="@string/todo" />
     </group>
 
 </menu>

@@ -32,7 +32,7 @@ class TaskFragment : BaseTaskFragment(), TaskMvpView {
     }
 
     override fun setToolbar(title: Long) {
-        collapseToolbar.title = "My Day"
+        collapseToolbar.title = resources.getString(R.string.myday)
         collapseToolbar.subtitle = AppUtils.makeDate(title)
     }
 

@@ -18,6 +18,8 @@ interface DataManager{
 
     fun getTasksByDayId(date: Long): Single<List<Task>>
 
+    fun getTasksByNotEqualToDayId(date: Long): Single<List<Task>>
+
     fun updateTaskOrder(task: Task, order: Int)
 
     fun updateTaskStatus(task: Task)

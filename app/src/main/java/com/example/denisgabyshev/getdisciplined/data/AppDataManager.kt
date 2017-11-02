@@ -73,6 +73,10 @@ class AppDataManager @Inject constructor(@ApplicationContext val context: Contex
                 .observeOn(AndroidSchedulers.mainThread()).subscribe()
     }
 
+    override fun getTasksByNotEqualToDayId(date: Long): Single<List<Task>> =
+        database.taskDao().getTasksByNoEqualToDayId(date)
+
+
 
 
 }

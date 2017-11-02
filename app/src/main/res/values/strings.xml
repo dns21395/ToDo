@@ -6,4 +6,6 @@
     <string name="add_to_do">Add a to-do</string>
     <string name="menu">Menu</string>
     <string name="empty_text">text empty</string>
+    <string name="myday">My Day</string>
+    <string name="todo">To-Do</string>
 </resources>

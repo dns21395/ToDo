@@ -33,7 +33,7 @@ class ToDoListFragment : BaseTaskFragment(), ToDoListMvpView {
             inflater.inflate(R.layout.fragment_tasks_todo, container, false)
 
     override fun setToolbar(title: Long) {
-        toolbar.title = "My List"
+        toolbar.title = resources.getString(R.string.todo)
     }
 
     override fun setFragment() {

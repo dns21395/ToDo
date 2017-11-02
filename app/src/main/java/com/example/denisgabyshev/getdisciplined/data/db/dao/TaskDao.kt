@@ -16,6 +16,9 @@ interface TaskDao {
     @Query("SELECT * FROM task WHERE dateId = :date ORDER BY taskOrder")
     fun getTasksByDayId(date: Long): Single<List<Task>>
 
+    @Query("SELECT * FROM task WHERE dateId != :date ORDER BY taskOrder")
+    fun getTasksByNoEqualToDayId(date: Long): Single<List<Task>>
+
     @Query("SELECT COUNT(task.id) FROM task "
             + " INNER JOIN date ON date.id = :dateId")
     fun getTaskCount(dateId: Long): Int
@@ -28,6 +31,6 @@ interface TaskDao {
 
     @Insert
     fun insert(task: Task)
-
-
 }
+
+

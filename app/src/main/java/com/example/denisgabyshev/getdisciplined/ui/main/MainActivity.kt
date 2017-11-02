@@ -2,26 +2,17 @@ package com.example.denisgabyshev.getdisciplined.ui.main
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
-import android.graphics.Rect
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.ActionBarDrawerToggle
-import android.util.Log
 import android.view.Gravity
-import android.view.KeyEvent
-import android.view.WindowManager
-import android.widget.Toast
 import com.example.denisgabyshev.getdisciplined.R
 import com.example.denisgabyshev.getdisciplined.ui.base.BaseActivity
-import com.example.denisgabyshev.getdisciplined.ui.base.BaseFragment
-import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskFragment
 import com.example.denisgabyshev.getdisciplined.ui.main.task.list.ToDoListFragment
 import javax.inject.Inject
 import com.example.denisgabyshev.getdisciplined.ui.main.task.today.TaskFragment
 import com.example.denisgabyshev.getdisciplined.utils.ScreenUtils
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_tasks_today.*
 
 
 /**
@@ -71,11 +62,11 @@ class MainActivity : BaseActivity(), MainMvpView {
         navigationView.setNavigationItemSelectedListener {
             drawerLayout.closeDrawers()
             when(it.itemId) {
-                R.id.todo -> {
+                R.id.myday -> {
                     setTaskFragment(TaskFragment())
                     true
                 }
-                R.id.list -> {
+                R.id.todo -> {
                     setTaskFragment(ToDoListFragment())
                     true
                 }
