@@ -25,8 +25,6 @@ class TaskFragment : BaseTaskFragment(), TaskMvpView {
 
     @Inject lateinit var presenter: TaskMvpPresenter<TaskMvpView>
 
-    private var isHideToolbarView = false
-
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity.activityComponent.inject(this)
@@ -45,8 +43,9 @@ class TaskFragment : BaseTaskFragment(), TaskMvpView {
         super.setFragment()
 
         presenter.isTodayExist()
+    }
 
-
-
+    override fun itemInsert() {
+        presenter.isTodayExist()
     }
 }

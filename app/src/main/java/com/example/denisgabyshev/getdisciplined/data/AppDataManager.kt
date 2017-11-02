@@ -47,7 +47,7 @@ class AppDataManager @Inject constructor(@ApplicationContext val context: Contex
                 database.dateDao().getDateId(date)
 
 
-    override fun getTasksByDayId(date: Long): Flowable<List<Task>> =
+    override fun getTasksByDayId(date: Long): Single<List<Task>> =
             database.taskDao().getTasksByDayId(date)
 
     override fun updateTaskOrder(task: Task, order: Int) {
@@ -62,6 +62,13 @@ class AppDataManager @Inject constructor(@ApplicationContext val context: Contex
     override fun updateTaskStatus(task: Task) {
         Single.fromCallable {
             database.taskDao().updateTask(task)
+        }.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe()
+    }
+
+    override fun deleteTask(task: Task) {
+        Single.fromCallable {
+            database.taskDao().delete(task)
         }.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe()
     }

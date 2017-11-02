@@ -13,6 +13,9 @@ import com.example.denisgabyshev.getdisciplined.ui.main.task.today.TaskPresenter
 import com.example.denisgabyshev.getdisciplined.ui.main.task.add.AddMvpPresenter
 import com.example.denisgabyshev.getdisciplined.ui.main.task.add.AddMvpView
 import com.example.denisgabyshev.getdisciplined.ui.main.task.add.AddPresenter
+import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskMvpPresenter
+import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskMvpView
+import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskPresenter
 import com.example.denisgabyshev.getdisciplined.ui.main.task.list.ToDoListMvpPresenter
 import com.example.denisgabyshev.getdisciplined.ui.main.task.list.ToDoListMvpView
 import com.example.denisgabyshev.getdisciplined.ui.main.task.list.ToDoListPresenter

@@ -5,9 +5,12 @@ import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.*
 import com.example.denisgabyshev.getdisciplined.R
+import com.example.denisgabyshev.getdisciplined.data.db.model.Task
 import com.example.denisgabyshev.getdisciplined.ui.base.BaseFragment
 import com.example.denisgabyshev.getdisciplined.ui.main.MainActivity
 import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskFragment
+import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskMvpPresenter
+import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskMvpView
 import com.example.denisgabyshev.getdisciplined.ui.main.task.list.ToDoListMvpView
 import com.example.denisgabyshev.getdisciplined.ui.main.task.list.ToDoListPresenter
 import com.example.denisgabyshev.getdisciplined.ui.main.task.list.ToDoListPresenter_Factory
@@ -30,14 +33,13 @@ class AddFragment : BaseFragment(), AddMvpView {
 
     @Inject lateinit var presenter: AddMvpPresenter<AddMvpView>
 
-
-    
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         activity.activityComponent.inject(this)
 
         presenter.onAttach(this)
+
 
     }
 
@@ -65,7 +67,7 @@ class AddFragment : BaseFragment(), AddMvpView {
     }
 
     override fun addTaskAction() {
-        presenter.addTask(textTask.text.toString())
+        presenter.addTask(textTask.text.toString(), {(parentFragment as BaseTaskFragment).itemInsert()})
     }
 
 

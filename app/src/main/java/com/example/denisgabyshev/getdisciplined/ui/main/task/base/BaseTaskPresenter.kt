@@ -25,6 +25,8 @@ open class BaseTaskPresenter<V: BaseTaskMvpView> @Inject constructor(dataManager
 
     private val TAG = "BaseTaskPresenter"
 
+    var todayId: Long = 0
+
 
     override fun insertToday() {
         Observable.just(AppUtils.getToday())
@@ -37,6 +39,8 @@ open class BaseTaskPresenter<V: BaseTaskMvpView> @Inject constructor(dataManager
 
 
     override fun isTodayExist() {
+        Log.d(TAG, "IS TODAY EXIST")
+
         dataManager.getDateId(AppUtils.getToday())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -50,21 +54,24 @@ open class BaseTaskPresenter<V: BaseTaskMvpView> @Inject constructor(dataManager
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
+                    Log.d(TAG, "$it")
                     if(it.isNotEmpty()) {
                         val date = it[0].date
                         val dateId = it[0].id
 
                         mvpView?.setToolbar(date)
+                        todayId = dateId
                         getTasksByDate(dateId)
                     }
                 }
     }
 
     override fun getTasksByDate(dateId: Long) {
-        dataManager.getTasksByDayId(dateId).toObservable()
+        dataManager.getTasksByDayId(dateId)
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                   mvpView?.updateTasksList(it as ArrayList<Task>)
-                }
+                .subscribe ({
+                    mvpView?.updateTasksList(it as ArrayList<Task>)
+                }, Throwable::printStackTrace)
     }
 }

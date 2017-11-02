@@ -42,5 +42,9 @@ class ToDoListFragment : BaseTaskFragment(), ToDoListMvpView {
         presenter.isTodayExist()
     }
 
+    override fun itemInsert() {
+        presenter.isTodayExist()
+    }
+
 
 }

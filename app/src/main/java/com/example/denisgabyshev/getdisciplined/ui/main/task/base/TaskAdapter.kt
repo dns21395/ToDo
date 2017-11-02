@@ -34,8 +34,6 @@ class TaskAdapter(val appBar: AppBarLayout, val recyclerView: RecyclerView, val 
     private var itemTouchHelper = ItemTouchHelper(callback)
     private var onStartDragListener: OnStartDragListener = this
 
-    private var isDragging = false
-
     init {
         itemTouchHelper.attachToRecyclerView(recyclerView)
 
@@ -71,7 +69,7 @@ class TaskAdapter(val appBar: AppBarLayout, val recyclerView: RecyclerView, val 
         dataManager.updateTaskStatus(tasks[position])
 
         holder.setStatus(tasks[position])
-        
+
     }
 
     override fun getItemCount(): Int = tasks.size
@@ -82,17 +80,16 @@ class TaskAdapter(val appBar: AppBarLayout, val recyclerView: RecyclerView, val 
             TaskViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.task_item, parent, false))
 
     fun setArray(taskArray: ArrayList<Task>) {
-        if(!isDragging) {
-            if (tasks.size > 0) {
-                appBar.setExpanded(false)
-            }
 
-            tasks = taskArray
-
-            notifyDataSetChanged()
-
-            recyclerView.smoothScrollToPosition(itemCount)
+        if (tasks.size > 0) {
+            appBar.setExpanded(false)
         }
+
+        tasks = taskArray
+
+        notifyDataSetChanged()
+
+        recyclerView.smoothScrollToPosition(itemCount)
     }
 
     override fun onItemMove(oldPos: Int, newPos: Int): Boolean {
@@ -103,18 +100,17 @@ class TaskAdapter(val appBar: AppBarLayout, val recyclerView: RecyclerView, val 
     override fun onItemSwipe(pos: Int) {
         Log.d(TAG, "OnItemSwipe ${tasks[pos]}")
         notifyItemRemoved(pos)
+        dataManager.deleteTask(tasks[pos])
         tasks.removeAt(pos)
 
     }
 
     override fun onStartDrag(viewHolder: RecyclerView.ViewHolder) {
         itemTouchHelper.startDrag(viewHolder)
-        isDragging = true
-        (viewHolder as TaskViewHolder).changeBackground(R.color.selected)
+        (viewHolder as TaskViewHolder).changeBackground(R.color.colorPrimaryLight)
     }
 
     fun dragStopped(viewHolder: RecyclerView.ViewHolder) {
-        isDragging = false
         (viewHolder as TaskViewHolder).changeBackground(android.R.color.white)
 
     }
@@ -167,8 +163,6 @@ class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         status.imageResource = R.drawable.checkbox_blank_circle_outline
 
     }
-
-
 
     fun changeBackground(color: Int) = with(itemView)  {
         parentRL.backgroundColor = ContextCompat.getColor(context, color)

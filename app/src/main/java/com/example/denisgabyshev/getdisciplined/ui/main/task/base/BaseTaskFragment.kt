@@ -1,5 +1,8 @@
 package com.example.denisgabyshev.getdisciplined.ui.main.task.base
 
+import android.support.v4.content.ContextCompat
+import android.support.v4.graphics.drawable.DrawableCompat
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.FrameLayout
 import android.widget.RelativeLayout
@@ -10,6 +13,7 @@ import com.example.denisgabyshev.getdisciplined.ui.main.MainActivity
 import com.example.denisgabyshev.getdisciplined.ui.main.task.add.AddFragment
 import kotlinx.android.synthetic.main.fragment_tasks_today.*
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
+import javax.inject.Inject
 
 /**
  * Created by denisgabyshev on 11/10/2017.
@@ -20,7 +24,6 @@ abstract class BaseTaskFragment: BaseFragment(), BaseTaskMvpView {
     var frameAddTask: FrameLayout? = null
 
     val layoutManager = LinearLayoutManager(context)
-
 
     private val TAG = "BaseTaskFragment"
 
@@ -63,6 +66,8 @@ abstract class BaseTaskFragment: BaseFragment(), BaseTaskMvpView {
         taskList.setPadding(0, 0, 0, 0)
 
         layoutManager.stackFromEnd = false
+
+        taskList.smoothScrollToPosition(adapter!!.itemCount)
     }
 
     override fun updateTasksList(array: ArrayList<Task>) {
@@ -77,10 +82,13 @@ abstract class BaseTaskFragment: BaseFragment(), BaseTaskMvpView {
             (activity as MainActivity).openDrawer()
         }
 
-
         taskList.layoutManager = layoutManager
         adapter = TaskAdapter(appBar, taskList, context.applicationContext)
         taskList.adapter = adapter
+
+        val itemDecoration = DividerItemDecoration(taskList.context, layoutManager.orientation)
+        itemDecoration.setDrawable(ContextCompat.getDrawable(context, R.drawable.divider))
+        taskList.addItemDecoration(itemDecoration)
 
         fab.setOnClickListener {
             showAddTaskView()
@@ -91,4 +99,6 @@ abstract class BaseTaskFragment: BaseFragment(), BaseTaskMvpView {
             if(!it && frameAddTask != null) hideAddTaskView()
         })
     }
+
+    abstract fun itemInsert()
 }
