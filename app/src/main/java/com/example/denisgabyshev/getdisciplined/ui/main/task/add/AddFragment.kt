@@ -1,28 +1,13 @@
 package com.example.denisgabyshev.getdisciplined.ui.main.task.add
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.*
 import com.example.denisgabyshev.getdisciplined.R
-import com.example.denisgabyshev.getdisciplined.data.db.model.Task
 import com.example.denisgabyshev.getdisciplined.ui.base.BaseFragment
-import com.example.denisgabyshev.getdisciplined.ui.main.MainActivity
 import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskFragment
-import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskMvpPresenter
-import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskMvpView
-import com.example.denisgabyshev.getdisciplined.ui.main.task.list.ToDoListMvpView
-import com.example.denisgabyshev.getdisciplined.ui.main.task.list.ToDoListPresenter
-import com.example.denisgabyshev.getdisciplined.ui.main.task.list.ToDoListPresenter_Factory
-import com.example.denisgabyshev.getdisciplined.ui.main.task.today.TaskMvpView
-import com.example.denisgabyshev.getdisciplined.ui.main.task.today.TaskPresenter
-import com.example.denisgabyshev.getdisciplined.utils.AppUtils
 import com.example.denisgabyshev.getdisciplined.utils.KeyboardUtils
 import kotlinx.android.synthetic.main.task_add_item.*
-import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
-import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.sdk25.coroutines.onFocusChange
 import javax.inject.Inject
 
 /**

@@ -1,4 +1,4 @@
-package com.example.denisgabyshev.getdisciplined.ui.main.task.list
+package com.example.denisgabyshev.getdisciplined.ui.main.task.todo
 
 import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskMvpPresenter
 

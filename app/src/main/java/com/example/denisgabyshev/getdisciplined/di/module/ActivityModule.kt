@@ -13,12 +13,12 @@ import com.example.denisgabyshev.getdisciplined.ui.main.task.today.TaskPresenter
 import com.example.denisgabyshev.getdisciplined.ui.main.task.add.AddMvpPresenter
 import com.example.denisgabyshev.getdisciplined.ui.main.task.add.AddMvpView
 import com.example.denisgabyshev.getdisciplined.ui.main.task.add.AddPresenter
-import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskMvpPresenter
-import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskMvpView
-import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskPresenter
-import com.example.denisgabyshev.getdisciplined.ui.main.task.list.ToDoListMvpPresenter
-import com.example.denisgabyshev.getdisciplined.ui.main.task.list.ToDoListMvpView
-import com.example.denisgabyshev.getdisciplined.ui.main.task.list.ToDoListPresenter
+import com.example.denisgabyshev.getdisciplined.ui.main.task.list.ListMvpPresenter
+import com.example.denisgabyshev.getdisciplined.ui.main.task.list.ListMvpView
+import com.example.denisgabyshev.getdisciplined.ui.main.task.list.ListPresenter
+import com.example.denisgabyshev.getdisciplined.ui.main.task.todo.ToDoListMvpPresenter
+import com.example.denisgabyshev.getdisciplined.ui.main.task.todo.ToDoListMvpView
+import com.example.denisgabyshev.getdisciplined.ui.main.task.todo.ToDoListPresenter
 import com.example.denisgabyshev.getdisciplined.ui.splash.SplashMvpPresenter
 import com.example.denisgabyshev.getdisciplined.ui.splash.SplashMvpView
 import com.example.denisgabyshev.getdisciplined.ui.splash.SplashPresenter
@@ -60,6 +60,9 @@ class ActivityModule(private val activity: AppCompatActivity) {
 
     @Provides
     fun provideAddMvpPresenter(presenter: AddPresenter<AddMvpView>): AddMvpPresenter<AddMvpView> = presenter
+
+    @Provides
+    fun provideListMvpPresenter(presenter: ListPresenter<ListMvpView>) : ListMvpPresenter<ListMvpView> = presenter
 
     @Provides
     fun provideToDoListMvpPresenter(presenter: ToDoListPresenter<ToDoListMvpView>): ToDoListMvpPresenter<ToDoListMvpView> = presenter

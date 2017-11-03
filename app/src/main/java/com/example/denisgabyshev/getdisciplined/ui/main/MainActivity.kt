@@ -8,7 +8,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.view.Gravity
 import com.example.denisgabyshev.getdisciplined.R
 import com.example.denisgabyshev.getdisciplined.ui.base.BaseActivity
-import com.example.denisgabyshev.getdisciplined.ui.main.task.list.ToDoListFragment
+import com.example.denisgabyshev.getdisciplined.ui.main.task.todo.ToDoListFragment
 import javax.inject.Inject
 import com.example.denisgabyshev.getdisciplined.ui.main.task.today.TaskFragment
 import com.example.denisgabyshev.getdisciplined.utils.ScreenUtils
