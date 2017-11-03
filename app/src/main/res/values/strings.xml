@@ -8,4 +8,5 @@
     <string name="empty_text">text empty</string>
     <string name="myday">My Day</string>
     <string name="todo">To-Do</string>
+    <string name="new_list">New list</string>
 </resources>

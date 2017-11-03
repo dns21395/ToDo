@@ -10,5 +10,7 @@ import android.arch.persistence.room.PrimaryKey
 data class ListId(
    @PrimaryKey(autoGenerate = true)
    val id: Long,
-   var name: String
+   var name: String,
+   var order: Long
+
 )
