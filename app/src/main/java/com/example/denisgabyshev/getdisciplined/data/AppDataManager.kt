@@ -29,11 +29,11 @@ class AppDataManager @Inject constructor(@ApplicationContext val context: Contex
                 .observeOn(AndroidSchedulers.mainThread()).subscribe()
     }
 
-    override fun addTask(dateId: Long, task: String) {
+    override fun addTask(dateId: Long, listId: Long?, task: String) {
 
         val count = database.taskDao().getTaskCount(dateId)
 
-        val _task = Task(0, dateId, task, count)
+        val _task = Task(0, dateId, listId, task, count)
 
         Single.fromCallable {
             database.taskDao().insert(_task)

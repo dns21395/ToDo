@@ -12,7 +12,7 @@ import io.reactivex.Single
 interface DataManager{
     fun addDate(date: Long)
 
-    fun addTask(dateId: Long, task: String)
+    fun addTask(dateId: Long, listId: Long?, task: String)
 
     fun getDateId(date: Long): Flowable<List<Date>>
 

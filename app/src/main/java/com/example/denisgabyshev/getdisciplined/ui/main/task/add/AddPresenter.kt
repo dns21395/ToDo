@@ -34,7 +34,7 @@ class AddPresenter<V: AddMvpView> @Inject
         if(taskText.isNotEmpty()) {
             Single.fromCallable {
                 dataManager.getDateId(AppUtils.getToday()).subscribe { dateId ->
-                    dataManager.addTask(dateId[0].id, taskText.trim())
+                    dataManager.addTask(dateId[0].id, null, taskText.trim())
                 }}.subscribeOn(Schedulers.io())
                     .subscribe ({operation()}, Throwable::printStackTrace)
         } else {
