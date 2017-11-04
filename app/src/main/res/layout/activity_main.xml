@@ -15,14 +15,9 @@
 
     <android.support.design.widget.NavigationView
         android:id="@+id/navigationView"
-        style="@style/Widget.Design.NavigationView"
         android:layout_gravity="start"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        app:itemBackground="@android:color/white"
-        app:itemIconTint="@color/black_effective"
-        app:itemTextColor="@color/black_effective"
-        app:menu="@menu/drawer">
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
