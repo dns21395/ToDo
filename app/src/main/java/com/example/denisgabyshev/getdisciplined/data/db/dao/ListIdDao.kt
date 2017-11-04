@@ -6,6 +6,7 @@ import android.arch.persistence.room.Query
 import com.example.denisgabyshev.getdisciplined.data.db.model.Date
 import com.example.denisgabyshev.getdisciplined.data.db.model.ListId
 import io.reactivex.Flowable
+import io.reactivex.Single
 
 /**
  * Created by denisgabyshev on 03/11/2017.
@@ -17,6 +18,9 @@ interface ListIdDao {
 
     @Query("SELECT * FROM listId ORDER BY id DESC LIMIT 1")
     fun getLastListId(): ListId
+
+    @Query("SELECT name FROM listId WHERE id = :mId LIMIT 1")
+    fun getListIdName(mId: Long): Single<String>
 
     @Query("SELECT COUNT(listId.id) FROM listId")
     fun getListsCount(): Long

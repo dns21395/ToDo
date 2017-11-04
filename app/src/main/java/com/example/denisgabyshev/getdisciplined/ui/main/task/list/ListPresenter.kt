@@ -32,4 +32,17 @@ class ListPresenter<V: ListMvpView>
                     mvpView?.updateTasksList(it as ArrayList<Task>)
                 }, Throwable::printStackTrace)
     }
+
+    override fun getListIdName(id: Long) {
+        dataManager.getListIdName(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe ({
+                    mvpView?.setToolbar(it)
+                }, Throwable::printStackTrace)
+
+
+    }
+
+
 }

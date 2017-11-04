@@ -37,6 +37,9 @@ abstract class BaseActivity : AppCompatActivity(), MvpView {
                 .build()
     }
 
+    var currentListId = 0L
+
+
     override fun showToast(message: String) {
         toast(message)
     }

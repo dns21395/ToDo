@@ -17,6 +17,8 @@ interface DataManager{
 
     fun getAllListId(): Flowable<List<ListId>>
 
+    fun getListIdName(id: Long): Single<String>
+
     fun addDate(date: Long)
 
     fun addTask(dateId: Long, listId: Long?, task: String)

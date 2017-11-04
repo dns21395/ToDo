@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.denisgabyshev.getdisciplined.R
 import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskFragment
+import kotlinx.android.synthetic.main.fragment_tasks_todo.*
 import javax.inject.Inject
 
 /**
@@ -20,6 +21,10 @@ class ListFragment : BaseTaskFragment(), ListMvpView {
 
         activity.activityComponent.inject(this)
         presenter.onAttach(this)
+
+        setFragment()
+
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
@@ -31,7 +36,15 @@ class ListFragment : BaseTaskFragment(), ListMvpView {
 
     }
 
+    override fun setToolbar(text: String) {
+        toolbar.title = text
+    }
+
     override fun itemInsert() {
         presenter.isTodayExist()
+    }
+
+    override fun setFragment() {
+        presenter.getListIdName(activity.currentListId)
     }
 }

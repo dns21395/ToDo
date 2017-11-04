@@ -20,9 +20,6 @@ import kotlinx.android.synthetic.main.activity_main.*
  * Created by denisgabyshev on 18/09/2017.
  */
 class MainActivity : BaseActivity(), MainMvpView, ListAdapter.Callback {
-
-
-
     private val TAG = "MainActivity"
 
     @Inject lateinit var presenter: MainMvpPresenter<MainMvpView>
@@ -103,6 +100,7 @@ class MainActivity : BaseActivity(), MainMvpView, ListAdapter.Callback {
     }
 
     override fun clickedNavigationItem(listId: ListId) {
+        currentListId = listId.id
         setTaskFragment(ListFragment())
     }
 }
