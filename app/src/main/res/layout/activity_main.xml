@@ -8,12 +8,9 @@
     android:layout_height="match_parent">
 
     <FrameLayout
-
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
-
 
 
     <android.support.design.widget.NavigationView
@@ -37,7 +34,7 @@
                 android:layout_height="wrap_content"/>
 
             <RelativeLayout
-                android:id="@+id/add_list"
+                android:id="@+id/addList"
                 android:clickable="true"
                 android:foreground="?attr/selectableItemBackground"
                 android:background="@drawable/top_shadow"

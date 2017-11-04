@@ -10,5 +10,9 @@ import com.example.denisgabyshev.getdisciplined.ui.base.MvpPresenter
 interface MainMvpPresenter<V : MainMvpView> : MvpPresenter<V> {
     fun onDrawerClick()
 
+    fun onAddListId()
+
+    fun navigationListIds()
+
 
 }

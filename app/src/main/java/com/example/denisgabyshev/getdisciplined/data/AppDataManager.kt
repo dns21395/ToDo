@@ -1,8 +1,10 @@
 package com.example.denisgabyshev.getdisciplined.data
 
 import android.content.Context
+import com.example.denisgabyshev.getdisciplined.R
 import com.example.denisgabyshev.getdisciplined.data.db.AppDatabase
 import com.example.denisgabyshev.getdisciplined.data.db.model.Date
+import com.example.denisgabyshev.getdisciplined.data.db.model.ListId
 import com.example.denisgabyshev.getdisciplined.data.db.model.Task
 import com.example.denisgabyshev.getdisciplined.di.ApplicationContext
 import io.reactivex.*
@@ -19,6 +21,26 @@ class AppDataManager @Inject constructor(@ApplicationContext val context: Contex
                                          private val database: AppDatabase) : DataManager {
 
     private val TAG = "AppDataManager"
+
+    override fun addListId() {
+        val count = database.listIdDao().getListsCount()
+
+        val name = context.resources.getString(R.string.untitled_list)
+
+        Single.fromCallable {
+            database.listIdDao().insert(ListId(0, name, count))
+        }.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe()
+    }
+
+    override fun getAllListId(): Flowable<List<ListId>> =
+        database.listIdDao().getAll()
+
+
+    override fun getLastId() : ListId =
+            database.listIdDao().getLastListId()
+
+
 
     override fun addDate(date: Long) {
         val _date = Date(0, date)
@@ -39,8 +61,6 @@ class AppDataManager @Inject constructor(@ApplicationContext val context: Contex
             database.taskDao().insert(_task)
         }.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe()
-
-
     }
 
      override fun getDateId(date: Long): Flowable<List<Date>> =

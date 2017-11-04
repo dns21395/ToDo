@@ -9,4 +9,5 @@
     <string name="myday">My Day</string>
     <string name="todo">To-Do</string>
     <string name="new_list">New list</string>
+    <string name="untitled_list">Untitled list</string>
 </resources>

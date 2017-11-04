@@ -13,8 +13,15 @@ import io.reactivex.Flowable
 @Dao
 interface ListIdDao {
     @Query("SELECT * FROM listId")
-    fun getAllDate(): Flowable<List<ListId>>
+    fun getAll(): Flowable<List<ListId>>
+
+    @Query("SELECT * FROM listId ORDER BY id DESC LIMIT 1")
+    fun getLastListId(): ListId
+
+    @Query("SELECT COUNT(listId.id) FROM listId")
+    fun getListsCount(): Long
 
     @Insert
     fun insert(list: ListId)
+
 }

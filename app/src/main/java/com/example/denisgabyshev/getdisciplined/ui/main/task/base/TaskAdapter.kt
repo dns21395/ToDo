@@ -29,7 +29,6 @@ class TaskAdapter(val appBar: AppBarLayout, val recyclerView: RecyclerView, val 
 
     @Inject lateinit var dataManager: DataManager
 
-
     private var callback = ItemTouchHelperCallback(this)
     private var itemTouchHelper = ItemTouchHelper(callback)
     private var onStartDragListener: OnStartDragListener = this
