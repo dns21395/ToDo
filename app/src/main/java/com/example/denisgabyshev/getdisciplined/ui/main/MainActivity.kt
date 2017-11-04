@@ -10,6 +10,7 @@ import android.view.Gravity
 import com.example.denisgabyshev.getdisciplined.R
 import com.example.denisgabyshev.getdisciplined.data.db.model.ListId
 import com.example.denisgabyshev.getdisciplined.ui.base.BaseActivity
+import com.example.denisgabyshev.getdisciplined.ui.main.task.list.ListFragment
 import com.example.denisgabyshev.getdisciplined.ui.main.task.todo.ToDoListFragment
 import javax.inject.Inject
 import com.example.denisgabyshev.getdisciplined.ui.main.task.today.TaskFragment
@@ -102,6 +103,6 @@ class MainActivity : BaseActivity(), MainMvpView, ListAdapter.Callback {
     }
 
     override fun clickedNavigationItem(listId: ListId) {
-
+        setTaskFragment(ListFragment())
     }
 }
