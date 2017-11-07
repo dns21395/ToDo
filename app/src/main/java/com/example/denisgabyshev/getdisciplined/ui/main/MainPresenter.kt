@@ -39,6 +39,7 @@ constructor(dataManager: DataManager,
         }.subscribeOn(Schedulers.io())
                 .subscribe({
                     Log.d(TAG, "${dataManager.getLastId()}")
+                    mvpView?.showListIdNameDialog()
                 }, Throwable::printStackTrace)
     }
 
@@ -50,4 +51,6 @@ constructor(dataManager: DataManager,
                     mvpView?.updateNavigationArray(it as ArrayList<ListId>)
                 }
     }
+
+
 }

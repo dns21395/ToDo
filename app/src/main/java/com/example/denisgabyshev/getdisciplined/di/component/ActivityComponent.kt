@@ -3,6 +3,7 @@ package com.example.denisgabyshev.getdisciplined.di.component
 import com.example.denisgabyshev.getdisciplined.di.PerActivity
 import com.example.denisgabyshev.getdisciplined.di.module.ActivityModule
 import com.example.denisgabyshev.getdisciplined.ui.main.MainActivity
+import com.example.denisgabyshev.getdisciplined.ui.main.navigationItem.ListIdNameDialog
 import com.example.denisgabyshev.getdisciplined.ui.main.task.today.TaskFragment
 import com.example.denisgabyshev.getdisciplined.ui.main.task.add.AddFragment
 import com.example.denisgabyshev.getdisciplined.ui.main.task.list.ListFragment
@@ -22,4 +23,5 @@ interface ActivityComponent {
     fun inject(addFragment: AddFragment)
     fun inject(toDoListFragment: ToDoListFragment)
     fun inject(listFragment: ListFragment)
+    fun inject(listIdNameDialog: ListIdNameDialog)
 }

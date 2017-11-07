@@ -10,6 +10,7 @@ import android.view.Gravity
 import com.example.denisgabyshev.getdisciplined.R
 import com.example.denisgabyshev.getdisciplined.data.db.model.ListId
 import com.example.denisgabyshev.getdisciplined.ui.base.BaseActivity
+import com.example.denisgabyshev.getdisciplined.ui.main.navigationItem.ListIdNameDialog
 import com.example.denisgabyshev.getdisciplined.ui.main.task.list.ListFragment
 import com.example.denisgabyshev.getdisciplined.ui.main.task.todo.ToDoListFragment
 import javax.inject.Inject
@@ -27,7 +28,6 @@ class MainActivity : BaseActivity(), MainMvpView, ListAdapter.Callback {
     lateinit var drawerToggle: ActionBarDrawerToggle
 
     var adapter: ListAdapter? = null
-
 
     companion object {
         fun getStartIntent(context: Context): Intent =
@@ -102,5 +102,9 @@ class MainActivity : BaseActivity(), MainMvpView, ListAdapter.Callback {
     override fun clickedNavigationItem(listId: ListId) {
         currentListId = listId.id
         setTaskFragment(ListFragment())
+    }
+
+    override fun showListIdNameDialog() {
+        ListIdNameDialog.newInstance().show(supportFragmentManager)
     }
 }

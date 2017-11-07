@@ -55,7 +55,7 @@
                     android:textColor="@color/black_effective"
                     android:layout_centerVertical="true"
                     android:layout_toEndOf="@id/plusImage"
-                    android:text="@string/new_list"
+                    android:text="@string/newList"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </RelativeLayout>

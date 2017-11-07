@@ -16,4 +16,6 @@ interface MainMvpView : MvpView {
 
     fun updateNavigationArray(array: ArrayList<ListId>)
 
+    fun showListIdNameDialog()
+
 }

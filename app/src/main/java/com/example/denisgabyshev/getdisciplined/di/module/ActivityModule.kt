@@ -7,6 +7,9 @@ import com.example.denisgabyshev.getdisciplined.di.PerActivity
 import com.example.denisgabyshev.getdisciplined.ui.main.MainMvpPresenter
 import com.example.denisgabyshev.getdisciplined.ui.main.MainMvpView
 import com.example.denisgabyshev.getdisciplined.ui.main.MainPresenter
+import com.example.denisgabyshev.getdisciplined.ui.main.navigationItem.ListIdNameDialogMvpPresenter
+import com.example.denisgabyshev.getdisciplined.ui.main.navigationItem.ListIdNameDialogMvpView
+import com.example.denisgabyshev.getdisciplined.ui.main.navigationItem.ListIdNameDialogPresenter
 import com.example.denisgabyshev.getdisciplined.ui.main.task.today.TaskMvpPresenter
 import com.example.denisgabyshev.getdisciplined.ui.main.task.today.TaskMvpView
 import com.example.denisgabyshev.getdisciplined.ui.main.task.today.TaskPresenter
@@ -51,6 +54,9 @@ class ActivityModule(private val activity: AppCompatActivity) {
     @Provides
     @PerActivity
     fun provideMainPresenter(presenter: MainPresenter<MainMvpView>): MainMvpPresenter<MainMvpView> = presenter
+
+    @Provides
+    fun provideListIdNameDialogPresenter(presenter: ListIdNameDialogPresenter<ListIdNameDialogMvpView>): ListIdNameDialogMvpPresenter<ListIdNameDialogMvpView> = presenter
 
     @Provides
     fun provideTaskMvpPresenter(presenter: TaskPresenter<TaskMvpView>): TaskMvpPresenter<TaskMvpView> = presenter
