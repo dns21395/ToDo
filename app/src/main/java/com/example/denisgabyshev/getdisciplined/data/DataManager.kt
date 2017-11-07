@@ -17,7 +17,11 @@ interface DataManager{
 
     fun getAllListId(): Flowable<List<ListId>>
 
-    fun getListIdName(id: Long): Single<String>
+    fun updateListId(listId: ListId)
+
+    fun deleteListId(listId: ListId)
+
+    fun getListIdName(id: Long): Flowable<String>
 
     fun addDate(date: Long)
 

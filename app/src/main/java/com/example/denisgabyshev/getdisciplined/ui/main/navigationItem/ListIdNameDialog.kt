@@ -5,10 +5,11 @@ import android.support.v4.app.FragmentManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import com.example.denisgabyshev.getdisciplined.R
 import com.example.denisgabyshev.getdisciplined.ui.base.BaseDialog
+import com.example.denisgabyshev.getdisciplined.ui.main.MainActivity
+import com.example.denisgabyshev.getdisciplined.ui.main.task.list.ListFragment
+import kotlinx.android.synthetic.main.dialog_listid_name.*
 import javax.inject.Inject
 
 /**
@@ -16,7 +17,8 @@ import javax.inject.Inject
  */
 class ListIdNameDialog : BaseDialog(), ListIdNameDialogMvpView {
 
-    private val TAG = "ListIdNameDialog"
+
+    val TAG = "ListIdNameDialog"
 
     @Inject lateinit var presenter: ListIdNameDialogMvpPresenter<ListIdNameDialogMvpView>
 
@@ -38,6 +40,11 @@ class ListIdNameDialog : BaseDialog(), ListIdNameDialogMvpView {
 
         presenter.onAttach(this)
 
+        positive.setOnClickListener {
+
+            listId()?.name = listIdName.text.toString().trim()
+            presenter.updateListId(listId()!!)
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
@@ -45,6 +52,13 @@ class ListIdNameDialog : BaseDialog(), ListIdNameDialogMvpView {
 
     fun show(fragmentManager: FragmentManager) {
         super.show(fragmentManager, TAG)
+    }
+
+    override fun updateIdListTitleToolbar() {
+//        val fragment: ListFragment = (activity.supportFragmentManager.findFragmentById(R.id.frameLayout) as ListFragment)
+//        fragment.presenter.getListIdName(activity.currentListId!!.id)
+
+        (activity as MainActivity).clickedNavigationItem(activity.currentListId!!)
     }
 
 

@@ -1,5 +1,6 @@
 package com.example.denisgabyshev.getdisciplined.ui.main.task.list
 
+import android.util.Log
 import com.example.denisgabyshev.getdisciplined.data.DataManager
 import com.example.denisgabyshev.getdisciplined.data.db.model.Task
 import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskPresenter
@@ -18,6 +19,8 @@ class ListPresenter<V: ListMvpView>
                         schedulerProvider: SchedulerProvider,
                         compositeDisposable: CompositeDisposable) :
     BaseTaskPresenter<V>(dataManager, schedulerProvider, compositeDisposable), ListMvpPresenter<V> {
+
+    private val TAG = "ListPresenter"
 
     override fun onAttach(mvpView: V) {
         super.onAttach(mvpView)

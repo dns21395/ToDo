@@ -38,8 +38,7 @@ constructor(dataManager: DataManager,
             dataManager.addListId()
         }.subscribeOn(Schedulers.io())
                 .subscribe({
-                    Log.d(TAG, "${dataManager.getLastId()}")
-                    mvpView?.showListIdNameDialog()
+                    mvpView?.showListIdNameDialog(dataManager.getLastId())
                 }, Throwable::printStackTrace)
     }
 

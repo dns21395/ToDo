@@ -1,11 +1,14 @@
 package com.example.denisgabyshev.getdisciplined.ui.main.task.list
 
+
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.denisgabyshev.getdisciplined.R
 import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskFragment
+import kotlinx.android.synthetic.main.dialog_listid_name.view.*
 import kotlinx.android.synthetic.main.fragment_tasks_todo.*
 import javax.inject.Inject
 
@@ -13,6 +16,8 @@ import javax.inject.Inject
  * Created by denisgabyshev on 03/11/2017.
  */
 class ListFragment : BaseTaskFragment(), ListMvpView {
+
+    private val TAG = "ListFragment"
 
     @Inject lateinit var presenter: ListMvpPresenter<ListMvpView>
 
@@ -41,10 +46,11 @@ class ListFragment : BaseTaskFragment(), ListMvpView {
     }
 
     override fun itemInsert() {
-        presenter.isTodayExist()
+
     }
 
     override fun setFragment() {
-        presenter.getListIdName(activity.currentListId)
+        super.setFragment()
+        presenter.getListIdName(activity.currentListId!!.id)
     }
 }

@@ -14,6 +14,7 @@ import android.view.Window
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import com.example.denisgabyshev.getdisciplined.data.db.model.ListId
 import com.example.denisgabyshev.getdisciplined.di.component.ActivityComponent
 import com.example.denisgabyshev.getdisciplined.utils.KeyboardUtils
 import org.jetbrains.anko.support.v4.act
@@ -81,6 +82,8 @@ abstract class BaseDialog : DialogFragment(), DialogMvpView {
     }
 
     fun getActivityComponent(): ActivityComponent = activity.activityComponent
+
+    fun listId(): ListId? = activity.currentListId
 
 
     override fun show(fragmentManager: FragmentManager, tag: String) {

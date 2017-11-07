@@ -19,7 +19,7 @@ import javax.inject.Singleton
 @Singleton
 class AppDataManager @Inject constructor(@ApplicationContext val context: Context,
                                          private val database: AppDatabase) : DataManager {
-    override fun getListIdName(id: Long): Single<String> =
+    override fun getListIdName(id: Long): Flowable<String> =
             database.listIdDao().getListIdName(id)
 
     private val TAG = "AppDataManager"
@@ -31,6 +31,20 @@ class AppDataManager @Inject constructor(@ApplicationContext val context: Contex
 
         Single.fromCallable {
             database.listIdDao().insert(ListId(0, name, count))
+        }.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe()
+    }
+
+    override fun updateListId(listId: ListId) {
+        Single.fromCallable {
+            database.listIdDao().updateListId(listId)
+        }.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe()
+    }
+
+    override fun deleteListId(listId: ListId) {
+        Single.fromCallable {
+            database.listIdDao().deleteListId(listId)
         }.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe()
     }

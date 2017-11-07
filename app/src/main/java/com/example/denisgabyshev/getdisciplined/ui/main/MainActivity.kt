@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.Gravity
 import com.example.denisgabyshev.getdisciplined.R
 import com.example.denisgabyshev.getdisciplined.data.db.model.ListId
@@ -100,11 +101,18 @@ class MainActivity : BaseActivity(), MainMvpView, ListAdapter.Callback {
     }
 
     override fun clickedNavigationItem(listId: ListId) {
-        currentListId = listId.id
+        Log.d(TAG, "clicked navigation item $listId")
+        currentListId = listId
         setTaskFragment(ListFragment())
     }
 
-    override fun showListIdNameDialog() {
+    override fun showListIdNameDialog(listId: ListId) {
+        Log.d(TAG, "show list id name dialog : $listId")
+        currentListId = listId
+
+        setTaskFragment(ListFragment())
+
         ListIdNameDialog.newInstance().show(supportFragmentManager)
+
     }
 }

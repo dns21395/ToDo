@@ -16,6 +16,7 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.denisgabyshev.getdisciplined.data.db.model.ListId
 import com.example.denisgabyshev.getdisciplined.di.component.ActivityComponent
 import com.example.denisgabyshev.getdisciplined.di.component.DaggerActivityComponent
 import com.example.denisgabyshev.getdisciplined.di.module.ActivityModule
@@ -37,7 +38,7 @@ abstract class BaseActivity : AppCompatActivity(), MvpView {
                 .build()
     }
 
-    var currentListId = 0L
+    var currentListId: ListId? = null
 
 
     override fun showToast(message: String) {
@@ -77,4 +78,6 @@ abstract class BaseActivity : AppCompatActivity(), MvpView {
         }
         return result
     }
+
+
 }

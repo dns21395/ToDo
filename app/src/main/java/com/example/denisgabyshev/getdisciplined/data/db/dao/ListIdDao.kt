@@ -1,8 +1,6 @@
 package com.example.denisgabyshev.getdisciplined.data.db.dao
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.Query
+import android.arch.persistence.room.*
 import com.example.denisgabyshev.getdisciplined.data.db.model.Date
 import com.example.denisgabyshev.getdisciplined.data.db.model.ListId
 import io.reactivex.Flowable
@@ -20,12 +18,18 @@ interface ListIdDao {
     fun getLastListId(): ListId
 
     @Query("SELECT name FROM listId WHERE id = :mId LIMIT 1")
-    fun getListIdName(mId: Long): Single<String>
+    fun getListIdName(mId: Long): Flowable<String>
 
     @Query("SELECT COUNT(listId.id) FROM listId")
     fun getListsCount(): Long
 
     @Insert
     fun insert(list: ListId)
+
+    @Update
+    fun updateListId(listId: ListId)
+
+    @Delete
+    fun deleteListId(listId: ListId)
 
 }
