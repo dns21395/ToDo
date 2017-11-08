@@ -22,7 +22,7 @@
                  android:id="@+id/title"
                  android:text="@string/newList"
                  android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                 android:textColor="#000"
+                 android:textColor="@color/colorAccent"
                  android:layout_marginTop="20dp"
                  android:paddingStart="16dp"
                  android:layout_gravity="center"
@@ -32,8 +32,8 @@
              <EditText
                  android:text="@string/untitled_list"
                  android:selectAllOnFocus="true"
-                 android:layout_marginLeft="16dp"
-                 android:layout_marginRight="16dp"
+                 android:layout_marginLeft="21dp"
+                 android:layout_marginRight="21dp"
                  android:layout_marginTop="8dp"
                  android:layout_marginBottom="8dp"
                  android:id="@+id/listIdName"
@@ -42,6 +42,7 @@
                  android:layout_height="wrap_content" />
 
              <LinearLayout
+                 android:layout_marginBottom="5dp"
                  android:gravity="right"
                  android:layout_below="@id/listIdName"
                  android:layout_width="match_parent"
@@ -51,7 +52,7 @@
                      style="@style/Widget.AppCompat.Button.Borderless.Colored"
                      android:text="@string/cancel"
                      tools:text="@string/cancel"
-                     android:textColor="#000"
+                     android:textColor="#9E9E9E"
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content" />
                  <Button
@@ -59,7 +60,7 @@
                      style="@style/Widget.AppCompat.Button.Borderless.Colored"
                      android:text="@string/save"
                      tools:text="@string/save"
-                     android:textColor="#000"
+                     android:textColor="@color/colorAccent"
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content" />
 

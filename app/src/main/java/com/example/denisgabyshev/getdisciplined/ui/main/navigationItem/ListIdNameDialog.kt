@@ -16,11 +16,11 @@ import javax.inject.Inject
  * Created by denisgabyshev on 05/11/2017.
  */
 class ListIdNameDialog : BaseDialog(), ListIdNameDialogMvpView {
-
-
     val TAG = "ListIdNameDialog"
 
     @Inject lateinit var presenter: ListIdNameDialogMvpPresenter<ListIdNameDialogMvpView>
+
+    private lateinit var mainActivity: MainActivity
 
     companion object {
         fun newInstance(): ListIdNameDialog {
@@ -39,6 +39,8 @@ class ListIdNameDialog : BaseDialog(), ListIdNameDialogMvpView {
         component.inject(this)
 
         presenter.onAttach(this)
+
+        mainActivity = (activity as MainActivity)
 
         positive.setOnClickListener {
 
@@ -60,14 +62,13 @@ class ListIdNameDialog : BaseDialog(), ListIdNameDialogMvpView {
     }
 
     override fun updateIdListTitleToolbar() {
-        (activity as MainActivity).clickedNavigationItem(activity.currentListId!!)
+        mainActivity.clickedNavigationItem(activity.currentListId!!)
     }
 
     override fun cancelCreatingListId() {
-        (activity as MainActivity).clickedTodayOrToDoItem(0)
+        mainActivity.clickedTodayOrToDoItem(0)
+        mainActivity.openDrawer()
     }
-
-
 
 
 }
