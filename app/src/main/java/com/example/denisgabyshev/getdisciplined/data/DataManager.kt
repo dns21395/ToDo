@@ -13,7 +13,7 @@ import io.reactivex.Single
 interface DataManager{
     fun addListId()
 
-    fun getLastId() : ListId
+    fun getLastId() : Single<ListId>
 
     fun getAllListId(): Flowable<List<ListId>>
 
@@ -21,7 +21,7 @@ interface DataManager{
 
     fun deleteListId(listId: ListId)
 
-    fun getListIdName(id: Long): Flowable<String>
+    fun getListIdName(id: Long): Single<String>
 
     fun addDate(date: Long)
 

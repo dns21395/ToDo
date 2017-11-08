@@ -15,10 +15,10 @@ interface ListIdDao {
     fun getAll(): Flowable<List<ListId>>
 
     @Query("SELECT * FROM listId ORDER BY id DESC LIMIT 1")
-    fun getLastListId(): ListId
+    fun getLastListId(): Single<ListId>
 
     @Query("SELECT name FROM listId WHERE id = :mId LIMIT 1")
-    fun getListIdName(mId: Long): Flowable<String>
+    fun getListIdName(mId: Long): Single<String>
 
     @Query("SELECT COUNT(listId.id) FROM listId")
     fun getListsCount(): Long

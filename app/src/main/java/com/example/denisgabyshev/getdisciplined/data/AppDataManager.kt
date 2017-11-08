@@ -19,7 +19,7 @@ import javax.inject.Singleton
 @Singleton
 class AppDataManager @Inject constructor(@ApplicationContext val context: Context,
                                          private val database: AppDatabase) : DataManager {
-    override fun getListIdName(id: Long): Flowable<String> =
+    override fun getListIdName(id: Long): Single<String> =
             database.listIdDao().getListIdName(id)
 
     private val TAG = "AppDataManager"
@@ -53,7 +53,7 @@ class AppDataManager @Inject constructor(@ApplicationContext val context: Contex
         database.listIdDao().getAll()
 
 
-    override fun getLastId() : ListId =
+    override fun getLastId() : Single<ListId> =
             database.listIdDao().getLastListId()
 
 

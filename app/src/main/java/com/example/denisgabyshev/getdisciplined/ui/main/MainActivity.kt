@@ -90,6 +90,7 @@ class MainActivity : BaseActivity(), MainMvpView, ListAdapter.Callback {
     }
 
     override fun clickedTodayOrToDoItem(position: Int) {
+        currentListId = null
         when(position) {
             0 -> {
                 setTaskFragment(TaskFragment())

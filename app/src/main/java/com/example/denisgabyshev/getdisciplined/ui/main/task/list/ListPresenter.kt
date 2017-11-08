@@ -6,6 +6,7 @@ import com.example.denisgabyshev.getdisciplined.data.db.model.Task
 import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskPresenter
 import com.example.denisgabyshev.getdisciplined.ui.main.task.today.TaskMvpPresenter
 import com.example.denisgabyshev.getdisciplined.utils.rx.SchedulerProvider
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -43,6 +44,7 @@ class ListPresenter<V: ListMvpView>
                 .subscribe ({
                     mvpView?.setToolbar(it)
                 }, Throwable::printStackTrace)
+
 
 
     }

@@ -37,9 +37,9 @@ constructor(dataManager: DataManager,
         Single.fromCallable {
             dataManager.addListId()
         }.subscribeOn(Schedulers.io())
-                .subscribe({
-                    mvpView?.showListIdNameDialog(dataManager.getLastId())
-                }, Throwable::printStackTrace)
+            .subscribe({
+                showDialog()
+            }, Throwable::printStackTrace)
     }
 
     override fun navigationListIds() {
@@ -49,6 +49,15 @@ constructor(dataManager: DataManager,
                 .subscribe {
                     mvpView?.updateNavigationArray(it as ArrayList<ListId>)
                 }
+    }
+
+    private fun showDialog() {
+        dataManager.getLastId()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    mvpView?.showListIdNameDialog(it)
+                }, Throwable::printStackTrace)
     }
 
 
