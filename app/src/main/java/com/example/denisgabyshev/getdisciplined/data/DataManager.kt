@@ -25,13 +25,17 @@ interface DataManager{
 
     fun addDate(date: Long)
 
-    fun addTask(dateId: Long, listId: Long?, task: String)
+    fun addTask(dateId: Long?, listId: Long?, task: String)
 
     fun getDateId(date: Long): Flowable<List<Date>>
 
     fun getTasksByDayId(date: Long): Single<List<Task>>
 
-    fun getTasksByNotEqualToDayId(date: Long): Single<List<Task>>
+    fun getTasksByListId(id: Long): Single<List<Task>>
+
+    fun getTasksToDo(): Single<List<Task>>
+
+    fun getAllTasks(): Flowable<List<Task>>
 
     fun updateTaskOrder(task: Task, order: Int)
 

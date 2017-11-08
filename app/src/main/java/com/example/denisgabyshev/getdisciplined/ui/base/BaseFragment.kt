@@ -8,6 +8,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.denisgabyshev.getdisciplined.data.db.model.ListId
 import com.example.denisgabyshev.getdisciplined.utils.KeyboardUtils
 import org.jetbrains.anko.support.v4.toast
 import org.jetbrains.anko.toast
@@ -18,11 +19,15 @@ import org.jetbrains.anko.toast
 abstract class BaseFragment : Fragment(), MvpView {
     lateinit var activity: BaseActivity
 
+    var currentListId: ListId? = null
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
         if(context is BaseActivity) {
             activity = context
+
+            currentListId = activity.currentListId
         }
     }
 

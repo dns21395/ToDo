@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.denisgabyshev.getdisciplined.R
 import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskFragment
-import kotlinx.android.synthetic.main.dialog_listid_name.view.*
 import kotlinx.android.synthetic.main.fragment_tasks_todo.*
 import javax.inject.Inject
 
@@ -45,12 +44,16 @@ class ListFragment : BaseTaskFragment(), ListMvpView {
         toolbar.title = text
     }
 
-    override fun itemInsert() {
-
+    override fun itemInserted() {
+        presenter.getTasksByListId(currentListId!!.id)
     }
 
     override fun setFragment() {
         super.setFragment()
-        presenter.getListIdName(activity.currentListId!!.id)
+
+        Log.d(TAG, "ListFragment listid : $currentListId")
+
+        presenter.getListIdTitle(currentListId!!.id)
+        presenter.getTasksByListId(currentListId!!.id)
     }
 }

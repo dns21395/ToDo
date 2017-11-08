@@ -30,17 +30,30 @@ class AddPresenter<V: AddMvpView> @Inject
         mvpView.setFragment()
     }
 
-    override fun addTask(taskText: String, operation: () -> Unit) {
+    override fun addTask(taskText: String, listId: Long?, operation: () -> Unit) {
         if(taskText.isNotEmpty()) {
             Single.fromCallable {
-                dataManager.getDateId(AppUtils.getToday()).subscribe { dateId ->
-                    dataManager.addTask(dateId[0].id, null, taskText.trim())
-                }}.subscribeOn(Schedulers.io())
+                if(listId != null) {
+                    addTaskByListId(taskText, listId)
+                } else {
+                    addTaskByDayId(taskText)
+                }
+                }.subscribeOn(Schedulers.io())
                     .subscribe ({operation()}, Throwable::printStackTrace)
         } else {
             mvpView?.showToast("text is empty")
         }
         mvpView?.clearEditText()
+    }
+
+    private fun addTaskByDayId(taskText: String) {
+        dataManager.getDateId(AppUtils.getToday()).subscribe { dateId ->
+            dataManager.addTask(dateId[0].id, null, taskText.trim())
+        }
+    }
+
+    private fun addTaskByListId(taskText: String, listId: Long) {
+        dataManager.addTask(null, listId, taskText.trim())
     }
 
 }

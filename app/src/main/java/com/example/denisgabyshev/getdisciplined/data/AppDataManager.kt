@@ -1,6 +1,7 @@
 package com.example.denisgabyshev.getdisciplined.data
 
 import android.content.Context
+import android.util.Log
 import com.example.denisgabyshev.getdisciplined.R
 import com.example.denisgabyshev.getdisciplined.data.db.AppDatabase
 import com.example.denisgabyshev.getdisciplined.data.db.model.Date
@@ -52,6 +53,10 @@ class AppDataManager @Inject constructor(@ApplicationContext val context: Contex
     override fun getAllListId(): Flowable<List<ListId>> =
         database.listIdDao().getAll()
 
+    override fun getAllTasks(): Flowable<List<Task>> =
+        database.taskDao().getAllTasks()
+
+
 
     override fun getLastId() : Single<ListId> =
             database.listIdDao().getLastListId()
@@ -67,9 +72,17 @@ class AppDataManager @Inject constructor(@ApplicationContext val context: Contex
                 .observeOn(AndroidSchedulers.mainThread()).subscribe()
     }
 
-    override fun addTask(dateId: Long, listId: Long?, task: String) {
 
-        val count = database.taskDao().getTaskCount(dateId)
+    override fun addTask(dateId: Long?, listId: Long?, task: String) {
+
+        Log.d(TAG, "dateId : $dateId; listId : $listId")
+
+        var count = 0
+        if(dateId != null) count = database.taskDao().getTaskCountByDayId(dateId)
+        if(listId != null) count = database.taskDao().getTaskCountByListId(listId)
+
+
+        Log.d(TAG, "count : $count")
 
         val _task = Task(0, dateId, listId, task, count)
 
@@ -85,6 +98,9 @@ class AppDataManager @Inject constructor(@ApplicationContext val context: Contex
 
     override fun getTasksByDayId(date: Long): Single<List<Task>> =
             database.taskDao().getTasksByDayId(date)
+
+    override fun getTasksByListId(id: Long): Single<List<Task>> =
+            database.taskDao().getTasksByListId(id)
 
     override fun updateTaskOrder(task: Task, order: Int) {
         task.taskOrder = order
@@ -109,8 +125,8 @@ class AppDataManager @Inject constructor(@ApplicationContext val context: Contex
                 .observeOn(AndroidSchedulers.mainThread()).subscribe()
     }
 
-    override fun getTasksByNotEqualToDayId(date: Long): Single<List<Task>> =
-        database.taskDao().getTasksByNoEqualToDayId(date)
+    override fun getTasksToDo(): Single<List<Task>> =
+        database.taskDao().getTasksToDo()
 
 
 

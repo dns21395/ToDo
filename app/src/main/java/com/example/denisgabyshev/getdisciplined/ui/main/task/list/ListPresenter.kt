@@ -1,12 +1,9 @@
 package com.example.denisgabyshev.getdisciplined.ui.main.task.list
 
-import android.util.Log
 import com.example.denisgabyshev.getdisciplined.data.DataManager
 import com.example.denisgabyshev.getdisciplined.data.db.model.Task
 import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskPresenter
-import com.example.denisgabyshev.getdisciplined.ui.main.task.today.TaskMvpPresenter
 import com.example.denisgabyshev.getdisciplined.utils.rx.SchedulerProvider
-import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -21,6 +18,7 @@ class ListPresenter<V: ListMvpView>
                         compositeDisposable: CompositeDisposable) :
     BaseTaskPresenter<V>(dataManager, schedulerProvider, compositeDisposable), ListMvpPresenter<V> {
 
+
     private val TAG = "ListPresenter"
 
     override fun onAttach(mvpView: V) {
@@ -29,7 +27,16 @@ class ListPresenter<V: ListMvpView>
     }
 
     override fun getTasksByDate(dateId: Long) {
-        dataManager.getTasksByDayId(dateId)
+//        dataManager.getTasksByDayId(dateId)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe ({
+//                    mvpView?.updateTasksList(it as ArrayList<Task>)
+//                }, Throwable::printStackTrace)
+    }
+
+    override fun getTasksByListId(id: Long) {
+        dataManager.getTasksByListId(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe ({
@@ -37,17 +44,12 @@ class ListPresenter<V: ListMvpView>
                 }, Throwable::printStackTrace)
     }
 
-    override fun getListIdName(id: Long) {
+    override fun getListIdTitle(id: Long) {
         dataManager.getListIdName(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe ({
                     mvpView?.setToolbar(it)
                 }, Throwable::printStackTrace)
-
-
-
     }
-
-
 }

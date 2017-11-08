@@ -23,7 +23,7 @@ class ToDoListPresenter<V : ToDoListMvpView> @Inject constructor(dataManager: Da
     }
 
     override fun getTasksByDate(dateId: Long) {
-        dataManager.getTasksByNotEqualToDayId(dateId)
+        dataManager.getTasksToDo()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe ({

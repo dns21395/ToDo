@@ -6,6 +6,7 @@ import android.view.*
 import com.example.denisgabyshev.getdisciplined.R
 import com.example.denisgabyshev.getdisciplined.ui.base.BaseFragment
 import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskFragment
+import com.example.denisgabyshev.getdisciplined.ui.main.task.todo.ToDoListFragment
 import com.example.denisgabyshev.getdisciplined.utils.KeyboardUtils
 import kotlinx.android.synthetic.main.task_add_item.*
 import javax.inject.Inject
@@ -24,8 +25,6 @@ class AddFragment : BaseFragment(), AddMvpView {
         activity.activityComponent.inject(this)
 
         presenter.onAttach(this)
-
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
@@ -52,7 +51,11 @@ class AddFragment : BaseFragment(), AddMvpView {
     }
 
     override fun addTaskAction() {
-        presenter.addTask(textTask.text.toString(), {(parentFragment as BaseTaskFragment).itemInsert()})
+        val id = currentListId?.id
+
+        Log.d(TAG, "addTaskAction : $id\nmessage : ${textTask.text}")
+        if(id != null) presenter.addTask(textTask.text.toString(), id, {(parentFragment as BaseTaskFragment).itemInserted()})
+        else presenter.addTask(textTask.text.toString(), null, {(parentFragment as BaseTaskFragment).itemInserted()})
     }
 
 

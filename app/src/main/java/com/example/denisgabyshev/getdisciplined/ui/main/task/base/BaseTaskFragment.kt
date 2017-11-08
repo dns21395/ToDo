@@ -100,5 +100,5 @@ abstract class BaseTaskFragment: BaseFragment(), BaseTaskMvpView {
         })
     }
 
-    abstract fun itemInsert()
+    abstract fun itemInserted()
 }

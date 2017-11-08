@@ -45,7 +45,7 @@ class TaskFragment : BaseTaskFragment(), TaskMvpView {
         presenter.isTodayExist()
     }
 
-    override fun itemInsert() {
+    override fun itemInserted() {
         presenter.isTodayExist()
     }
 }

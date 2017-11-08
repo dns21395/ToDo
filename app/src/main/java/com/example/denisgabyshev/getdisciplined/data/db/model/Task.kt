@@ -18,7 +18,7 @@ import android.arch.persistence.room.PrimaryKey
 data class Task  (
         @PrimaryKey(autoGenerate = true)
         val id: Long,
-        val dateId: Long,
+        val dateId: Long?,
         var listId: Long?,
         var task: String,
         var taskOrder: Int,
