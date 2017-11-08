@@ -80,7 +80,7 @@ class AppDataManager @Inject constructor(@ApplicationContext val context: Contex
         var count = 0
         if(dateId != null) count = database.taskDao().getTaskCountByDayId(dateId)
         if(listId != null) count = database.taskDao().getTaskCountByListId(listId)
-
+        if(listId == null && dateId == null) count = database.taskDao().getTaskCountToDo()
 
         Log.d(TAG, "count : $count")
 

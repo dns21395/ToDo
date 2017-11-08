@@ -6,6 +6,8 @@ import android.view.*
 import com.example.denisgabyshev.getdisciplined.R
 import com.example.denisgabyshev.getdisciplined.ui.base.BaseFragment
 import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskFragment
+import com.example.denisgabyshev.getdisciplined.ui.main.task.list.ListFragment
+import com.example.denisgabyshev.getdisciplined.ui.main.task.today.TaskFragment
 import com.example.denisgabyshev.getdisciplined.ui.main.task.todo.ToDoListFragment
 import com.example.denisgabyshev.getdisciplined.utils.KeyboardUtils
 import kotlinx.android.synthetic.main.task_add_item.*
@@ -18,6 +20,8 @@ class AddFragment : BaseFragment(), AddMvpView {
     private val TAG = "AddFragment"
 
     @Inject lateinit var presenter: AddMvpPresenter<AddMvpView>
+
+    private val itemInserted = {(parentFragment as BaseTaskFragment).itemInserted()}
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,12 +55,28 @@ class AddFragment : BaseFragment(), AddMvpView {
     }
 
     override fun addTaskAction() {
-        val id = currentListId?.id
+        val text = textTask.text.toString()
 
-        Log.d(TAG, "addTaskAction : $id\nmessage : ${textTask.text}")
-        if(id != null) presenter.addTask(textTask.text.toString(), id, {(parentFragment as BaseTaskFragment).itemInserted()})
-        else presenter.addTask(textTask.text.toString(), null, {(parentFragment as BaseTaskFragment).itemInserted()})
+        if(text.isNotEmpty()) {
+            when (parentFragment::class) {
+                ListFragment::class -> {
+                    presenter.addTaskListId(text, currentListId!!.id, itemInserted)
+                }
+                ToDoListFragment::class -> {
+                    presenter.addTaskToDo(text, itemInserted)
+                }
+                TaskFragment::class -> {
+                    presenter.addTaskToday(text, itemInserted)
+                }
+
+            }
+        } else {
+            showToast("text is empty")
+        }
+
+        clearEditText()
     }
+
 
 
 

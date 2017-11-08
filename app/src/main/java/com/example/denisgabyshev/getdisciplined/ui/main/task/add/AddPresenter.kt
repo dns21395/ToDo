@@ -30,30 +30,46 @@ class AddPresenter<V: AddMvpView> @Inject
         mvpView.setFragment()
     }
 
-    override fun addTask(taskText: String, listId: Long?, operation: () -> Unit) {
-        if(taskText.isNotEmpty()) {
-            Single.fromCallable {
-                if(listId != null) {
-                    addTaskByListId(taskText, listId)
-                } else {
-                    addTaskByDayId(taskText)
-                }
-                }.subscribeOn(Schedulers.io())
-                    .subscribe ({operation()}, Throwable::printStackTrace)
-        } else {
-            mvpView?.showToast("text is empty")
-        }
-        mvpView?.clearEditText()
+//    override fun addTask(taskText: String, listId: Long?, operation: () -> Unit) {
+//        if(taskText.isNotEmpty()) {
+//            Single.fromCallable {
+//                if(listId != null) {
+//                    addTaskByListId(taskText, listId)
+//                } else {
+//                    addTaskByDayId(taskText)
+//                }
+//                }.subscribeOn(Schedulers.io())
+//                    .subscribe ({operation()}, Throwable::printStackTrace)
+//        } else {
+//            mvpView?.showToast("text is empty")
+//        }
+//        mvpView?.clearEditText()
+//    }
+
+    override fun addTaskToday(taskText: String, operation: () -> Unit) {
+        Single.fromCallable {
+            dataManager.getDateId(AppUtils.getToday()).subscribe { dateId ->
+                dataManager.addTask(dateId[0].id, null, taskText.trim())
+            }
+        }.subscribeOn(Schedulers.io())
+                .subscribe ({operation()}, Throwable::printStackTrace)
     }
 
-    private fun addTaskByDayId(taskText: String) {
-        dataManager.getDateId(AppUtils.getToday()).subscribe { dateId ->
-            dataManager.addTask(dateId[0].id, null, taskText.trim())
-        }
+    override fun addTaskToDo(taskText: String, operation: () -> Unit) {
+        Single.fromCallable {
+            dataManager.addTask(null, null, taskText.trim())
+        }.subscribeOn(Schedulers.io())
+                .subscribe ({operation()}, Throwable::printStackTrace)
+
     }
 
-    private fun addTaskByListId(taskText: String, listId: Long) {
-        dataManager.addTask(null, listId, taskText.trim())
+    override fun addTaskListId(taskText: String, listId: Long,  operation: () -> Unit) {
+        Single.fromCallable {
+            dataManager.addTask(null, listId, taskText.trim())
+        }.subscribeOn(Schedulers.io())
+                .subscribe ({operation()}, Throwable::printStackTrace)
     }
+
+
 
 }

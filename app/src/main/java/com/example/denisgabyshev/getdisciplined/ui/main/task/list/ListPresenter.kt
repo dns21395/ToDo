@@ -26,15 +26,6 @@ class ListPresenter<V: ListMvpView>
         mvpView.setFragment()
     }
 
-    override fun getTasksByDate(dateId: Long) {
-//        dataManager.getTasksByDayId(dateId)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe ({
-//                    mvpView?.updateTasksList(it as ArrayList<Task>)
-//                }, Throwable::printStackTrace)
-    }
-
     override fun getTasksByListId(id: Long) {
         dataManager.getTasksByListId(id)
                 .subscribeOn(Schedulers.io())
