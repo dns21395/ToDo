@@ -8,4 +8,6 @@ import com.example.denisgabyshev.getdisciplined.ui.base.MvpPresenter
  */
 interface ListIdNameDialogMvpPresenter<V : ListIdNameDialogMvpView> : MvpPresenter<V> {
     fun updateListId(listId: ListId)
+
+    fun cancelListId(listId: ListId)
 }

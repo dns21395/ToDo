@@ -30,4 +30,15 @@ class ListIdNameDialogPresenter<V : ListIdNameDialogMvpView>
         }, Throwable::printStackTrace)
     }
 
+    override fun cancelListId(listId: ListId) {
+        Single.fromCallable {
+            dataManager.deleteListId(listId)
+        }.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe ({
+                    mvpView?.cancelCreatingListId()
+                    mvpView?.dismissDialog()
+                }, Throwable::printStackTrace)
+    }
+
 }

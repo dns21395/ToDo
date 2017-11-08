@@ -45,6 +45,11 @@ class ListIdNameDialog : BaseDialog(), ListIdNameDialogMvpView {
             listId()?.name = listIdName.text.toString().trim()
             presenter.updateListId(listId()!!)
         }
+
+        negative.setOnClickListener {
+            presenter.cancelListId(listId()!!)
+        }
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
@@ -55,10 +60,11 @@ class ListIdNameDialog : BaseDialog(), ListIdNameDialogMvpView {
     }
 
     override fun updateIdListTitleToolbar() {
-//        val fragment: ListFragment = (activity.supportFragmentManager.findFragmentById(R.id.frameLayout) as ListFragment)
-//        fragment.presenter.getListIdName(activity.currentListId!!.id)
-
         (activity as MainActivity).clickedNavigationItem(activity.currentListId!!)
+    }
+
+    override fun cancelCreatingListId() {
+        (activity as MainActivity).clickedTodayOrToDoItem(0)
     }
 
 

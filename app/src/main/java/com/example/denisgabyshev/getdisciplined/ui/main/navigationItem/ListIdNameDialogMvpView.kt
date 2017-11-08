@@ -7,4 +7,6 @@ import com.example.denisgabyshev.getdisciplined.ui.base.DialogMvpView
  */
 interface ListIdNameDialogMvpView : DialogMvpView {
     fun updateIdListTitleToolbar()
+
+    fun cancelCreatingListId()
 }
