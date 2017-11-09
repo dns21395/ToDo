@@ -2,33 +2,26 @@ package com.example.denisgabyshev.getdisciplined.ui.main
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.helper.ItemTouchHelper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.denisgabyshev.getdisciplined.App
 import com.example.denisgabyshev.getdisciplined.R
-import com.example.denisgabyshev.getdisciplined.data.DataManager
 import com.example.denisgabyshev.getdisciplined.data.db.model.ListId
-import com.example.denisgabyshev.getdisciplined.utils.itemtouch.ItemTouchHelperAdapter
-import com.example.denisgabyshev.getdisciplined.utils.itemtouch.ItemTouchHelperCallback
-import com.example.denisgabyshev.getdisciplined.utils.itemtouch.OnStartDragListener
+import com.example.denisgabyshev.getdisciplined.utils.itemtouch.*
 import kotlinx.android.synthetic.main.listid_item.view.*
-import javax.inject.Inject
+import java.util.*
 
 /**
  * Created by denisgabyshev on 03/11/2017.
  */
-class ListAdapter(val context: Context) :
-    RecyclerView.Adapter<ListViewHolder>() {
+class ListAdapter(val context: Context, recyclerView: RecyclerView) :
+    DragableAdapter<ListViewHolder, ListId>(recyclerView) {
+
+    private val TAG = "ListAdapter"
 
     lateinit var callback: Callback
-
-    @Inject lateinit var dataManager: DataManager
-
-
-
-    private var listIds = ArrayList<ListId>()
 
     init {
         (context as App).component().inject(this)
@@ -45,30 +38,69 @@ class ListAdapter(val context: Context) :
                 }
             }
         } else {
-            holder.bind(listIds[position])
+            holder.bind(items[position])
         }
 
         holder.itemView.setOnClickListener {
             if(position < 2) {
                 callback.clickedTodayOrToDoItem(position)
             } else {
-                callback.clickedNavigationItem(listIds[position])
+                callback.clickedNavigationItem(items[holder.adapterPosition])
             }
+        }
+
+        holder.itemView.setOnLongClickListener {
+            onStartDragListener.onStartDrag(holder)
+            false
         }
     }
 
-    override fun getItemCount(): Int = listIds.size
+    override fun getItemCount(): Int = items.size
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ListViewHolder =
             ListViewHolder(LayoutInflater.from(context).inflate(R.layout.listid_item, parent, false))
 
     fun updateArray(array: ArrayList<ListId>) {
-        listIds = array
+        Log.d(TAG, "itemCount = $itemCount array = ${array.size}")
+        if(itemCount - 2 != array.size) {
+            items = array
 
-        listIds.add(0, ListId(0, context.resources.getString(R.string.todo), 0))
-        listIds.add(0, ListId(0, context.resources.getString(R.string.myday), 0))
+            items.add(0, ListId(0, context.resources.getString(R.string.todo), 0))
+            items.add(0, ListId(0, context.resources.getString(R.string.myday), 0))
 
-        notifyDataSetChanged()
+            notifyDataSetChanged()
+        }
+    }
+
+    override fun onItemMove(oldPos: Int, newPos: Int): Boolean {
+        moveItem(oldPos, newPos)
+        return true
+    }
+
+    override fun onItemSwipe(pos: Int) {
+
+    }
+
+    private fun moveItem(oldPos: Int, newPos: Int) {
+        if(oldPos >= 2 && newPos >= 2) {
+            notifyItemMoved(oldPos, newPos)
+
+            val orderForOld = items[newPos].listOrder
+            val orderFolNew = items[oldPos].listOrder
+
+            val task1 = items[oldPos]
+            task1.listOrder = orderForOld
+            dataManager.updateListId(task1)
+
+            val task2 = items[newPos]
+            task1.listOrder = orderFolNew
+            dataManager.updateListId(task2)
+
+            items[oldPos].listOrder = orderForOld
+            items[newPos].listOrder = orderFolNew
+
+            Collections.swap(items, oldPos, newPos)
+        }
     }
 
 
@@ -77,10 +109,9 @@ class ListAdapter(val context: Context) :
 
         fun clickedNavigationItem(listId: ListId)
     }
-
 }
 
-class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class ListViewHolder(itemView: View) : DragableHolder(itemView) {
     lateinit var _listId: ListId
 
     fun bind(listId: ListId) = with(itemView) {

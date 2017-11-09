@@ -20,7 +20,7 @@ abstract class DragableAdapter<T : DragableHolder, L: Any>
 
     @Inject lateinit var dataManager: DataManager
 
-    var callback = ItemTouchHelperCallback(this)
+    private var callback = ItemTouchHelperCallback(this)
     var itemTouchHelper = ItemTouchHelper(callback)
     var onStartDragListener: OnStartDragListener = this
 

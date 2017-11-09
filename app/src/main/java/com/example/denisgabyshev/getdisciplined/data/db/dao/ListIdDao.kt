@@ -1,7 +1,6 @@
 package com.example.denisgabyshev.getdisciplined.data.db.dao
 
 import android.arch.persistence.room.*
-import com.example.denisgabyshev.getdisciplined.data.db.model.Date
 import com.example.denisgabyshev.getdisciplined.data.db.model.ListId
 import io.reactivex.Flowable
 import io.reactivex.Single
@@ -11,7 +10,7 @@ import io.reactivex.Single
  */
 @Dao
 interface ListIdDao {
-    @Query("SELECT * FROM listId")
+    @Query("SELECT * FROM listId ORDER BY listOrder")
     fun getAll(): Flowable<List<ListId>>
 
     @Query("SELECT * FROM listId ORDER BY id DESC LIMIT 1")

@@ -59,7 +59,6 @@ class MainActivity : BaseActivity(), MainMvpView, ListAdapter.Callback {
 
         addList.setOnClickListener {
             presenter.onAddListId()
-
         }
     }
 
@@ -79,7 +78,7 @@ class MainActivity : BaseActivity(), MainMvpView, ListAdapter.Callback {
 
     private fun setupNavRecyclerView() {
         listsRecycler.layoutManager = LinearLayoutManager(this)
-        adapter = ListAdapter(applicationContext)
+        adapter = ListAdapter(applicationContext, listsRecycler)
         adapter?.callback = this
         listsRecycler.adapter = adapter
 
