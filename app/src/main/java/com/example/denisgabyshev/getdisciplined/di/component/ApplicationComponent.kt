@@ -9,6 +9,7 @@ import com.example.denisgabyshev.getdisciplined.di.ApplicationContext
 import com.example.denisgabyshev.getdisciplined.di.module.ApplicationModule
 import com.example.denisgabyshev.getdisciplined.ui.main.ListAdapter
 import com.example.denisgabyshev.getdisciplined.ui.main.task.base.TaskAdapter
+import com.example.denisgabyshev.getdisciplined.utils.itemtouch.DragableAdapter
 import com.example.denisgabyshev.getdisciplined.utils.rx.SchedulerProvider
 import dagger.Component
 import javax.inject.Singleton

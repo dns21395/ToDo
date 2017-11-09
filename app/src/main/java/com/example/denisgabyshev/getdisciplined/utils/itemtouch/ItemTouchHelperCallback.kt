@@ -1,14 +1,14 @@
-package com.example.denisgabyshev.getdisciplined.ui.main.task.base
+package com.example.denisgabyshev.getdisciplined.utils.itemtouch
 
 import android.graphics.Canvas
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
-import com.example.denisgabyshev.getdisciplined.R
+import com.example.denisgabyshev.getdisciplined.ui.main.task.base.TaskAdapter
 
 /**
  * Created by denisgabyshev on 29/10/2017.
  */
-class ItemTouchHelperCallback(val adapter: TaskAdapter) : ItemTouchHelper.Callback() {
+class ItemTouchHelperCallback<T : DragableHolder, L: Any>(val adapter: DragableAdapter<T, L>) : ItemTouchHelper.Callback() {
     val ALPHA_FULL = 1.0f
 
     override fun getMovementFlags(recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder?): Int =

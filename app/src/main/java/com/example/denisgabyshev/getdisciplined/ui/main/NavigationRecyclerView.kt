@@ -2,6 +2,7 @@ package com.example.denisgabyshev.getdisciplined.ui.main
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,9 @@ import com.example.denisgabyshev.getdisciplined.App
 import com.example.denisgabyshev.getdisciplined.R
 import com.example.denisgabyshev.getdisciplined.data.DataManager
 import com.example.denisgabyshev.getdisciplined.data.db.model.ListId
+import com.example.denisgabyshev.getdisciplined.utils.itemtouch.ItemTouchHelperAdapter
+import com.example.denisgabyshev.getdisciplined.utils.itemtouch.ItemTouchHelperCallback
+import com.example.denisgabyshev.getdisciplined.utils.itemtouch.OnStartDragListener
 import kotlinx.android.synthetic.main.listid_item.view.*
 import javax.inject.Inject
 
@@ -21,6 +25,8 @@ class ListAdapter(val context: Context) :
     lateinit var callback: Callback
 
     @Inject lateinit var dataManager: DataManager
+
+
 
     private var listIds = ArrayList<ListId>()
 

@@ -1,4 +1,4 @@
-package com.example.denisgabyshev.getdisciplined.ui.main.task.base
+package com.example.denisgabyshev.getdisciplined.utils.itemtouch
 
 import android.support.v7.widget.RecyclerView
 

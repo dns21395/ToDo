@@ -8,13 +8,13 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import com.example.denisgabyshev.getdisciplined.App
 import com.example.denisgabyshev.getdisciplined.R
 import com.example.denisgabyshev.getdisciplined.data.DataManager
 import com.example.denisgabyshev.getdisciplined.data.db.model.Task
+import com.example.denisgabyshev.getdisciplined.utils.itemtouch.*
 import kotlinx.android.synthetic.main.task_item.view.*
 import org.jetbrains.anko.backgroundColor
 import org.jetbrains.anko.imageResource
@@ -25,30 +25,21 @@ import javax.inject.Inject
  * Created by denisgabyshev on 04/10/2017.
  */
 class TaskAdapter(val appBar: AppBarLayout, val recyclerView: RecyclerView, val context: Context) :
-        RecyclerView.Adapter<TaskViewHolder>(), ItemTouchHelperAdapter, OnStartDragListener {
+        DragableAdapter<TaskViewHolder, Task>(recyclerView) {
 
-    @Inject lateinit var dataManager: DataManager
-
-    private var callback = ItemTouchHelperCallback(this)
-    private var itemTouchHelper = ItemTouchHelper(callback)
-    private var onStartDragListener: OnStartDragListener = this
 
     init {
-        itemTouchHelper.attachToRecyclerView(recyclerView)
-
         (context as App).component().inject(this)
     }
 
     private val TAG = "TaskAdapter"
 
-    private var tasks = ArrayList<Task>()
-
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        holder.bind(tasks[holder.adapterPosition])
+        holder.bind(items[holder.adapterPosition])
 
         holder.itemView?.setOnClickListener {
-            Log.d(TAG, "Clicked : ${tasks[holder.adapterPosition]}")
+            Log.d(TAG, "Clicked : ${items[holder.adapterPosition]}")
 }
 
 
@@ -63,18 +54,17 @@ class TaskAdapter(val appBar: AppBarLayout, val recyclerView: RecyclerView, val 
     }
 
     private fun statusButtonClicked(holder: TaskViewHolder, position: Int) {
-        tasks[position].status = !tasks[position].status
+        items[position].status = !items[position].status
 
-        dataManager.updateTaskStatus(tasks[position])
+        dataManager.updateTaskStatus(items[position])
 
-        Log.d(TAG, "updateTaskStatus = ${tasks[position]}")
+        Log.d(TAG, "updateTaskStatus = ${items[position]}")
 
-        holder.setStatus(tasks[position])
+        holder.setStatus(items[position])
 
     }
 
-    override fun getItemCount(): Int = tasks.size
-
+    override fun getItemCount(): Int = items.size
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder =
@@ -82,11 +72,11 @@ class TaskAdapter(val appBar: AppBarLayout, val recyclerView: RecyclerView, val 
 
     fun setArray(taskArray: ArrayList<Task>) {
 
-        if (tasks.size > 0) {
+        if (items.size > 0) {
             appBar.setExpanded(false)
         }
 
-        tasks = taskArray
+        items = taskArray
 
         logShowArray("SET ARRAY")
 
@@ -101,49 +91,40 @@ class TaskAdapter(val appBar: AppBarLayout, val recyclerView: RecyclerView, val 
     }
 
     override fun onItemSwipe(pos: Int) {
-        dataManager.deleteTask(tasks[pos])
-        tasks.removeAt(pos)
+        dataManager.deleteTask(items[pos])
+        items.removeAt(pos)
         notifyItemRemoved(pos)
 
         logShowArray("AFTER SWIPE")
 
     }
 
-    override fun onStartDrag(viewHolder: RecyclerView.ViewHolder) {
-        itemTouchHelper.startDrag(viewHolder)
-        (viewHolder as TaskViewHolder).changeBackground(R.color.colorPrimaryLight)
-    }
-
-    fun dragStopped(viewHolder: RecyclerView.ViewHolder) {
-        (viewHolder as TaskViewHolder).changeBackground(android.R.color.white)
-
-    }
 
     private fun moveItem(oldPos: Int, newPos: Int) {
         notifyItemMoved(oldPos, newPos)
 
-        val orderForOld = tasks[newPos].taskOrder
-        val orderFolNew = tasks[oldPos].taskOrder
+        val orderForOld = items[newPos].taskOrder
+        val orderFolNew = items[oldPos].taskOrder
 
-        dataManager.updateTaskOrder(tasks[oldPos], orderForOld)
-        dataManager.updateTaskOrder(tasks[newPos], orderFolNew)
+        dataManager.updateTaskOrder(items[oldPos], orderForOld)
+        dataManager.updateTaskOrder(items[newPos], orderFolNew)
 
-        tasks[oldPos].taskOrder = orderForOld
-        tasks[newPos].taskOrder = orderFolNew
+        items[oldPos].taskOrder = orderForOld
+        items[newPos].taskOrder = orderFolNew
 
-        Collections.swap(tasks, oldPos, newPos)
+        Collections.swap(items, oldPos, newPos)
     }
 
     private fun logShowArray(title: String) {
         Log.d(TAG, "-= $title =-")
 
-        for(i in tasks.indices) {
-            Log.d(TAG, "$i = ${tasks[i]}")
+        for(i in items.indices) {
+            Log.d(TAG, "$i = ${items[i]}")
         }
     }
 }
 
-class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class TaskViewHolder(itemView: View) : DragableHolder(itemView) {
     private val TAG = "TaskViewHolder"
 
     lateinit var taskClass: Task
@@ -176,7 +157,5 @@ class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     }
 
-    fun changeBackground(color: Int) = with(itemView)  {
-        parentRL.backgroundColor = ContextCompat.getColor(context, color)
-    }
+
 }
