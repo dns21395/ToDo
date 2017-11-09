@@ -38,10 +38,6 @@ class TaskAdapter(val appBar: AppBarLayout, val recyclerView: RecyclerView, val 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         holder.bind(items[holder.adapterPosition])
 
-        holder.itemView?.setOnClickListener {
-            Log.d(TAG, "Clicked : ${items[holder.adapterPosition]}")
-}
-
 
         holder.itemView.setOnLongClickListener {
             onStartDragListener.onStartDrag(holder)
@@ -58,10 +54,7 @@ class TaskAdapter(val appBar: AppBarLayout, val recyclerView: RecyclerView, val 
 
         dataManager.updateTaskStatus(items[position])
 
-        Log.d(TAG, "updateTaskStatus = ${items[position]}")
-
         holder.setStatus(items[position])
-
     }
 
     override fun getItemCount(): Int = items.size
@@ -78,8 +71,6 @@ class TaskAdapter(val appBar: AppBarLayout, val recyclerView: RecyclerView, val 
 
         items = taskArray
 
-        logShowArray("SET ARRAY")
-
         notifyDataSetChanged()
 
         recyclerView.smoothScrollToPosition(itemCount)
@@ -94,9 +85,6 @@ class TaskAdapter(val appBar: AppBarLayout, val recyclerView: RecyclerView, val 
         dataManager.deleteTask(items[pos])
         items.removeAt(pos)
         notifyItemRemoved(pos)
-
-        logShowArray("AFTER SWIPE")
-
     }
 
 
@@ -115,13 +103,6 @@ class TaskAdapter(val appBar: AppBarLayout, val recyclerView: RecyclerView, val 
         Collections.swap(items, oldPos, newPos)
     }
 
-    private fun logShowArray(title: String) {
-        Log.d(TAG, "-= $title =-")
-
-        for(i in items.indices) {
-            Log.d(TAG, "$i = ${items[i]}")
-        }
-    }
 }
 
 class TaskViewHolder(itemView: View) : DragableHolder(itemView) {

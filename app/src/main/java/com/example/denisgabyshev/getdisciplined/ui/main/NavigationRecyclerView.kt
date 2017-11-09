@@ -61,8 +61,7 @@ class ListAdapter(val context: Context, recyclerView: RecyclerView) :
             ListViewHolder(LayoutInflater.from(context).inflate(R.layout.listid_item, parent, false))
 
     fun updateArray(array: ArrayList<ListId>) {
-        Log.d(TAG, "itemCount = $itemCount array = ${array.size}")
-        if(itemCount - 2 != array.size) {
+        if(!onDrag) {
             items = array
 
             items.add(0, ListId(0, context.resources.getString(R.string.todo), 0))
@@ -71,6 +70,8 @@ class ListAdapter(val context: Context, recyclerView: RecyclerView) :
             notifyDataSetChanged()
         }
     }
+
+
 
     override fun onItemMove(oldPos: Int, newPos: Int): Boolean {
         moveItem(oldPos, newPos)

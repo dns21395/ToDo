@@ -18,6 +18,8 @@ abstract class DragableAdapter<T : DragableHolder, L: Any>
 
     var items = ArrayList<L>()
 
+    var onDrag = false
+
     @Inject lateinit var dataManager: DataManager
 
     private var callback = ItemTouchHelperCallback(this)
@@ -28,13 +30,15 @@ abstract class DragableAdapter<T : DragableHolder, L: Any>
         itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
-    fun dragStopped(viewHolder: RecyclerView.ViewHolder) {
+    override fun onStopDrag(viewHolder: RecyclerView.ViewHolder) {
         (viewHolder as DragableHolder).changeBackground(android.R.color.white)
+        onDrag = false
     }
 
     override fun onStartDrag(viewHolder: RecyclerView.ViewHolder) {
         itemTouchHelper.startDrag(viewHolder)
         (viewHolder as DragableHolder).changeBackground(R.color.colorPrimaryLight)
+        onDrag = true
     }
 
 

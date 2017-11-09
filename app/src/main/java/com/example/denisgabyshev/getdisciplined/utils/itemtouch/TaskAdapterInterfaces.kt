@@ -17,4 +17,5 @@ interface ItemTouchHelperViewHolder {
 
 interface OnStartDragListener {
     fun onStartDrag(viewHolder: RecyclerView.ViewHolder)
+    fun onStopDrag(viewHolder: RecyclerView.ViewHolder)
 }

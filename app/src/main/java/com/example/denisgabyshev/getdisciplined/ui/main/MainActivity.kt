@@ -26,8 +26,6 @@ class MainActivity : BaseActivity(), MainMvpView, ListAdapter.Callback {
 
     @Inject lateinit var presenter: MainMvpPresenter<MainMvpView>
 
-    lateinit var drawerToggle: ActionBarDrawerToggle
-
     var adapter: ListAdapter? = null
 
     companion object {

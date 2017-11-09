@@ -51,6 +51,8 @@ class ListFragment : BaseTaskFragment(), ListMvpView {
     override fun setFragment() {
         super.setFragment()
 
+        Log.d(TAG, "LIST ID : ${currentListId!!.id}")
+
 
         presenter.getListIdTitle(currentListId!!.id)
         presenter.getTasksByListId(currentListId!!.id)

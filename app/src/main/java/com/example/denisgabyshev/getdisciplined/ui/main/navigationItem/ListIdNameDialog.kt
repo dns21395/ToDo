@@ -69,6 +69,4 @@ class ListIdNameDialog : BaseDialog(), ListIdNameDialogMvpView {
         mainActivity.clickedTodayOrToDoItem(0)
         mainActivity.openDrawer()
     }
-
-
 }

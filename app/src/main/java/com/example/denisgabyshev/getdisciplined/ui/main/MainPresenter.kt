@@ -57,6 +57,7 @@ constructor(dataManager: DataManager,
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
+                    Log.d(TAG, "SHOW DIALOG = $it")
                     mvpView?.showListIdNameDialog(it)
                 }, Throwable::printStackTrace)
     }

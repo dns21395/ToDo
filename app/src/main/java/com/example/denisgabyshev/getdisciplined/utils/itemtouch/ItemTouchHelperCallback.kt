@@ -3,7 +3,6 @@ package com.example.denisgabyshev.getdisciplined.utils.itemtouch
 import android.graphics.Canvas
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
-import com.example.denisgabyshev.getdisciplined.ui.main.task.base.TaskAdapter
 
 /**
  * Created by denisgabyshev on 29/10/2017.
@@ -59,6 +58,6 @@ class ItemTouchHelperCallback<T : DragableHolder, L: Any>(val adapter: DragableA
             itemViewHolder.onItemClear()
         }
 
-        adapter.dragStopped(viewHolder)
+        adapter.onStopDrag(viewHolder)
     }
 }
