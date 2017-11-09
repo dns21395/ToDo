@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.denisgabyshev.getdisciplined.R
+import com.example.denisgabyshev.getdisciplined.data.db.model.Task
 import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskFragment
 import kotlinx.android.synthetic.main.fragment_tasks_todo.*
 import javax.inject.Inject
@@ -26,9 +27,6 @@ class ListFragment : BaseTaskFragment(), ListMvpView {
         activity.activityComponent.inject(this)
         presenter.onAttach(this)
 
-        setFragment()
-
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
@@ -39,6 +37,8 @@ class ListFragment : BaseTaskFragment(), ListMvpView {
     override fun setToolbar(title: Long) {
 
     }
+
+
 
     override fun setToolbar(text: String) {
         toolbar.title = text
@@ -51,7 +51,6 @@ class ListFragment : BaseTaskFragment(), ListMvpView {
     override fun setFragment() {
         super.setFragment()
 
-        Log.d(TAG, "ListFragment listid : $currentListId")
 
         presenter.getListIdTitle(currentListId!!.id)
         presenter.getTasksByListId(currentListId!!.id)

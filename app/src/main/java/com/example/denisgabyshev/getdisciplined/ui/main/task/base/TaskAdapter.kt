@@ -45,11 +45,11 @@ class TaskAdapter(val appBar: AppBarLayout, val recyclerView: RecyclerView, val 
 
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        holder.bind(tasks[position])
+        holder.bind(tasks[holder.adapterPosition])
 
         holder.itemView?.setOnClickListener {
-            Log.d(TAG, "Clicked : ${tasks[position]}")
-        }
+            Log.d(TAG, "Clicked : ${tasks[holder.adapterPosition]}")
+}
 
 
         holder.itemView.setOnLongClickListener {
@@ -58,7 +58,7 @@ class TaskAdapter(val appBar: AppBarLayout, val recyclerView: RecyclerView, val 
         }
 
         holder.itemView.status.setOnClickListener {
-            statusButtonClicked(holder, position)
+            statusButtonClicked(holder, holder.adapterPosition)
         }
     }
 
@@ -66,6 +66,8 @@ class TaskAdapter(val appBar: AppBarLayout, val recyclerView: RecyclerView, val 
         tasks[position].status = !tasks[position].status
 
         dataManager.updateTaskStatus(tasks[position])
+
+        Log.d(TAG, "updateTaskStatus = ${tasks[position]}")
 
         holder.setStatus(tasks[position])
 
@@ -86,6 +88,8 @@ class TaskAdapter(val appBar: AppBarLayout, val recyclerView: RecyclerView, val 
 
         tasks = taskArray
 
+        logShowArray("SET ARRAY")
+
         notifyDataSetChanged()
 
         recyclerView.smoothScrollToPosition(itemCount)
@@ -97,10 +101,11 @@ class TaskAdapter(val appBar: AppBarLayout, val recyclerView: RecyclerView, val 
     }
 
     override fun onItemSwipe(pos: Int) {
-        Log.d(TAG, "OnItemSwipe ${tasks[pos]}")
-        notifyItemRemoved(pos)
         dataManager.deleteTask(tasks[pos])
         tasks.removeAt(pos)
+        notifyItemRemoved(pos)
+
+        logShowArray("AFTER SWIPE")
 
     }
 
@@ -127,6 +132,14 @@ class TaskAdapter(val appBar: AppBarLayout, val recyclerView: RecyclerView, val 
         tasks[newPos].taskOrder = orderFolNew
 
         Collections.swap(tasks, oldPos, newPos)
+    }
+
+    private fun logShowArray(title: String) {
+        Log.d(TAG, "-= $title =-")
+
+        for(i in tasks.indices) {
+            Log.d(TAG, "$i = ${tasks[i]}")
+        }
     }
 }
 

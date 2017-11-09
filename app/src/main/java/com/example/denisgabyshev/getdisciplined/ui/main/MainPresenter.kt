@@ -27,16 +27,6 @@ constructor(dataManager: DataManager,
         super.onAttach(mvpView)
 
         mvpView.setTaskFragment(TaskFragment())
-
-        dataManager.getAllTasks()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe ({
-                    Log.d(TAG, "todo items")
-                    for(item in it) {
-                        Log.d(TAG, "$item")
-                    }
-                }, Throwable::printStackTrace)
     }
 
     override fun onDrawerClick() {
@@ -47,6 +37,7 @@ constructor(dataManager: DataManager,
         Single.fromCallable {
             dataManager.addListId()
         }.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 showDialog()
             }, Throwable::printStackTrace)
