@@ -11,6 +11,9 @@ import io.reactivex.Single
  * Created by denisgabyshev on 11/09/2017.
  */
 interface DataManager{
+
+    // ListId
+
     fun addListId()
 
     fun getLastId() : Single<ListId>
@@ -23,11 +26,17 @@ interface DataManager{
 
     fun getListIdName(id: Long): Single<String>
 
+    // Date
+
     fun addDate(date: Long)
 
-    fun addTask(dateId: Long?, listId: Long?, task: String)
-
     fun getDateId(date: Long): Flowable<List<Date>>
+
+    // Task
+
+    fun addTaskList(listId: Long, task: String)
+
+    fun addTaskToDoAndToday(dateId: Long?, task: String)
 
     fun getTasksByDayId(date: Long): Single<List<Task>>
 

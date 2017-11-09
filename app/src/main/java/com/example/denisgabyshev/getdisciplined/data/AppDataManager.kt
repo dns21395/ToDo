@@ -73,22 +73,16 @@ class AppDataManager @Inject constructor(@ApplicationContext val context: Contex
     }
 
 
-    override fun addTask(dateId: Long?, listId: Long?, task: String) {
+    override fun addTaskList(listId: Long, task: String) {
+        val count = database.taskDao().getTaskCountByListId(listId)
+        val _task = Task(0, null, listId, task, count)
+        database.taskDao().insert(_task)
+    }
 
-        Log.d(TAG, "dateId : $dateId; listId : $listId")
-
-        var count = 0
-        if(dateId != null) count = database.taskDao().getTaskCountToDoAndToday()
-        if(listId != null) count = database.taskDao().getTaskCountByListId(listId)
-
-        Log.d(TAG, "count : $count")
-
-        val _task = Task(0, dateId, listId, task, count)
-
-        Single.fromCallable {
-            database.taskDao().insert(_task)
-        }.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe()
+    override fun addTaskToDoAndToday(dateId: Long?, task: String) {
+        val count = database.taskDao().getTaskCountToDoAndToday()
+        val _task = Task(0, dateId, null, task, count)
+        database.taskDao().insert(_task)
     }
 
      override fun getDateId(date: Long): Flowable<List<Date>> =

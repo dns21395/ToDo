@@ -27,6 +27,15 @@ constructor(dataManager: DataManager,
         super.onAttach(mvpView)
 
         mvpView.setTaskFragment(TaskFragment())
+
+        dataManager.getAllTasks()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    for(item in it) {
+                        Log.d(TAG, "$item")
+                    }
+                }
     }
 
     override fun onDrawerClick() {
