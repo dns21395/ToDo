@@ -28,8 +28,8 @@ interface TaskDao {
     @Query("SELECT COUNT(task.id) FROM task WHERE listId = :theId")
     fun getTaskCountByListId(theId: Long): Int
 
-    @Query("SELECT COUNT(task.id) FROM task WHERE listId IS NULL")
-    fun getTaskCountToDo(): Int
+    @Query("SELECT COUNT(task.id) FROM task WHERE listId IS NULL AND dateId IS NOT NULL")
+    fun getTaskCountToDoAndToday(): Int
 
     @Update
     fun updateTask(task: Task)
