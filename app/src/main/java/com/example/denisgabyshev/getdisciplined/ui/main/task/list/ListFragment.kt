@@ -3,11 +3,9 @@ package com.example.denisgabyshev.getdisciplined.ui.main.task.list
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.example.denisgabyshev.getdisciplined.R
-import com.example.denisgabyshev.getdisciplined.data.db.model.Task
+import com.example.denisgabyshev.getdisciplined.ui.main.MainActivity
 import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskFragment
 import kotlinx.android.synthetic.main.fragment_tasks_todo.*
 import javax.inject.Inject
@@ -19,6 +17,8 @@ class ListFragment : BaseTaskFragment(), ListMvpView {
 
     private val TAG = "ListFragment"
 
+    private lateinit var mainActivity: MainActivity
+
     @Inject lateinit var presenter: ListMvpPresenter<ListMvpView>
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
@@ -26,6 +26,8 @@ class ListFragment : BaseTaskFragment(), ListMvpView {
 
         activity.activityComponent.inject(this)
         presenter.onAttach(this)
+
+        mainActivity = (activity as MainActivity)
 
     }
 
@@ -51,10 +53,29 @@ class ListFragment : BaseTaskFragment(), ListMvpView {
     override fun setFragment() {
         super.setFragment()
 
+        setMenu()
+
         Log.d(TAG, "LIST ID : ${currentListId!!.id}")
 
 
         presenter.getListIdTitle(currentListId!!.id)
         presenter.getTasksByListId(currentListId!!.id)
+    }
+
+    private fun setMenu() {
+        toolbar.inflateMenu(R.menu.list)
+        toolbar.setOnMenuItemClickListener {
+            when(it.itemId) {
+                R.id.deleteListId -> {
+                    presenter.deleteList(mainActivity.currentListId!!)
+                }
+            }
+            false
+        }
+
+    }
+
+    override fun deleteList() {
+        mainActivity.clickedTodayOrToDoItem(0)
     }
 }

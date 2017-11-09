@@ -7,4 +7,6 @@ import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskMvpVie
  */
 interface ListMvpView : BaseTaskMvpView {
     fun setToolbar(text: String)
+
+    fun deleteList()
 }

@@ -10,4 +10,6 @@ interface ListMvpPresenter<V : ListMvpView> : BaseTaskMvpPresenter<V> {
     fun getListIdTitle(id: Long)
 
     fun getTasksByListId(id: Long)
+
+    fun deleteList(listId: ListId)
 }

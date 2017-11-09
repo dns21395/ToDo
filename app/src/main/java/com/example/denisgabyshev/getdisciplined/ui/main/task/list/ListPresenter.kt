@@ -1,9 +1,11 @@
 package com.example.denisgabyshev.getdisciplined.ui.main.task.list
 
 import com.example.denisgabyshev.getdisciplined.data.DataManager
+import com.example.denisgabyshev.getdisciplined.data.db.model.ListId
 import com.example.denisgabyshev.getdisciplined.data.db.model.Task
 import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskPresenter
 import com.example.denisgabyshev.getdisciplined.utils.rx.SchedulerProvider
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -41,6 +43,16 @@ class ListPresenter<V: ListMvpView>
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe ({
                     mvpView?.setToolbar(it)
+                }, Throwable::printStackTrace)
+    }
+
+    override fun deleteList(listId: ListId) {
+        Single.fromCallable {
+            dataManager.deleteListId(listId)
+        }.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe ({
+                    mvpView?.deleteList()
                 }, Throwable::printStackTrace)
     }
 }
