@@ -16,4 +16,6 @@ interface BaseTaskMvpView : MvpView {
     fun setToolbar(title: Long)
 
     fun setFragment()
+
+    fun updateTasksVisibilityIcon(visibility: Boolean)
 }

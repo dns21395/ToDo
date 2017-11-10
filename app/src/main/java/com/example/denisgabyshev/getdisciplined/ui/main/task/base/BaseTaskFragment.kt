@@ -4,6 +4,7 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.graphics.drawable.DrawableCompat
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.view.Menu
 import android.widget.FrameLayout
 import android.widget.RelativeLayout
 import com.example.denisgabyshev.getdisciplined.R
@@ -101,4 +102,12 @@ abstract class BaseTaskFragment: BaseFragment(), BaseTaskMvpView {
     }
 
     abstract fun itemInserted()
+
+    override fun updateTasksVisibilityIcon(visibility: Boolean) {
+        if(visibility) setIconCheck(R.drawable.check_show) else setIconCheck(R.drawable.check_hide)
+    }
+
+    private fun setIconCheck(drawable: Int) {
+        toolbar.menu.getItem(0).icon = resources.getDrawable(drawable,null)
+    }
 }

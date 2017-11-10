@@ -7,6 +7,8 @@ import com.example.denisgabyshev.getdisciplined.data.db.AppDatabase
 import com.example.denisgabyshev.getdisciplined.data.db.model.Date
 import com.example.denisgabyshev.getdisciplined.data.db.model.ListId
 import com.example.denisgabyshev.getdisciplined.data.db.model.Task
+import com.example.denisgabyshev.getdisciplined.data.prefs.AppPreferencesHelper
+import com.example.denisgabyshev.getdisciplined.data.prefs.PreferencesHelper
 import com.example.denisgabyshev.getdisciplined.di.ApplicationContext
 import io.reactivex.*
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -19,7 +21,16 @@ import javax.inject.Singleton
  */
 @Singleton
 class AppDataManager @Inject constructor(@ApplicationContext val context: Context,
-                                         private val database: AppDatabase) : DataManager {
+                                         private val database: AppDatabase,
+                                         private val preferencesHelper: PreferencesHelper) : DataManager {
+    override fun setFinishedTasksVisibility(status: Boolean) {
+        preferencesHelper.setFinishedTasksVisibility(status)
+    }
+
+    override fun getFinishedTasksVisibility(): Boolean =
+        preferencesHelper.getFinishedTasksVisibility()
+
+
     override fun getListIdName(id: Long): Single<String> =
             database.listIdDao().getListIdName(id)
 

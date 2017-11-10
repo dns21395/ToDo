@@ -8,6 +8,7 @@ import com.example.denisgabyshev.getdisciplined.data.AppDataManager
 import com.example.denisgabyshev.getdisciplined.data.DataManager
 import com.example.denisgabyshev.getdisciplined.data.db.AppDatabase
 import com.example.denisgabyshev.getdisciplined.data.prefs.AppPreferencesHelper
+import com.example.denisgabyshev.getdisciplined.data.prefs.PreferencesHelper
 import com.example.denisgabyshev.getdisciplined.di.ApplicationContext
 import com.example.denisgabyshev.getdisciplined.di.PreferenceInfo
 import com.example.denisgabyshev.getdisciplined.utils.AppConstants
@@ -39,7 +40,7 @@ class ApplicationModule(private val application: Application) {
 
     @Provides
     @Singleton
-    fun providePreferencesHelper(appPreferencesHelper: AppPreferencesHelper) = appPreferencesHelper
+    fun providePreferencesHelper(appPreferencesHelper: AppPreferencesHelper): PreferencesHelper = appPreferencesHelper
 
     @Provides
     fun provideAppDatabase(): AppDatabase = Room.databaseBuilder(application, AppDatabase::class.java, "we-need-db").build()

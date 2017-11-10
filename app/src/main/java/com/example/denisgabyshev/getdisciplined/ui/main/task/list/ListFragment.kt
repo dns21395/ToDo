@@ -15,6 +15,7 @@ import javax.inject.Inject
  */
 class ListFragment : BaseTaskFragment(), ListMvpView {
 
+
     private val TAG = "ListFragment"
 
     private lateinit var mainActivity: MainActivity
@@ -60,6 +61,7 @@ class ListFragment : BaseTaskFragment(), ListMvpView {
 
         presenter.getListIdTitle(currentListId!!.id)
         presenter.getTasksByListId(currentListId!!.id)
+        presenter.getTasksVisibility()
     }
 
     private fun setMenu() {
@@ -69,10 +71,12 @@ class ListFragment : BaseTaskFragment(), ListMvpView {
                 R.id.deleteListId -> {
                     presenter.deleteList(mainActivity.currentListId!!)
                 }
+                R.id.check -> {
+                    presenter.changeTaskVisibility()
+                }
             }
             false
         }
-
     }
 
     override fun deleteList() {

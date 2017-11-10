@@ -12,12 +12,12 @@ import javax.inject.Singleton
  */
 
 @Singleton
-class AppPreferencesHelper @Inject
-    constructor(@ApplicationContext val context: Context,
-                @PreferenceInfo val prefFileName: String): PreferencesHelper {
-    val PREF_KEY_FINISHED_TASKS_VISIBILITY = "PREF_KEY_FINISHED_TASKS_VISIBILITY"
+class AppPreferencesHelper @Inject constructor(@ApplicationContext val context: Context,
+                                               @PreferenceInfo val prefFileName: String): PreferencesHelper {
 
-    val prefs: SharedPreferences = context.getSharedPreferences(prefFileName, Context.MODE_PRIVATE)
+    private val PREF_KEY_FINISHED_TASKS_VISIBILITY = "PREF_KEY_FINISHED_TASKS_VISIBILITY"
+
+    private val prefs: SharedPreferences = context.getSharedPreferences(prefFileName, Context.MODE_PRIVATE)
 
     override fun setFinishedTasksVisibility(status: Boolean) {
         prefs.edit().putBoolean(PREF_KEY_FINISHED_TASKS_VISIBILITY, status).apply()

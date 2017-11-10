@@ -23,6 +23,7 @@ open class BaseTaskPresenter<V: BaseTaskMvpView> @Inject constructor(dataManager
         BasePresenter<V>(dataManager, schedulerProvider, compositeDisposable), BaseTaskMvpPresenter<V> {
 
 
+
     private val TAG = "BaseTaskPresenter"
 
     var todayId: Long = 0
@@ -73,5 +74,14 @@ open class BaseTaskPresenter<V: BaseTaskMvpView> @Inject constructor(dataManager
                 .subscribe ({
                     mvpView?.updateTasksList(it as ArrayList<Task>)
                 }, Throwable::printStackTrace)
+    }
+
+    override fun getTasksVisibility() {
+        mvpView?.updateTasksVisibilityIcon(dataManager.getFinishedTasksVisibility())
+    }
+
+    override fun changeTaskVisibility() {
+        dataManager.setFinishedTasksVisibility(!dataManager.getFinishedTasksVisibility())
+        mvpView?.updateTasksVisibilityIcon(dataManager.getFinishedTasksVisibility())
     }
 }

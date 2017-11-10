@@ -21,6 +21,7 @@ class ListPresenter<V: ListMvpView>
     BaseTaskPresenter<V>(dataManager, schedulerProvider, compositeDisposable), ListMvpPresenter<V> {
 
 
+
     private val TAG = "ListPresenter"
 
     override fun onAttach(mvpView: V) {
@@ -55,4 +56,8 @@ class ListPresenter<V: ListMvpView>
                     mvpView?.deleteList()
                 }, Throwable::printStackTrace)
     }
+
+
+
+
 }

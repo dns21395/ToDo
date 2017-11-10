@@ -12,5 +12,7 @@ interface BaseTaskMvpPresenter<V: BaseTaskMvpView> : MvpPresenter<V> {
 
     fun getTasksByDate(dateId: Long)
 
+    fun getTasksVisibility()
 
+    fun changeTaskVisibility()
 }
