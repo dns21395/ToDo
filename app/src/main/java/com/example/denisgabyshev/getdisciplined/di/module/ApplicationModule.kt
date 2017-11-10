@@ -7,7 +7,10 @@ import com.example.denisgabyshev.getdisciplined.App
 import com.example.denisgabyshev.getdisciplined.data.AppDataManager
 import com.example.denisgabyshev.getdisciplined.data.DataManager
 import com.example.denisgabyshev.getdisciplined.data.db.AppDatabase
+import com.example.denisgabyshev.getdisciplined.data.prefs.AppPreferencesHelper
 import com.example.denisgabyshev.getdisciplined.di.ApplicationContext
+import com.example.denisgabyshev.getdisciplined.di.PreferenceInfo
+import com.example.denisgabyshev.getdisciplined.utils.AppConstants
 import com.example.denisgabyshev.getdisciplined.utils.rx.AppSchedulerProvider
 import com.example.denisgabyshev.getdisciplined.utils.rx.SchedulerProvider
 import dagger.Module
@@ -29,6 +32,14 @@ class ApplicationModule(private val application: Application) {
     @Provides
     @Singleton
     fun provideDataManager(appDataManager: AppDataManager): DataManager = appDataManager
+
+    @Provides
+    @PreferenceInfo
+    fun providePreferenceName(): String = AppConstants.PREF_NAME
+
+    @Provides
+    @Singleton
+    fun providePreferencesHelper(appPreferencesHelper: AppPreferencesHelper) = appPreferencesHelper
 
     @Provides
     fun provideAppDatabase(): AppDatabase = Room.databaseBuilder(application, AppDatabase::class.java, "we-need-db").build()

@@ -12,4 +12,6 @@
     <string name="untitled_list">Untitled list</string>
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
+    <string name="check">Check</string>
+    <string name="delete">Delete</string>
 </resources>

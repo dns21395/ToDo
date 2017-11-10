@@ -18,5 +18,9 @@ annotation class ApplicationContext
 @Retention(AnnotationRetention.RUNTIME)
 annotation class PerActivity
 
+@Scope
+@Retention(AnnotationRetention.RUNTIME)
+annotation class PreferenceInfo
+
 
 
