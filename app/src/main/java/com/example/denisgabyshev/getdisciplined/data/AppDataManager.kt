@@ -23,18 +23,24 @@ import javax.inject.Singleton
 class AppDataManager @Inject constructor(@ApplicationContext val context: Context,
                                          private val database: AppDatabase,
                                          private val preferencesHelper: PreferencesHelper) : DataManager {
-    override fun setFinishedTasksVisibility(status: Boolean) {
-        preferencesHelper.setFinishedTasksVisibility(status)
+
+
+    // Date
+
+    override fun addDate(date: Long) {
+        val _date = Date(0, date)
+
+        Single.fromCallable {
+            database.dateDao().insert(_date)
+        }.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe()
     }
 
-    override fun getFinishedTasksVisibility(): Boolean =
-        preferencesHelper.getFinishedTasksVisibility()
+    override fun getDateId(date: Long): Flowable<List<Date>> =
+            database.dateDao().getDateId(date)
 
+    // List
 
-    override fun getListIdName(id: Long): Single<String> =
-            database.listIdDao().getListIdName(id)
-
-    private val TAG = "AppDataManager"
 
     override fun addListId() {
         val count = database.listIdDao().getListsCount()
@@ -46,6 +52,12 @@ class AppDataManager @Inject constructor(@ApplicationContext val context: Contex
         }.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe()
     }
+
+    override fun getLastId() : Single<ListId> =
+            database.listIdDao().getLastListId()
+
+    override fun getAllListId(): Flowable<List<ListId>> =
+            database.listIdDao().getAll()
 
     override fun updateListId(listId: ListId) {
         Single.fromCallable {
@@ -61,27 +73,14 @@ class AppDataManager @Inject constructor(@ApplicationContext val context: Contex
                 .observeOn(AndroidSchedulers.mainThread()).subscribe()
     }
 
-    override fun getAllListId(): Flowable<List<ListId>> =
-        database.listIdDao().getAll()
+    override fun getListIdName(id: Long): Single<String> =
+            database.listIdDao().getListIdName(id)
+
+
+    // Tasks
 
     override fun getAllTasks(): Flowable<List<Task>> =
         database.taskDao().getAllTasks()
-
-
-
-    override fun getLastId() : Single<ListId> =
-            database.listIdDao().getLastListId()
-
-
-
-    override fun addDate(date: Long) {
-        val _date = Date(0, date)
-
-        Single.fromCallable {
-            database.dateDao().insert(_date)
-        }.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe()
-    }
 
 
     override fun addTaskList(listId: Long, task: String) {
@@ -95,10 +94,6 @@ class AppDataManager @Inject constructor(@ApplicationContext val context: Contex
         val _task = Task(0, dateId, null, task, count)
         database.taskDao().insert(_task)
     }
-
-     override fun getDateId(date: Long): Flowable<List<Date>> =
-                database.dateDao().getDateId(date)
-
 
     override fun getTasksByDayId(date: Long): Single<List<Task>> =
             database.taskDao().getTasksByDayId(date)
@@ -132,6 +127,15 @@ class AppDataManager @Inject constructor(@ApplicationContext val context: Contex
     override fun getTasksToDo(): Single<List<Task>> =
         database.taskDao().getTasksToDo()
 
+
+    // Preferences
+
+    override fun setFinishedTasksVisibility(status: Boolean) {
+        preferencesHelper.setFinishedTasksVisibility(status)
+    }
+
+    override fun getFinishedTasksVisibility(): Boolean =
+            preferencesHelper.getFinishedTasksVisibility()
 
 
 
