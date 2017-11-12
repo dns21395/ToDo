@@ -28,6 +28,7 @@
                 app:fixPadding="true">
 
                 <ImageView
+                    android:id="@+id/toolbarBackground"
                     android:fitsSystemWindows="true"
                     android:scaleType="centerCrop"
                     app:layout_collapseMode="parallax"

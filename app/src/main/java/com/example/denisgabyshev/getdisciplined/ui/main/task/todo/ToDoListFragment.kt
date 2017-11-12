@@ -36,6 +36,7 @@ class ToDoListFragment : BaseTaskFragment(), ToDoListMvpView {
         setMenu()
 
         presenter.isTodayExist()
+        presenter.getTasksVisibility()
     }
 
     private fun setMenu() {

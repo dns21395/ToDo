@@ -1,10 +1,8 @@
 package com.example.denisgabyshev.getdisciplined.ui.main.task.base
 
 import android.support.v4.content.ContextCompat
-import android.support.v4.graphics.drawable.DrawableCompat
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import android.view.Menu
 import android.widget.FrameLayout
 import android.widget.RelativeLayout
 import com.example.denisgabyshev.getdisciplined.R
@@ -14,7 +12,7 @@ import com.example.denisgabyshev.getdisciplined.ui.main.MainActivity
 import com.example.denisgabyshev.getdisciplined.ui.main.task.add.AddFragment
 import kotlinx.android.synthetic.main.fragment_tasks_today.*
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
-import javax.inject.Inject
+import java.util.*
 
 /**
  * Created by denisgabyshev on 11/10/2017.
@@ -29,9 +27,7 @@ abstract class BaseTaskFragment: BaseFragment(), BaseTaskMvpView {
     private val TAG = "BaseTaskFragment"
 
     override fun showAddTaskView() {
-
         frameAddTask = FrameLayout(context)
-        frameAddTask?.id = 1227
         val params: RelativeLayout.LayoutParams = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT)
         params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM)
 
@@ -78,6 +74,8 @@ abstract class BaseTaskFragment: BaseFragment(), BaseTaskMvpView {
     override fun setFragment() {
         setHasOptionsMenu(true)
 
+        toolbarBackground.setImageResource(getToolbarBackground())
+
         toolbar.setNavigationIcon(R.drawable.menu)
         toolbar.setNavigationOnClickListener {
             (activity as MainActivity).openDrawer()
@@ -109,5 +107,11 @@ abstract class BaseTaskFragment: BaseFragment(), BaseTaskMvpView {
 
     private fun setIconCheck(drawable: Int) {
         toolbar.menu.getItem(0).icon = resources.getDrawable(drawable,null)
+    }
+
+    private fun getToolbarBackground(): Int {
+        val images = arrayOf(R.drawable.splash_background, R.drawable.background2, R.drawable.background3, R.drawable.background4, R.drawable.background5, R.drawable.background6, R.drawable.background7, R.drawable.background8, R.drawable.background9)
+
+        return images[Random().nextInt(images.size)]
     }
 }

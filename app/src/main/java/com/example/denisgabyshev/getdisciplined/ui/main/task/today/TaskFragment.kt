@@ -45,6 +45,7 @@ class TaskFragment : BaseTaskFragment(), TaskMvpView {
         setMenu()
 
         presenter.isTodayExist()
+        presenter.getTasksVisibility()
     }
 
     private fun setMenu() {
