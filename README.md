@@ -6,10 +6,10 @@ To-Do application written on Kotlin with RxJava and Dagger 2.
 Features
 -----
 * Today tasks list
-* ToDo list that contains today tasks and tasks added earlier<br />
+* ToDo list that contains today tasks and tasks added earlier<br /><br />
 * Change order of tasks
 * Delete task by swipe
-* Hide/Show completed tasks<br />
+* Hide/Show completed tasks<br /><br />
 * User lists
 * Remove user lists
 * Change order of user lists
