@@ -24,5 +24,5 @@ class AppPreferencesHelper @Inject constructor(@ApplicationContext val context: 
     }
 
     override fun getFinishedTasksVisibility(): Boolean =
-            prefs.getBoolean(PREF_KEY_FINISHED_TASKS_VISIBILITY, false)
+            prefs.getBoolean(PREF_KEY_FINISHED_TASKS_VISIBILITY, true)
 }

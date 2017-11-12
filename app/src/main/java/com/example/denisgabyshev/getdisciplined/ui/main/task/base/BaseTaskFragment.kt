@@ -3,6 +3,7 @@ package com.example.denisgabyshev.getdisciplined.ui.main.task.base
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import android.widget.FrameLayout
 import android.widget.RelativeLayout
 import com.example.denisgabyshev.getdisciplined.R
@@ -27,7 +28,10 @@ abstract class BaseTaskFragment: BaseFragment(), BaseTaskMvpView {
     private val TAG = "BaseTaskFragment"
 
     override fun showAddTaskView() {
+
         frameAddTask = FrameLayout(context)
+        frameAddTask?.id = View.generateViewId()
+        
         val params: RelativeLayout.LayoutParams = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT)
         params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM)
 
