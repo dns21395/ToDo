@@ -5,6 +5,7 @@ To-Do application written on Kotlin with RxJava and Dagger 2.
 
 Features
 -----
+Tasks | Task containerss
 :-------------------------:|:-------------------------:
 ![](https://raw.githubusercontent.com/dns21395/ToDo/master/ReadmeFiles/photo1.png)  |  ![](https://raw.githubusercontent.com/dns21395/ToDo/master/ReadmeFiles/photo2.png)
 
