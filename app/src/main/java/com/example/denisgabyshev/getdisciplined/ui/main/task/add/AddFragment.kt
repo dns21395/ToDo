@@ -21,7 +21,7 @@ class AddFragment : BaseFragment(), AddMvpView {
 
     @Inject lateinit var presenter: AddMvpPresenter<AddMvpView>
 
-    private val itemInserted = {(parentFragment as BaseTaskFragment).itemInserted()}
+    private val itemInserted = {(parentFragment as BaseTaskFragment).updateTasksArray()}
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

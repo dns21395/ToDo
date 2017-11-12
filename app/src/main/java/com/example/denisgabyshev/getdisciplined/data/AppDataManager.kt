@@ -95,11 +95,20 @@ class AppDataManager @Inject constructor(@ApplicationContext val context: Contex
         database.taskDao().insert(_task)
     }
 
-    override fun getTasksByDayId(date: Long): Single<List<Task>> =
-            database.taskDao().getTasksByDayId(date)
+    override fun getTasksByDayId(date: Long, status: Boolean): Single<List<Task>> = when(status) {
+        true -> database.taskDao().getTasksByDayId(date)
+        false -> database.taskDao().getTasksByDayIdStatusFalse(date)
+    }
 
-    override fun getTasksByListId(id: Long): Single<List<Task>> =
-            database.taskDao().getTasksByListId(id)
+    override fun getTasksToDo(status: Boolean): Single<List<Task>> = when(status) {
+        true ->  database.taskDao().getTasksToDo()
+        false -> database.taskDao().getTasksToDoStatusFalse()
+    }
+
+    override fun getTasksByListId(id: Long, status: Boolean): Single<List<Task>> = when(status) {
+        true -> database.taskDao().getTasksByListId(id)
+        false -> database.taskDao().getTasksByListIdStatusFalse(id)
+    }
 
     override fun updateTaskOrder(task: Task, order: Int) {
         task.taskOrder = order
@@ -124,8 +133,8 @@ class AppDataManager @Inject constructor(@ApplicationContext val context: Contex
                 .observeOn(AndroidSchedulers.mainThread()).subscribe()
     }
 
-    override fun getTasksToDo(): Single<List<Task>> =
-        database.taskDao().getTasksToDo()
+
+
 
 
     // Preferences

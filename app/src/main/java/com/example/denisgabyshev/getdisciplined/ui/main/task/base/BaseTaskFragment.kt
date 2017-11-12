@@ -101,7 +101,7 @@ abstract class BaseTaskFragment: BaseFragment(), BaseTaskMvpView {
         })
     }
 
-    abstract fun itemInserted()
+    abstract fun updateTasksArray()
 
     override fun updateTasksVisibilityIcon(visibility: Boolean) {
         if(visibility) setIconCheck(R.drawable.check_show) else setIconCheck(R.drawable.check_hide)

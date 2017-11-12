@@ -33,10 +33,24 @@ class ToDoListFragment : BaseTaskFragment(), ToDoListMvpView {
     override fun setFragment() {
         super.setFragment()
 
+        setMenu()
+
         presenter.isTodayExist()
     }
 
-    override fun itemInserted() {
+    private fun setMenu() {
+        toolbar.inflateMenu(R.menu.main)
+        toolbar.setOnMenuItemClickListener {
+            when(it.itemId) {
+                R.id.check -> {
+                    presenter.changeTaskVisibility()
+                }
+            }
+            false
+        }
+    }
+
+    override fun updateTasksArray() {
         presenter.isTodayExist()
     }
 

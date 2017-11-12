@@ -55,6 +55,10 @@ class TaskAdapter(val appBar: AppBarLayout, val recyclerView: RecyclerView, val 
         dataManager.updateTaskStatus(items[position])
 
         holder.setStatus(items[position])
+
+        if(!dataManager.getFinishedTasksVisibility()) {
+            items.removeAt(position)
+        }
     }
 
     override fun getItemCount(): Int = items.size

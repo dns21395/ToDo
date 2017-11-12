@@ -13,11 +13,11 @@ interface TaskHelper {
 
     fun addTaskToDoAndToday(dateId: Long?, task: String)
 
-    fun getTasksByDayId(date: Long): Single<List<Task>>
+    fun getTasksByDayId(date: Long, status: Boolean): Single<List<Task>>
 
-    fun getTasksByListId(id: Long): Single<List<Task>>
+    fun getTasksToDo(status: Boolean): Single<List<Task>>
 
-    fun getTasksToDo(): Single<List<Task>>
+    fun getTasksByListId(id: Long, status: Boolean): Single<List<Task>>
 
     fun getAllTasks(): Flowable<List<Task>>
 

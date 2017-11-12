@@ -47,7 +47,7 @@ class ListFragment : BaseTaskFragment(), ListMvpView {
         toolbar.title = text
     }
 
-    override fun itemInserted() {
+    override fun updateTasksArray() {
         presenter.getTasksByListId(currentListId!!.id)
     }
 
@@ -57,7 +57,6 @@ class ListFragment : BaseTaskFragment(), ListMvpView {
         setMenu()
 
         Log.d(TAG, "LIST ID : ${currentListId!!.id}")
-
 
         presenter.getListIdTitle(currentListId!!.id)
         presenter.getTasksByListId(currentListId!!.id)

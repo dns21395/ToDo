@@ -30,7 +30,7 @@ class ListPresenter<V: ListMvpView>
     }
 
     override fun getTasksByListId(id: Long) {
-        dataManager.getTasksByListId(id)
+        dataManager.getTasksByListId(id, dataManager.getFinishedTasksVisibility())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe ({

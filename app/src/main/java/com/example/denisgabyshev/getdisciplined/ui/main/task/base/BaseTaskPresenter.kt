@@ -7,11 +7,9 @@ import com.example.denisgabyshev.getdisciplined.ui.base.BasePresenter
 import com.example.denisgabyshev.getdisciplined.utils.AppUtils
 import com.example.denisgabyshev.getdisciplined.utils.rx.SchedulerProvider
 import io.reactivex.Observable
-import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import org.jetbrains.anko.doAsync
 import javax.inject.Inject
 
 /**
@@ -68,7 +66,7 @@ open class BaseTaskPresenter<V: BaseTaskMvpView> @Inject constructor(dataManager
     }
 
     override fun getTasksByDate(dateId: Long) {
-        dataManager.getTasksByDayId(dateId)
+        dataManager.getTasksByDayId(dateId, dataManager.getFinishedTasksVisibility())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe ({
@@ -83,5 +81,6 @@ open class BaseTaskPresenter<V: BaseTaskMvpView> @Inject constructor(dataManager
     override fun changeTaskVisibility() {
         dataManager.setFinishedTasksVisibility(!dataManager.getFinishedTasksVisibility())
         mvpView?.updateTasksVisibilityIcon(dataManager.getFinishedTasksVisibility())
+        (mvpView as BaseTaskFragment).updateTasksArray()
     }
 }
