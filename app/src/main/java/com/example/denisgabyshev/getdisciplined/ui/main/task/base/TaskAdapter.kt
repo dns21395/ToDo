@@ -45,19 +45,22 @@ class TaskAdapter(val appBar: AppBarLayout, val recyclerView: RecyclerView, val 
         }
 
         holder.itemView.status.setOnClickListener {
-            statusButtonClicked(holder, holder.adapterPosition)
+            statusButtonClicked(holder)
         }
     }
 
-    private fun statusButtonClicked(holder: TaskViewHolder, position: Int) {
-        items[position].status = !items[position].status
+    private fun statusButtonClicked(holder: TaskViewHolder) {
+        val adapterPosition = holder.adapterPosition
 
-        dataManager.updateTaskStatus(items[position])
+        items[adapterPosition].status = !items[adapterPosition].status
 
-        holder.setStatus(items[position])
+        dataManager.updateTaskStatus(items[adapterPosition])
+
+        holder.setStatus(items[adapterPosition])
 
         if(!dataManager.getFinishedTasksVisibility()) {
-            items.removeAt(position)
+            items.removeAt(adapterPosition)
+            notifyItemRemoved(adapterPosition)
         }
     }
 
