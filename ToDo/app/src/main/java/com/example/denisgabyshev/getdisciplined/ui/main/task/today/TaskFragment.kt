@@ -42,10 +42,10 @@ class TaskFragment : BaseTaskFragment(), TaskMvpView {
     override fun setFragment() {
         super.setFragment()
 
-        setMenu()
+        //setMenu()
+        //presenter.getTasksVisibility()
 
         presenter.isTodayExist()
-        presenter.getTasksVisibility()
     }
 
     private fun setMenu() {
@@ -56,7 +56,7 @@ class TaskFragment : BaseTaskFragment(), TaskMvpView {
                     presenter.changeTaskVisibility()
                 }
             }
-            false
+            true
         }
     }
 
