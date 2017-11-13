@@ -2,12 +2,13 @@ package com.example.denisgabyshev.getdisciplined.ui.main.task.list
 
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import com.example.denisgabyshev.getdisciplined.R
 import com.example.denisgabyshev.getdisciplined.ui.main.MainActivity
 import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskFragment
-import kotlinx.android.synthetic.main.fragment_tasks_todo.*
+import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskMvpView
+import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskPresenter
+import kotlinx.android.synthetic.main.fragment_tasks.*
 import javax.inject.Inject
 
 /**
@@ -25,6 +26,9 @@ class ListFragment : BaseTaskFragment(), ListMvpView {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        setMenu()
+
         activity.activityComponent.inject(this)
         presenter.onAttach(this)
 
@@ -33,14 +37,13 @@ class ListFragment : BaseTaskFragment(), ListMvpView {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            inflater.inflate(R.layout.fragment_tasks_todo, container, false)
+            inflater.inflate(R.layout.fragment_tasks, container, false)
 
 
 
     override fun setToolbar(title: Long) {
 
     }
-
 
 
     override fun setToolbar(text: String) {
@@ -51,16 +54,11 @@ class ListFragment : BaseTaskFragment(), ListMvpView {
         presenter.getTasksByListId(currentListId!!.id)
     }
 
-    override fun setFragment() {
-        super.setFragment()
+    override fun <V : BaseTaskMvpView> setFragment(presenter: BaseTaskPresenter<V>) {
+        super.setFragment(presenter)
 
-        setMenu()
-
-        Log.d(TAG, "LIST ID : ${currentListId!!.id}")
-
-        presenter.getListIdTitle(currentListId!!.id)
-        presenter.getTasksByListId(currentListId!!.id)
-        presenter.getTasksVisibility()
+        this.presenter.getListIdTitle(currentListId!!.id)
+        this.presenter.getTasksByListId(currentListId!!.id)
     }
 
     private fun setMenu() {

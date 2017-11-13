@@ -21,10 +21,10 @@ class TaskPresenter<V : TaskMvpView> @Inject constructor(dataManager: DataManage
 
     override fun onAttach(mvpView: V) {
         super.onAttach(mvpView)
-        mvpView.setFragment()
+        mvpView.setFragment(this)
     }
 
-    override fun getTasksByDate(dateId: Long) {
+    override fun getTasks(dateId: Long) {
         dataManager.getTasksByDayId(dateId, dataManager.getFinishedTasksVisibility())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

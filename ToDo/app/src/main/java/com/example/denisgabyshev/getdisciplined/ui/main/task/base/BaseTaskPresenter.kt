@@ -59,12 +59,12 @@ open class BaseTaskPresenter<V: BaseTaskMvpView> @Inject constructor(dataManager
                         val dateId = it[0].id
                         mvpView?.setToolbar(date)
                         todayId = dateId
-                        getTasksByDate(dateId)
+                        getTasks(dateId)
                     }
                 }
     }
 
-    override fun getTasksByDate(dateId: Long) {
+    override fun getTasks(dateId: Long) {
         dataManager.getTasksByDayId(dateId, dataManager.getFinishedTasksVisibility())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

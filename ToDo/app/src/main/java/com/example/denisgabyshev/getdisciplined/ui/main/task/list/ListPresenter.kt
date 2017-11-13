@@ -26,7 +26,7 @@ class ListPresenter<V: ListMvpView>
 
     override fun onAttach(mvpView: V) {
         super.onAttach(mvpView)
-        mvpView.setFragment()
+        mvpView.setFragment(this)
     }
 
     override fun getTasksByListId(id: Long) {

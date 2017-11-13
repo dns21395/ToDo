@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.*
 import com.example.denisgabyshev.getdisciplined.R
 import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskFragment
-import kotlinx.android.synthetic.main.fragment_tasks_todo.*
+import kotlinx.android.synthetic.main.fragment_tasks.*
 import javax.inject.Inject
 
 /**
@@ -17,6 +17,9 @@ class TaskFragment : BaseTaskFragment(), TaskMvpView {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setMenu()
+
         activity.activityComponent.inject(this)
         presenter.onAttach(this)
     }
@@ -26,17 +29,7 @@ class TaskFragment : BaseTaskFragment(), TaskMvpView {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?  =
-        inflater.inflate(R.layout.fragment_tasks_todo, container, false)
-
-
-    override fun setFragment() {
-        super.setFragment()
-
-        setMenu()
-
-        presenter.isTodayExist()
-        presenter.getTasksVisibility()
-    }
+        inflater.inflate(R.layout.fragment_tasks, container, false)
 
 
     private fun setMenu() {

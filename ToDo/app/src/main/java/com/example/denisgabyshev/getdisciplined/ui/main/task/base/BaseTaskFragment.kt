@@ -11,7 +11,7 @@ import com.example.denisgabyshev.getdisciplined.data.db.model.Task
 import com.example.denisgabyshev.getdisciplined.ui.base.BaseFragment
 import com.example.denisgabyshev.getdisciplined.ui.main.MainActivity
 import com.example.denisgabyshev.getdisciplined.ui.main.task.add.AddFragment
-import kotlinx.android.synthetic.main.fragment_tasks_todo.*
+import kotlinx.android.synthetic.main.fragment_tasks.*
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 import java.util.*
 
@@ -75,7 +75,7 @@ abstract class BaseTaskFragment: BaseFragment(), BaseTaskMvpView {
         adapter?.setArray(array)
     }
 
-    override fun setFragment() {
+    override fun <V : BaseTaskMvpView> setFragment(presenter: BaseTaskPresenter<V>) {
         setHasOptionsMenu(true)
 
         toolbarBackground.setImageResource(getToolbarBackground())
@@ -101,7 +101,38 @@ abstract class BaseTaskFragment: BaseFragment(), BaseTaskMvpView {
         KeyboardVisibilityEvent.setEventListener(activity, {
             if(!it && frameAddTask != null) hideAddTaskView()
         })
+
+        presenter.isTodayExist()
+        presenter.getTasksVisibility()
     }
+
+//    override fun setFragment() {
+//        setHasOptionsMenu(true)
+//
+//        toolbarBackground.setImageResource(getToolbarBackground())
+//
+//        toolbar.setNavigationIcon(R.drawable.menu)
+//        toolbar.setNavigationOnClickListener {
+//            (activity as MainActivity).openDrawer()
+//        }
+//
+//        taskList.layoutManager = layoutManager
+//        adapter = TaskAdapter(appBar, taskList, context.applicationContext)
+//        taskList.adapter = adapter
+//
+//        val itemDecoration = DividerItemDecoration(taskList.context, layoutManager.orientation)
+//        itemDecoration.setDrawable(ContextCompat.getDrawable(context, R.drawable.divider))
+//        taskList.addItemDecoration(itemDecoration)
+//
+//        fab.setOnClickListener {
+//            showAddTaskView()
+//            fab.hide()
+//        }
+//
+//        KeyboardVisibilityEvent.setEventListener(activity, {
+//            if(!it && frameAddTask != null) hideAddTaskView()
+//        })
+//    }
 
     abstract fun updateTasksArray()
 

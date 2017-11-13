@@ -10,7 +10,7 @@ interface BaseTaskMvpPresenter<V: BaseTaskMvpView> : MvpPresenter<V> {
 
     fun isTodayExist()
 
-    fun getTasksByDate(dateId: Long)
+    fun getTasks(dateId: Long)
 
     fun getTasksVisibility()
 

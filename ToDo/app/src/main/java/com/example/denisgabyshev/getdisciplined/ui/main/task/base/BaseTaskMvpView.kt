@@ -15,7 +15,7 @@ interface BaseTaskMvpView : MvpView {
 
     fun setToolbar(title: Long)
 
-    fun setFragment()
+    fun <V: BaseTaskMvpView> setFragment(presenter: BaseTaskPresenter<V>)
 
     fun updateTasksVisibilityIcon(visibility: Boolean)
 }
