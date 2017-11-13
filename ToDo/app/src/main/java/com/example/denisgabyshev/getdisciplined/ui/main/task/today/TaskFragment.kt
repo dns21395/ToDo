@@ -1,20 +1,10 @@
 package com.example.denisgabyshev.getdisciplined.ui.main.task.today
 
-import android.graphics.Rect
 import android.os.Bundle
-import android.support.design.widget.AppBarLayout
-import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.*
 import com.example.denisgabyshev.getdisciplined.R
-import com.example.denisgabyshev.getdisciplined.ui.main.MainActivity
-import com.example.denisgabyshev.getdisciplined.ui.main.MainMvpPresenter
-import com.example.denisgabyshev.getdisciplined.ui.main.MainMvpView
 import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskFragment
-import com.example.denisgabyshev.getdisciplined.utils.AppUtils
-import kotlinx.android.synthetic.main.fragment_tasks_today.*
-import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
-import org.jetbrains.anko.appcompat.v7.coroutines.onMenuItemClick
+import kotlinx.android.synthetic.main.fragment_tasks_todo.*
 import javax.inject.Inject
 
 /**
@@ -32,21 +22,22 @@ class TaskFragment : BaseTaskFragment(), TaskMvpView {
     }
 
     override fun setToolbar(title: Long) {
-        collapseToolbar.title = resources.getString(R.string.myday)
-        collapseToolbar.subtitle = AppUtils.makeDate(title)
+        toolbar.title = resources.getString(R.string.myday)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            inflater.inflate(R.layout.fragment_tasks_today, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?  =
+        inflater.inflate(R.layout.fragment_tasks_todo, container, false)
+
 
     override fun setFragment() {
         super.setFragment()
 
-        //setMenu()
-        //presenter.getTasksVisibility()
+        setMenu()
 
         presenter.isTodayExist()
+        presenter.getTasksVisibility()
     }
+
 
     private fun setMenu() {
         toolbar.inflateMenu(R.menu.main)
@@ -56,7 +47,7 @@ class TaskFragment : BaseTaskFragment(), TaskMvpView {
                     presenter.changeTaskVisibility()
                 }
             }
-            true
+            false
         }
     }
 

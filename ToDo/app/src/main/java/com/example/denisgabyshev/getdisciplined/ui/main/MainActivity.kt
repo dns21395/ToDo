@@ -47,7 +47,6 @@ class MainActivity : BaseActivity(), MainMvpView, ListAdapter.Callback {
     override fun setTaskFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().replace(R.id.frameLayout, fragment).commit()
         closeDrawer()
-        
     }
 
     override fun setUp() {

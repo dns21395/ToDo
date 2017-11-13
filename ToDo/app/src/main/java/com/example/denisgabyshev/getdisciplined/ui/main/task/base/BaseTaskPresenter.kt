@@ -57,7 +57,6 @@ open class BaseTaskPresenter<V: BaseTaskMvpView> @Inject constructor(dataManager
                     if(it.isNotEmpty()) {
                         val date = it[0].date
                         val dateId = it[0].id
-
                         mvpView?.setToolbar(date)
                         todayId = dateId
                         getTasksByDate(dateId)

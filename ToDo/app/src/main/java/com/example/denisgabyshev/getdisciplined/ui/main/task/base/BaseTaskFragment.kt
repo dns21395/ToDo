@@ -11,7 +11,7 @@ import com.example.denisgabyshev.getdisciplined.data.db.model.Task
 import com.example.denisgabyshev.getdisciplined.ui.base.BaseFragment
 import com.example.denisgabyshev.getdisciplined.ui.main.MainActivity
 import com.example.denisgabyshev.getdisciplined.ui.main.task.add.AddFragment
-import kotlinx.android.synthetic.main.fragment_tasks_today.*
+import kotlinx.android.synthetic.main.fragment_tasks_todo.*
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 import java.util.*
 

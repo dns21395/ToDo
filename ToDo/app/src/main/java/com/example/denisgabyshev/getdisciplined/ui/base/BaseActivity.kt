@@ -23,7 +23,6 @@ import com.example.denisgabyshev.getdisciplined.di.module.ActivityModule
 import com.example.denisgabyshev.getdisciplined.utils.KeyboardUtils
 import com.example.denisgabyshev.getdisciplined.utils.app
 import com.readystatesoftware.systembartint.SystemBarTintManager
-import kotlinx.android.synthetic.main.fragment_tasks_today.*
 import org.jetbrains.anko.toast
 
 /**
