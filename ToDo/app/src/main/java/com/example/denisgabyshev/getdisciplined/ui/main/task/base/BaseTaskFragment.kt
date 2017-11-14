@@ -106,6 +106,10 @@ abstract class BaseTaskFragment: BaseFragment(), BaseTaskMvpView {
         presenter.getTasksVisibility()
     }
 
+    override fun setToolbar(title: String) {
+        toolbar.title = title
+    }
+
     abstract fun updateTasksArray()
 
     override fun updateTasksVisibilityIcon(visibility: Boolean) {

@@ -53,9 +53,7 @@ open class BaseTaskPresenter<V: BaseTaskMvpView> @Inject constructor(dataManager
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext {
                     if(it.isNotEmpty()) {
-                        val date = it[0].date
                         val dateId = it[0].id
-                        mvpView?.setToolbar(date)
                         todayId = dateId
                         getTasks(dateId)
                     }

@@ -16,7 +16,6 @@ import javax.inject.Inject
  */
 class ListFragment : BaseTaskFragment(), ListMvpView {
 
-
     private val TAG = "ListFragment"
 
     private lateinit var mainActivity: MainActivity
@@ -25,7 +24,6 @@ class ListFragment : BaseTaskFragment(), ListMvpView {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         setMenu()
 
@@ -38,12 +36,6 @@ class ListFragment : BaseTaskFragment(), ListMvpView {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.fragment_tasks, container, false)
-
-
-
-    override fun setToolbar(title: Long) {
-
-    }
 
 
     override fun setToolbar(text: String) {
@@ -75,8 +67,6 @@ class ListFragment : BaseTaskFragment(), ListMvpView {
             false
         }
     }
-
-
 
     override fun deleteList() {
         mainActivity.clickedTodayOrToDoItem(0)

@@ -6,7 +6,5 @@ import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskMvpVie
  * Created by denisgabyshev on 03/11/2017.
  */
 interface ListMvpView : BaseTaskMvpView {
-    fun setToolbar(text: String)
-
     fun deleteList()
 }

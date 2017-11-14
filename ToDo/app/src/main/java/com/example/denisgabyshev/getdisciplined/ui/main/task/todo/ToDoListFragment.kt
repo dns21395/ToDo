@@ -26,15 +26,8 @@ class ToDoListFragment : BaseTaskFragment(), ToDoListMvpView {
         presenter.onAttach(this)
     }
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.fragment_tasks, container, false)
-
-    override fun setToolbar(title: Long) {
-        toolbar.title = resources.getString(R.string.todo)
-    }
-
-
 
     private fun setMenu() {
         toolbar.inflateMenu(R.menu.main)
@@ -49,11 +42,11 @@ class ToDoListFragment : BaseTaskFragment(), ToDoListMvpView {
     }
 
     override fun <V : BaseTaskMvpView> setFragment(presenter: BaseTaskPresenter<V>) {
+        setToolbar(resources.getString(R.string.todo))
         super.setFragment(presenter)
 
         presenter.isTodayExist()
     }
-
 
     override fun updateTasksArray() {
         presenter.isTodayExist()

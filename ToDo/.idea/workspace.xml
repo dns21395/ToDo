@@ -65,8 +65,8 @@
       <file leaf-file-name="BaseTaskFragment.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/base/BaseTaskFragment.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="383">
-              <caret line="108" column="31" lean-forward="false" selection-start-line="108" selection-start-column="17" selection-end-line="108" selection-end-column="31" />
+            <state relative-caret-position="350">
+              <caret line="109" column="29" lean-forward="false" selection-start-line="109" selection-start-column="29" selection-end-line="109" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -75,49 +75,23 @@
       <file leaf-file-name="ToDoListFragment.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/todo/ToDoListFragment.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="48" column="5" lean-forward="false" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="5" />
-              <folding />
+            <state relative-caret-position="424">
+              <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+              <folding>
+                <element signature="e#1555#1589#1" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TaskPresenter.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/today/TaskPresenter.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="28" column="35" lean-forward="false" selection-start-line="28" selection-start-column="35" selection-end-line="28" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TaskFragment.kt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TaskFragment.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/today/TaskFragment.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="494">
-              <caret line="57" column="27" lean-forward="false" selection-start-line="57" selection-start-column="27" selection-end-line="57" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AppDataManager.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/data/AppDataManager.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="92" column="0" lean-forward="false" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ListPresenter.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/list/ListPresenter.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="154">
+              <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+              <folding>
+                <element signature="e#1559#1594#1" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -125,8 +99,8 @@
       <file leaf-file-name="ListFragment.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/list/ListFragment.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="512">
-              <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
+            <state relative-caret-position="-269">
+              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -135,8 +109,38 @@
       <file leaf-file-name="BaseTaskPresenter.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/base/BaseTaskPresenter.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="534">
-              <caret line="66" column="17" lean-forward="false" selection-start-line="66" selection-start-column="17" selection-end-line="66" selection-end-column="17" />
+            <state relative-caret-position="97">
+              <caret line="54" column="41" lean-forward="false" selection-start-line="54" selection-start-column="41" selection-end-line="54" selection-end-column="41" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ListMvpView.kt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/list/ListMvpView.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="7" column="41" lean-forward="false" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BaseTaskMvpPresenter.kt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/base/BaseTaskMvpPresenter.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="10" column="8" lean-forward="false" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BaseTaskMvpView.kt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/base/BaseTaskMvpView.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="15" column="8" lean-forward="false" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -175,6 +179,7 @@
       <find>override fun getTasksByDayId\(date\: Long\, status\: Boolean\)\: Single\&lt;List\&lt;Task\&gt;\&gt; \= when\(status\) \{\n        true \-\&gt; database\.taskDao\(\)\.getTasksByDayId\(date\)\n        false \-\&gt; database\.taskDao\(\)\.getTasksByDayIdStatusFalse\(date\)\n    \}</find>
       <find>getDateId</find>
       <find>itemInserted</find>
+      <find>setTool</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/di</dir>
@@ -2056,13 +2061,8 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_tasks_today.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/MainActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/base/BaseTaskMvpPresenter.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/base/BaseTaskMvpView.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/todo/ToDoListPresenter.kt" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/todo/ToDoListFragment.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/base/BaseTaskFragment.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/list/ListFragment.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/today/TaskFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/MainPresenter.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/list/ListPresenter.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/base/BaseActivity.kt" />
@@ -2070,8 +2070,14 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/data/db/helpers/DateHelper.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/data/AppDataManager.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/add/AddPresenter.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/base/BaseTaskPresenter.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/today/TaskPresenter.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/base/BaseTaskMvpView.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/base/BaseTaskFragment.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/today/TaskFragment.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/todo/ToDoListFragment.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/list/ListFragment.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/base/BaseTaskPresenter.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/list/ListMvpView.kt" />
       </list>
     </option>
   </component>
@@ -2643,7 +2649,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510668810155" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510672379009" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2691,7 +2697,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510668810155" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510672379009" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2853,7 +2859,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510668810156" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510672379010" />
       </method>
     </configuration>
     <list size="1">
@@ -2906,7 +2912,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32957748" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.57323945" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.08028169" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -2936,13 +2942,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/utils/KeyboardUtils.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="11" column="6" lean-forward="false" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/utils/Extensions.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -3019,13 +3018,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/base/BaseTaskMvpView.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="27" lean-forward="false" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_tasks.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
@@ -3035,13 +3027,6 @@
       </provider>
       <provider editor-type-id="android-designer2">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/base/BaseTaskMvpPresenter.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="8" lean-forward="false" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/data/db/helpers/TaskHelper.kt">
@@ -3268,14 +3253,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/base/BaseTaskFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="108" column="31" lean-forward="false" selection-start-line="108" selection-start-column="17" selection-end-line="108" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/list/ListPresenter.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -3288,30 +3265,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="28" column="35" lean-forward="false" selection-start-line="28" selection-start-column="35" selection-end-line="28" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/list/ListFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="512">
-          <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/todo/ToDoListFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="48" column="5" lean-forward="false" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/base/BaseTaskPresenter.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="534">
-          <caret line="66" column="17" lean-forward="false" selection-start-line="66" selection-start-column="17" selection-end-line="66" selection-end-column="17" />
           <folding />
         </state>
       </provider>
@@ -3332,10 +3285,70 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/base/BaseTaskMvpPresenter.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="8" lean-forward="false" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/base/BaseTaskMvpView.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="15" column="8" lean-forward="false" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/base/BaseTaskFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="109" column="29" lean-forward="false" selection-start-line="109" selection-start-column="29" selection-end-line="109" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/today/TaskFragment.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="57" column="27" lean-forward="false" selection-start-line="57" selection-start-column="27" selection-end-line="57" selection-end-column="27" />
+        <state relative-caret-position="154">
+          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding>
+            <element signature="e#1559#1594#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/todo/ToDoListFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="424">
+          <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+          <folding>
+            <element signature="e#1555#1589#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/list/ListFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-269">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/base/BaseTaskPresenter.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="97">
+          <caret line="54" column="41" lean-forward="false" selection-start-line="54" selection-start-column="41" selection-end-line="54" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/denisgabyshev/getdisciplined/ui/main/task/list/ListMvpView.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="41" lean-forward="false" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
           <folding />
         </state>
       </provider>

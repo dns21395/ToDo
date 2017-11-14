@@ -27,10 +27,6 @@ class TaskFragment : BaseTaskFragment(), TaskMvpView {
         presenter.onAttach(this)
     }
 
-    override fun setToolbar(title: Long) {
-        toolbar.title = resources.getString(R.string.myday)
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?  =
         inflater.inflate(R.layout.fragment_tasks, container, false)
 
@@ -48,6 +44,7 @@ class TaskFragment : BaseTaskFragment(), TaskMvpView {
     }
 
     override fun <V : BaseTaskMvpView> setFragment(presenter: BaseTaskPresenter<V>) {
+        setToolbar(resources.getString(R.string.myday))
         super.setFragment(presenter)
 
         presenter.isTodayExist()
