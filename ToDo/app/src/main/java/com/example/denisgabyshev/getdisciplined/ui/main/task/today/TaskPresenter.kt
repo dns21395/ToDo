@@ -26,6 +26,7 @@ class TaskPresenter<V : TaskMvpView> @Inject constructor(dataManager: DataManage
     }
 
     override fun getTasks(dateId: Long) {
+        Log.d(TAG, "TODAY GET TASKS")
         dataManager.getTasksByDayId(dateId, dataManager.getFinishedTasksVisibility())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
