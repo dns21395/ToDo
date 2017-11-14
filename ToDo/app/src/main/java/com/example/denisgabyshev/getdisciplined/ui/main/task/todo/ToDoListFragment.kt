@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.*
 import com.example.denisgabyshev.getdisciplined.R
 import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskFragment
+import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskMvpView
+import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskPresenter
 import kotlinx.android.synthetic.main.fragment_tasks.*
 import javax.inject.Inject
 
@@ -45,6 +47,13 @@ class ToDoListFragment : BaseTaskFragment(), ToDoListMvpView {
             false
         }
     }
+
+    override fun <V : BaseTaskMvpView> setFragment(presenter: BaseTaskPresenter<V>) {
+        super.setFragment(presenter)
+
+        presenter.isTodayExist()
+    }
+
 
     override fun updateTasksArray() {
         presenter.isTodayExist()

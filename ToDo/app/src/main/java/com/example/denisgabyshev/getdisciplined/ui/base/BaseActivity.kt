@@ -16,6 +16,7 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.denisgabyshev.getdisciplined.R
 import com.example.denisgabyshev.getdisciplined.data.db.model.ListId
 import com.example.denisgabyshev.getdisciplined.di.component.ActivityComponent
 import com.example.denisgabyshev.getdisciplined.di.component.DaggerActivityComponent
@@ -24,6 +25,7 @@ import com.example.denisgabyshev.getdisciplined.utils.KeyboardUtils
 import com.example.denisgabyshev.getdisciplined.utils.app
 import com.readystatesoftware.systembartint.SystemBarTintManager
 import org.jetbrains.anko.toast
+import java.util.*
 
 /**
  * Created by denisgabyshev on 10/09/2017.
@@ -37,7 +39,9 @@ abstract class BaseActivity : AppCompatActivity(), MvpView {
                 .build()
     }
 
+
     var currentListId: ListId? = null
+    val backgroundToolbar = getToolbarBackground()
 
 
     override fun showToast(message: String) {
@@ -76,6 +80,12 @@ abstract class BaseActivity : AppCompatActivity(), MvpView {
             result = resources.getDimensionPixelSize(resourceId)
         }
         return result
+    }
+
+    private fun getToolbarBackground(): Int {
+        val images = arrayOf(R.drawable.splash_background, R.drawable.background2, R.drawable.background3, R.drawable.background4, R.drawable.background5, R.drawable.background6, R.drawable.background7, R.drawable.background8, R.drawable.background9)
+
+        return images[Random().nextInt(images.size)]
     }
 
 

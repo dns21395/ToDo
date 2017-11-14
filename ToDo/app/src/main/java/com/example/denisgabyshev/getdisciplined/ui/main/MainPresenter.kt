@@ -25,13 +25,13 @@ constructor(dataManager: DataManager,
 
     override fun onAttach(mvpView: V) {
         super.onAttach(mvpView)
-
         mvpView.setTaskFragment(TaskFragment())
 
         dataManager.getAllTasks()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
+                    Log.d(TAG, "DB UPDATED!")
                     for(item in it) {
                         Log.d(TAG, "$item")
                     }

@@ -16,7 +16,7 @@ interface DateDao {
     fun getAllDate(): Flowable<List<Date>>
 
     @Query("SELECT id, date FROM date WHERE date = :mDate LIMIT 1")
-    fun getDateId(mDate: Long): Flowable<List<Date>>
+    fun getDateId(mDate: Long): List<Date>
 
     @Insert
     fun insert(date: Date)

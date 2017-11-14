@@ -36,7 +36,7 @@ class AppDataManager @Inject constructor(@ApplicationContext val context: Contex
                 .observeOn(AndroidSchedulers.mainThread()).subscribe()
     }
 
-    override fun getDateId(date: Long): Flowable<List<Date>> =
+    override fun getDateId(date: Long):  List<Date> =
             database.dateDao().getDateId(date)
 
     // List

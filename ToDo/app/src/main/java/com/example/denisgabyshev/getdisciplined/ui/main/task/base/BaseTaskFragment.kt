@@ -78,7 +78,7 @@ abstract class BaseTaskFragment: BaseFragment(), BaseTaskMvpView {
     override fun <V : BaseTaskMvpView> setFragment(presenter: BaseTaskPresenter<V>) {
         setHasOptionsMenu(true)
 
-        toolbarBackground.setImageResource(getToolbarBackground())
+        toolbarBackground.setImageResource(activity.backgroundToolbar)
 
         toolbar.setNavigationIcon(R.drawable.menu)
         toolbar.setNavigationOnClickListener {
@@ -102,37 +102,9 @@ abstract class BaseTaskFragment: BaseFragment(), BaseTaskMvpView {
             if(!it && frameAddTask != null) hideAddTaskView()
         })
 
-        presenter.isTodayExist()
+
         presenter.getTasksVisibility()
     }
-
-//    override fun setFragment() {
-//        setHasOptionsMenu(true)
-//
-//        toolbarBackground.setImageResource(getToolbarBackground())
-//
-//        toolbar.setNavigationIcon(R.drawable.menu)
-//        toolbar.setNavigationOnClickListener {
-//            (activity as MainActivity).openDrawer()
-//        }
-//
-//        taskList.layoutManager = layoutManager
-//        adapter = TaskAdapter(appBar, taskList, context.applicationContext)
-//        taskList.adapter = adapter
-//
-//        val itemDecoration = DividerItemDecoration(taskList.context, layoutManager.orientation)
-//        itemDecoration.setDrawable(ContextCompat.getDrawable(context, R.drawable.divider))
-//        taskList.addItemDecoration(itemDecoration)
-//
-//        fab.setOnClickListener {
-//            showAddTaskView()
-//            fab.hide()
-//        }
-//
-//        KeyboardVisibilityEvent.setEventListener(activity, {
-//            if(!it && frameAddTask != null) hideAddTaskView()
-//        })
-//    }
 
     abstract fun updateTasksArray()
 
@@ -144,9 +116,5 @@ abstract class BaseTaskFragment: BaseFragment(), BaseTaskMvpView {
         toolbar.menu.getItem(0).icon = resources.getDrawable(drawable,null)
     }
 
-    private fun getToolbarBackground(): Int {
-        val images = arrayOf(R.drawable.splash_background, R.drawable.background2, R.drawable.background3, R.drawable.background4, R.drawable.background5, R.drawable.background6, R.drawable.background7, R.drawable.background8, R.drawable.background9)
 
-        return images[Random().nextInt(images.size)]
-    }
 }

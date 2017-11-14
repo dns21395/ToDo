@@ -76,6 +76,8 @@ class ListFragment : BaseTaskFragment(), ListMvpView {
         }
     }
 
+
+
     override fun deleteList() {
         mainActivity.clickedTodayOrToDoItem(0)
     }

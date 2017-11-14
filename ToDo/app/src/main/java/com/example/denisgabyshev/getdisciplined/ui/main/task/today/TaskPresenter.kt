@@ -1,5 +1,6 @@
 package com.example.denisgabyshev.getdisciplined.ui.main.task.today
 
+import android.util.Log
 import com.example.denisgabyshev.getdisciplined.data.DataManager
 import com.example.denisgabyshev.getdisciplined.data.db.model.Task
 import com.example.denisgabyshev.getdisciplined.ui.main.task.base.BaseTaskPresenter
@@ -29,6 +30,7 @@ class TaskPresenter<V : TaskMvpView> @Inject constructor(dataManager: DataManage
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe ({
+                    Log.d(TAG, "TASKS : $it")
                     mvpView?.updateTasksList(it as ArrayList<Task>)
                 }, Throwable::printStackTrace)
     }

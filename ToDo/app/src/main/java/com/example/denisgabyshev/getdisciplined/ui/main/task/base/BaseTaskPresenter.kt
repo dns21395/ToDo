@@ -7,9 +7,11 @@ import com.example.denisgabyshev.getdisciplined.ui.base.BasePresenter
 import com.example.denisgabyshev.getdisciplined.utils.AppUtils
 import com.example.denisgabyshev.getdisciplined.utils.rx.SchedulerProvider
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.experimental.channels.actor
 import javax.inject.Inject
 
 /**
@@ -38,23 +40,13 @@ open class BaseTaskPresenter<V: BaseTaskMvpView> @Inject constructor(dataManager
 
 
     override fun isTodayExist() {
-        Log.d(TAG, "IS TODAY EXIST")
-
-        dataManager.getDateId(AppUtils.getToday())
+        val getTask = Observable.fromCallable { dataManager . getDateId (AppUtils.getToday()) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-            if(it.isEmpty()) {
-                insertToday()
-            }
-        }
-
-        dataManager.getDateId(AppUtils.getToday())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    Log.d(TAG, "$it")
+                .doOnNext {
+                    Log.d(TAG, "GET TASK : $it\nIS NOT EMPTY : ${it.isNotEmpty()}")
                     if(it.isNotEmpty()) {
+                        Log.d(TAG, "set toolbar etc")
                         val date = it[0].date
                         val dateId = it[0].id
                         mvpView?.setToolbar(date)
@@ -62,6 +54,16 @@ open class BaseTaskPresenter<V: BaseTaskMvpView> @Inject constructor(dataManager
                         getTasks(dateId)
                     }
                 }
+
+        val isTodayExist = Observable.fromCallable { dataManager.getDateId(AppUtils.getToday()) }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext {
+                    Log.d(TAG, "IS TODDAY EXIST $it\nIS EMPTY : ${it.isEmpty()}")
+                    if (it.isEmpty()) insertToday()
+                }
+
+        Observable.merge(isTodayExist, getTask).subscribe()
     }
 
     override fun getTasks(dateId: Long) {

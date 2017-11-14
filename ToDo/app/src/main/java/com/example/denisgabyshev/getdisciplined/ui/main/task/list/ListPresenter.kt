@@ -20,8 +20,6 @@ class ListPresenter<V: ListMvpView>
                         compositeDisposable: CompositeDisposable) :
     BaseTaskPresenter<V>(dataManager, schedulerProvider, compositeDisposable), ListMvpPresenter<V> {
 
-
-
     private val TAG = "ListPresenter"
 
     override fun onAttach(mvpView: V) {

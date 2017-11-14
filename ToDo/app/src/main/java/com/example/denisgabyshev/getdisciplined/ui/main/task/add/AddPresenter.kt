@@ -3,9 +3,12 @@ package com.example.denisgabyshev.getdisciplined.ui.main.task.add
 import android.util.Log
 import com.example.denisgabyshev.getdisciplined.R
 import com.example.denisgabyshev.getdisciplined.data.DataManager
+import com.example.denisgabyshev.getdisciplined.data.db.model.Date
 import com.example.denisgabyshev.getdisciplined.ui.base.BasePresenter
 import com.example.denisgabyshev.getdisciplined.utils.AppUtils
 import com.example.denisgabyshev.getdisciplined.utils.rx.SchedulerProvider
+import io.reactivex.Flowable
+import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -31,18 +34,21 @@ class AddPresenter<V: AddMvpView> @Inject
     }
 
     override fun addTaskToday(taskText: String, operation: () -> Unit) {
-        Single.fromCallable {
-            dataManager.getDateId(AppUtils.getToday()).subscribe { dateId ->
-                dataManager.addTaskToDoAndToday(dateId[0].id, taskText.trim())
-            }
+        Observable.fromCallable {
+            dataManager.getDateId(AppUtils.getToday())
         }.subscribeOn(Schedulers.io())
-                .subscribe ({operation()}, Throwable::printStackTrace)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        {dataManager.addTaskToDoAndToday(it[0].id, taskText.trim())},
+                        Throwable::printStackTrace,
+                        {operation()})
     }
 
     override fun addTaskToDo(taskText: String, operation: () -> Unit) {
         Single.fromCallable {
             dataManager.addTaskToDoAndToday(null, taskText.trim())
         }.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe ({operation()}, Throwable::printStackTrace)
 
     }
@@ -51,6 +57,7 @@ class AddPresenter<V: AddMvpView> @Inject
         Single.fromCallable {
             dataManager.addTaskList(listId, taskText.trim())
         }.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe ({operation()}, Throwable::printStackTrace)
     }
 
