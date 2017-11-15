@@ -17,6 +17,8 @@ Features
 * List "To Do" shows previous days and tasks of current day.<br />
 * User lists not related with "My Day" and "To Do" lists.<br /><br />
 
+Virtual emulator can produces this bug : [a link](https://stackoverflow.com/questions/40084753/why-collapsing-toolbar-title-is-under-toolbar)<br /><br />
+
 Tasks | Task containers
 :-------------------------:|:-------------------------:
 ![](https://raw.githubusercontent.com/dns21395/ToDo/master/ReadmeFiles/photo1.png)  |  ![](https://raw.githubusercontent.com/dns21395/ToDo/master/ReadmeFiles/photo2.png)
