@@ -29,23 +29,13 @@ open class BaseTaskPresenter<V: BaseTaskMvpView> @Inject constructor(dataManager
 
     var todayId: Long = 0
 
-
-    override fun insertToday() {
-        Observable.just(AppUtils.getToday())
-                .observeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    dataManager.addDate(it)
-                }
-    }
-
-
     override fun isTodayExist() {
         val isTodayExist = Observable.fromCallable { dataManager.getDateId(AppUtils.getToday()) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext {
-                    if (it.isEmpty()) insertToday()
+                    Log.d(TAG, "CHECK : $it")
+                    if (it.isEmpty()) dataManager.addDate(AppUtils.getToday())
                 }
 
         val getTask = Observable.fromCallable { dataManager . getDateId (AppUtils.getToday()) }
@@ -53,6 +43,7 @@ open class BaseTaskPresenter<V: BaseTaskMvpView> @Inject constructor(dataManager
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext {
                     if(it.isNotEmpty()) {
+                        Log.d(TAG, "DATE : $it")
                         val dateId = it[0].id
                         todayId = dateId
                         getTasks(dateId)

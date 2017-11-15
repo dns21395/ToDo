@@ -31,7 +31,7 @@ class TaskPresenter<V : TaskMvpView> @Inject constructor(dataManager: DataManage
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe ({
-                    Log.d(TAG, "TASKS : $it")
+                    Log.d(TAG, "TASKS : $it / status : ${dataManager.getFinishedTasksVisibility()}")
                     mvpView?.updateTasksList(it as ArrayList<Task>)
                 }, Throwable::printStackTrace)
     }

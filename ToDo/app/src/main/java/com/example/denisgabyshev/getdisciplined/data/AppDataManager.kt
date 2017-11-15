@@ -30,10 +30,10 @@ class AppDataManager @Inject constructor(@ApplicationContext val context: Contex
     override fun addDate(date: Long) {
         val _date = Date(0, date)
 
-        Single.fromCallable {
+        Observable.fromCallable {
             database.dateDao().insert(_date)
         }.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe()
+         .observeOn(AndroidSchedulers.mainThread()).subscribe()
     }
 
     override fun getDateId(date: Long):  List<Date> =
