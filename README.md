@@ -13,9 +13,9 @@ Features
 * User lists
 * Remove user lists
 * Change order of user lists<br /><br />
-List "My Day" shows only tasks added in this day.
-List "To Do" shows previous days and tasks current day
-User items not related with "My Day" and "To Do" lists
+List "My Day" shows only tasks added in this day.<br /><br />
+List "To Do" shows previous days and tasks current day.<br /><br />
+User items not related with "My Day" and "To Do" lists.<br /><br />
 
 Tasks | Task containers
 :-------------------------:|:-------------------------:
