@@ -12,7 +12,10 @@ Features
 * Hide/Show completed tasks<br /><br />
 * User lists
 * Remove user lists
-* Change order of user lists
+* Change order of user lists<br /><br />
+List "My Day" shows only tasks added in this day.
+List "To Do" shows previous days and tasks current day
+User items not related with "My Day" and "To Do" lists
 
 Tasks | Task containers
 :-------------------------:|:-------------------------:
