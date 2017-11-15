@@ -4,7 +4,9 @@ import android.util.Log
 import com.example.denisgabyshev.getdisciplined.data.DataManager
 import com.example.denisgabyshev.getdisciplined.data.db.model.ListId
 import com.example.denisgabyshev.getdisciplined.ui.base.BasePresenter
+import com.example.denisgabyshev.getdisciplined.ui.main.task.list.ListFragment
 import com.example.denisgabyshev.getdisciplined.ui.main.task.today.TaskFragment
+import com.example.denisgabyshev.getdisciplined.ui.main.task.todo.ToDoListFragment
 import com.example.denisgabyshev.getdisciplined.utils.rx.SchedulerProvider
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers

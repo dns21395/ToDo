@@ -34,32 +34,18 @@ class AddPresenter<V: AddMvpView> @Inject
     }
 
     override fun addTaskToday(taskText: String, operation: () -> Unit) {
-
-        val date: Long = 0
-
-        val addTask = Observable.fromCallable {
+        Observable.fromCallable {
             dataManager.getDateId(AppUtils.getToday())
         }.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext {
 
                     Log.d(TAG, "$it - ${it[0].id}")
-                    Observable.fromCallable {  dataManager.addTaskToDoAndToday(it[0].id, taskText.trim())}
+                    Single.fromCallable {  dataManager.addTaskToDoAndToday(it[0].id, taskText.trim())}
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe()
-                    }
-
-
-        val callOperation = Observable.empty<Any>()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnComplete {
-                    Log.d(TAG, "CALLING TO UPDATE UI ARRAY")
-                    operation()
-                }
-
-        Observable.concat(addTask, callOperation).subscribe()
+                            .subscribe ({operation()}, Throwable::printStackTrace)
+                    }.subscribe()
     }
 
     override fun addTaskToDo(taskText: String, operation: () -> Unit) {

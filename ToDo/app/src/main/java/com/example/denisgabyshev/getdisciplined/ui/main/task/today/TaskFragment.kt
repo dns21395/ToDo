@@ -45,9 +45,10 @@ class TaskFragment : BaseTaskFragment(), TaskMvpView {
 
     override fun <V : BaseTaskMvpView> setFragment(presenter: BaseTaskPresenter<V>) {
         setToolbar(resources.getString(R.string.myday))
+        presenter.isTodayExist()
         super.setFragment(presenter)
 
-        presenter.isTodayExist()
+
     }
 
     override fun updateTasksArray() {

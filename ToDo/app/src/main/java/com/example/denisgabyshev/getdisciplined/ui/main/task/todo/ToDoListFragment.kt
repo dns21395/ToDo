@@ -43,9 +43,10 @@ class ToDoListFragment : BaseTaskFragment(), ToDoListMvpView {
 
     override fun <V : BaseTaskMvpView> setFragment(presenter: BaseTaskPresenter<V>) {
         setToolbar(resources.getString(R.string.todo))
+        presenter.isTodayExist()
         super.setFragment(presenter)
 
-        presenter.isTodayExist()
+
     }
 
     override fun updateTasksArray() {
