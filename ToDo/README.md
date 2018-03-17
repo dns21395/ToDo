@@ -1,2 +1,0 @@
-# GetDisciplined
-app
