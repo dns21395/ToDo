@@ -1,6 +1,7 @@
 package night.lines.todo.database.manager
 
 import android.content.Context
+import io.reactivex.Flowable
 import night.lines.todo.database.dao.CommonDao
 import night.lines.todo.database.dao.SectionDao
 import night.lines.todo.database.dao.TaskDao
@@ -16,4 +17,6 @@ class AppDatabaseManager @Inject constructor(val context: Context,
                                              val taskDao: TaskDao) : DatabaseManager {
 
     override fun insertTask(task: Task): Long = taskDao.insert(task)
+
+    override fun getAllTasks(): Flowable<List<Task>> = taskDao.getAllTasks()
 }

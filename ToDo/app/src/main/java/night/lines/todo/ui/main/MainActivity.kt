@@ -29,6 +29,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         }
     }
 
+
     @ProvidePresenter
     fun providePresenter(): MainPresenter {
         return Toothpick

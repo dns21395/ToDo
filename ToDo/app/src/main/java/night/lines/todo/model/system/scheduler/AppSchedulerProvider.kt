@@ -1,4 +1,4 @@
-package night.lines.todo.util
+package night.lines.todo.model.system.scheduler
 
 import io.reactivex.CompletableTransformer
 import io.reactivex.FlowableTransformer
@@ -11,31 +11,28 @@ import io.reactivex.schedulers.Schedulers
 /**
  * Created by denisgabyshev on 17/03/2018.
  */
-class SchedulerProvider {
-    fun <T> ioToMainObservableScheduler(): ObservableTransformer<T, T> = ObservableTransformer { upstream ->
+class AppSchedulerProvider : SchedulerProvider {
+    override fun <T> ioToMainObservableScheduler(): ObservableTransformer<T, T> = ObservableTransformer { upstream ->
         upstream.subscribeOn(getIOThreadScheduler())
                 .observeOn(getMainThreadScheduler())
     }
 
-    fun <T> ioToMainSingleScheduler(): SingleTransformer<T, T> = SingleTransformer { upstream ->
+    override fun <T> ioToMainSingleScheduler(): SingleTransformer<T, T> = SingleTransformer { upstream ->
         upstream.subscribeOn(getIOThreadScheduler())
                 .observeOn(getMainThreadScheduler())
     }
 
-
-    fun ioToMainCompletableScheduler(): CompletableTransformer = CompletableTransformer { upstream ->
+    override fun ioToMainCompletableScheduler(): CompletableTransformer = CompletableTransformer { upstream ->
         upstream.subscribeOn(getIOThreadScheduler())
                 .observeOn(getMainThreadScheduler())
     }
 
-
-    fun <T> ioToMainFlowableScheduler(): FlowableTransformer<T, T> = FlowableTransformer { upstream ->
+    override fun <T> ioToMainFlowableScheduler(): FlowableTransformer<T, T> = FlowableTransformer { upstream ->
         upstream.subscribeOn(getIOThreadScheduler())
                 .observeOn(getMainThreadScheduler())
     }
 
-
-    fun <T> ioToMainMaybeScheduler(): MaybeTransformer<T, T> = MaybeTransformer { upstream ->
+    override fun <T> ioToMainMaybeScheduler(): MaybeTransformer<T, T> = MaybeTransformer { upstream ->
         upstream.subscribeOn(getIOThreadScheduler())
                 .observeOn(getMainThreadScheduler())
     }
