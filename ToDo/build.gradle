@@ -27,12 +27,13 @@ task clean(type: Delete) {
 }
 
 ext {
-    dagger2Version = '2.14.1'
+    toothpickVersion = "1.0.6"
     rxkotlin = '2.2.0'
     roomDatabaseVersion = '1.0.0'
     rxandroidVersion = '2.0.2'
     multidex = '1.0.3'
     supportLibraryVersion = '27.1.0'
     moxy = '1.5.3'
+    mosby = '2.0.1'
     rxbindings = '2.1.1'
 }

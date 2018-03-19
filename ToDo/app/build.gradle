@@ -15,6 +15,12 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [toothpick_registry_package_name: 'night.lines.todo']
+            }
+        }
     }
     buildTypes {
         release {
@@ -26,6 +32,8 @@ android {
         generateStubs = true
         correctErrorTypes = true
     }
+
+
 }
 
 dependencies {
@@ -50,15 +58,12 @@ dependencies {
     implementation "com.arello-mobile:moxy-app-compat:$moxy"
     kapt "com.arello-mobile:moxy-compiler:$moxy"
 
-
     // Database
     implementation "android.arch.persistence.room:runtime:$roomDatabaseVersion"
     implementation "android.arch.persistence.room:rxjava2:$roomDatabaseVersion"
     kapt "android.arch.persistence.room:compiler:$roomDatabaseVersion"
 
-    // dependency injection
-    implementation "com.google.dagger:dagger:$dagger2Version"
-    kapt "com.google.dagger:dagger-compiler:$dagger2Version"
-    kapt "com.google.dagger:dagger-android-processor:$dagger2Version"
-    implementation "com.google.dagger:dagger-android-support:$dagger2Version"
+    //DI
+    implementation "com.github.stephanenicolas.toothpick:toothpick-runtime:$toothpickVersion"
+    kapt "com.github.stephanenicolas.toothpick:toothpick-compiler:$toothpickVersion"
 }
