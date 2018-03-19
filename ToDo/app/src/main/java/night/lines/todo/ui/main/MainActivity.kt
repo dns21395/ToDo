@@ -23,10 +23,6 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        button.setOnClickListener {
-            val text = editText.text
-            presenter.onClickButton(text.toString())
-        }
     }
 
 
