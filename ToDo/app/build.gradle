@@ -49,6 +49,7 @@ dependencies {
     // reactive
     implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlin"
     implementation "io.reactivex.rxjava2:rxandroid:$rxandroidVersion"
+    implementation "com.jakewharton.rxrelay2:rxrelay:$rxrelay"
 
     // rxbindings
     implementation "com.jakewharton.rxbinding2:rxbinding:$rxbindings"

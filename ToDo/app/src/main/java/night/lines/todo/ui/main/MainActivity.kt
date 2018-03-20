@@ -14,7 +14,7 @@ import night.lines.todo.presentation.global.MainActivityController
 import night.lines.todo.presentation.main.MainPresenter
 import night.lines.todo.presentation.main.MainView
 import night.lines.todo.toothpick.DI
-import night.lines.todo.toothpick.module.MainActivivtyModule
+import night.lines.todo.toothpick.module.MainActivityModule
 import night.lines.todo.ui.main.addtask.AddTaskFragment
 import night.lines.todo.ui.main.task.TaskFragment
 import toothpick.Toothpick
@@ -25,8 +25,6 @@ import javax.inject.Inject
  */
 class MainActivity : MvpAppCompatActivity(), MainView {
 
-    @Inject lateinit var controller: MainActivityController
-
     @InjectPresenter
     lateinit var presenter: MainPresenter
 
@@ -35,7 +33,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     @ProvidePresenter
     fun providePresenter(): MainPresenter {
         return Toothpick
-                .openScopes(DI.APP_SCOPE, DI.MAIN_SCOPE)
+                .openScopes(DI.MAIN_SCOPE)
                 .getInstance(MainPresenter::class.java)
     }
 
@@ -43,21 +41,14 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Toothpick.openScopes(DI.APP_SCOPE, DI.MAIN_SCOPE).apply {
-            installModules(MainActivivtyModule())
-            Toothpick.inject(this@MainActivity, this)
-        }
-
-
         supportFragmentManager.beginTransaction().replace(R.id.frameLayout, TaskFragment())
                 .commitAllowingStateLoss()
 
         fab.setOnClickListener {
-            when(bottomFrameLayoutId) {
-                0 -> showAddTaskFragment()
-                else -> hideAddTaskFragment()
-            }
+            presenter.onFabButtonClicked()
         }
+
+        presenter.onViewPrepared()
 
     }
 
@@ -68,6 +59,8 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     }
 
     override fun showAddTaskFragment() {
+        fab.hide()
+
         val bottomFrameLayout = FrameLayout(applicationContext)
 
         val params = ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT)
@@ -94,15 +87,9 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
         constraintSet.connect(frameLayout.id, ConstraintSet.BOTTOM, bottomFrameLayoutId, ConstraintSet.TOP)
 
-        constraintSet.clear(fab.id, ConstraintSet.BOTTOM)
-
-        constraintSet.connect(fab.id, ConstraintSet.BOTTOM, bottomFrameLayoutId, ConstraintSet.TOP)
-
         constraintSet.applyTo(parentConstraint)
 
         supportFragmentManager.beginTransaction().replace(bottomFrameLayoutId, AddTaskFragment()).commitAllowingStateLoss()
-
-        fab.hide()
     }
 
     override fun hideAddTaskFragment() {

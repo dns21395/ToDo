@@ -6,7 +6,7 @@ import toothpick.config.Module
 /**
  * Created by denisgabyshev on 20/03/2018.
  */
-class MainActivivtyModule : Module() {
+class MainActivityModule : Module() {
     init {
         bind(MainActivityController::class.java).toInstance(MainActivityController())
     }

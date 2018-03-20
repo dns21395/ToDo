@@ -31,6 +31,7 @@ ext {
     rxkotlin = '2.2.0'
     roomDatabaseVersion = '1.0.0'
     rxandroidVersion = '2.0.2'
+    rxrelay = '2.0.0'
     multidex = '1.0.3'
     supportLibraryVersion = '27.1.0'
     moxy = '1.5.3'
