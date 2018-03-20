@@ -1,8 +1,10 @@
 package night.lines.todo.ui.main
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
 import android.support.constraint.ConstraintSet
+import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import com.arellomobile.mvp.MvpAppCompatActivity
@@ -25,10 +27,17 @@ import javax.inject.Inject
  */
 class MainActivity : MvpAppCompatActivity(), MainView {
 
+    private val TAG = "MainActivity"
+
     @InjectPresenter
     lateinit var presenter: MainPresenter
 
-    private var bottomFrameLayoutId = 0
+    private var  bottomFrameLayoutId = View.generateViewId()
+
+
+
+
+    private val addTaskFragment = AddTaskFragment()
 
     @ProvidePresenter
     fun providePresenter(): MainPresenter {
@@ -67,8 +76,6 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
         bottomFrameLayout.layoutParams = params
 
-        bottomFrameLayoutId = View.generateViewId()
-
         bottomFrameLayout.id = bottomFrameLayoutId
 
         parentConstraint.addView(bottomFrameLayout)
@@ -89,10 +96,12 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
         constraintSet.applyTo(parentConstraint)
 
-        supportFragmentManager.beginTransaction().replace(bottomFrameLayoutId, AddTaskFragment()).commitAllowingStateLoss()
+        supportFragmentManager.beginTransaction().replace(bottomFrameLayoutId, addTaskFragment).commitAllowingStateLoss()
     }
 
     override fun hideAddTaskFragment() {
+        supportFragmentManager.beginTransaction().remove(addTaskFragment).commit()
+
         parentConstraint.removeView(findViewById(bottomFrameLayoutId))
 
         val constraintSet = ConstraintSet()
@@ -104,9 +113,20 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
         constraintSet.applyTo(parentConstraint)
 
-        bottomFrameLayoutId = 0
+       // bottomFrameLayoutId = 0
 
         fab.show()
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration?) {
+        super.onConfigurationChanged(newConfig)
+
+        Log.d(TAG, "onConfigurationChanged")
+
+        if(bottomFrameLayoutId != 0) {
+            Log.d(TAG, "SHOW")
+            showAddTaskFragment()
+        }
     }
 
 }

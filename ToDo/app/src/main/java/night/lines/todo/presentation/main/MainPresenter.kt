@@ -36,6 +36,9 @@ class MainPresenter @Inject constructor(private val databaseManager: DatabaseMan
         )
     }
 
+
+
+
     fun onFabButtonClicked() {
         mainActivityController.callAddTaskFragmentAction(MainActivityController.EnumAddTaskFragment.SHOW)
     }
@@ -51,4 +54,6 @@ class MainPresenter @Inject constructor(private val databaseManager: DatabaseMan
                         }
         )
     }
+
+
 }

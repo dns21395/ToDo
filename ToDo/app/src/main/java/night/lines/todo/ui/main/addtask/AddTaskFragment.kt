@@ -1,6 +1,7 @@
 package night.lines.todo.ui.main.addtask
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -19,6 +20,8 @@ class AddTaskFragment : BaseFragment(), AddTaskView {
 
     @InjectPresenter lateinit var presenter: AddTaskPresenter
 
+    private val TAG = "AddTaskFragment"
+
     @ProvidePresenter
     fun providePresenter(): AddTaskPresenter =
             Toothpick
@@ -30,7 +33,12 @@ class AddTaskFragment : BaseFragment(), AddTaskView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        addButton.setOnClickListener { presenter.onAddTaskButtonClicked() }
+        Log.d(TAG, "onViewCreated")
 
+        addButton.setOnClickListener { presenter.onAddTaskButtonClicked() }
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 }

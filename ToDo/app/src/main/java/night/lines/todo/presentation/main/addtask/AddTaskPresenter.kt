@@ -15,6 +15,7 @@ class AddTaskPresenter @Inject constructor(private val databaseManager: Database
                                            private val schedulerProvider: SchedulerProvider,
                                            private val mainActivityController: MainActivityController
 ): BasePresenter<AddTaskView>() {
+
     fun onAddTaskButtonClicked() {
         mainActivityController.callAddTaskFragmentAction(MainActivityController.EnumAddTaskFragment.HIDE)
     }
