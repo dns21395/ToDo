@@ -9,6 +9,7 @@ import night.lines.todo.R
 import night.lines.todo.presentation.main.MainPresenter
 import night.lines.todo.presentation.main.MainView
 import night.lines.todo.toothpick.DI
+import night.lines.todo.ui.main.task.TaskFragment
 import toothpick.Toothpick
 
 /**
@@ -23,13 +24,21 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-    }
+        supportFragmentManager.beginTransaction().replace(R.id.frameLayout, TaskFragment())
+                .commitAllowingStateLoss()
 
+    }
 
     @ProvidePresenter
     fun providePresenter(): MainPresenter {
         return Toothpick
-                .openScope(DI.APP_SCOPE)
+                .openScopes(DI.APP_SCOPE, DI.MAIN_SCOPE)
                 .getInstance(MainPresenter::class.java)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        if(isFinishing) Toothpick.closeScope(DI.MAIN_SCOPE)
     }
 }
