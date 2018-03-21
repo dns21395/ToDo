@@ -32,13 +32,6 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     @InjectPresenter
     lateinit var presenter: MainPresenter
 
-    private var  bottomFrameLayoutId = View.generateViewId()
-
-
-
-
-    private val addTaskFragment = AddTaskFragment()
-
     @ProvidePresenter
     fun providePresenter(): MainPresenter {
         return Toothpick
@@ -53,11 +46,13 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         supportFragmentManager.beginTransaction().replace(R.id.frameLayout, TaskFragment())
                 .commitAllowingStateLoss()
 
+        if(presenter.bottomFrameLayoutId != 0) createFrameLayout()
+
         fab.setOnClickListener {
             presenter.onFabButtonClicked()
         }
 
-        presenter.onViewPrepared()
+       // presenter.onViewPrepared()
 
     }
 
@@ -67,7 +62,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         if(isFinishing) Toothpick.closeScope(DI.MAIN_SCOPE)
     }
 
-    override fun showAddTaskFragment() {
+    private fun createFrameLayout() {
         fab.hide()
 
         val bottomFrameLayout = FrameLayout(applicationContext)
@@ -76,7 +71,9 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
         bottomFrameLayout.layoutParams = params
 
-        bottomFrameLayout.id = bottomFrameLayoutId
+        if(presenter.bottomFrameLayoutId == 0) presenter.bottomFrameLayoutId = View.generateViewId()
+
+        bottomFrameLayout.id = presenter.bottomFrameLayoutId
 
         parentConstraint.addView(bottomFrameLayout)
 
@@ -84,25 +81,31 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
         constraintSet.clone(parentConstraint)
 
-        constraintSet.connect(bottomFrameLayoutId, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM )
+        constraintSet.connect(presenter.bottomFrameLayoutId, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM )
 
-        constraintSet.connect(bottomFrameLayoutId, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START)
+        constraintSet.connect(presenter.bottomFrameLayoutId, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START)
 
-        constraintSet.connect(bottomFrameLayoutId, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END)
+        constraintSet.connect(presenter.bottomFrameLayoutId, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END)
 
         constraintSet.clear(frameLayout.id, ConstraintSet.BOTTOM)
 
-        constraintSet.connect(frameLayout.id, ConstraintSet.BOTTOM, bottomFrameLayoutId, ConstraintSet.TOP)
+        constraintSet.connect(frameLayout.id, ConstraintSet.BOTTOM, presenter.bottomFrameLayoutId, ConstraintSet.TOP)
 
         constraintSet.applyTo(parentConstraint)
+    }
 
-        supportFragmentManager.beginTransaction().replace(bottomFrameLayoutId, addTaskFragment).commitAllowingStateLoss()
+    override fun showAddTaskFragment() {
+        createFrameLayout()
+
+        supportFragmentManager.beginTransaction().replace(presenter.bottomFrameLayoutId, AddTaskFragment(), AddTaskFragment.TAG).commit()
     }
 
     override fun hideAddTaskFragment() {
-        supportFragmentManager.beginTransaction().remove(addTaskFragment).commit()
+        val bottomFragment = supportFragmentManager.findFragmentByTag(AddTaskFragment.TAG)
 
-        parentConstraint.removeView(findViewById(bottomFrameLayoutId))
+        if(bottomFragment != null) supportFragmentManager.beginTransaction().remove(bottomFragment).commit()
+
+        parentConstraint.removeView(findViewById(presenter.bottomFrameLayoutId))
 
         val constraintSet = ConstraintSet()
         constraintSet.clone(parentConstraint)
@@ -113,20 +116,8 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
         constraintSet.applyTo(parentConstraint)
 
-       // bottomFrameLayoutId = 0
+        presenter.bottomFrameLayoutId = 0
 
         fab.show()
     }
-
-    override fun onConfigurationChanged(newConfig: Configuration?) {
-        super.onConfigurationChanged(newConfig)
-
-        Log.d(TAG, "onConfigurationChanged")
-
-        if(bottomFrameLayoutId != 0) {
-            Log.d(TAG, "SHOW")
-            showAddTaskFragment()
-        }
-    }
-
 }

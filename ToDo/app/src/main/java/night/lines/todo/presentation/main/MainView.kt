@@ -8,7 +8,8 @@ import com.arellomobile.mvp.viewstate.strategy.*
  */
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface MainView : MvpView {
- 
+
+    @StateStrategyType(OneExecutionStateStrategy::class)
     fun showAddTaskFragment()
 
     @StateStrategyType(SkipStrategy::class)

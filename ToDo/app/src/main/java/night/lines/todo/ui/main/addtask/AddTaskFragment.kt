@@ -20,7 +20,9 @@ class AddTaskFragment : BaseFragment(), AddTaskView {
 
     @InjectPresenter lateinit var presenter: AddTaskPresenter
 
-    private val TAG = "AddTaskFragment"
+    companion object {
+        val TAG = "AddTaskFragment"
+    }
 
     @ProvidePresenter
     fun providePresenter(): AddTaskPresenter =

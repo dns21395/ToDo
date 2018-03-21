@@ -23,7 +23,13 @@ class MainPresenter @Inject constructor(private val databaseManager: DatabaseMan
 
     private val TAG = "MainPresenter"
 
-    fun onViewPrepared() {
+    var bottomFrameLayoutId: Int = 0
+
+    init {
+        onViewPrepared()
+    }
+
+    private fun onViewPrepared() {
         compositeDisposable.add(
                 mainActivityController.addTaskFragmentState
                         .compose(schedulerProvider.ioToMainObservableScheduler())
