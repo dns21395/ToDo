@@ -52,6 +52,8 @@ class MainActivity : MvpAppCompatActivity(), MainView {
             presenter.onFabButtonClicked()
         }
 
+        // sd
+
     }
 
     override fun onDestroy() {
