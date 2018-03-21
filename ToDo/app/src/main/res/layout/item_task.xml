@@ -8,6 +8,7 @@
     <ImageButton
         android:id="@+id/statusButton"
         android:padding="16dp"
+        android:background="@null"
         android:src="@drawable/checkbox_blank_circle_outline"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
