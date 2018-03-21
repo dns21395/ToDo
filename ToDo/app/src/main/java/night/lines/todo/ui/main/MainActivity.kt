@@ -119,6 +119,10 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         fab.show()
     }
 
+    override fun setToolbarBackground(background: Int) {
+        toolbarBackground.setImageResource(background)
+    }
+
     override fun onBackPressed() {
         if(presenter.bottomFrameLayoutId != 0) hideAddTaskFragment()
         else super.onBackPressed()

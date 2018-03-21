@@ -188,7 +188,6 @@
     <orderEntry type="library" name="com.github.stephanenicolas.toothpick:toothpick-runtime:1.0.6@jar" level="project" />
     <orderEntry type="library" name="org.jetbrains.anko:anko-appcompat-v7:0.10.4@jar" level="project" />
     <orderEntry type="library" name="org.jetbrains.kotlin:kotlin-stdlib:1.2.30@jar" level="project" />
-    <orderEntry type="library" name="net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent-2.1.0" level="project" />
     <orderEntry type="library" name="android.arch.persistence.room:runtime-1.0.0" level="project" />
     <orderEntry type="library" name="android.arch.persistence:db-1.0.0" level="project" />
     <orderEntry type="library" name="org.jetbrains.anko:anko-support-v4:0.10.4@jar" level="project" />

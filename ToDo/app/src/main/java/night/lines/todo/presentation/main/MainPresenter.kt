@@ -5,6 +5,7 @@ import com.arellomobile.mvp.InjectViewState
 import io.reactivex.Observable
 import night.lines.todo.database.manager.DatabaseManager
 import night.lines.todo.database.model.Task
+import night.lines.todo.model.interactor.main.MainInteractor
 import night.lines.todo.model.system.scheduler.AppSchedulerProvider
 import night.lines.todo.model.system.scheduler.SchedulerProvider
 import night.lines.todo.presentation.global.BasePresenter
@@ -18,7 +19,8 @@ import javax.inject.Inject
 @InjectViewState
 class MainPresenter @Inject constructor(private val databaseManager: DatabaseManager,
                                         private val schedulerProvider: SchedulerProvider,
-                                        private val mainActivityController: MainActivityController
+                                        private val mainActivityController: MainActivityController,
+                                        private val interactor: MainInteractor
 ) : BasePresenter<MainView>() {
 
     private val TAG = "MainPresenter"
@@ -27,6 +29,8 @@ class MainPresenter @Inject constructor(private val databaseManager: DatabaseMan
 
     init {
         onViewPrepared()
+
+        callBackground()
     }
 
     private fun onViewPrepared() {
@@ -42,7 +46,15 @@ class MainPresenter @Inject constructor(private val databaseManager: DatabaseMan
         )
     }
 
-
+    fun callBackground() {
+        compositeDisposable.add(
+                interactor.getBackground()
+                        .compose(schedulerProvider.ioToMainObservableScheduler())
+                        .subscribe {
+                            viewState.setToolbarBackground(it)
+                        }
+        )
+    }
 
 
     fun onFabButtonClicked() {

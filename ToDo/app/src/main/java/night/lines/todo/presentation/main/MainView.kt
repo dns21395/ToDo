@@ -14,4 +14,6 @@ interface MainView : MvpView {
 
     @StateStrategyType(SkipStrategy::class)
     fun hideAddTaskFragment()
+
+    fun setToolbarBackground(background: Int)
 }

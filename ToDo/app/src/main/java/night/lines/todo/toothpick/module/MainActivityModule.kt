@@ -1,5 +1,8 @@
 package night.lines.todo.toothpick.module
 
+import night.lines.todo.model.interactor.main.MainInteractor
+import night.lines.todo.model.repository.toolbarimages.AppToolbarImages
+import night.lines.todo.model.repository.toolbarimages.ToolbarImages
 import night.lines.todo.presentation.global.MainActivityController
 import toothpick.config.Module
 
@@ -9,5 +12,8 @@ import toothpick.config.Module
 class MainActivityModule : Module() {
     init {
         bind(MainActivityController::class.java).toInstance(MainActivityController())
+
+        bind(ToolbarImages::class.java).toInstance(AppToolbarImages())
+        bind(MainInteractor::class.java).to(MainInteractor::class.java)
     }
 }
