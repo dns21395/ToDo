@@ -37,4 +37,5 @@ ext {
     moxy = '1.5.3'
     mosby = '2.0.1'
     rxbindings = '2.1.1'
+    anko_version='0.10.4'
 }

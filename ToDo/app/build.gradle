@@ -68,4 +68,7 @@ dependencies {
     //DI
     implementation "com.github.stephanenicolas.toothpick:toothpick-runtime:$toothpickVersion"
     kapt "com.github.stephanenicolas.toothpick:toothpick-compiler:$toothpickVersion"
+
+    // Anko
+    compile "org.jetbrains.anko:anko:$anko_version"
 }

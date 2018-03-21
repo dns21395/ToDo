@@ -13,6 +13,7 @@ import night.lines.todo.presentation.main.addtask.AddTaskPresenter
 import night.lines.todo.presentation.main.addtask.AddTaskView
 import night.lines.todo.toothpick.DI
 import night.lines.todo.ui.global.BaseFragment
+import org.jetbrains.anko.support.v4.toast
 import toothpick.Toothpick
 
 /**
@@ -41,9 +42,13 @@ class AddTaskFragment : BaseFragment(), AddTaskView {
 
         context?.let { KeyboardUtils.showSoftInput(textTask, it) }
 
-        addButton.setOnClickListener { 
-            presenter.onAddTaskButtonClicked()
-            KeyboardUtils.hideSoftInput(activity as FragmentActivity)
+        addButton.setOnClickListener {
+            if(textTask.text.toString().isNotEmpty()) {
+                presenter.onAddTaskButtonClicked(textTask.text.toString())
+                KeyboardUtils.hideSoftInput(activity as FragmentActivity)
+            } else {
+                toast(R.string.text_add_task_empty)
+            }
         }
     }
 }
