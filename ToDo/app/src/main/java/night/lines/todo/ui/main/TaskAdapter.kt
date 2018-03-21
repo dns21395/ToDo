@@ -68,10 +68,6 @@ class TaskAdapter(context: Context, recyclerView: RecyclerView) : RecyclerView.A
                 task.isDone = !task.isDone
                 presenter.onStatusButtonClick(task)
             }
-
-
-
-
         }
 
         private fun changeBackground(color: Int) = with(itemView)  {

@@ -11,10 +11,9 @@ import javax.inject.Provider
 /**
  * Created by denisgabyshev on 19/03/2018.
  */
-class RoomProvider @Inject constructor(private val context: Context,
-                                       private val appDatabase: AppDatabase) : Provider<DatabaseManager> {
+class RoomProvider @Inject constructor(private val appDatabase: AppDatabase) : Provider<DatabaseManager> {
     override fun get(): DatabaseManager =
-            AppDatabaseManager(context, appDatabase.commonDao(), appDatabase.sectionDao(), appDatabase.taskDao())
+            AppDatabaseManager(appDatabase.taskDao())
 
 
 }

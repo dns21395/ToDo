@@ -22,15 +22,11 @@ class AddTaskPresenter @Inject constructor(private val databaseManager: Database
     fun onAddTaskButtonClicked(taskName: String) {
         compositeDisposable.add(
                 Observable.fromCallable {
-                    databaseManager.insertTask(Task(0, mainActivityController.sectionId, taskName, Date().time))
+                    databaseManager.insertTask(Task(0, taskName, Date().time))
                 }.compose(schedulerProvider.ioToMainObservableScheduler())
                         .subscribe {
                             mainActivityController.callAddTaskFragmentAction(MainActivityController.EnumAddTaskFragment.HIDE)
                         }
         )
-    }
-
-    fun onBackPressed() {
-        mainActivityController.callAddTaskFragmentAction(MainActivityController.EnumAddTaskFragment.HIDE)
     }
 }
