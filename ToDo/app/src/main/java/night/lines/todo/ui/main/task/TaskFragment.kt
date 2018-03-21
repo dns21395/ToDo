@@ -20,7 +20,7 @@ import toothpick.Toothpick
  */
 class TaskFragment : BaseFragment(), TaskView {
 
-    private val adapter = TaskAdapter()
+    private lateinit var adapter: TaskAdapter
     private val layoutManager = LinearLayoutManager(context)
 
     @InjectPresenter
@@ -37,6 +37,8 @@ class TaskFragment : BaseFragment(), TaskView {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+
+        adapter = TaskAdapter(context!!, recyclerView)
         adapter.presenter = presenter
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter

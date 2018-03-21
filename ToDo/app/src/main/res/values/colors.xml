@@ -3,4 +3,6 @@
     <color name="colorPrimary">#F6F6F6</color>
     <color name="colorPrimaryDark">#d1d1d5</color>
     <color name="colorAccent">#464656</color>
+    <color name="swipe_item">#D32F2F</color>
+
 </resources>

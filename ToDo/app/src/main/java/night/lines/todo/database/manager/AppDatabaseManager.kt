@@ -22,4 +22,6 @@ class AppDatabaseManager @Inject constructor(val context: Context,
     override fun getAllTasks(): Flowable<List<Task>> = taskDao.getAllTasks()
 
     override fun updateTask(task: Task): Observable<Unit> = Observable.fromCallable { taskDao.update(task) }
+
+    override fun removeTask(task: Task): Observable<Unit> = Observable.fromCallable { taskDao.delete(task) }
 }

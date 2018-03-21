@@ -56,8 +56,6 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     override fun onDestroy() {
         super.onDestroy()
-
-        if(isFinishing) Toothpick.closeScope(DI.MAIN_SCOPE)
     }
 
     private fun createFrameLayout() {

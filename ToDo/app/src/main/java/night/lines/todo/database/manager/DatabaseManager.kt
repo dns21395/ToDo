@@ -17,4 +17,6 @@ interface DatabaseManager {
     fun getAllTasks(): Flowable<List<Task>>
 
     fun updateTask(task: Task): Observable<Unit>
+
+    fun removeTask(task: Task): Observable<Unit>
 }

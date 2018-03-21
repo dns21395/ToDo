@@ -45,4 +45,14 @@ class TaskPresenter @Inject constructor(private val databaseManager: DatabaseMan
                         .subscribe()
         )
     }
+
+    fun onItemSwiped(task: Task, function: () -> Unit) {
+        compositeDisposable.add(
+                databaseManager.removeTask(task)
+                        .compose(schedulerProvider.ioToMainObservableScheduler())
+                        .subscribe {
+                            function.invoke()
+                        }
+        )
+    }
 }
