@@ -51,6 +51,8 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         fab.setOnClickListener {
             presenter.onFabButtonClicked()
         }
+
+        // haha
     }
 
     override fun onDestroy() {
