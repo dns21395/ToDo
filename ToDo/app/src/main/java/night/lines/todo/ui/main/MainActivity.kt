@@ -118,4 +118,9 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
         fab.show()
     }
+
+    override fun onBackPressed() {
+        if(presenter.bottomFrameLayoutId != 0) hideAddTaskFragment()
+        else super.onBackPressed()
+    }
 }

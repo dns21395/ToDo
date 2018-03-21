@@ -29,4 +29,8 @@ class AddTaskPresenter @Inject constructor(private val databaseManager: Database
                         }
         )
     }
+
+    fun onBackPressed() {
+        mainActivityController.callAddTaskFragmentAction(MainActivityController.EnumAddTaskFragment.HIDE)
+    }
 }

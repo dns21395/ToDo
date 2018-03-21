@@ -7,6 +7,7 @@ import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import kotlinx.android.synthetic.main.fragment_add_task.*
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 import night.lines.todo.R
 import night.lines.todo.model.system.KeyboardUtils
 import night.lines.todo.presentation.main.addtask.AddTaskPresenter
@@ -43,12 +44,17 @@ class AddTaskFragment : BaseFragment(), AddTaskView {
         context?.let { KeyboardUtils.showSoftInput(textTask, it) }
 
         addButton.setOnClickListener {
-            if(textTask.text.toString().isNotEmpty()) {
+            if (textTask.text.toString().isNotEmpty()) {
                 presenter.onAddTaskButtonClicked(textTask.text.toString())
                 KeyboardUtils.hideSoftInput(activity as FragmentActivity)
             } else {
                 toast(R.string.text_add_task_empty)
             }
         }
+
+        KeyboardVisibilityEvent.setEventListener(activity, {
+            Log.d(TAG, "event listener $it")
+            //if (!it && textTask!= null && textTask.hasFocus() && textTask.text.toString().isEmpty()) presenter.onBackPressed()
+        })
     }
 }
