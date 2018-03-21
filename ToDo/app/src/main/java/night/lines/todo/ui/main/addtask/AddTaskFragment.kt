@@ -1,12 +1,14 @@
 package night.lines.todo.ui.main.addtask
 
 import android.os.Bundle
+import android.support.v4.app.FragmentActivity
 import android.util.Log
 import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import kotlinx.android.synthetic.main.fragment_add_task.*
 import night.lines.todo.R
+import night.lines.todo.model.system.KeyboardUtils
 import night.lines.todo.presentation.main.addtask.AddTaskPresenter
 import night.lines.todo.presentation.main.addtask.AddTaskView
 import night.lines.todo.toothpick.DI
@@ -37,10 +39,11 @@ class AddTaskFragment : BaseFragment(), AddTaskView {
 
         Log.d(TAG, "onViewCreated")
 
-        addButton.setOnClickListener { presenter.onAddTaskButtonClicked() }
-    }
+        context?.let { KeyboardUtils.showSoftInput(textTask, it) }
 
-    override fun onResume() {
-        super.onResume()
+        addButton.setOnClickListener { 
+            presenter.onAddTaskButtonClicked()
+            KeyboardUtils.hideSoftInput(activity as FragmentActivity)
+        }
     }
 }

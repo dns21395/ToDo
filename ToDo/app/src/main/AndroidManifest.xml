@@ -10,7 +10,10 @@
         android:roundIcon="@drawable/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.main.MainActivity"/>
+        <activity android:name=".ui.main.MainActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            />
         <activity android:name=".ui.splash.SplashActivity"
             android:noHistory="true"
             android:theme="@style/SplashTheme">

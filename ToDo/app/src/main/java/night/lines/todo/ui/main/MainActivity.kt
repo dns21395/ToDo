@@ -52,8 +52,6 @@ class MainActivity : MvpAppCompatActivity(), MainView {
             presenter.onFabButtonClicked()
         }
 
-       // presenter.onViewPrepared()
-
     }
 
     override fun onDestroy() {
