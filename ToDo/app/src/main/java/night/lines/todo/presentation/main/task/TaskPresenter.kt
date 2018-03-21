@@ -38,10 +38,11 @@ class TaskPresenter @Inject constructor(private val databaseManager: DatabaseMan
         )
     }
 
-    fun onFabClick() {
-        Observable.fromCallable {
-            databaseManager.insertTask(Task(0, mainActivityController.sectionId, "TEST : ${Random().nextInt(1000)}", Date().time))
-        }.compose(schedulerProvider.ioToMainObservableScheduler())
-                .subscribe()
+    fun onStatusButtonClick(task: Task) {
+        compositeDisposable.add(
+                databaseManager.updateTask(task)
+                        .compose(schedulerProvider.ioToMainObservableScheduler())
+                        .subscribe()
+        )
     }
 }
