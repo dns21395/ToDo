@@ -41,8 +41,6 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        transparentStatusBar()
-
         setMenu()
 
         supportFragmentManager.beginTransaction().replace(R.id.frameLayout, TaskFragment())
@@ -134,19 +132,6 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         toolbar.setOnMenuItemClickListener {
             if(it.itemId == R.id.check) presenter.setFinishedTasksVisibility()
             false
-        }
-    }
-
-    private fun transparentStatusBar() {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-            window.statusBarColor = Color.TRANSPARENT
-
-            val tintManager = SystemBarTintManager(this)
-            // enable status bar tint
-            tintManager.isStatusBarTintEnabled = true
-            // enable navigation bar tint
-            tintManager.setNavigationBarTintEnabled(true)
         }
     }
 

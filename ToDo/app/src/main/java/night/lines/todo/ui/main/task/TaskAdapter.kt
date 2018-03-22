@@ -1,6 +1,7 @@
 package night.lines.todo.ui.main.task
 
 import android.content.Context
+import android.graphics.Paint
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
@@ -64,8 +65,14 @@ class TaskAdapter(context: Context, private val recyclerView: RecyclerView) : Re
             taskName.text = task.taskName
 
             when(task.isDone) {
-                true -> statusButton.imageResource = R.drawable.checkbox_marked_circle
-                false -> statusButton.imageResource = R.drawable.checkbox_blank_circle_outline
+                true -> {
+                    taskName.paintFlags = taskName.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                    statusButton.imageResource = R.drawable.checkbox_marked_circle
+                }
+                false -> {
+                    taskName.paintFlags = taskName.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+                    statusButton.imageResource = R.drawable.checkbox_blank_circle_outline
+                }
             }
 
             statusButton.setOnClickListener {
