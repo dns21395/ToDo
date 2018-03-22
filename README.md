@@ -22,6 +22,6 @@ Features
 * Remove task by swipe
 * Hide/Show completed tasks<br /><br />
 
-Tasks | Removing task
+Adding a task | Removing a task
 :-------------------------:|:-------------------------:
 ![](https://raw.githubusercontent.com/dns21395/ToDo/master/ReadmeFiles/photo1.png)  |  ![](https://raw.githubusercontent.com/dns21395/ToDo/master/ReadmeFiles/photo2.png)
