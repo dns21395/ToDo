@@ -10,9 +10,9 @@ import night.lines.todo.model.data.database.model.Task
 interface DatabaseManager {
     fun insertTask(task: Task): Long
 
-    fun getAllTasks(): Flowable<List<Task>>
-
     fun updateTask(task: Task): Observable<Unit>
 
     fun removeTask(task: Task): Observable<Unit>
+
+    fun getTasks(showFinished: Int): Flowable<List<Task>>
 }

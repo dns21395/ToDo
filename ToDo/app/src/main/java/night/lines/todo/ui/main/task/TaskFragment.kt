@@ -12,7 +12,6 @@ import night.lines.todo.presentation.main.task.TaskPresenter
 import night.lines.todo.presentation.main.task.TaskView
 import night.lines.todo.toothpick.DI
 import night.lines.todo.ui.global.BaseFragment
-import night.lines.todo.ui.main.TaskAdapter
 import toothpick.Toothpick
 
 /**
@@ -37,15 +36,11 @@ class TaskFragment : BaseFragment(), TaskView {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-
         adapter = TaskAdapter(context!!, recyclerView)
         adapter.presenter = presenter
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
         recyclerView.addItemDecoration(DividerItemDecoration(recyclerView.context, layoutManager.orientation))
-
-        presenter.onViewPrepared()
-
 
     }
 

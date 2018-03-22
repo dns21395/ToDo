@@ -1,4 +1,4 @@
-package night.lines.todo.ui.main
+package night.lines.todo.ui.main.task
 
 import android.content.Context
 import android.support.v4.content.ContextCompat
@@ -11,7 +11,6 @@ import kotlinx.android.synthetic.main.item_task.view.*
 import night.lines.todo.R
 import night.lines.todo.model.data.database.model.Task
 import night.lines.todo.presentation.main.task.TaskPresenter
-import night.lines.todo.ui.main.task.TaskAdapterSwipeCallback
 import org.jetbrains.anko.backgroundColor
 import org.jetbrains.anko.imageResource
 
@@ -75,7 +74,7 @@ class TaskAdapter(context: Context, recyclerView: RecyclerView) : RecyclerView.A
         }
 
         fun onItemSelected() {
-            changeBackground(R.color.colorPrimaryDark)
+            changeBackground(R.color.item_touch)
         }
 
         fun onItemClear() {

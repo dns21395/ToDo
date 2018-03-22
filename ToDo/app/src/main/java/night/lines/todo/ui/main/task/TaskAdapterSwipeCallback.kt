@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.View
 import night.lines.todo.R
-import night.lines.todo.ui.main.TaskAdapter
 
 /**
  * Created by denisgabyshev on 21/03/2018.

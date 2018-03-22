@@ -20,4 +20,16 @@ class MainActivityController {
         HIDE
     }
 
+    private val taskFragmentStateRelay = PublishRelay.create<EnumTaskFragment>()
+
+    val taskFragmentState: Observable<EnumTaskFragment> = taskFragmentStateRelay
+
+    fun callTaskFragmentAction(action: EnumTaskFragment) {
+        taskFragmentStateRelay.accept(action)
+    }
+
+    enum class EnumTaskFragment {
+        FINISHED_ITEMS_VISIBILITY_UPDATED
+    }
+
 }

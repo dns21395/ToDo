@@ -15,8 +15,7 @@ import javax.inject.Inject
  * Created by denisgabyshev on 18/03/2018.
  */
 @InjectViewState
-class MainPresenter @Inject constructor(private val databaseManager: DatabaseManager,
-                                        private val schedulerProvider: SchedulerProvider,
+class MainPresenter @Inject constructor(private val schedulerProvider: SchedulerProvider,
                                         private val mainActivityController: MainActivityController,
                                         private val interactor: MainInteractor
 ) : BasePresenter<MainView>() {
@@ -68,7 +67,6 @@ class MainPresenter @Inject constructor(private val databaseManager: DatabaseMan
     }
 
     private fun updateIconCheckFinishedItemsVisibility(visible: Boolean) {
-        Log.d(TAG, "UPD")
         when(visible) {
             true -> viewState.updateIconCheckFinishedItemsVisibility(R.drawable.check_show)
             false -> viewState.updateIconCheckFinishedItemsVisibility(R.drawable.check_hide)
@@ -84,6 +82,7 @@ class MainPresenter @Inject constructor(private val databaseManager: DatabaseMan
                 }.compose(schedulerProvider.ioToMainObservableScheduler())
                         .subscribe {
                             updateIconCheckFinishedItemsVisibility(it)
+                            mainActivityController.callTaskFragmentAction(MainActivityController.EnumTaskFragment.FINISHED_ITEMS_VISIBILITY_UPDATED)
                         }
         )
     }

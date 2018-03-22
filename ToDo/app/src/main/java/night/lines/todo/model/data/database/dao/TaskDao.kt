@@ -10,6 +10,7 @@ import night.lines.todo.model.data.database.model.Task
  */
 @Dao
 interface TaskDao : BaseDao<Task> {
-    @Query("SELECT * FROM task")
-    fun getAllTasks(): Flowable<List<Task>>
+
+    @Query("SELECT * FROM task WHERE isDone = :finished OR isDone = 0")
+    fun getTasks(finished: Int): Flowable<List<Task>>
 }
