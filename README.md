@@ -1,7 +1,7 @@
 # To-Do
 To-Do application written on Kotlin
 
-<p align="center"><img src="https://raw.githubusercontent.com/dns21395/ToDo/master/ReadmeFiles/photo1.png" width="360" /></p>
+<p align="center"><img src="https://raw.githubusercontent.com/dns21395/ToDo/master/ReadmeFiles/photo.png" width="360" /></p>
 
 Used Resources
 -----
