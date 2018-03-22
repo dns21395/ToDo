@@ -1,4 +1,4 @@
-package night.lines.todo.database.dao
+package night.lines.todo.model.data.database.dao
 
 import android.arch.persistence.room.Delete
 import android.arch.persistence.room.Insert

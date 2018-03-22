@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_task.view.*
 import night.lines.todo.R
-import night.lines.todo.database.model.Task
+import night.lines.todo.model.data.database.model.Task
 import night.lines.todo.presentation.main.task.TaskPresenter
 import night.lines.todo.ui.main.task.TaskAdapterSwipeCallback
 import org.jetbrains.anko.backgroundColor

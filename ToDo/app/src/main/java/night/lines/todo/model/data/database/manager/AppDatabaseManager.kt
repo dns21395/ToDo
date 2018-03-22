@@ -1,10 +1,9 @@
-package night.lines.todo.database.manager
+package night.lines.todo.model.data.database.manager
 
-import android.content.Context
 import io.reactivex.Flowable
 import io.reactivex.Observable
-import night.lines.todo.database.dao.TaskDao
-import night.lines.todo.database.model.Task
+import night.lines.todo.model.data.database.dao.TaskDao
+import night.lines.todo.model.data.database.model.Task
 import javax.inject.Inject
 
 /**

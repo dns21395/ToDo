@@ -2,8 +2,9 @@ package night.lines.todo.toothpick.module
 
 import android.arch.persistence.room.Room
 import android.content.Context
-import night.lines.todo.database.AppDatabase
-import night.lines.todo.database.manager.DatabaseManager
+import night.lines.todo.model.data.database.AppDatabase
+import night.lines.todo.model.data.database.manager.DatabaseManager
+import night.lines.todo.model.data.storage.Prefs
 import night.lines.todo.model.system.scheduler.AppSchedulerProvider
 import night.lines.todo.model.system.scheduler.SchedulerProvider
 import night.lines.todo.toothpick.provider.RoomProvider
@@ -22,5 +23,6 @@ class AppModule(context: Context) : Module() {
         )
         bind(DatabaseManager::class.java).toProvider(RoomProvider::class.java).providesSingletonInScope()
         bind(SchedulerProvider::class.java).toInstance(AppSchedulerProvider())
+        bind(Prefs::class.java).to(Prefs::class.java).singletonInScope()
     }
 }

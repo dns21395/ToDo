@@ -3,14 +3,12 @@ package night.lines.todo.presentation.main
 import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import io.reactivex.Observable
-import night.lines.todo.database.manager.DatabaseManager
-import night.lines.todo.database.model.Task
+import night.lines.todo.R
+import night.lines.todo.model.data.database.manager.DatabaseManager
 import night.lines.todo.model.interactor.main.MainInteractor
-import night.lines.todo.model.system.scheduler.AppSchedulerProvider
 import night.lines.todo.model.system.scheduler.SchedulerProvider
 import night.lines.todo.presentation.global.BasePresenter
 import night.lines.todo.presentation.global.MainActivityController
-import java.util.*
 import javax.inject.Inject
 
 /**
@@ -31,6 +29,8 @@ class MainPresenter @Inject constructor(private val databaseManager: DatabaseMan
         onViewPrepared()
 
         callBackground()
+
+        checkFinishedItemsVisibility()
     }
 
     private fun onViewPrepared() {
@@ -46,7 +46,7 @@ class MainPresenter @Inject constructor(private val databaseManager: DatabaseMan
         )
     }
 
-    fun callBackground() {
+    private fun callBackground() {
         compositeDisposable.add(
                 interactor.getBackground()
                         .compose(schedulerProvider.ioToMainObservableScheduler())
@@ -56,22 +56,42 @@ class MainPresenter @Inject constructor(private val databaseManager: DatabaseMan
         )
     }
 
+    private fun checkFinishedItemsVisibility() {
+        compositeDisposable.add(
+                Observable.fromCallable {
+                    interactor.getFinishedTasksVisibility()
+                }.compose(schedulerProvider.ioToMainObservableScheduler())
+                        .subscribe {
+                            updateIconCheckFinishedItemsVisibility(it)
+                        }
+        )
+    }
+
+    private fun updateIconCheckFinishedItemsVisibility(visible: Boolean) {
+        Log.d(TAG, "UPD")
+        when(visible) {
+            true -> viewState.updateIconCheckFinishedItemsVisibility(R.drawable.check_show)
+            false -> viewState.updateIconCheckFinishedItemsVisibility(R.drawable.check_hide)
+        }
+    }
+
+    fun setFinishedTasksVisibility() {
+        compositeDisposable.add(
+                Observable.fromCallable {
+                    val visibility = interactor.getFinishedTasksVisibility()
+                    interactor.setFinishedTasksVisibility(!visibility)
+                    !visibility
+                }.compose(schedulerProvider.ioToMainObservableScheduler())
+                        .subscribe {
+                            updateIconCheckFinishedItemsVisibility(it)
+                        }
+        )
+    }
 
     fun onFabButtonClicked() {
         mainActivityController.callAddTaskFragmentAction(MainActivityController.EnumAddTaskFragment.SHOW)
     }
 
-    fun onClickButton(text: String) {
-        compositeDisposable.add(
-                databaseManager.getAllTasks()
-                        .compose(schedulerProvider.ioToMainFlowableScheduler())
-                        .subscribe {
-                            for(item in it) {
-                                Log.d(TAG, "$item")
-                            }
-                        }
-        )
-    }
 
 
 }

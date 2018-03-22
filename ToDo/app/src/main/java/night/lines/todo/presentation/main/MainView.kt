@@ -16,4 +16,7 @@ interface MainView : MvpView {
     fun hideAddTaskFragment()
 
     fun setToolbarBackground(background: Int)
+
+    @StateStrategyType(OneExecutionStateStrategy::class)
+    fun updateIconCheckFinishedItemsVisibility(drawable: Int)
 }

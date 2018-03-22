@@ -1,26 +1,24 @@
 package night.lines.todo.ui.main
 
-import android.content.res.Configuration
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
 import android.support.constraint.ConstraintSet
-import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.readystatesoftware.systembartint.SystemBarTintManager
 import kotlinx.android.synthetic.main.activity_main.*
 import night.lines.todo.R
-import night.lines.todo.presentation.global.MainActivityController
 import night.lines.todo.presentation.main.MainPresenter
 import night.lines.todo.presentation.main.MainView
 import night.lines.todo.toothpick.DI
-import night.lines.todo.toothpick.module.MainActivityModule
 import night.lines.todo.ui.main.addtask.AddTaskFragment
 import night.lines.todo.ui.main.task.TaskFragment
 import toothpick.Toothpick
-import javax.inject.Inject
 
 /**
  * Created by denisgabyshev on 18/03/2018.
@@ -43,6 +41,10 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        transparentStatusBar()
+
+        setMenu()
+
         supportFragmentManager.beginTransaction().replace(R.id.frameLayout, TaskFragment())
                 .commitAllowingStateLoss()
 
@@ -51,11 +53,6 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         fab.setOnClickListener {
             presenter.onFabButtonClicked()
         }
-
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 
     private fun createFrameLayout() {
@@ -124,5 +121,31 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     override fun onBackPressed() {
         if(presenter.bottomFrameLayoutId != 0) hideAddTaskFragment()
         else super.onBackPressed()
+    }
+
+    private fun setMenu() {
+        toolbar.inflateMenu(R.menu.main)
+
+        toolbar.setOnMenuItemClickListener {
+            if(it.itemId == R.id.check) presenter.setFinishedTasksVisibility()
+            false
+        }
+    }
+
+    private fun transparentStatusBar() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            window.statusBarColor = Color.TRANSPARENT
+
+            val tintManager = SystemBarTintManager(this)
+            // enable status bar tint
+            tintManager.isStatusBarTintEnabled = true
+            // enable navigation bar tint
+            tintManager.setNavigationBarTintEnabled(true)
+        }
+    }
+
+    override fun updateIconCheckFinishedItemsVisibility(drawable: Int) {
+        toolbar.menu.getItem(0).icon = resources.getDrawable(drawable, null)
     }
 }

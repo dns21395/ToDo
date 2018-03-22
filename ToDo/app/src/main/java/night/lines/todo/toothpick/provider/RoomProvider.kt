@@ -1,10 +1,8 @@
 package night.lines.todo.toothpick.provider
 
-import android.arch.persistence.room.Room
-import android.content.Context
-import night.lines.todo.database.AppDatabase
-import night.lines.todo.database.manager.AppDatabaseManager
-import night.lines.todo.database.manager.DatabaseManager
+import night.lines.todo.model.data.database.AppDatabase
+import night.lines.todo.model.data.database.manager.AppDatabaseManager
+import night.lines.todo.model.data.database.manager.DatabaseManager
 import javax.inject.Inject
 import javax.inject.Provider
 

@@ -1,9 +1,9 @@
-package night.lines.todo.database
+package night.lines.todo.model.data.database
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase
-import night.lines.todo.database.dao.TaskDao
-import night.lines.todo.database.model.Task
+import night.lines.todo.model.data.database.dao.TaskDao
+import night.lines.todo.model.data.database.model.Task
 
 /**
  * Created by denisgabyshev on 18/03/2018.

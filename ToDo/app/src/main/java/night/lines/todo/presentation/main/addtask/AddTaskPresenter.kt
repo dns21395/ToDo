@@ -2,8 +2,8 @@ package night.lines.todo.presentation.main.addtask
 
 import com.arellomobile.mvp.InjectViewState
 import io.reactivex.Observable
-import night.lines.todo.database.manager.DatabaseManager
-import night.lines.todo.database.model.Task
+import night.lines.todo.model.data.database.manager.DatabaseManager
+import night.lines.todo.model.data.database.model.Task
 import night.lines.todo.model.system.scheduler.SchedulerProvider
 import night.lines.todo.presentation.global.BasePresenter
 import night.lines.todo.presentation.global.MainActivityController
