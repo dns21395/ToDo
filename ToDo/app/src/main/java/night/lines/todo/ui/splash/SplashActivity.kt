@@ -4,8 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
-import night.lines.todo.mvp.presenters.SplashPresenter
-import night.lines.todo.mvp.views.SplashView
+import night.lines.todo.presentation.splash.SplashPresenter
+import night.lines.todo.presentation.splash.SplashView
 import night.lines.todo.ui.main.MainActivity
 
 /**

@@ -25,7 +25,7 @@ class AddTaskPresenter @Inject constructor(private val databaseManager: Database
                     databaseManager.insertTask(Task(0, taskName, Date().time))
                 }.compose(schedulerProvider.ioToMainObservableScheduler())
                         .subscribe {
-                            mainActivityController.callAddTaskFragmentAction(MainActivityController.EnumAddTaskFragment.HIDE)
+                            mainActivityController.callTaskFragmentAction(MainActivityController.EnumTaskFragment.ITEM_ADDED)
                         }
         )
     }

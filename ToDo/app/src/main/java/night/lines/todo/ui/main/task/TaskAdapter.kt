@@ -17,7 +17,7 @@ import org.jetbrains.anko.imageResource
 /**
  * Created by denisgabyshev on 20/03/2018.
  */
-class TaskAdapter(context: Context, recyclerView: RecyclerView) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>(){
+class TaskAdapter(context: Context, private val recyclerView: RecyclerView) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>(){
 
     lateinit var presenter: TaskPresenter
 
@@ -40,10 +40,15 @@ class TaskAdapter(context: Context, recyclerView: RecyclerView) : RecyclerView.A
     fun updateArray(array: ArrayList<Task>) {
         presenter.updateTaskArray(array)
         notifyDataSetChanged()
+        if(presenter.isAddTaskFragmentVisible) smoothScrollToPosition()
     }
 
     fun removeAt(position: Int) {
         presenter.onItemSwiped(presenter.getTaskByPosition(position), {notifyItemRemoved(position)})
+    }
+
+    fun smoothScrollToPosition() {
+        recyclerView.smoothScrollToPosition(presenter.getTaskArrayItemCount())
     }
 
     inner class TaskViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {

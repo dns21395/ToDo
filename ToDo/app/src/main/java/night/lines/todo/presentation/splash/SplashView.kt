@@ -1,4 +1,4 @@
-package night.lines.todo.mvp.views
+package night.lines.todo.presentation.splash
 
 import com.arellomobile.mvp.MvpView
 

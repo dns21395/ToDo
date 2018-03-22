@@ -29,7 +29,8 @@ class MainActivityController {
     }
 
     enum class EnumTaskFragment {
-        FINISHED_ITEMS_VISIBILITY_UPDATED
+        FINISHED_ITEMS_VISIBILITY_UPDATED,
+        ITEM_ADDED
     }
 
 }

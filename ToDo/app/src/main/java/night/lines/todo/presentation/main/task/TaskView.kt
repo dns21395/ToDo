@@ -11,4 +11,6 @@ import night.lines.todo.model.data.database.model.Task
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface TaskView : MvpView {
     fun updateTaskArray(array: ArrayList<Task>)
+
+    fun scrollToEnd()
 }

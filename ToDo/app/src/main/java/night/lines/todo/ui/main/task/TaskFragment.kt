@@ -3,6 +3,8 @@ package night.lines.todo.ui.main.task
 import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.util.Log
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import kotlinx.android.synthetic.main.fragment_task.*
@@ -18,6 +20,8 @@ import toothpick.Toothpick
  * Created by denisgabyshev on 20/03/2018.
  */
 class TaskFragment : BaseFragment(), TaskView {
+
+    private val TAG = "TaskFragment"
 
     private lateinit var adapter: TaskAdapter
     private val layoutManager = LinearLayoutManager(context)
@@ -46,5 +50,9 @@ class TaskFragment : BaseFragment(), TaskView {
 
     override fun updateTaskArray(array: ArrayList<Task>) {
         adapter.updateArray(array)
+    }
+
+    override fun scrollToEnd() {
+        adapter.smoothScrollToPosition()
     }
 }

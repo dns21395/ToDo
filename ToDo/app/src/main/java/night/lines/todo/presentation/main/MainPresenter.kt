@@ -91,6 +91,10 @@ class MainPresenter @Inject constructor(private val schedulerProvider: Scheduler
         mainActivityController.callAddTaskFragmentAction(MainActivityController.EnumAddTaskFragment.SHOW)
     }
 
+    fun enumAddTaskFragmentHide() {
+        mainActivityController.callAddTaskFragmentAction(MainActivityController.EnumAddTaskFragment.HIDE)
+    }
+
 
 
 }

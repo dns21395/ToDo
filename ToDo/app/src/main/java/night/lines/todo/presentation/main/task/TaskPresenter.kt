@@ -27,6 +27,8 @@ class TaskPresenter @Inject constructor(private val databaseManager: DatabaseMan
 
     private var getTasksDisposable = updateGetTasksDisposable()
 
+    var isAddTaskFragmentVisible = false
+
     init {
         onViewPrepared()
     }
@@ -46,11 +48,25 @@ class TaskPresenter @Inject constructor(private val databaseManager: DatabaseMan
                 mainController.taskFragmentState
                         .compose(schedulerProvider.ioToMainObservableScheduler())
                         .subscribe {
-                            if(it == MainActivityController.EnumTaskFragment.FINISHED_ITEMS_VISIBILITY_UPDATED) {
-                                Log.d(TAG, "${interactor.getFinishedTasksVisibility()}")
-                                compositeDisposable.remove(getTasksDisposable)
-                                getTasksDisposable = updateGetTasksDisposable()
-                                compositeDisposable.add(getTasksDisposable)
+                            when(it) {
+                                MainActivityController.EnumTaskFragment.FINISHED_ITEMS_VISIBILITY_UPDATED -> {
+                                    Log.d(TAG, "${interactor.getFinishedTasksVisibility()}")
+                                    compositeDisposable.remove(getTasksDisposable)
+                                    getTasksDisposable = updateGetTasksDisposable()
+                                    compositeDisposable.add(getTasksDisposable)
+                                }
+                                else -> viewState.scrollToEnd()
+                            }
+                        }
+        )
+
+        compositeDisposable.add(
+                mainController.addTaskFragmentState
+                        .compose(schedulerProvider.ioToMainObservableScheduler())
+                        .subscribe {
+                            isAddTaskFragmentVisible = when(it) {
+                                MainActivityController.EnumAddTaskFragment.SHOW -> true
+                                else -> false
                             }
                         }
         )

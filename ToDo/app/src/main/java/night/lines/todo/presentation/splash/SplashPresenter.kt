@@ -1,8 +1,7 @@
-package night.lines.todo.mvp.presenters
+package night.lines.todo.presentation.splash
 
 import com.arellomobile.mvp.MvpPresenter
-import io.reactivex.disposables.CompositeDisposable
-import night.lines.todo.mvp.views.SplashView
+import night.lines.todo.presentation.splash.SplashView
 
 /**
  * Created by denisgabyshev on 18/03/2018.

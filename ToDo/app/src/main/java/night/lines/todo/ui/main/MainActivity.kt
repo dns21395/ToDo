@@ -80,9 +80,9 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
         constraintSet.connect(presenter.bottomFrameLayoutId, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END)
 
-        constraintSet.clear(frameLayout.id, ConstraintSet.BOTTOM)
+        constraintSet.clear(coordinator.id, ConstraintSet.BOTTOM)
 
-        constraintSet.connect(frameLayout.id, ConstraintSet.BOTTOM, presenter.bottomFrameLayoutId, ConstraintSet.TOP)
+        constraintSet.connect(coordinator.id, ConstraintSet.BOTTOM, presenter.bottomFrameLayoutId, ConstraintSet.TOP)
 
         constraintSet.applyTo(parentConstraint)
     }
@@ -91,6 +91,8 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         createFrameLayout()
 
         supportFragmentManager.beginTransaction().replace(presenter.bottomFrameLayoutId, AddTaskFragment(), AddTaskFragment.TAG).commit()
+
+        app_bar.setExpanded(false)
     }
 
     override fun hideAddTaskFragment() {
@@ -103,9 +105,9 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         val constraintSet = ConstraintSet()
         constraintSet.clone(parentConstraint)
 
-        constraintSet.clear(frameLayout.id, ConstraintSet.BOTTOM)
+        constraintSet.clear(coordinator.id, ConstraintSet.BOTTOM)
 
-        constraintSet.connect(frameLayout.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM)
+        constraintSet.connect(coordinator.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM)
 
         constraintSet.applyTo(parentConstraint)
 
@@ -119,7 +121,10 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     }
 
     override fun onBackPressed() {
-        if(presenter.bottomFrameLayoutId != 0) hideAddTaskFragment()
+        if(presenter.bottomFrameLayoutId != 0) {
+            hideAddTaskFragment()
+            presenter.enumAddTaskFragmentHide()
+        }
         else super.onBackPressed()
     }
 
