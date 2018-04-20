@@ -15,12 +15,6 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [toothpick_registry_package_name: 'night.lines.todo']
-            }
-        }
     }
     buildTypes {
         release {
@@ -28,15 +22,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    kapt {
-        generateStubs = true
-        correctErrorTypes = true
-    }
-
-
 }
 
 dependencies {
+    implementation project(':data')
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
@@ -71,4 +61,11 @@ dependencies {
 
     // Anko
     implementation "org.jetbrains.anko:anko:$anko_version"
+}
+
+kapt {
+    generateStubs = true
+    arguments {
+        arg("toothpick_registry_package_name", "night.lines.todo.app")
+    }
 }
