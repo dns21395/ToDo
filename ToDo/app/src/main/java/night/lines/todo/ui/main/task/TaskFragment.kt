@@ -3,16 +3,18 @@ package night.lines.todo.ui.main.task
 import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.util.Log
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import kotlinx.android.synthetic.main.fragment_task.*
 import night.lines.todo.R
-import night.lines.todo.model.data.database.model.Task
+import night.lines.todo.data.database.db.model.TaskModel
+import night.lines.todo.domain.model.Task
 import night.lines.todo.presentation.main.task.TaskPresenter
 import night.lines.todo.presentation.main.task.TaskView
 import night.lines.todo.toothpick.DI
+import night.lines.todo.toothpick.main.MainScope
+import night.lines.todo.toothpick.task.TaskModule
+import night.lines.todo.toothpick.task.TaskScope
 import night.lines.todo.ui.global.BaseFragment
 import toothpick.Toothpick
 
@@ -32,8 +34,10 @@ class TaskFragment : BaseFragment(), TaskView {
     @ProvidePresenter
     fun providePresenter(): TaskPresenter
         =  Toothpick
-            .openScope(DI.MAIN_SCOPE)
-            .getInstance(TaskPresenter::class.java)
+            .openScopes(MainScope::class.java, TaskScope::class.java).apply {
+                installModules(TaskModule())
+                Toothpick.inject(this@TaskFragment, this)
+            }.getInstance(TaskPresenter::class.java)
 
     override val layoutRes = R.layout.fragment_task
 
@@ -46,6 +50,7 @@ class TaskFragment : BaseFragment(), TaskView {
         recyclerView.adapter = adapter
         recyclerView.addItemDecoration(DividerItemDecoration(recyclerView.context, layoutManager.orientation))
 
+        presenter.onViewPrepared()
     }
 
     override fun updateTaskArray(array: ArrayList<Task>) {

@@ -1,12 +1,8 @@
 package night.lines.todo.ui.global
 
-import android.app.ProgressDialog
-import android.graphics.Color
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import com.arellomobile.mvp.MvpAppCompatFragment
 
 /**

@@ -15,6 +15,8 @@ import night.lines.todo.R
 import night.lines.todo.presentation.main.MainPresenter
 import night.lines.todo.presentation.main.MainView
 import night.lines.todo.toothpick.DI
+import night.lines.todo.toothpick.main.MainModule
+import night.lines.todo.toothpick.main.MainScope
 import night.lines.todo.ui.main.addtask.AddTaskFragment
 import night.lines.todo.ui.main.task.TaskFragment
 import toothpick.Toothpick
@@ -32,8 +34,10 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     @ProvidePresenter
     fun providePresenter(): MainPresenter {
         return Toothpick
-                .openScopes(DI.MAIN_SCOPE)
-                .getInstance(MainPresenter::class.java)
+                .openScopes(DI.APP_SCOPE, MainScope::class.java).apply {
+                    installModules(MainModule())
+                    Toothpick.inject(this@MainActivity, this)
+                }.getInstance(MainPresenter::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

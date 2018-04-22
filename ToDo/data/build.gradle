@@ -24,20 +24,23 @@ android {
 }
 
 dependencies {
+    implementation project(':domain')
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
-    //DI
-    implementation "com.github.stephanenicolas.toothpick:toothpick-runtime:$toothpickVersion"
-    kapt "com.github.stephanenicolas.toothpick:toothpick-compiler:$toothpickVersion"
+    // Database
+    implementation "android.arch.persistence.room:runtime:$roomDatabaseVersion"
+    implementation "android.arch.persistence.room:rxjava2:$roomDatabaseVersion"
+    kapt "android.arch.persistence.room:compiler:$roomDatabaseVersion"
+
+    // reactive
+    implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlin"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroidVersion"
+    implementation "com.jakewharton.rxrelay2:rxrelay:$rxrelay"
 }
 
-kapt {
-    generateStubs = true
-    arguments {
-        arg("toothpick_registry_package_name", "night.lines.todo.data")
-    }
-}
+

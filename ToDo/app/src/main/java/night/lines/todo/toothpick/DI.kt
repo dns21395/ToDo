@@ -5,6 +5,4 @@ package night.lines.todo.toothpick
  */
 object DI {
     const val APP_SCOPE = "app scope"
-    const val MAIN_SCOPE = "main scope"
-    const val MAIN_FRAGMENT_SCOPE = "main fragment scope"
 }

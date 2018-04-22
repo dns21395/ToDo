@@ -1,11 +1,9 @@
 package night.lines.todo.presentation.main
 
-import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import io.reactivex.Observable
 import night.lines.todo.R
-import night.lines.todo.model.data.database.manager.DatabaseManager
-import night.lines.todo.model.interactor.main.MainInteractor
+import night.lines.todo.ui.main.MainManager
 import night.lines.todo.model.system.scheduler.SchedulerProvider
 import night.lines.todo.presentation.global.BasePresenter
 import night.lines.todo.presentation.global.MainActivityController
@@ -17,7 +15,7 @@ import javax.inject.Inject
 @InjectViewState
 class MainPresenter @Inject constructor(private val schedulerProvider: SchedulerProvider,
                                         private val mainActivityController: MainActivityController,
-                                        private val interactor: MainInteractor
+                                        private val interactor: MainManager
 ) : BasePresenter<MainView>() {
 
     private val TAG = "MainPresenter"
@@ -76,9 +74,9 @@ class MainPresenter @Inject constructor(private val schedulerProvider: Scheduler
     fun setFinishedTasksVisibility() {
         compositeDisposable.add(
                 Observable.fromCallable {
-                    val visibility = interactor.getFinishedTasksVisibility()
-                    interactor.setFinishedTasksVisibility(!visibility)
-                    !visibility
+                    val visibility = !interactor.getFinishedTasksVisibility()
+                    interactor.setFinishedTasksVisibility(visibility)
+                    visibility
                 }.compose(schedulerProvider.ioToMainObservableScheduler())
                         .subscribe {
                             updateIconCheckFinishedItemsVisibility(it)
