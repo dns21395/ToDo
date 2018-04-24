@@ -3,10 +3,11 @@ package night.lines.todo.presentation.main
 import com.arellomobile.mvp.InjectViewState
 import io.reactivex.Observable
 import night.lines.todo.R
-import night.lines.todo.ui.main.MainManager
-import night.lines.todo.model.system.scheduler.SchedulerProvider
-import night.lines.todo.presentation.global.BasePresenter
-import night.lines.todo.presentation.global.MainActivityController
+import night.lines.todo.domain.repository.PreferencesRepository
+import night.lines.todo.manager.MainManager
+import night.lines.todo.util.SchedulerProvider
+import night.lines.todo.presentation.base.BasePresenter
+import night.lines.todo.manager.MainActivityController
 import javax.inject.Inject
 
 /**
@@ -20,29 +21,28 @@ class MainPresenter @Inject constructor(private val schedulerProvider: Scheduler
 
     private val TAG = "MainPresenter"
 
+    @Inject lateinit var preferencesRepository: PreferencesRepository
+
     var bottomFrameLayoutId: Int = 0
 
-    init {
-        onViewPrepared()
-
-        callBackground()
-
-        checkFinishedItemsVisibility()
-    }
-
-    private fun onViewPrepared() {
+    fun onViewPrepared() {
         compositeDisposable.add(
                 mainActivityController.addTaskFragmentState
                         .compose(schedulerProvider.ioToMainObservableScheduler())
                         .subscribe {
-                            when(it) {
-                                MainActivityController.EnumAddTaskFragment.SHOW -> viewState.showAddTaskFragment()
-                                else -> viewState.hideAddTaskFragment()
-                            }
+                            handleAddTaskFragmentState(it)
+                            callBackground()
+                            checkFinishedItemsVisibility()
                         }
         )
     }
 
+    private fun handleAddTaskFragmentState(enum: MainActivityController.EnumAddTaskFragment) {
+        when(enum) {
+            MainActivityController.EnumAddTaskFragment.SHOW -> viewState.showAddTaskFragment()
+            else -> viewState.hideAddTaskFragment()
+        }
+    }
     private fun callBackground() {
         compositeDisposable.add(
                 interactor.getBackground()
@@ -55,12 +55,8 @@ class MainPresenter @Inject constructor(private val schedulerProvider: Scheduler
 
     private fun checkFinishedItemsVisibility() {
         compositeDisposable.add(
-                Observable.fromCallable {
-                    interactor.getFinishedTasksVisibility()
-                }.compose(schedulerProvider.ioToMainObservableScheduler())
-                        .subscribe {
-                            updateIconCheckFinishedItemsVisibility(it)
-                        }
+               preferencesRepository.getFinishedTasksVisibility().compose(schedulerProvider.ioToMainObservableScheduler())
+                        .subscribe { updateIconCheckFinishedItemsVisibility(it) }
         )
     }
 
@@ -73,11 +69,12 @@ class MainPresenter @Inject constructor(private val schedulerProvider: Scheduler
 
     fun setFinishedTasksVisibility() {
         compositeDisposable.add(
-                Observable.fromCallable {
-                    val visibility = !interactor.getFinishedTasksVisibility()
-                    interactor.setFinishedTasksVisibility(visibility)
-                    visibility
-                }.compose(schedulerProvider.ioToMainObservableScheduler())
+                preferencesRepository.getFinishedTasksVisibility()
+                        .map {
+                            preferencesRepository.setFinishedTasksVisibility(!it)
+                        !it
+                        }
+                        .compose(schedulerProvider.ioToMainObservableScheduler())
                         .subscribe {
                             updateIconCheckFinishedItemsVisibility(it)
                             mainActivityController.callTaskFragmentAction(MainActivityController.EnumTaskFragment.FINISHED_ITEMS_VISIBILITY_UPDATED)

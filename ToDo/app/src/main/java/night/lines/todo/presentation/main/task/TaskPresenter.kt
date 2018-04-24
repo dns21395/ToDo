@@ -2,15 +2,16 @@ package night.lines.todo.presentation.main.task
 
 import android.util.Log
 import com.arellomobile.mvp.InjectViewState
+import io.reactivex.BackpressureStrategy
 import io.reactivex.disposables.Disposable
 import night.lines.todo.domain.interactor.main.GetTasksUseCase
 import night.lines.todo.domain.interactor.main.RemoveTaskUseCase
 import night.lines.todo.domain.interactor.main.UpdateTaskUseCase
 import night.lines.todo.domain.model.Task
 import night.lines.todo.domain.repository.PreferencesRepository
-import night.lines.todo.model.system.scheduler.SchedulerProvider
-import night.lines.todo.presentation.global.BasePresenter
-import night.lines.todo.presentation.global.MainActivityController
+import night.lines.todo.util.SchedulerProvider
+import night.lines.todo.presentation.base.BasePresenter
+import night.lines.todo.manager.MainActivityController
 import java.util.*
 import javax.inject.Inject
 
@@ -73,7 +74,8 @@ class TaskPresenter @Inject constructor(private val schedulerProvider: Scheduler
     }
 
     private fun updateGetTasksDisposable(): Disposable
-         = getTasksUseCase.execute(preferencesRepository.getFinishedTasksVisibility() )
+         = preferencesRepository.getFinishedTasksVisibility().toFlowable(BackpressureStrategy.BUFFER)
+            .flatMap { getTasksUseCase.execute(it) }
             .compose(schedulerProvider.ioToMainFlowableScheduler())
             .subscribe {
                 Log.d(TAG, "$it")

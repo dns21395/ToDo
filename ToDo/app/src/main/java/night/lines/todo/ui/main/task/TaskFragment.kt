@@ -7,15 +7,13 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import kotlinx.android.synthetic.main.fragment_task.*
 import night.lines.todo.R
-import night.lines.todo.data.database.db.model.TaskModel
 import night.lines.todo.domain.model.Task
 import night.lines.todo.presentation.main.task.TaskPresenter
 import night.lines.todo.presentation.main.task.TaskView
-import night.lines.todo.toothpick.DI
 import night.lines.todo.toothpick.main.MainScope
 import night.lines.todo.toothpick.task.TaskModule
 import night.lines.todo.toothpick.task.TaskScope
-import night.lines.todo.ui.global.BaseFragment
+import night.lines.todo.ui.base.BaseFragment
 import toothpick.Toothpick
 
 /**

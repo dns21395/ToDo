@@ -54,6 +54,8 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         fab.setOnClickListener {
             presenter.onFabButtonClicked()
         }
+
+        presenter.onViewPrepared()
     }
 
     private fun createFrameLayout() {

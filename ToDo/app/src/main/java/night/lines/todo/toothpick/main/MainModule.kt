@@ -1,7 +1,7 @@
 package night.lines.todo.toothpick.main
 
-import night.lines.todo.ui.main.ToolbarImages
-import night.lines.todo.presentation.global.MainActivityController
+import night.lines.todo.manager.ToolbarImages
+import night.lines.todo.manager.MainActivityController
 import toothpick.config.Module
 
 /**

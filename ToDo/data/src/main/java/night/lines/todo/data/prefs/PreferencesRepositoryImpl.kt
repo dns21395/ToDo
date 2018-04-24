@@ -2,6 +2,7 @@ package night.lines.todo.data.prefs
 
 import android.content.Context
 import android.content.SharedPreferences
+import io.reactivex.Observable
 import night.lines.todo.domain.repository.PreferencesRepository
 
 class PreferencesRepositoryImpl constructor(context: Context) : PreferencesRepository {
@@ -13,5 +14,5 @@ class PreferencesRepositoryImpl constructor(context: Context) : PreferencesRepos
 
     override fun setFinishedTasksVisibility(status: Boolean) { prefs.edit().putBoolean(PREF_KEY_FINISHED_TASKS_VISIBILITY, status).apply() }
 
-    override fun getFinishedTasksVisibility(): Boolean = prefs.getBoolean(PREF_KEY_FINISHED_TASKS_VISIBILITY, false)
+    override fun getFinishedTasksVisibility(): Observable<Boolean> = Observable.fromCallable { prefs.getBoolean(PREF_KEY_FINISHED_TASKS_VISIBILITY, false) }
 }
