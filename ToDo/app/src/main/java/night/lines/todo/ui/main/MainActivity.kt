@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
 import android.support.constraint.ConstraintSet
+import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import com.arellomobile.mvp.MvpAppCompatActivity
@@ -120,6 +121,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     }
 
     override fun setToolbarBackground(background: Int) {
+        Log.d(TAG, "$background toolbar new image")
         toolbarBackground.setImageResource(background)
     }
 

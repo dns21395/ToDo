@@ -1,7 +1,7 @@
 package night.lines.todo.toothpick.main
 
-import night.lines.todo.manager.ToolbarImages
-import night.lines.todo.manager.MainActivityController
+import night.lines.todo.ui.main.AddTaskActionsRelay
+import night.lines.todo.ui.main.MainNavigationRelay
 import toothpick.config.Module
 
 /**
@@ -9,7 +9,7 @@ import toothpick.config.Module
  */
 class MainModule : Module() {
     init {
-        bind(MainActivityController::class.java).toInstance(MainActivityController())
-        bind(ToolbarImages::class.java).toInstance(ToolbarImages())
+        bind(MainNavigationRelay::class.java).toInstance(MainNavigationRelay())
+        bind(AddTaskActionsRelay::class.java).toInstance(AddTaskActionsRelay())
     }
 }

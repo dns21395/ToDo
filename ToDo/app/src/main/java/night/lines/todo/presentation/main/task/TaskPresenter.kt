@@ -11,7 +11,7 @@ import night.lines.todo.domain.model.Task
 import night.lines.todo.domain.repository.PreferencesRepository
 import night.lines.todo.util.SchedulerProvider
 import night.lines.todo.presentation.base.BasePresenter
-import night.lines.todo.manager.MainActivityController
+import night.lines.todo.ui.main.MainNavigationRelay
 import java.util.*
 import javax.inject.Inject
 
@@ -20,7 +20,7 @@ import javax.inject.Inject
  */
 @InjectViewState
 class TaskPresenter @Inject constructor(private val schedulerProvider: SchedulerProvider,
-                                        private val mainController: MainActivityController): BasePresenter<TaskView>() {
+                                        private val mainController: MainNavigationRelay): BasePresenter<TaskView>() {
 
     private val TAG = "TaskPresenter"
 
@@ -52,7 +52,7 @@ class TaskPresenter @Inject constructor(private val schedulerProvider: Scheduler
                         .compose(schedulerProvider.ioToMainObservableScheduler())
                         .subscribe {
                             when(it) {
-                                MainActivityController.EnumTaskFragment.FINISHED_ITEMS_VISIBILITY_UPDATED -> {
+                                MainNavigationRelay.EnumTaskFragment.FINISHED_ITEMS_VISIBILITY_UPDATED -> {
                                     Log.d(TAG, "${preferencesRepository.getFinishedTasksVisibility()}")
                                     getTasksDisposable = updateGetTasksDisposable()
                                 }
@@ -66,7 +66,7 @@ class TaskPresenter @Inject constructor(private val schedulerProvider: Scheduler
                         .compose(schedulerProvider.ioToMainObservableScheduler())
                         .subscribe {
                             isAddTaskFragmentVisible = when(it) {
-                                MainActivityController.EnumAddTaskFragment.SHOW -> true
+                                MainNavigationRelay.EnumAddTaskFragment.SHOW -> true
                                 else -> false
                             }
                         }
