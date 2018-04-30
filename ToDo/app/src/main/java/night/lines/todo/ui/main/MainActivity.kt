@@ -10,7 +10,6 @@ import android.widget.FrameLayout
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
-import com.readystatesoftware.systembartint.SystemBarTintManager
 import kotlinx.android.synthetic.main.activity_main.*
 import night.lines.todo.R
 import night.lines.todo.presentation.main.MainPresenter
@@ -137,5 +136,10 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     override fun updateIconCheckFinishedItemsVisibility(drawable: Int) {
         toolbar.menu.getItem(0).icon = resources.getDrawable(drawable, null)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if(isFinishing) Toothpick.closeScope(DI.MAIN_SCOPE)
     }
 }

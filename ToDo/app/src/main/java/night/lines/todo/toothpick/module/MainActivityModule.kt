@@ -13,7 +13,6 @@ import toothpick.config.Module
 class MainActivityModule : Module() {
     init {
         bind(MainActivityController::class.java).toInstance(MainActivityController())
-
         bind(ToolbarImages::class.java).toInstance(AppToolbarImages())
         bind(MainInteractor::class.java).to(MainInteractor::class.java)
         bind(TaskInteractor::class.java).to(TaskInteractor::class.java)

@@ -2,7 +2,7 @@ package night.lines.todo
 
 import android.app.Application
 import night.lines.todo.toothpick.DI
-import night.lines.todo.toothpick.module.AppModule
+import night.lines.todo.toothpick.module.ApplicationModule
 import night.lines.todo.toothpick.module.MainActivityModule
 import toothpick.Toothpick
 import toothpick.configuration.Configuration
@@ -34,7 +34,7 @@ class App : Application() {
 
     private fun initAppScope() {
         val appScope = Toothpick.openScope(DI.APP_SCOPE)
-        appScope.installModules(AppModule(this))
+        appScope.installModules(ApplicationModule(this))
 
         val mainScope = Toothpick.openScopes(DI.APP_SCOPE, DI.MAIN_SCOPE)
         mainScope.installModules(MainActivityModule())

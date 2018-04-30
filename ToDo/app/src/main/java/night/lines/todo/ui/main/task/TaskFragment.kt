@@ -32,7 +32,7 @@ class TaskFragment : BaseFragment(), TaskView {
     @ProvidePresenter
     fun providePresenter(): TaskPresenter
         =  Toothpick
-            .openScope(DI.MAIN_SCOPE)
+            .openScopes(DI.MAIN_SCOPE, DI.TASK_SCOPE)
             .getInstance(TaskPresenter::class.java)
 
     override val layoutRes = R.layout.fragment_task
