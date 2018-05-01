@@ -46,7 +46,6 @@ class TaskFragment : BaseFragment(), TaskView {
         recyclerView.addItemDecoration(DividerItemDecoration(recyclerView.context, layoutManager.orientation))
 
         presenter.onViewPrepared()
-
     }
 
     override fun updateTaskArray(array: ArrayList<Task>) {

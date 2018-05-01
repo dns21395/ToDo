@@ -46,7 +46,9 @@ class TaskPresenter @Inject constructor(private val schedulerProvider: Scheduler
     fun getTaskByPosition(position: Int): Task = array[position]
 
     fun onViewPrepared() {
-        compositeDisposable.add(updateGetTasksDisposable())
+        getTasksDisposable = updateGetTasksDisposable()
+
+        compositeDisposable.add(getTasksDisposable)
 
         compositeDisposable.add(showOrHideFinishedItems())
 
@@ -58,7 +60,11 @@ class TaskPresenter @Inject constructor(private val schedulerProvider: Scheduler
             .compose(schedulerProvider.ioToMainObservableScheduler())
             .subscribe {
                 isAddTaskFragmentVisible = when(it) {
-                    AddTaskFragmentRelay.EnumAddTaskFragment.SHOW -> true
+                    AddTaskFragmentRelay.EnumAddTaskFragment.SHOW -> {
+                        Log.d(TAG, "isAddTaskFragmentVisible : $it")
+                        viewState.scrollToEnd()
+                        true
+                    }
                     else -> false
                 }
             }
@@ -69,7 +75,8 @@ class TaskPresenter @Inject constructor(private val schedulerProvider: Scheduler
             .subscribe {
                 when(it) {
                     TaskFragmentRelay.EnumTaskFragment.FINISHED_ITEMS_VISIBILITY_UPDATED -> {
-                        updateGetTasksDisposable()
+                        getTasksDisposable.dispose()
+                        getTasksDisposable = updateGetTasksDisposable()
                     }
                     else -> viewState.scrollToEnd()
                 }
@@ -77,7 +84,10 @@ class TaskPresenter @Inject constructor(private val schedulerProvider: Scheduler
 
     private fun updateGetTasksDisposable(): Disposable
          = preferencesRepository.getFinishedTasksVisibility().toFlowable(BackpressureStrategy.BUFFER)
-            .flatMap { getTasksUseCase.execute(it) }
+            .flatMap {
+                Log.d(TAG, "ipdateGetTasksDisposable() : ${it}")
+                getTasksUseCase.execute(it)
+            }
             .compose(schedulerProvider.ioToMainFlowableScheduler())
             .subscribe {
                 Log.d(TAG, "$it")
