@@ -1,0 +1,16 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+apply plugin: 'kotlin-kapt'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // reactive
+    implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlin"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroidVersion"
+    implementation "com.jakewharton.rxrelay2:rxrelay:$rxrelay"
+}
+
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"

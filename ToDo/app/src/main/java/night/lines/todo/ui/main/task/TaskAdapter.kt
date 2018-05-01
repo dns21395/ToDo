@@ -10,7 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_task.view.*
 import night.lines.todo.R
-import night.lines.todo.model.data.database.model.Task
+import night.lines.todo.data.database.db.model.TaskModel
+import night.lines.todo.domain.model.Task
 import night.lines.todo.presentation.main.task.TaskPresenter
 import org.jetbrains.anko.backgroundColor
 import org.jetbrains.anko.imageResource
@@ -65,13 +66,13 @@ class TaskAdapter(context: Context, private val recyclerView: RecyclerView) : Re
             taskName.text = task.taskName
 
             when(task.isDone) {
-                true -> {
-                    taskName.paintFlags = taskName.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-                    statusButton.imageResource = R.drawable.checkbox_marked_circle
-                }
                 false -> {
                     taskName.paintFlags = taskName.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
                     statusButton.imageResource = R.drawable.checkbox_blank_circle_outline
+                }
+                true -> {
+                    taskName.paintFlags = taskName.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                    statusButton.imageResource = R.drawable.checkbox_marked_circle
                 }
             }
 

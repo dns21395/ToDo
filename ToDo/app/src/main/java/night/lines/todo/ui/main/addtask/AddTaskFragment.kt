@@ -1,7 +1,6 @@
 package night.lines.todo.ui.main.addtask
 
 import android.os.Bundle
-import android.support.v4.app.FragmentActivity
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
@@ -9,11 +8,11 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import kotlinx.android.synthetic.main.fragment_add_task.*
 import night.lines.todo.R
-import night.lines.todo.model.system.KeyboardUtils
+import night.lines.todo.util.KeyboardUtils
 import night.lines.todo.presentation.main.addtask.AddTaskPresenter
 import night.lines.todo.presentation.main.addtask.AddTaskView
 import night.lines.todo.toothpick.DI
-import night.lines.todo.ui.global.BaseFragment
+import night.lines.todo.ui.base.BaseFragment
 import org.jetbrains.anko.support.v4.toast
 import toothpick.Toothpick
 
@@ -30,9 +29,15 @@ class AddTaskFragment : BaseFragment(), AddTaskView {
 
     @ProvidePresenter
     fun providePresenter(): AddTaskPresenter =
+<<<<<<< HEAD
             Toothpick
                     .openScopes(DI.TASK_SCOPE, DI.ADD_TASK_SCOPE)
                     .getInstance(AddTaskPresenter::class.java)
+=======
+            Toothpick.openScope(DI.MAIN_ACTIVITY_SCOPE).apply {
+                Toothpick.inject(this@AddTaskFragment, this)
+            }.getInstance(AddTaskPresenter::class.java)
+>>>>>>> clean
 
     override val layoutRes = R.layout.fragment_add_task
 
@@ -52,6 +57,7 @@ class AddTaskFragment : BaseFragment(), AddTaskView {
            addTask()
         }
     }
+
 
     private fun addTask() {
         if (textTask.text.toString().isNotEmpty()) {

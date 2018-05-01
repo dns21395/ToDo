@@ -1,12 +1,11 @@
 package night.lines.todo.presentation.main.addtask
 
 import com.arellomobile.mvp.InjectViewState
-import io.reactivex.Observable
-import night.lines.todo.model.data.database.manager.DatabaseManager
-import night.lines.todo.model.data.database.model.Task
-import night.lines.todo.model.system.scheduler.SchedulerProvider
-import night.lines.todo.presentation.global.BasePresenter
-import night.lines.todo.presentation.global.MainActivityController
+import night.lines.todo.domain.interactor.main.AddTaskUseCase
+import night.lines.todo.domain.model.Task
+import night.lines.todo.util.SchedulerProvider
+import night.lines.todo.presentation.base.BasePresenter
+import night.lines.todo.ui.main.task.TaskFragmentRelay
 import java.util.*
 import javax.inject.Inject
 
@@ -14,18 +13,18 @@ import javax.inject.Inject
  * Created by denisgabyshev on 20/03/2018.
  */
 @InjectViewState
-class AddTaskPresenter @Inject constructor(private val databaseManager: DatabaseManager,
-                                           private val schedulerProvider: SchedulerProvider,
-                                           private val mainActivityController: MainActivityController
-): BasePresenter<AddTaskView>() {
+class AddTaskPresenter @Inject constructor(private val schedulerProvider: SchedulerProvider,
+                                           private val taskFragmentRelay: TaskFragmentRelay)
+    : BasePresenter<AddTaskView>() {
+
+    @Inject lateinit var addTaskUseCase: AddTaskUseCase
 
     fun onAddTaskButtonClicked(taskName: String) {
         compositeDisposable.add(
-                Observable.fromCallable {
-                    databaseManager.insertTask(Task(0, taskName, Date().time))
-                }.compose(schedulerProvider.ioToMainObservableScheduler())
+                addTaskUseCase.execute(Task(0, taskName, Date().time))
+                .compose(schedulerProvider.ioToMainObservableScheduler())
                         .subscribe {
-                            mainActivityController.callTaskFragmentAction(MainActivityController.EnumTaskFragment.ITEM_ADDED)
+                            taskFragmentRelay.callTaskFragmentAction(TaskFragmentRelay.EnumTaskFragment.ITEM_ADDED)
                         }
         )
     }

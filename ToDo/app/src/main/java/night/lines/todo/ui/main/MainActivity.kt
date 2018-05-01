@@ -1,11 +1,10 @@
 package night.lines.todo.ui.main
 
-import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.support.constraint.ConstraintLayout
 import android.support.constraint.ConstraintSet
-import android.view.View
 import android.widget.FrameLayout
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -15,6 +14,7 @@ import night.lines.todo.R
 import night.lines.todo.presentation.main.MainPresenter
 import night.lines.todo.presentation.main.MainView
 import night.lines.todo.toothpick.DI
+import night.lines.todo.toothpick.module.MainModule
 import night.lines.todo.ui.main.addtask.AddTaskFragment
 import night.lines.todo.ui.main.task.TaskFragment
 import toothpick.Toothpick
@@ -22,6 +22,7 @@ import toothpick.Toothpick
 /**
  * Created by denisgabyshev on 18/03/2018.
  */
+
 class MainActivity : MvpAppCompatActivity(), MainView {
 
     private val TAG = "MainActivity"
@@ -32,8 +33,10 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     @ProvidePresenter
     fun providePresenter(): MainPresenter {
         return Toothpick
-                .openScopes(DI.MAIN_SCOPE)
-                .getInstance(MainPresenter::class.java)
+                .openScopes(DI.APP_SCOPE, DI.MAIN_ACTIVITY_SCOPE).apply {
+                    installModules(MainModule())
+                    Toothpick.inject(this@MainActivity, this)
+                }.getInstance(MainPresenter::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +53,8 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         fab.setOnClickListener {
             presenter.onFabButtonClicked()
         }
+
+        presenter.onViewPrepared()
     }
 
     private fun createFrameLayout() {
@@ -114,6 +119,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     }
 
     override fun setToolbarBackground(background: Int) {
+        Log.d(TAG, "$background toolbar new image")
         toolbarBackground.setImageResource(background)
     }
 
