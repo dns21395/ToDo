@@ -11,9 +11,7 @@ import night.lines.todo.R
 import night.lines.todo.util.KeyboardUtils
 import night.lines.todo.presentation.main.addtask.AddTaskPresenter
 import night.lines.todo.presentation.main.addtask.AddTaskView
-import night.lines.todo.toothpick.addtask.AddTaskModule
-import night.lines.todo.toothpick.addtask.AddTaskScope
-import night.lines.todo.toothpick.task.TaskScope
+import night.lines.todo.toothpick.DI
 import night.lines.todo.ui.base.BaseFragment
 import org.jetbrains.anko.support.v4.toast
 import toothpick.Toothpick
@@ -31,8 +29,7 @@ class AddTaskFragment : BaseFragment(), AddTaskView {
 
     @ProvidePresenter
     fun providePresenter(): AddTaskPresenter =
-            Toothpick.openScopes(TaskScope::class.java, AddTaskScope::class.java).apply {
-                installModules(AddTaskModule())
+            Toothpick.openScope(DI.MAIN_ACTIVITY_SCOPE).apply {
                 Toothpick.inject(this@AddTaskFragment, this)
             }.getInstance(AddTaskPresenter::class.java)
 
@@ -54,6 +51,7 @@ class AddTaskFragment : BaseFragment(), AddTaskView {
            addTask()
         }
     }
+
 
     private fun addTask() {
         if (textTask.text.toString().isNotEmpty()) {

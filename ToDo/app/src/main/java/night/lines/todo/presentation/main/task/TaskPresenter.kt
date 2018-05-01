@@ -11,7 +11,8 @@ import night.lines.todo.domain.model.Task
 import night.lines.todo.domain.repository.PreferencesRepository
 import night.lines.todo.util.SchedulerProvider
 import night.lines.todo.presentation.base.BasePresenter
-import night.lines.todo.ui.main.MainNavigationRelay
+import night.lines.todo.ui.main.task.TaskFragmentRelay
+import night.lines.todo.ui.main.addtask.AddTaskFragmentRelay
 import java.util.*
 import javax.inject.Inject
 
@@ -20,7 +21,8 @@ import javax.inject.Inject
  */
 @InjectViewState
 class TaskPresenter @Inject constructor(private val schedulerProvider: SchedulerProvider,
-                                        private val mainController: MainNavigationRelay): BasePresenter<TaskView>() {
+                                        private val addTaskFragmentRelay: AddTaskFragmentRelay,
+                                        private val taskFragmentRelay: TaskFragmentRelay): BasePresenter<TaskView>() {
 
     private val TAG = "TaskPresenter"
 
@@ -44,34 +46,34 @@ class TaskPresenter @Inject constructor(private val schedulerProvider: Scheduler
     fun getTaskByPosition(position: Int): Task = array[position]
 
     fun onViewPrepared() {
-
         compositeDisposable.add(updateGetTasksDisposable())
 
-        compositeDisposable.add(
-                mainController.taskFragmentState
-                        .compose(schedulerProvider.ioToMainObservableScheduler())
-                        .subscribe {
-                            when(it) {
-                                MainNavigationRelay.EnumTaskFragment.FINISHED_ITEMS_VISIBILITY_UPDATED -> {
-                                    Log.d(TAG, "${preferencesRepository.getFinishedTasksVisibility()}")
-                                    getTasksDisposable = updateGetTasksDisposable()
-                                }
-                                else -> viewState.scrollToEnd()
-                            }
-                        }
-        )
+        compositeDisposable.add(showOrHideFinishedItems())
 
-        compositeDisposable.add(
-                mainController.addTaskFragmentState
-                        .compose(schedulerProvider.ioToMainObservableScheduler())
-                        .subscribe {
-                            isAddTaskFragmentVisible = when(it) {
-                                MainNavigationRelay.EnumAddTaskFragment.SHOW -> true
-                                else -> false
-                            }
-                        }
-        )
+        compositeDisposable.add(isAddTaskFragmentVisible())
     }
+
+    private fun isAddTaskFragmentVisible(): Disposable
+        = addTaskFragmentRelay.addTaskFragmentState
+            .compose(schedulerProvider.ioToMainObservableScheduler())
+            .subscribe {
+                isAddTaskFragmentVisible = when(it) {
+                    AddTaskFragmentRelay.EnumAddTaskFragment.SHOW -> true
+                    else -> false
+                }
+            }
+
+    private fun showOrHideFinishedItems(): Disposable
+        = taskFragmentRelay.taskFragmentState
+            .compose(schedulerProvider.ioToMainObservableScheduler())
+            .subscribe {
+                when(it) {
+                    TaskFragmentRelay.EnumTaskFragment.FINISHED_ITEMS_VISIBILITY_UPDATED -> {
+                        updateGetTasksDisposable()
+                    }
+                    else -> viewState.scrollToEnd()
+                }
+            }
 
     private fun updateGetTasksDisposable(): Disposable
          = preferencesRepository.getFinishedTasksVisibility().toFlowable(BackpressureStrategy.BUFFER)

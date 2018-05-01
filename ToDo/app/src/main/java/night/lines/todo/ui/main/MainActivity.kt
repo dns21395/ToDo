@@ -1,12 +1,10 @@
 package night.lines.todo.ui.main
 
-import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
-import android.support.constraint.ConstraintLayout
-import android.support.constraint.ConstraintSet
 import android.util.Log
 import android.view.View
+import android.support.constraint.ConstraintLayout
+import android.support.constraint.ConstraintSet
 import android.widget.FrameLayout
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -16,8 +14,7 @@ import night.lines.todo.R
 import night.lines.todo.presentation.main.MainPresenter
 import night.lines.todo.presentation.main.MainView
 import night.lines.todo.toothpick.DI
-import night.lines.todo.toothpick.main.MainModule
-import night.lines.todo.toothpick.main.MainScope
+import night.lines.todo.toothpick.module.MainModule
 import night.lines.todo.ui.main.addtask.AddTaskFragment
 import night.lines.todo.ui.main.task.TaskFragment
 import toothpick.Toothpick
@@ -25,6 +22,7 @@ import toothpick.Toothpick
 /**
  * Created by denisgabyshev on 18/03/2018.
  */
+
 class MainActivity : MvpAppCompatActivity(), MainView {
 
     private val TAG = "MainActivity"
@@ -35,7 +33,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     @ProvidePresenter
     fun providePresenter(): MainPresenter {
         return Toothpick
-                .openScopes(DI.APP_SCOPE, MainScope::class.java).apply {
+                .openScopes(DI.APP_SCOPE, DI.MAIN_ACTIVITY_SCOPE).apply {
                     installModules(MainModule())
                     Toothpick.inject(this@MainActivity, this)
                 }.getInstance(MainPresenter::class.java)

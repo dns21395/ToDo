@@ -6,8 +6,8 @@ import night.lines.todo.R
 import night.lines.todo.domain.repository.PreferencesRepository
 import night.lines.todo.util.SchedulerProvider
 import night.lines.todo.presentation.base.BasePresenter
-import night.lines.todo.ui.main.AddTaskActionsRelay
-import night.lines.todo.ui.main.MainNavigationRelay
+import night.lines.todo.ui.main.task.TaskFragmentRelay
+import night.lines.todo.ui.main.addtask.AddTaskFragmentRelay
 import night.lines.todo.ui.main.ToolbarImages
 import javax.inject.Inject
 
@@ -16,8 +16,8 @@ import javax.inject.Inject
  */
 @InjectViewState
 class MainPresenter @Inject constructor(private val schedulerProvider: SchedulerProvider,
-                                        private val mainNavigationRelay: MainNavigationRelay,
-                                        private val addTaskActionsRelay: AddTaskActionsRelay) : BasePresenter<MainView>() {
+                                        private val addTaskFragmentRelay: AddTaskFragmentRelay,
+                                        private val taskFragmentRelay: TaskFragmentRelay) : BasePresenter<MainView>() {
 
     private val TAG = "MainPresenter"
 
@@ -29,7 +29,7 @@ class MainPresenter @Inject constructor(private val schedulerProvider: Scheduler
         setToolbarBackground()
 
         compositeDisposable.add(
-                mainNavigationRelay.addTaskFragmentState
+                addTaskFragmentRelay.addTaskFragmentState
                         .compose(schedulerProvider.ioToMainObservableScheduler())
                         .subscribe {
                             handleAddTaskFragmentState(it)
@@ -38,9 +38,9 @@ class MainPresenter @Inject constructor(private val schedulerProvider: Scheduler
         )
     }
 
-    private fun handleAddTaskFragmentState(enum: MainNavigationRelay.EnumAddTaskFragment) {
+    private fun handleAddTaskFragmentState(enum: AddTaskFragmentRelay.EnumAddTaskFragment) {
         when(enum) {
-            MainNavigationRelay.EnumAddTaskFragment.SHOW -> viewState.showAddTaskFragment()
+            AddTaskFragmentRelay.EnumAddTaskFragment.SHOW -> viewState.showAddTaskFragment()
             else -> viewState.hideAddTaskFragment()
         }
     }
@@ -77,17 +77,17 @@ class MainPresenter @Inject constructor(private val schedulerProvider: Scheduler
                         .compose(schedulerProvider.ioToMainObservableScheduler())
                         .subscribe {
                             updateIconCheckFinishedItemsVisibility(it)
-                            addTaskActionsRelay.callTaskFragmentAction(AddTaskActionsRelay.EnumTaskFragment.FINISHED_ITEMS_VISIBILITY_UPDATED)
+                            taskFragmentRelay.callTaskFragmentAction(TaskFragmentRelay.EnumTaskFragment.FINISHED_ITEMS_VISIBILITY_UPDATED)
                         }
         )
     }
 
     fun onFabButtonClicked() {
-        mainNavigationRelay.callAddTaskFragmentAction(MainNavigationRelay.EnumAddTaskFragment.SHOW)
+        addTaskFragmentRelay.callAddTaskFragmentAction(AddTaskFragmentRelay.EnumAddTaskFragment.SHOW)
     }
 
     fun enumAddTaskFragmentHide() {
-        mainNavigationRelay.callAddTaskFragmentAction(MainNavigationRelay.EnumAddTaskFragment.HIDE)
+        addTaskFragmentRelay.callAddTaskFragmentAction(AddTaskFragmentRelay.EnumAddTaskFragment.HIDE)
     }
 
 

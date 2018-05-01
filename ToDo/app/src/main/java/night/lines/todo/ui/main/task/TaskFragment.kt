@@ -10,9 +10,7 @@ import night.lines.todo.R
 import night.lines.todo.domain.model.Task
 import night.lines.todo.presentation.main.task.TaskPresenter
 import night.lines.todo.presentation.main.task.TaskView
-import night.lines.todo.toothpick.main.MainScope
-import night.lines.todo.toothpick.task.TaskModule
-import night.lines.todo.toothpick.task.TaskScope
+import night.lines.todo.toothpick.DI
 import night.lines.todo.ui.base.BaseFragment
 import toothpick.Toothpick
 
@@ -32,8 +30,7 @@ class TaskFragment : BaseFragment(), TaskView {
     @ProvidePresenter
     fun providePresenter(): TaskPresenter
         =  Toothpick
-            .openScopes(MainScope::class.java, TaskScope::class.java).apply {
-                installModules(TaskModule())
+            .openScopes(DI.MAIN_ACTIVITY_SCOPE).apply {
                 Toothpick.inject(this@TaskFragment, this)
             }.getInstance(TaskPresenter::class.java)
 
@@ -50,11 +47,6 @@ class TaskFragment : BaseFragment(), TaskView {
 
         presenter.onViewPrepared()
 
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Toothpick.closeScope(TaskScope::class.java)
     }
 
     override fun updateTaskArray(array: ArrayList<Task>) {

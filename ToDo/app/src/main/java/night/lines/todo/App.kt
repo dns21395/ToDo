@@ -2,8 +2,8 @@ package night.lines.todo
 
 import android.app.Application
 import night.lines.todo.toothpick.DI
-import night.lines.todo.toothpick.app.AppModule
-import night.lines.todo.toothpick.main.MainModule
+import night.lines.todo.toothpick.module.ApplicationModule
+import night.lines.todo.toothpick.module.UseCaseModule
 import toothpick.Toothpick
 import toothpick.configuration.Configuration
 import toothpick.registries.FactoryRegistryLocator
@@ -34,6 +34,8 @@ class App : Application() {
 
     private fun initAppScope() {
         val appScope = Toothpick.openScope(DI.APP_SCOPE)
-        appScope.installModules(AppModule(this))
+        appScope.installModules(
+                ApplicationModule(this),
+                UseCaseModule())
     }
 }

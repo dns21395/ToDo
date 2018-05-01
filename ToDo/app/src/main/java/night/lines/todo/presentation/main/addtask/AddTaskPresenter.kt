@@ -5,7 +5,7 @@ import night.lines.todo.domain.interactor.main.AddTaskUseCase
 import night.lines.todo.domain.model.Task
 import night.lines.todo.util.SchedulerProvider
 import night.lines.todo.presentation.base.BasePresenter
-import night.lines.todo.ui.main.MainNavigationRelay
+import night.lines.todo.ui.main.task.TaskFragmentRelay
 import java.util.*
 import javax.inject.Inject
 
@@ -14,8 +14,8 @@ import javax.inject.Inject
  */
 @InjectViewState
 class AddTaskPresenter @Inject constructor(private val schedulerProvider: SchedulerProvider,
-                                           private val mainActivityController: MainNavigationRelay
-): BasePresenter<AddTaskView>() {
+                                           private val taskFragmentRelay: TaskFragmentRelay)
+    : BasePresenter<AddTaskView>() {
 
     @Inject lateinit var addTaskUseCase: AddTaskUseCase
 
@@ -24,7 +24,7 @@ class AddTaskPresenter @Inject constructor(private val schedulerProvider: Schedu
                 addTaskUseCase.execute(Task(0, taskName, Date().time))
                 .compose(schedulerProvider.ioToMainObservableScheduler())
                         .subscribe {
-                            mainActivityController.callTaskFragmentAction(MainNavigationRelay.EnumTaskFragment.ITEM_ADDED)
+                            taskFragmentRelay.callTaskFragmentAction(TaskFragmentRelay.EnumTaskFragment.ITEM_ADDED)
                         }
         )
     }
