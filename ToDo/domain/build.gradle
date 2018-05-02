@@ -9,6 +9,16 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlin"
     implementation "io.reactivex.rxjava2:rxandroid:$rxandroidVersion"
     implementation "com.jakewharton.rxrelay2:rxrelay:$rxrelay"
+
+    // Test
+    testImplementation "com.nhaarman:mockito-kotlin:$mockito_kotlin"
+    implementation 'junit:junit:4.12'
+
+    // Database
+    implementation "android.arch.persistence.room:runtime:$roomDatabaseVersion"
+    implementation "android.arch.persistence.room:rxjava2:$roomDatabaseVersion"
+    kapt "android.arch.persistence.room:compiler:$roomDatabaseVersion"
+
 }
 
 

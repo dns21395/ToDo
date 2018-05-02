@@ -5,7 +5,7 @@ import night.lines.todo.domain.interactor.type.UseCaseWithParameter
 import night.lines.todo.domain.model.Task
 import night.lines.todo.domain.repository.DatabaseRepository
 
-class AddTaskUseCase constructor(private val databaseRepository: DatabaseRepository) : UseCaseWithParameter<Task, Long> {
+open class AddTaskUseCase constructor(private val databaseRepository: DatabaseRepository) : UseCaseWithParameter<Task, Long> {
     override fun execute(parameter: Task): Observable<Long> = databaseRepository.insertTask(parameter)
 }
 

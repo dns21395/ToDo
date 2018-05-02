@@ -38,4 +38,6 @@ ext {
     mosby = '2.0.1'
     rxbindings = '2.1.1'
     anko_version = '0.10.4'
+    mockito = '2.18.3'
+    mockito_kotlin = '1.5.0'
 }
