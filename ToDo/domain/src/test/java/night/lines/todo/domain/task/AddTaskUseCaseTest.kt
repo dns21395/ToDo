@@ -1,7 +1,8 @@
-package night.lines.todo.domain
+package night.lines.todo.domain.task
 
 import io.reactivex.Observable
 import io.reactivex.observers.TestObserver
+import night.lines.todo.domain.DomainTestData
 import night.lines.todo.domain.interactor.main.AddTaskUseCase
 import night.lines.todo.domain.model.Task
 import night.lines.todo.domain.repository.DatabaseRepository
@@ -26,9 +27,9 @@ class AddTaskUseCaseTest {
     @Throws(Exception::class)
     fun shouldAddNewTask() {
         Mockito.`when`(databaseRepository.insertTask(any())).thenReturn(Observable.just(1))
-        addTaskUseCase.execute(Task(1, "test", 0)).subscribe(testSubscriber)
+        addTaskUseCase.execute(DomainTestData.TASK).subscribe(testSubscriber)
 
-        Mockito.verify(databaseRepository, Mockito.times(1)).insertTask(Task(1, "test", 0))
+        Mockito.verify(databaseRepository, Mockito.times(1)).insertTask(DomainTestData.TASK)
         Mockito.verifyNoMoreInteractions(databaseRepository)
 
         testSubscriber.assertComplete()

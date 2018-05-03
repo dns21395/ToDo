@@ -1,14 +1,13 @@
-package night.lines.todo.domain
+package night.lines.todo.domain.task
 
 import io.reactivex.Flowable
-import io.reactivex.Observable
 import io.reactivex.subscribers.TestSubscriber
+import night.lines.todo.domain.DomainTestData
 import night.lines.todo.domain.interactor.main.GetTasksUseCase
 import night.lines.todo.domain.model.Task
 import night.lines.todo.domain.repository.DatabaseRepository
 import org.junit.Before
 import org.junit.Test
-import org.mockito.Mock
 import org.mockito.Mockito
 
 class GetTasksUseCaseTest {
@@ -28,7 +27,7 @@ class GetTasksUseCaseTest {
     @Throws(Exception::class)
     fun shouldReturnAllTasks() {
         val tasks = ArrayList<Task>()
-        tasks.add(Task(1, "t", 0))
+        tasks.add(DomainTestData.TASK)
 
         Mockito.`when`(databaseRepository.getTasks(true)).thenReturn(Flowable.just(tasks))
 
