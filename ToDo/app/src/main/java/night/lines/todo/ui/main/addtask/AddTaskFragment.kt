@@ -29,15 +29,10 @@ class AddTaskFragment : BaseFragment(), AddTaskView {
 
     @ProvidePresenter
     fun providePresenter(): AddTaskPresenter =
-<<<<<<< HEAD
             Toothpick
-                    .openScopes(DI.TASK_SCOPE, DI.ADD_TASK_SCOPE)
-                    .getInstance(AddTaskPresenter::class.java)
-=======
-            Toothpick.openScope(DI.MAIN_ACTIVITY_SCOPE).apply {
-                Toothpick.inject(this@AddTaskFragment, this)
-            }.getInstance(AddTaskPresenter::class.java)
->>>>>>> clean
+                    .openScope(DI.MAIN_ACTIVITY_SCOPE).apply {
+                        Toothpick.inject(this@AddTaskFragment, this)
+                    }.getInstance(AddTaskPresenter::class.java)
 
     override val layoutRes = R.layout.fragment_add_task
 

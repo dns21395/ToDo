@@ -2,12 +2,15 @@ package night.lines.todo.toothpick.module
 
 import android.arch.persistence.room.Room
 import android.content.Context
-import night.lines.todo.model.data.database.AppDatabase
-import night.lines.todo.model.data.database.manager.DatabaseManager
-import night.lines.todo.model.data.storage.Prefs
-import night.lines.todo.model.system.scheduler.AppSchedulerProvider
-import night.lines.todo.model.system.scheduler.SchedulerProvider
-import night.lines.todo.toothpick.provider.RoomProvider
+import night.lines.todo.data.database.db.AppDatabase
+import night.lines.todo.data.database.db.converter.DatabaseConverter
+import night.lines.todo.domain.repository.DatabaseRepository
+import night.lines.todo.domain.repository.PreferencesRepository
+import night.lines.todo.toothpick.provider.DatabaseConverterProvider
+import night.lines.todo.toothpick.provider.DatabaseRepositoryProvider
+import night.lines.todo.toothpick.provider.PreferencesRepositoryProvider
+import night.lines.todo.util.SchedulerProvider
+import night.lines.todo.util.SchedulerProviderImpl
 import toothpick.config.Module
 
 /**
@@ -21,8 +24,9 @@ class ApplicationModule(context: Context) : Module() {
                 AppDatabase::class.java,
                 "todo.db").build()
         )
-        bind(DatabaseManager::class.java).toProvider(RoomProvider::class.java).providesSingletonInScope()
-        bind(SchedulerProvider::class.java).toInstance(AppSchedulerProvider())
-        bind(Prefs::class.java).to(Prefs::class.java).singletonInScope()
+        bind(DatabaseConverter::class.java).toProvider(DatabaseConverterProvider::class.java)
+        bind(DatabaseRepository::class.java).toProvider(DatabaseRepositoryProvider::class.java).providesSingletonInScope()
+        bind(SchedulerProvider::class.java).toInstance(SchedulerProviderImpl())
+        bind(PreferencesRepository::class.java).toProvider(PreferencesRepositoryProvider::class.java)
     }
 }

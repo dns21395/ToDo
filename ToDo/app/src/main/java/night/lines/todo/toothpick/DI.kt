@@ -5,11 +5,6 @@ package night.lines.todo.toothpick
  */
 object DI {
     const val APP_SCOPE = "app scope"
-<<<<<<< HEAD
-    const val MAIN_SCOPE = "main scope"
-    const val TASK_SCOPE = "task scope"
-    const val ADD_TASK_SCOPE = "task_scope"
-=======
+
     const val MAIN_ACTIVITY_SCOPE = "main activity scope"
->>>>>>> clean
 }

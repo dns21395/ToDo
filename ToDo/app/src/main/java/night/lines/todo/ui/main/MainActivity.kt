@@ -34,8 +34,8 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     fun providePresenter(): MainPresenter {
         return Toothpick
                 .openScopes(DI.APP_SCOPE, DI.MAIN_ACTIVITY_SCOPE).apply {
-                    installModules(MainModule())
                     Toothpick.inject(this@MainActivity, this)
+                    installModules(MainModule())
                 }.getInstance(MainPresenter::class.java)
     }
 
@@ -146,6 +146,6 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     override fun onDestroy() {
         super.onDestroy()
-        if(isFinishing) Toothpick.closeScope(DI.MAIN_SCOPE)
+        if(isFinishing) Toothpick.closeScope(DI.MAIN_ACTIVITY_SCOPE)
     }
 }
