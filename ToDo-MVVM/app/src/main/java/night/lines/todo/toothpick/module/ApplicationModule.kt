@@ -26,9 +26,8 @@ class ApplicationModule(application: Application) : Module() {
         bind(Application::class.java).toInstance(application)
         bind(AppDatabase::class.java).toProvider(RoomProvider::class.java)
         bind(DatabaseConverter::class.java).toProvider(DatabaseConverterProvider::class.java)
-        bind(DatabaseRepository::class.java).toProvider(DatabaseRepositoryProvider::class.java).providesSingletonInScope()
+        bind(DatabaseRepository::class.java).toProvider(DatabaseRepositoryProvider::class.java)
         bind(SchedulerProvider::class.java).toInstance(SchedulerProviderImpl())
         bind(PreferencesRepository::class.java).toProvider(PreferencesRepositoryProvider::class.java)
-
     }
 }

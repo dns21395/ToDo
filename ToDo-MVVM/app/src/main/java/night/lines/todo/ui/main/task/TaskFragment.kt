@@ -3,6 +3,7 @@ package night.lines.todo.ui.main.task
 import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import com.android.databinding.library.baseAdapters.BR
 import kotlinx.android.synthetic.main.fragment_task.*
 import night.lines.todo.R
@@ -29,6 +30,11 @@ class TaskFragment : BaseFragment<FragmentTaskBinding, TaskFragmentViewModel>(),
 
     override val layoutRes = R.layout.fragment_task
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        taskFragmentViewModel.navigator = this
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -42,6 +48,7 @@ class TaskFragment : BaseFragment<FragmentTaskBinding, TaskFragmentViewModel>(),
     }
 
     override fun updateTaskArray(array: ArrayList<Task>) {
+        Log.d(TAG, "update task array")
         adapter.updateArray(array)
     }
 

@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
 import android.support.constraint.ConstraintSet
+import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import kotlinx.android.synthetic.main.activity_main.*
@@ -44,8 +45,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mainActivityViewModel.navigator = this
-        mainActivityViewModel.onViewPrepared()
-
 
         setMenu()
 

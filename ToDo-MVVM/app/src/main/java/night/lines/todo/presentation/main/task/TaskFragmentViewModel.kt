@@ -1,5 +1,6 @@
 package night.lines.todo.presentation.main.task
 
+import android.util.Log
 import io.reactivex.BackpressureStrategy
 import io.reactivex.disposables.Disposable
 import night.lines.todo.domain.interactor.main.GetTasksUseCase
@@ -23,6 +24,8 @@ class TaskFragmentViewModel @Inject constructor(schedulerProvider: SchedulerProv
     @Inject lateinit var updateTaskUseCase: UpdateTaskUseCase
     @Inject lateinit var removeTaskUseCase: RemoveTaskUseCase
     @Inject lateinit var getTasksUseCase: GetTasksUseCase
+
+    private val TAG = "TaskFragmentViewModel"
 
     private var array = ArrayList<Task>()
 
@@ -67,6 +70,7 @@ class TaskFragmentViewModel @Inject constructor(schedulerProvider: SchedulerProv
             .subscribe {
                 when(it) {
                     TaskFragmentRelay.EnumTaskFragment.FINISHED_ITEMS_VISIBILITY_UPDATED -> {
+                        Log.d(TAG, "FINISHTED ITEMS VISIBILITY UPDATED")
                         getTasksDisposable.dispose()
                         getTasksDisposable = updateGetTasksDisposable()
                     }
@@ -81,6 +85,7 @@ class TaskFragmentViewModel @Inject constructor(schedulerProvider: SchedulerProv
             }
             .compose(schedulerProvider.ioToMainFlowableScheduler())
             .subscribe {
+                Log.d(TAG, "updateGetTasksDisposable : $it")
                 navigator?.updateTaskArray(it)
             }
 
