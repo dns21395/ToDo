@@ -11,6 +11,8 @@ import night.lines.todo.toothpick.provider.DatabaseConverterProvider
 import night.lines.todo.toothpick.provider.DatabaseRepositoryProvider
 import night.lines.todo.toothpick.provider.PreferencesRepositoryProvider
 import night.lines.todo.toothpick.provider.RoomProvider
+import night.lines.todo.ui.main.addtask.AddTaskFragmentRelay
+import night.lines.todo.ui.main.task.TaskFragmentRelay
 import night.lines.todo.util.SchedulerProvider
 import night.lines.todo.util.SchedulerProviderImpl
 import toothpick.config.Module
@@ -27,5 +29,6 @@ class ApplicationModule(application: Application) : Module() {
         bind(DatabaseRepository::class.java).toProvider(DatabaseRepositoryProvider::class.java).providesSingletonInScope()
         bind(SchedulerProvider::class.java).toInstance(SchedulerProviderImpl())
         bind(PreferencesRepository::class.java).toProvider(PreferencesRepositoryProvider::class.java)
+
     }
 }

@@ -2,8 +2,9 @@ package night.lines.todo.ui.main.task
 
 import com.jakewharton.rxrelay2.PublishRelay
 import io.reactivex.Observable
+import javax.inject.Inject
 
-class TaskFragmentRelay {
+class TaskFragmentRelay @Inject constructor() {
     private val taskFragmentStateRelay = PublishRelay.create<EnumTaskFragment>()
 
     val taskFragmentState: Observable<EnumTaskFragment> = taskFragmentStateRelay
