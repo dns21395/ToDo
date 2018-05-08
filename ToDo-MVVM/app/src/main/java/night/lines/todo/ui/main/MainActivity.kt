@@ -13,6 +13,7 @@ import night.lines.todo.databinding.ActivityMainBinding
 import night.lines.todo.presentation.main.MainActivityViewModel
 import night.lines.todo.presentation.main.MainNavigator
 import night.lines.todo.toothpick.DI
+import night.lines.todo.toothpick.main.Main
 import night.lines.todo.toothpick.main.MainModule
 import night.lines.todo.ui.base.BaseActivity
 import night.lines.todo.ui.main.addtask.AddTaskFragment
@@ -31,7 +32,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(),
     @Inject lateinit var mainActivityViewModel: MainActivityViewModel
 
     override fun performDependencyInjection() {
-        Toothpick.openScopes(DI.APP_SCOPE, DI.MAIN_ACTIVITY_SCOPE).apply {
+        Toothpick.openScopes(DI.APP_SCOPE, Main::class.java).apply {
             Toothpick.inject(this@MainActivity, this)
             installModules(MainModule())
         }
@@ -150,6 +151,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(),
 
     override fun onDestroy() {
         super.onDestroy()
-        if(isFinishing) Toothpick.closeScope(DI.MAIN_ACTIVITY_SCOPE)
+        if(isFinishing) Toothpick.closeScope(Main::class.java)
     }
 }

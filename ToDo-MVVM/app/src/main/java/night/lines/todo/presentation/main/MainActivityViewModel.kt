@@ -3,6 +3,7 @@ package night.lines.todo.presentation.main
 import io.reactivex.Observable
 import night.lines.todo.R
 import night.lines.todo.domain.repository.PreferencesRepository
+import night.lines.todo.toothpick.main.Main
 import night.lines.todo.ui.base.BaseViewModel
 import night.lines.todo.ui.main.ToolbarImages
 import night.lines.todo.ui.main.addtask.AddTaskFragmentRelay
@@ -10,6 +11,7 @@ import night.lines.todo.ui.main.task.TaskFragmentRelay
 import night.lines.todo.util.SchedulerProvider
 import javax.inject.Inject
 
+@Main
 class MainActivityViewModel @Inject constructor(schedulerProvider: SchedulerProvider,
                                                 private val preferencesRepository: PreferencesRepository,
                                                 private val addTaskFragmentRelay: AddTaskFragmentRelay,

@@ -10,9 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_task.view.*
 import night.lines.todo.R
-import night.lines.todo.data.database.db.model.TaskModel
 import night.lines.todo.domain.model.Task
-import night.lines.todo.presentation.main.task.TaskPresenter
+import night.lines.todo.presentation.main.task.TaskFragmentViewModel
 import org.jetbrains.anko.backgroundColor
 import org.jetbrains.anko.imageResource
 
@@ -21,7 +20,7 @@ import org.jetbrains.anko.imageResource
  */
 class TaskAdapter(context: Context, private val recyclerView: RecyclerView) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>(){
 
-    lateinit var presenter: TaskPresenter
+    lateinit var viewModel: TaskFragmentViewModel
 
     private val swipeCallback = TaskAdapterSwipeCallback(context, this)
     private val itemTouchHelper = ItemTouchHelper(swipeCallback)
@@ -33,24 +32,24 @@ class TaskAdapter(context: Context, private val recyclerView: RecyclerView) : Re
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder
         = TaskViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_task, parent, false))
 
-    override fun getItemCount(): Int = presenter.getTaskArrayItemCount()
+    override fun getItemCount(): Int = viewModel.getTaskArrayItemCount()
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        holder.bind(presenter.getTaskByPosition(position))
+        holder.bind(viewModel.getTaskByPosition(position))
     }
 
     fun updateArray(array: ArrayList<Task>) {
-        presenter.updateTaskArray(array)
+        viewModel.updateTaskArray(array)
         notifyDataSetChanged()
-        if(presenter.isAddTaskFragmentVisible) smoothScrollToPosition()
+        if(viewModel.isAddTaskFragmentVisible) smoothScrollToPosition()
     }
 
     fun removeAt(position: Int) {
-        presenter.onItemSwiped(presenter.getTaskByPosition(position), {notifyItemRemoved(position)})
+        viewModel.onItemSwiped(viewModel.getTaskByPosition(position), {notifyItemRemoved(position)})
     }
 
     fun smoothScrollToPosition() {
-        recyclerView.smoothScrollToPosition(presenter.getTaskArrayItemCount())
+        recyclerView.smoothScrollToPosition(viewModel.getTaskArrayItemCount())
     }
 
     inner class TaskViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
@@ -78,7 +77,7 @@ class TaskAdapter(context: Context, private val recyclerView: RecyclerView) : Re
 
             statusButton.setOnClickListener {
                 task.isDone = !task.isDone
-                presenter.onStatusButtonClick(task)
+                viewModel.onStatusButtonClick(task)
             }
         }
 
