@@ -50,12 +50,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(),
         supportFragmentManager.beginTransaction().replace(R.id.frameLayout, TaskFragment())
                 .commitAllowingStateLoss()
 
-//        if(mainActivityViewModel.bottomFrameLayoutId != 0) createFrameLayout()
-
-//        fab.setOnClickListener {
-//            mainActivityViewModel.onFabButtonClicked()
-//        }
-
         mainActivityViewModel.onViewPrepared()
     }
 
@@ -138,7 +132,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(),
         toolbar.inflateMenu(R.menu.main)
 
         toolbar.setOnMenuItemClickListener {
-            if(it.itemId == R.id.check) mainActivityViewModel.setFinishedTasksVisibility()
+            if(it.itemId == R.id.check) {
+                Log.d(TAG, "update finished task visibility")
+                mainActivityViewModel.setFinishedTasksVisibility()
+            }
             false
         }
     }

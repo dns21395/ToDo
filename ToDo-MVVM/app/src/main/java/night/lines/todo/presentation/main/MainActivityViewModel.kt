@@ -61,14 +61,12 @@ class MainActivityViewModel @Inject constructor(schedulerProvider: SchedulerProv
                preferencesRepository.getFinishedTasksVisibility()
                        .compose(schedulerProvider.ioToMainObservableScheduler())
                         .subscribe {
-                            Log.d(TAG, "setting finished task visibility ${if(it) "show" else "hide"}")
                             updateIconCheckFinishedItemsVisibility(it)
                         }
         )
     }
 
     private fun updateIconCheckFinishedItemsVisibility(visible: Boolean) {
-        Log.d(TAG, "update to ${if(visible) "show" else "hide"}")
         when(visible) {
             true -> navigator?.updateIconCheckFinishedItemsVisibility(R.drawable.check_show)
             false -> navigator?.updateIconCheckFinishedItemsVisibility(R.drawable.check_hide)
@@ -78,14 +76,11 @@ class MainActivityViewModel @Inject constructor(schedulerProvider: SchedulerProv
     fun setFinishedTasksVisibility() {
         compositeDisposable.add(
                 preferencesRepository.getFinishedTasksVisibility()
-                        .map {
-                            Log.d(TAG, "finishedTaskVisibility $it -> ${!it}")
-                            preferencesRepository.setFinishedTasksVisibility(!it)
-                        !it
-                        }
+                        .map { preferencesRepository.setFinishedTasksVisibility(!it)
+                        !it }
                         .compose(schedulerProvider.ioToMainObservableScheduler())
                         .subscribe {
-                            Log.d(TAG, "i got <$it> and gonna put it as visibility")
+                            Log.d(TAG, "call FINISHED ITEMS VISIBILITY CHANGED")
                             updateIconCheckFinishedItemsVisibility(it)
                             taskFragmentRelay.callTaskFragmentAction(TaskFragmentRelay.EnumTaskFragment.FINISHED_ITEMS_VISIBILITY_UPDATED)
                         }

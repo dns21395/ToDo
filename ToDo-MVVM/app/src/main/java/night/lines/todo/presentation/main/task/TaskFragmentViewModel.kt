@@ -46,7 +46,19 @@ class TaskFragmentViewModel @Inject constructor(schedulerProvider: SchedulerProv
 
         compositeDisposable.add(getTasksDisposable)
 
-        compositeDisposable.add(taskFragmentState())
+        compositeDisposable.add(taskFragmentRelay.taskFragmentState
+                .compose(schedulerProvider.ioToMainObservableScheduler())
+                .subscribe {
+                    Log.d(TAG, "UPDATE $it")
+                    when(it) {
+                        TaskFragmentRelay.EnumTaskFragment.FINISHED_ITEMS_VISIBILITY_UPDATED -> {
+                            getTasksDisposable.dispose()
+                            getTasksDisposable = updateGetTasksDisposable()
+                            compositeDisposable.add(getTasksDisposable)
+                        }
+                        else -> navigator?.scrollToEnd()
+                    }
+                })
 
         compositeDisposable.add(isAddTaskFragmentVisible())
     }
@@ -68,9 +80,12 @@ class TaskFragmentViewModel @Inject constructor(schedulerProvider: SchedulerProv
             = taskFragmentRelay.taskFragmentState
             .compose(schedulerProvider.ioToMainObservableScheduler())
             .subscribe {
+                Log.d(TAG, "UPDATE $it")
                 when(it) {
                     TaskFragmentRelay.EnumTaskFragment.FINISHED_ITEMS_VISIBILITY_UPDATED -> {
-
+                        getTasksDisposable.dispose()
+                        getTasksDisposable = updateGetTasksDisposable()
+                        compositeDisposable.add(getTasksDisposable)
                     }
                     else -> navigator?.scrollToEnd()
                 }
@@ -81,13 +96,7 @@ class TaskFragmentViewModel @Inject constructor(schedulerProvider: SchedulerProv
             .toFlowable(BackpressureStrategy.BUFFER)
             .flatMap { getTasksUseCase.execute(it) }
             .compose(schedulerProvider.ioToMainFlowableScheduler())
-            .subscribe ({
-                Log.d(TAG, "onNext : $it")
-                navigator?.updateTaskArray(it)}, {
-                Log.e(TAG, "onError : $it")
-            }, {
-                Log.d(TAG, "onComplete")
-            })
+            .subscribe { navigator?.updateTaskArray(it) }
 
     fun onStatusButtonClick(task: Task) {
         compositeDisposable.add(

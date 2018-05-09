@@ -16,7 +16,7 @@ import javax.inject.Inject
  */
 @Main
 class AddTaskFragmentViewModel @Inject constructor(schedulerProvider: SchedulerProvider,
-                                                   private val addTaskFragmentRelay: TaskFragmentRelay)
+                                                   private val taskFragmentRelay: TaskFragmentRelay)
     : BaseViewModel<AddTaskNavigator>(schedulerProvider) {
 
     private val TAG = "AddTaskViewModel"
@@ -38,7 +38,7 @@ class AddTaskFragmentViewModel @Inject constructor(schedulerProvider: SchedulerP
                         addTaskUseCase.execute(Task(0, textTask.get() ?: "", Date().time))
                                 .compose(schedulerProvider.ioToMainObservableScheduler())
                                 .subscribe {
-                                    addTaskFragmentRelay.callTaskFragmentAction(TaskFragmentRelay.EnumTaskFragment.ITEM_ADDED)
+                                    taskFragmentRelay.callTaskFragmentAction(TaskFragmentRelay.EnumTaskFragment.ITEM_ADDED)
                                     textTask.set("")
 
                                 }

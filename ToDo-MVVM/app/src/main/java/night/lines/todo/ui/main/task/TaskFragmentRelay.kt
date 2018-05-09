@@ -15,7 +15,6 @@ class TaskFragmentRelay @Inject constructor() {
 
     enum class EnumTaskFragment {
         FINISHED_ITEMS_VISIBILITY_UPDATED,
-        ITEM_ADDED,
-        SCROLL_TO_END
+        ITEM_ADDED
     }
 }
