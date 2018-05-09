@@ -28,7 +28,7 @@ class MainActivityViewModel @Inject constructor(schedulerProvider: SchedulerProv
 
         setToolbarBackground()
 
-        checkFinishedItemsVisibility()
+        updateFinishedItemsVisibility()
 
         compositeDisposable.add(
                 addTaskFragmentRelay.addTaskFragmentState
@@ -56,7 +56,7 @@ class MainActivityViewModel @Inject constructor(schedulerProvider: SchedulerProv
     }
 
 
-    private fun checkFinishedItemsVisibility() {
+    private fun updateFinishedItemsVisibility() {
         compositeDisposable.add(
                preferencesRepository.getFinishedTasksVisibility()
                        .compose(schedulerProvider.ioToMainObservableScheduler())

@@ -77,6 +77,7 @@ class TaskPresenter @Inject constructor(private val schedulerProvider: Scheduler
                     TaskFragmentRelay.EnumTaskFragment.FINISHED_ITEMS_VISIBILITY_UPDATED -> {
                         getTasksDisposable.dispose()
                         getTasksDisposable = updateGetTasksDisposable()
+                        compositeDisposable.add(getTasksDisposable)
                     }
                     else -> viewState.scrollToEnd()
                 }
