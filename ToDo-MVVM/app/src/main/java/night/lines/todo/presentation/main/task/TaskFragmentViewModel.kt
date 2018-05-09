@@ -46,7 +46,7 @@ class TaskFragmentViewModel @Inject constructor(schedulerProvider: SchedulerProv
 
         compositeDisposable.add(getTasksDisposable)
 
-        compositeDisposable.add(showOrHideFinishedItems())
+        compositeDisposable.add(taskFragmentState())
 
         compositeDisposable.add(isAddTaskFragmentVisible())
     }
@@ -64,30 +64,30 @@ class TaskFragmentViewModel @Inject constructor(schedulerProvider: SchedulerProv
                 }
             }
 
-    private fun showOrHideFinishedItems(): Disposable
+    private fun taskFragmentState(): Disposable
             = taskFragmentRelay.taskFragmentState
             .compose(schedulerProvider.ioToMainObservableScheduler())
             .subscribe {
                 when(it) {
                     TaskFragmentRelay.EnumTaskFragment.FINISHED_ITEMS_VISIBILITY_UPDATED -> {
-                        Log.d(TAG, "FINISHTED ITEMS VISIBILITY UPDATED")
-                        getTasksDisposable.dispose()
-                        getTasksDisposable = updateGetTasksDisposable()
+
                     }
                     else -> navigator?.scrollToEnd()
                 }
             }
 
     private fun updateGetTasksDisposable(): Disposable
-            = preferencesRepository.getFinishedTasksVisibility().toFlowable(BackpressureStrategy.BUFFER)
-            .flatMap {
-                getTasksUseCase.execute(it)
-            }
+    = preferencesRepository.getFinishedTasksVisibility()
+            .toFlowable(BackpressureStrategy.BUFFER)
+            .flatMap { getTasksUseCase.execute(it) }
             .compose(schedulerProvider.ioToMainFlowableScheduler())
-            .subscribe {
-                Log.d(TAG, "updateGetTasksDisposable : $it")
-                navigator?.updateTaskArray(it)
-            }
+            .subscribe ({
+                Log.d(TAG, "onNext : $it")
+                navigator?.updateTaskArray(it)}, {
+                Log.e(TAG, "onError : $it")
+            }, {
+                Log.d(TAG, "onComplete")
+            })
 
     fun onStatusButtonClick(task: Task) {
         compositeDisposable.add(

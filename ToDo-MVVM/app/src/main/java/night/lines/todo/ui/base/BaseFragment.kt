@@ -22,9 +22,9 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel<*>> : Fragmen
     var rootView: View? = null
     private var viewDataBinding: T? = null
     private var viewModel: V? = null
+    abstract var bindingVariable: Int
 
     abstract val layoutRes: Int
-    abstract fun getBindingVariable(): Int
     abstract fun getViewModel(): V
     abstract fun performDependencyInjection()
 
@@ -46,6 +46,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel<*>> : Fragmen
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         viewDataBinding = DataBindingUtil.inflate(inflater, layoutRes, container, false)
         viewDataBinding?.let {
+            it.setVariable(bindingVariable, viewModel)
             rootView = it.root
 
         }

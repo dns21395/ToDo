@@ -43,7 +43,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         mainActivityViewModel.navigator = this
 
         setMenu()
@@ -51,11 +50,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(),
         supportFragmentManager.beginTransaction().replace(R.id.frameLayout, TaskFragment())
                 .commitAllowingStateLoss()
 
-        if(mainActivityViewModel.bottomFrameLayoutId != 0) createFrameLayout()
+//        if(mainActivityViewModel.bottomFrameLayoutId != 0) createFrameLayout()
 
-        fab.setOnClickListener {
-            mainActivityViewModel.onFabButtonClicked()
-        }
+//        fab.setOnClickListener {
+//            mainActivityViewModel.onFabButtonClicked()
+//        }
 
         mainActivityViewModel.onViewPrepared()
     }

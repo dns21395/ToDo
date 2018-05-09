@@ -9,6 +9,6 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 /**
  * Created by denisgabyshev on 20/03/2018.
  */
-interface AddTaskNavigator : MvpView {
-
+interface AddTaskNavigator {
+    fun showToastEmptyText()
 }

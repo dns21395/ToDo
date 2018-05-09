@@ -30,6 +30,9 @@ class TaskFragment : BaseFragment<FragmentTaskBinding, TaskFragmentViewModel>(),
 
     override val layoutRes = R.layout.fragment_task
 
+    override var bindingVariable: Int = BR.viewModel
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         taskFragmentViewModel.navigator = this
@@ -55,8 +58,6 @@ class TaskFragment : BaseFragment<FragmentTaskBinding, TaskFragmentViewModel>(),
     override fun scrollToEnd() {
         adapter.smoothScrollToPosition()
     }
-
-    override fun getBindingVariable(): Int = BR.viewModel
 
     override fun getViewModel(): TaskFragmentViewModel = taskFragmentViewModel
 

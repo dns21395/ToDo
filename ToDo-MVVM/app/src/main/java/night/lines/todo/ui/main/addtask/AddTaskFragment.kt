@@ -26,6 +26,8 @@ class AddTaskFragment : BaseFragment<FragmentAddTaskBinding, AddTaskFragmentView
 
     @Inject lateinit var addTaskViewModel: AddTaskFragmentViewModel
 
+    override var bindingVariable: Int = BR.viewModel
+
     companion object {
         val TAG = "AddTaskFragment"
     }
@@ -33,6 +35,7 @@ class AddTaskFragment : BaseFragment<FragmentAddTaskBinding, AddTaskFragmentView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         addTaskViewModel.navigator = this
+        addTaskViewModel.onViewPrepared()
     }
 
     override fun getViewModel(): AddTaskFragmentViewModel = addTaskViewModel
@@ -40,17 +43,14 @@ class AddTaskFragment : BaseFragment<FragmentAddTaskBinding, AddTaskFragmentView
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         Log.d(TAG, "onViewCreated")
 
         context?.let { KeyboardUtils.showSoftInput(textTask, it) }
 
         textTask.setOnEditorActionListener{ textView, i, keyEvent ->
-            if(i == KeyEvent.KEYCODE_ENDCALL) addTask()
+            if(i == KeyEvent.KEYCODE_ENDCALL) addTaskViewModel.onAddTaskButtonClicked()
             true
-        }
-
-        addButton.setOnClickListener {
-           addTask()
         }
     }
 
@@ -60,15 +60,7 @@ class AddTaskFragment : BaseFragment<FragmentAddTaskBinding, AddTaskFragmentView
         }
     }
 
-    private fun addTask() {
-        if (textTask.text.toString().isNotEmpty()) {
-            addTaskViewModel.onAddTaskButtonClicked(textTask.text.toString())
-            textTask.text.clear()
-        } else {
-            toast(R.string.text_add_task_empty)
-
-        }
+    override fun showToastEmptyText() {
+        toast(R.string.text_add_task_empty)
     }
-
-    override fun getBindingVariable(): Int = BR.viewModel
 }

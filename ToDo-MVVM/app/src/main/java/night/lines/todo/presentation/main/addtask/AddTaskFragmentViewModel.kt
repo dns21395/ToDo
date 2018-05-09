@@ -1,5 +1,7 @@
 package night.lines.todo.presentation.main.addtask
 
+import android.databinding.ObservableField
+import android.util.Log
 import night.lines.todo.domain.interactor.main.AddTaskUseCase
 import night.lines.todo.domain.model.Task
 import night.lines.todo.util.SchedulerProvider
@@ -14,20 +16,34 @@ import javax.inject.Inject
  */
 @Main
 class AddTaskFragmentViewModel @Inject constructor(schedulerProvider: SchedulerProvider,
-                                                   private val taskFragmentRelay: TaskFragmentRelay)
+                                                   private val addTaskFragmentRelay: TaskFragmentRelay)
     : BaseViewModel<AddTaskNavigator>(schedulerProvider) {
+
+    private val TAG = "AddTaskViewModel"
 
     @Inject lateinit var addTaskUseCase: AddTaskUseCase
 
-    override fun onViewPrepared() {}
+    var textTask = ObservableField<String>()
 
-    fun onAddTaskButtonClicked(taskName: String) {
-        compositeDisposable.add(
-                addTaskUseCase.execute(Task(0, taskName, Date().time))
-                .compose(schedulerProvider.ioToMainObservableScheduler())
-                        .subscribe {
-                            taskFragmentRelay.callTaskFragmentAction(TaskFragmentRelay.EnumTaskFragment.ITEM_ADDED)
-                        }
-        )
+    override fun onViewPrepared() {
+        textTask.set("")
+    }
+
+    fun onAddTaskButtonClicked() {
+        Log.d(TAG, "$textTask")
+        when(textTask.get()?.isEmpty()) {
+            true -> { navigator?.showToastEmptyText() }
+            false -> {
+                compositeDisposable.add(
+                        addTaskUseCase.execute(Task(0, textTask.get() ?: "", Date().time))
+                                .compose(schedulerProvider.ioToMainObservableScheduler())
+                                .subscribe {
+                                    addTaskFragmentRelay.callTaskFragmentAction(TaskFragmentRelay.EnumTaskFragment.ITEM_ADDED)
+                                    textTask.set("")
+
+                                }
+                )
+            }
+        }
     }
 }
