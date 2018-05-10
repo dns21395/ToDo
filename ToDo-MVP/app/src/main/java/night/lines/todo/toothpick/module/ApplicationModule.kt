@@ -27,6 +27,6 @@ class ApplicationModule(context: Context) : Module() {
         bind(DatabaseConverter::class.java).toProvider(DatabaseConverterProvider::class.java)
         bind(DatabaseRepository::class.java).toProvider(DatabaseRepositoryProvider::class.java).providesSingletonInScope()
         bind(SchedulerProvider::class.java).toInstance(SchedulerProviderImpl())
-        bind(PreferencesRepository::class.java).toProvider(PreferencesRepositoryProvider::class.java)
+        bind(PreferencesRepository::class.java).toProvider(PreferencesRepositoryProvider::class.java).providesSingletonInScope()
     }
 }

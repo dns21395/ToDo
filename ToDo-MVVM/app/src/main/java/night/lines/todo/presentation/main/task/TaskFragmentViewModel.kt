@@ -46,19 +46,7 @@ class TaskFragmentViewModel @Inject constructor(schedulerProvider: SchedulerProv
 
         compositeDisposable.add(getTasksDisposable)
 
-        compositeDisposable.add(taskFragmentRelay.taskFragmentState
-                .compose(schedulerProvider.ioToMainObservableScheduler())
-                .subscribe {
-                    Log.d(TAG, "UPDATE $it")
-                    when(it) {
-                        TaskFragmentRelay.EnumTaskFragment.FINISHED_ITEMS_VISIBILITY_UPDATED -> {
-                            getTasksDisposable.dispose()
-                            getTasksDisposable = updateGetTasksDisposable()
-                            compositeDisposable.add(getTasksDisposable)
-                        }
-                        else -> navigator?.scrollToEnd()
-                    }
-                })
+        compositeDisposable.add(taskFragmentState())
 
         compositeDisposable.add(isAddTaskFragmentVisible())
     }
@@ -67,6 +55,7 @@ class TaskFragmentViewModel @Inject constructor(schedulerProvider: SchedulerProv
             = addTaskFragmentRelay.addTaskFragmentState
             .compose(schedulerProvider.ioToMainObservableScheduler())
             .subscribe {
+                Log.d(TAG, "add task show or not : $it")
                 isAddTaskFragmentVisible = when(it) {
                     AddTaskFragmentRelay.EnumAddTaskFragment.SHOW -> {
                         navigator?.scrollToEnd()
@@ -80,7 +69,7 @@ class TaskFragmentViewModel @Inject constructor(schedulerProvider: SchedulerProv
             = taskFragmentRelay.taskFragmentState
             .compose(schedulerProvider.ioToMainObservableScheduler())
             .subscribe {
-                Log.d(TAG, "UPDATE $it")
+                Log.d(TAG, "taskFragmentState $it")
                 when(it) {
                     TaskFragmentRelay.EnumTaskFragment.FINISHED_ITEMS_VISIBILITY_UPDATED -> {
                         getTasksDisposable.dispose()

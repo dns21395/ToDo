@@ -29,5 +29,6 @@ class ApplicationModule(application: Application) : Module() {
         bind(DatabaseRepository::class.java).toProvider(DatabaseRepositoryProvider::class.java).providesSingletonInScope()
         bind(SchedulerProvider::class.java).toInstance(SchedulerProviderImpl())
         bind(PreferencesRepository::class.java).toProvider(PreferencesRepositoryProvider::class.java).providesSingletonInScope()
+
     }
 }

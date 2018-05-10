@@ -11,7 +11,7 @@ import toothpick.config.Module
  */
 class MainModule : Module() {
     init {
-        bind(AddTaskFragmentRelay::class.java).toInstance(AddTaskFragmentRelay())
-        bind(TaskFragmentRelay::class.java).toInstance(TaskFragmentRelay())
+        bind(AddTaskFragmentRelay::class.java).singletonInScope()
+        bind(TaskFragmentRelay::class.java).singletonInScope()
     }
 }

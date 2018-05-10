@@ -30,7 +30,6 @@ class AddTaskFragmentViewModel @Inject constructor(schedulerProvider: SchedulerP
     }
 
     fun onAddTaskButtonClicked() {
-        Log.d(TAG, "$textTask")
         when(textTask.get()?.isEmpty()) {
             true -> { navigator?.showToastEmptyText() }
             false -> {

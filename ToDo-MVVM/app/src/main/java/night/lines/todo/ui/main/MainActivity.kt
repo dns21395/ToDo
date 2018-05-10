@@ -34,8 +34,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(),
 
     override fun performDependencyInjection() {
         Toothpick.openScopes(DI.APP_SCOPE, Main::class.java).apply {
-            Toothpick.inject(this@MainActivity, this)
             installModules(MainModule())
+            Toothpick.inject(this@MainActivity, this)
         }
     }
 
