@@ -1,4 +1,4 @@
-package night.lines.todo.toothpick.module
+package night.lines.todo.toothpick.main
 
 import night.lines.todo.ui.main.task.TaskFragmentRelay
 import night.lines.todo.ui.main.addtask.AddTaskFragmentRelay

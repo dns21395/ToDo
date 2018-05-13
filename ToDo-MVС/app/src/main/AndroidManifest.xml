@@ -14,7 +14,7 @@
             android:windowSoftInputMode="adjustResize"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             />
-        <activity android:name=".ui.splash.SplashActivity"
+        <activity android:name=".ui.splash.SplashController"
             android:noHistory="true"
             android:theme="@style/SplashTheme">
             <intent-filter>

@@ -4,42 +4,47 @@ import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_add_task.*
 import night.lines.todo.R
 import night.lines.todo.util.KeyboardUtils
-import night.lines.todo.controller.main.addtask.AddTaskPresenter
-import night.lines.todo.controller.main.addtask.AddTaskView
-import night.lines.todo.toothpick.DI
+import night.lines.todo.domain.interactor.main.AddTaskUseCase
+import night.lines.todo.domain.model.Task
+import night.lines.todo.toothpick.addtask.AddTaskScope
+import night.lines.todo.toothpick.main.MainScope
 import night.lines.todo.ui.base.BaseFragment
+import night.lines.todo.ui.main.task.TaskFragmentRelay
+import night.lines.todo.util.SchedulerProvider
 import org.jetbrains.anko.support.v4.toast
 import toothpick.Toothpick
+import java.util.*
+import javax.inject.Inject
 
 /**
  * Created by denisgabyshev on 20/03/2018.
  */
-class AddTaskFragment : BaseFragment(), AddTaskView {
+class AddTaskFragment : BaseFragment() {
 
-    @InjectPresenter lateinit var presenter: AddTaskPresenter
+    @Inject lateinit var compositeDisposable: CompositeDisposable
+    @Inject lateinit var schedulerProvider: SchedulerProvider
+    @Inject lateinit var taskFragmentRelay: TaskFragmentRelay
+    @Inject lateinit var addTaskUseCase: AddTaskUseCase
 
     companion object {
         val TAG = "AddTaskFragment"
     }
 
-    @ProvidePresenter
-    fun providePresenter(): AddTaskPresenter =
-            Toothpick
-                    .openScope(DI.MAIN_ACTIVITY_SCOPE).apply {
-                        Toothpick.inject(this@AddTaskFragment, this)
-                    }.getInstance(AddTaskPresenter::class.java)
-
     override val layoutRes = R.layout.fragment_add_task
+
+    override fun inject() {
+        Toothpick.openScopes(MainScope::class.java, AddTaskScope::class.java).apply {
+            Toothpick.inject(this@AddTaskFragment, this)
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Log.d(TAG, "onViewCreated")
 
         context?.let { KeyboardUtils.showSoftInput(textTask, it) }
 
@@ -53,15 +58,28 @@ class AddTaskFragment : BaseFragment(), AddTaskView {
         }
     }
 
-
     private fun addTask() {
         if (textTask.text.toString().isNotEmpty()) {
-            presenter.onAddTaskButtonClicked(textTask.text.toString())
+            addTask(textTask.text.toString())
             textTask.text.clear()
         } else {
             toast(R.string.text_add_task_empty)
-
         }
+    }
+
+    fun addTask(taskName: String) {
+        compositeDisposable.add(
+                addTaskUseCase.execute(Task(0, taskName, Date().time))
+                        .compose(schedulerProvider.ioToMainObservableScheduler())
+                        .subscribe {
+                            taskFragmentRelay.callTaskFragmentAction(TaskFragmentRelay.EnumTaskFragment.ITEM_ADDED)
+                        }
+        )
+    }
+
+    override fun onDestroy() {
+        Toothpick.closeScope(AddTaskScope::class.java)
+        super.onDestroy()
     }
 
 

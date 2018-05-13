@@ -2,6 +2,7 @@ package night.lines.todo.toothpick.module
 
 import android.arch.persistence.room.Room
 import android.content.Context
+import io.reactivex.disposables.CompositeDisposable
 import night.lines.todo.data.database.db.AppDatabase
 import night.lines.todo.data.database.db.converter.DatabaseConverter
 import night.lines.todo.domain.repository.DatabaseRepository
@@ -9,6 +10,8 @@ import night.lines.todo.domain.repository.PreferencesRepository
 import night.lines.todo.toothpick.provider.DatabaseConverterProvider
 import night.lines.todo.toothpick.provider.DatabaseRepositoryProvider
 import night.lines.todo.toothpick.provider.PreferencesRepositoryProvider
+import night.lines.todo.ui.main.addtask.AddTaskFragmentRelay
+import night.lines.todo.ui.main.task.TaskFragmentRelay
 import night.lines.todo.util.SchedulerProvider
 import night.lines.todo.util.SchedulerProviderImpl
 import toothpick.config.Module
@@ -24,6 +27,7 @@ class ApplicationModule(context: Context) : Module() {
                 AppDatabase::class.java,
                 "todo.db").build()
         )
+        bind(CompositeDisposable::class.java).toInstance(CompositeDisposable())
         bind(DatabaseConverter::class.java).toProvider(DatabaseConverterProvider::class.java)
         bind(DatabaseRepository::class.java).toProvider(DatabaseRepositoryProvider::class.java).providesSingletonInScope()
         bind(SchedulerProvider::class.java).toInstance(SchedulerProviderImpl())
