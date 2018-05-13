@@ -47,7 +47,6 @@ class MainActivityViewModel @Inject constructor(schedulerProvider: SchedulerProv
         )
     }
 
-
     private fun handleAddTaskFragmentState(enum: AddTaskFragmentRelay.EnumAddTaskFragment) {
         when(enum) {
             AddTaskFragmentRelay.EnumAddTaskFragment.SHOW -> navigator?.showAddTaskFragment()
@@ -71,7 +70,6 @@ class MainActivityViewModel @Inject constructor(schedulerProvider: SchedulerProv
             true -> navigator?.updateIconCheckFinishedItemsVisibility(R.drawable.check_show)
             false -> navigator?.updateIconCheckFinishedItemsVisibility(R.drawable.check_hide)
         }
-        Log.d(TAG, "RELAY")
         taskFragmentRelay.callTaskFragmentAction(TaskFragmentRelay.EnumTaskFragment.FINISHED_ITEMS_VISIBILITY_UPDATED)
     }
 
@@ -82,21 +80,9 @@ class MainActivityViewModel @Inject constructor(schedulerProvider: SchedulerProv
                         !it }
                         .compose(schedulerProvider.ioToMainObservableScheduler())
                         .subscribe {
-                            Log.d(TAG, "call FINISHED ITEMS VISIBILITY CHANGED")
                             updateIconCheckFinishedItemsVisibility(it)
                         }
         )
-    }
-
-    fun test() {
-        preferencesRepository.getFinishedTasksVisibility()
-                .map { preferencesRepository.setFinishedTasksVisibility(!it)
-                    !it }
-                .compose(schedulerProvider.ioToMainObservableScheduler())
-                .subscribe {
-                    Log.d(TAG, "call FINISHED ITEMS VISIBILITY CHANGED")
-                    updateIconCheckFinishedItemsVisibility(it)
-                }
     }
 
     fun onFabButtonClicked() {
