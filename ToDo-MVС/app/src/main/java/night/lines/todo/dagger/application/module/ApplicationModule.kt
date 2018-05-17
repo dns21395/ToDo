@@ -36,8 +36,8 @@ class ApplicationModule {
         = Room.databaseBuilder(application, AppDatabase::class.java, "todo.db").build()
 
     @Provides
-    internal fun provideDatabaseConverter(databaseConverterImpl: DatabaseConverterImpl): DatabaseConverter
-        = databaseConverterImpl
+    internal fun provideDatabaseConverter(): DatabaseConverter
+        = DatabaseConverterImpl()
 
     @Provides
     @Singleton

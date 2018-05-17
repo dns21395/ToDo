@@ -2,6 +2,8 @@ package night.lines.todo.ui.main
 
 import dagger.Module
 import dagger.Provides
+import night.lines.todo.dagger.MainScope
+import night.lines.todo.dagger.application.ForApplication
 import night.lines.todo.domain.interactor.main.AddTaskUseCase
 import night.lines.todo.domain.interactor.main.GetTasksUseCase
 import night.lines.todo.domain.interactor.main.RemoveTaskUseCase
@@ -30,8 +32,10 @@ class MainActivityModule {
             = UpdateTaskUseCase(databaseRepository)
 
     @Provides
+    @MainScope
     fun provideTaskFragmentRelay(): TaskFragmentRelay = TaskFragmentRelay()
 
     @Provides
+    @MainScope
     fun provideAddTaskFragmentRelay(): AddTaskFragmentRelay = AddTaskFragmentRelay()
 }

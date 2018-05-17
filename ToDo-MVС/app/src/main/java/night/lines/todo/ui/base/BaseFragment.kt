@@ -2,18 +2,14 @@ package night.lines.todo.ui.base
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.support.HasSupportFragmentInjector
-import javax.inject.Inject
+import dagger.android.support.DaggerFragment
 
 /**
  * Created by denisgabyshev on 20/03/2018.
  */
-abstract class BaseFragment : Fragment() {
+abstract class BaseFragment : DaggerFragment() {
 
     private var parentActivity: BaseActivity? = null
 
@@ -25,24 +21,25 @@ abstract class BaseFragment : Fragment() {
         }
     }
 
-    @Inject lateinit var childFragmentInjector: DispatchingAndroidInjector<Fragment>
+
+//    @Inject lateinit var childFragmentInjector: DispatchingAndroidInjector<Fragment>
 
     abstract val layoutRes: Int
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        inject()
+//        inject()
         super.onCreate(savedInstanceState)
     }
 
 //    override fun supportFragmentInjector(): AndroidInjector<Fragment> = childFragmentInjector
 
-    private fun inject() {
-        val hasSupportFragmentInjector =  (parentActivity as HasSupportFragmentInjector)
-
-        val fragmentInjector = hasSupportFragmentInjector.supportFragmentInjector()
-
-        fragmentInjector.inject(this)
-    }
+//    private fun inject() {
+//        val hasSupportFragmentInjector =  (parentActivity as HasSupportFragmentInjector)
+//
+//        val fragmentInjector = hasSupportFragmentInjector.supportFragmentInjector()
+//
+//        fragmentInjector.inject(this)
+//    }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =

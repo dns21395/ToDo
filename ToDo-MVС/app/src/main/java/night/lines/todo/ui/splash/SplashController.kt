@@ -15,7 +15,7 @@ class SplashController : AppCompatActivity() {
 
         inject()
 
-//        startActivity(Intent(this, MainActivity::class.java))
+        startActivity(Intent(this, MainActivity::class.java))
     }
 
     private fun inject() {

@@ -4,13 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.support.constraint.ConstraintLayout
 import android.support.constraint.ConstraintSet
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.widget.FrameLayout
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasFragmentInjector
-import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_main.*
@@ -62,9 +56,6 @@ class MainActivity : BaseActivity() {
                 .commitAllowingStateLoss()
     }
 
-
-
-
     private fun addTaskFragmentState() {
         compositeDisposable.add(
                 addTaskFragmentRelay.addTaskFragmentState
@@ -81,7 +72,6 @@ class MainActivity : BaseActivity() {
                         }
         )
     }
-
 
     private fun checkFinishedItemsVisibility() {
         compositeDisposable.add(
@@ -196,9 +186,5 @@ class MainActivity : BaseActivity() {
                             taskFragmentRelay.callTaskFragmentAction(TaskFragmentRelay.EnumTaskFragment.FINISHED_ITEMS_VISIBILITY_UPDATED)
                         }
         )
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 }
