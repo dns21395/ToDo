@@ -4,29 +4,31 @@ import android.os.Bundle
 import android.view.View
 import android.support.constraint.ConstraintLayout
 import android.support.constraint.ConstraintSet
+import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.widget.FrameLayout
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasFragmentInjector
+import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_main.*
 import night.lines.todo.R
 import night.lines.todo.domain.repository.PreferencesRepository
-import night.lines.todo.toothpick.DI
-import night.lines.todo.toothpick.main.MainScope
-import night.lines.todo.toothpick.main.MainModule
+import night.lines.todo.ui.base.BaseActivity
 import night.lines.todo.ui.main.addtask.AddTaskFragment
 import night.lines.todo.ui.main.addtask.AddTaskFragmentRelay
 import night.lines.todo.ui.main.task.TaskFragment
 import night.lines.todo.ui.main.task.TaskFragmentRelay
 import night.lines.todo.util.SchedulerProvider
-import toothpick.Toothpick
 import javax.inject.Inject
 
 /**
  * Created by denisgabyshev on 18/03/2018.
  */
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private val TAG = "MainActivity"
 
@@ -42,16 +44,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        inject()
-
         setMenu()
 
         setToolbarBackground()
 
         addTaskFragmentState()
-
-        supportFragmentManager.beginTransaction().replace(R.id.frameLayout, TaskFragment())
-                .commitAllowingStateLoss()
 
         if(bottomFrameLayoutId != 0) createFrameLayout()
 
@@ -60,14 +57,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         setFinishedTasksVisibility()
+
+        supportFragmentManager.beginTransaction().replace(R.id.frameLayout, TaskFragment())
+                .commitAllowingStateLoss()
     }
 
-    private fun inject() {
-        Toothpick.openScopes(DI.APP_SCOPE, MainScope::class.java).apply {
-            Toothpick.inject(this@MainActivity, this)
-            installModules(MainModule())
-        }
-    }
+
+
 
     private fun addTaskFragmentState() {
         compositeDisposable.add(
@@ -204,6 +200,5 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        if(isFinishing) Toothpick.closeScope(MainScope::class.java)
     }
 }

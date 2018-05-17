@@ -7,11 +7,12 @@ import io.reactivex.ObservableTransformer
 import io.reactivex.SingleTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 /**
  * Created by denisgabyshev on 17/03/2018.
  */
-class SchedulerProviderImpl : SchedulerProvider {
+class SchedulerProviderImpl @Inject constructor() : SchedulerProvider {
     override fun <T> ioToMainObservableScheduler(): ObservableTransformer<T, T> = ObservableTransformer { upstream ->
         upstream.subscribeOn(getIOThreadScheduler())
                 .observeOn(getMainThreadScheduler())

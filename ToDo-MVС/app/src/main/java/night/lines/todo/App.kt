@@ -1,41 +1,29 @@
 package night.lines.todo
 
-import android.app.Application
-import night.lines.todo.toothpick.DI
-import night.lines.todo.toothpick.module.ApplicationModule
-import night.lines.todo.toothpick.module.UseCaseModule
-import toothpick.Toothpick
-import toothpick.configuration.Configuration
-import toothpick.registries.FactoryRegistryLocator
-import toothpick.registries.MemberInjectorRegistryLocator
+
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
+import night.lines.todo.dagger.application.DaggerApplicationComponent
+import timber.log.Timber
+
 
 /**
  * Created by denisgabyshev on 17/03/2018.
  */
-class App : Application() {
+class App : DaggerApplication() {
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> =
+        DaggerApplicationComponent.builder().application(this).build()
 
     override fun onCreate() {
         super.onCreate()
 
-        initToothPick()
-        initAppScope()
+        initTimber()
     }
 
-    private fun initToothPick() {
+    private fun initTimber() {
         when(BuildConfig.DEBUG) {
-            true -> Toothpick.setConfiguration(Configuration.forDevelopment().preventMultipleRootScopes())
-            false -> {
-                Toothpick.setConfiguration(Configuration.forProduction().disableReflection())
-                FactoryRegistryLocator.setRootRegistry(night.lines.todo.app.FactoryRegistry())
-                MemberInjectorRegistryLocator.setRootRegistry(night.lines.todo.app.MemberInjectorRegistry())
-            }
+            true -> Timber.plant(Timber.DebugTree())
+            false -> {}
         }
-    }
-
-    private fun initAppScope() {
-        val appScope = Toothpick.openScope(DI.APP_SCOPE)
-        appScope.installModules(
-                ApplicationModule(this),
-                UseCaseModule())
     }
 }

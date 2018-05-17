@@ -7,7 +7,7 @@ import javax.inject.Inject
 /**
  * Created by denisgabyshev on 20/03/2018.
  */
-class AddTaskFragmentRelay @Inject constructor()  {
+class AddTaskFragmentRelay {
 
     private val addTaskFragmentStateRelay = PublishRelay.create<EnumAddTaskFragment>()
 

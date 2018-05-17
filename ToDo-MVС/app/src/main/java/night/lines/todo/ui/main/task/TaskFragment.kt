@@ -3,7 +3,6 @@ package night.lines.todo.ui.main.task
 import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import io.reactivex.BackpressureStrategy
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -14,12 +13,9 @@ import night.lines.todo.domain.interactor.main.GetTasksUseCase
 import night.lines.todo.domain.interactor.main.RemoveTaskUseCase
 import night.lines.todo.domain.interactor.main.UpdateTaskUseCase
 import night.lines.todo.domain.repository.PreferencesRepository
-import night.lines.todo.toothpick.main.MainScope
-import night.lines.todo.toothpick.task.TaskScope
 import night.lines.todo.ui.base.BaseFragment
 import night.lines.todo.ui.main.addtask.AddTaskFragmentRelay
 import night.lines.todo.util.SchedulerProvider
-import toothpick.Toothpick
 import javax.inject.Inject
 
 /**
@@ -47,17 +43,9 @@ class TaskFragment : BaseFragment() {
 
     var isAddTaskFragmentVisible = false
 
-
-    override fun inject() {
-            Toothpick.openScopes(MainScope::class.java, TaskScope::class.java).apply {
-                Toothpick.inject(this@TaskFragment, this)
-            }
-
-
-    }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
 
         adapter = TaskAdapter(context!!, recyclerView)
         adapter.taskFragment = this

@@ -5,9 +5,13 @@ import com.jakewharton.rxrelay2.PublishRelay
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class TaskFragmentRelay @Inject constructor()  {
+class TaskFragmentRelay  {
 
     private val TAG = "TaskFragmentRelay"
+
+    init {
+        Log.d(TAG, "asds")
+    }
 
 
     private val taskFragmentStateRelay = PublishRelay.create<EnumTaskFragment>()
