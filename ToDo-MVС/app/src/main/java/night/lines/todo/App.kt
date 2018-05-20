@@ -22,8 +22,17 @@ class App : DaggerApplication() {
 
     private fun initTimber() {
         when(BuildConfig.DEBUG) {
+<<<<<<< HEAD
             true -> Timber.plant(Timber.DebugTree())
             false -> {}
+=======
+            true -> Toothpick.setConfiguration(Configuration.forDevelopment().preventMultipleRootScopes())
+            false -> {
+                Toothpick.setConfiguration(Configuration.forProduction().disableReflection())
+                FactoryRegistryLocator.setRootRegistry(night.lines.todo.FactoryRegistry())
+                MemberInjectorRegistryLocator.setRootRegistry(night.lines.todo.MemberInjectorRegistry())
+            }
+>>>>>>> soso
         }
     }
 }

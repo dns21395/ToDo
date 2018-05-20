@@ -11,9 +11,14 @@ class TaskFragmentRelay @Inject constructor() {
     private val TAG = "TaskFragmentRelay"
 
     init {
+<<<<<<< HEAD:ToDo-MVС/app/src/main/java/night/lines/todo/ui/main/fragments/task/TaskFragmentRelay.kt
         Log.d(TAG, "INIT")
     }
 
+=======
+        Log.d(TAG, "TaskFragmentRelay created")
+    }
+>>>>>>> soso:ToDo-MVС/app/src/main/java/night/lines/todo/ui/main/task/TaskFragmentRelay.kt
 
     private val taskFragmentStateRelay = PublishRelay.create<EnumTaskFragment>()
 

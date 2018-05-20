@@ -10,11 +10,22 @@ import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_main.*
 import night.lines.todo.R
 import night.lines.todo.domain.repository.PreferencesRepository
+<<<<<<< HEAD
 import night.lines.todo.ui.base.BaseActivity
 import night.lines.todo.ui.main.fragments.addtask.controller.AddTaskFragment
 import night.lines.todo.ui.main.fragments.addtask.AddTaskFragmentRelay
 import night.lines.todo.ui.main.fragments.task.controller.TaskFragment
 import night.lines.todo.ui.main.fragments.task.TaskFragmentRelay
+=======
+import night.lines.todo.toothpick.DI
+import night.lines.todo.toothpick.main.Counter
+import night.lines.todo.toothpick.main.MainScope
+import night.lines.todo.toothpick.main.MainModule
+import night.lines.todo.ui.main.addtask.AddTaskFragment
+import night.lines.todo.ui.main.addtask.AddTaskFragmentRelay
+import night.lines.todo.ui.main.task.TaskFragment
+import night.lines.todo.ui.main.task.TaskFragmentRelay
+>>>>>>> soso
 import night.lines.todo.util.SchedulerProvider
 import javax.inject.Inject
 
@@ -31,6 +42,7 @@ class MainActivity : BaseActivity() {
     @Inject lateinit var addTaskFragmentRelay: AddTaskFragmentRelay
     @Inject lateinit var taskFragmentRelay: TaskFragmentRelay
     @Inject lateinit var preferencesRepository: PreferencesRepository
+    @Inject lateinit var counter: Counter
 
     private var bottomFrameLayoutId: Int = 0
 
@@ -52,8 +64,16 @@ class MainActivity : BaseActivity() {
 
         setFinishedTasksVisibility()
 
+<<<<<<< HEAD
         supportFragmentManager.beginTransaction().replace(R.id.frameLayout, TaskFragment())
                 .commitAllowingStateLoss()
+=======
+    private fun inject() {
+        Toothpick.openScopes(DI.APP_SCOPE, MainScope::class.java).apply {
+            installModules(MainModule())
+            Toothpick.inject(this@MainActivity, this)
+        }
+>>>>>>> soso
     }
 
     private fun addTaskFragmentState() {
