@@ -1,4 +1,4 @@
-package night.lines.todo.ui.main.task
+package night.lines.todo.ui.main.fragments.task
 
 import android.content.Context
 import android.graphics.Canvas

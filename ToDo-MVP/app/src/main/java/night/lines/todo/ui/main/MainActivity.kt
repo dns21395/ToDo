@@ -48,7 +48,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         supportFragmentManager.beginTransaction().replace(R.id.frameLayout, TaskFragment())
                 .commitAllowingStateLoss()
 
-        if(presenter.bottomFrameLayoutId != 0) createFrameLayout()
+        //if(presenter.bottomFrameLayoutId != 0) createFrameLayout()
 
         fab.setOnClickListener {
             presenter.onFabButtonClicked()

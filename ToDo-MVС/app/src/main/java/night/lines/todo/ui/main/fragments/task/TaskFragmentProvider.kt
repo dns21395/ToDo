@@ -1,7 +1,8 @@
-package night.lines.todo.ui.main.task
+package night.lines.todo.ui.main.fragments.task
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
+import night.lines.todo.ui.main.fragments.task.controller.TaskFragment
 
 @Module
 internal abstract class TaskFragmentProvider {

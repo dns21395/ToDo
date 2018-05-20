@@ -27,10 +27,12 @@ class TaskFragment : BaseFragment(), TaskView {
     @InjectPresenter
     lateinit var presenter: TaskPresenter
 
+
+
     @ProvidePresenter
     fun providePresenter(): TaskPresenter
         =  Toothpick
-            .openScope(DI.MAIN_ACTIVITY_SCOPE).apply {
+            .openScopes(DI.MAIN_ACTIVITY_SCOPE, DI.FRAGMENT_SCOPE).apply {
                 Toothpick.inject(this@TaskFragment, this)
             }.getInstance(TaskPresenter::class.java)
 

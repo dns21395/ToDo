@@ -22,24 +22,12 @@ abstract class BaseFragment : DaggerFragment() {
     }
 
 
-//    @Inject lateinit var childFragmentInjector: DispatchingAndroidInjector<Fragment>
 
     abstract val layoutRes: Int
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-//        inject()
-        super.onCreate(savedInstanceState)
-    }
 
-//    override fun supportFragmentInjector(): AndroidInjector<Fragment> = childFragmentInjector
 
-//    private fun inject() {
-//        val hasSupportFragmentInjector =  (parentActivity as HasSupportFragmentInjector)
-//
-//        val fragmentInjector = hasSupportFragmentInjector.supportFragmentInjector()
-//
-//        fragmentInjector.inject(this)
-//    }
+
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =

@@ -1,4 +1,4 @@
-package night.lines.todo.ui.main.addtask
+package night.lines.todo.ui.main.fragments.addtask.controller
 
 import android.os.Bundle
 import android.view.KeyEvent
@@ -10,7 +10,7 @@ import night.lines.todo.util.KeyboardUtils
 import night.lines.todo.domain.interactor.main.AddTaskUseCase
 import night.lines.todo.domain.model.Task
 import night.lines.todo.ui.base.BaseFragment
-import night.lines.todo.ui.main.task.TaskFragmentRelay
+import night.lines.todo.ui.main.fragments.task.TaskFragmentRelay
 import night.lines.todo.util.SchedulerProvider
 import org.jetbrains.anko.support.v4.toast
 import java.util.*

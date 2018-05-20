@@ -1,10 +1,8 @@
-package night.lines.todo.ui.main.task
+package night.lines.todo.ui.main.fragments.task
 
 import android.util.Log
 import com.jakewharton.rxrelay2.PublishRelay
 import io.reactivex.Observable
-import night.lines.todo.dagger.MainScope
-import night.lines.todo.dagger.application.ForApplication
 import javax.inject.Inject
 
 
@@ -13,7 +11,7 @@ class TaskFragmentRelay @Inject constructor() {
     private val TAG = "TaskFragmentRelay"
 
     init {
-        Log.d(TAG, "asds")
+        Log.d(TAG, "INIT")
     }
 
 

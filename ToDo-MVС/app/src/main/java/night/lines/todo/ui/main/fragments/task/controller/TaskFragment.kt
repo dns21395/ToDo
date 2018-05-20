@@ -1,4 +1,4 @@
-package night.lines.todo.ui.main.task
+package night.lines.todo.ui.main.fragments.task.controller
 
 import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
@@ -14,7 +14,9 @@ import night.lines.todo.domain.interactor.main.RemoveTaskUseCase
 import night.lines.todo.domain.interactor.main.UpdateTaskUseCase
 import night.lines.todo.domain.repository.PreferencesRepository
 import night.lines.todo.ui.base.BaseFragment
-import night.lines.todo.ui.main.addtask.AddTaskFragmentRelay
+import night.lines.todo.ui.main.fragments.addtask.AddTaskFragmentRelay
+import night.lines.todo.ui.main.fragments.task.TaskAdapter
+import night.lines.todo.ui.main.fragments.task.TaskFragmentRelay
 import night.lines.todo.util.SchedulerProvider
 import javax.inject.Inject
 

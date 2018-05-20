@@ -11,10 +11,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 import night.lines.todo.R
 import night.lines.todo.domain.repository.PreferencesRepository
 import night.lines.todo.ui.base.BaseActivity
-import night.lines.todo.ui.main.addtask.AddTaskFragment
-import night.lines.todo.ui.main.addtask.AddTaskFragmentRelay
-import night.lines.todo.ui.main.task.TaskFragment
-import night.lines.todo.ui.main.task.TaskFragmentRelay
+import night.lines.todo.ui.main.fragments.addtask.controller.AddTaskFragment
+import night.lines.todo.ui.main.fragments.addtask.AddTaskFragmentRelay
+import night.lines.todo.ui.main.fragments.task.controller.TaskFragment
+import night.lines.todo.ui.main.fragments.task.TaskFragmentRelay
 import night.lines.todo.util.SchedulerProvider
 import javax.inject.Inject
 
