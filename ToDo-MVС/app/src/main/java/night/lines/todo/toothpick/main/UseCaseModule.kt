@@ -1,4 +1,4 @@
-package night.lines.todo.toothpick.module
+package night.lines.todo.toothpick.main
 
 import night.lines.todo.domain.interactor.main.AddTaskUseCase
 import night.lines.todo.domain.interactor.main.GetTasksUseCase

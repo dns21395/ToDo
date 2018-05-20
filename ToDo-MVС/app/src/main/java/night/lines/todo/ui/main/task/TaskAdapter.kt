@@ -1,4 +1,4 @@
-package night.lines.todo.ui.main.fragments.task
+package night.lines.todo.ui.main.task
 
 import android.content.Context
 import android.graphics.Paint
@@ -10,8 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_task.view.*
 import night.lines.todo.R
+import night.lines.todo.data.database.db.model.TaskModel
 import night.lines.todo.domain.model.Task
-import night.lines.todo.ui.main.fragments.task.controller.TaskFragment
 import org.jetbrains.anko.backgroundColor
 import org.jetbrains.anko.imageResource
 

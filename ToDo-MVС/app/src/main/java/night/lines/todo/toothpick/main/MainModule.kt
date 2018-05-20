@@ -1,7 +1,8 @@
 package night.lines.todo.toothpick.main
 
-import night.lines.todo.ui.main.task.TaskFragmentRelay
+
 import night.lines.todo.ui.main.addtask.AddTaskFragmentRelay
+import night.lines.todo.ui.main.task.TaskFragmentRelay
 import toothpick.config.Module
 
 /**
@@ -11,6 +12,5 @@ class MainModule : Module() {
     init {
         bind(AddTaskFragmentRelay::class.java).toInstance(AddTaskFragmentRelay())
         bind(TaskFragmentRelay::class.java).toInstance(TaskFragmentRelay())
-        bind(Counter::class.java).toInstance(Counter())
     }
 }

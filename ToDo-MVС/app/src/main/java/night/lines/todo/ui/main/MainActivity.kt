@@ -4,36 +4,29 @@ import android.os.Bundle
 import android.view.View
 import android.support.constraint.ConstraintLayout
 import android.support.constraint.ConstraintSet
+import android.support.v7.app.AppCompatActivity
 import android.widget.FrameLayout
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_main.*
 import night.lines.todo.R
 import night.lines.todo.domain.repository.PreferencesRepository
-<<<<<<< HEAD
-import night.lines.todo.ui.base.BaseActivity
-import night.lines.todo.ui.main.fragments.addtask.controller.AddTaskFragment
-import night.lines.todo.ui.main.fragments.addtask.AddTaskFragmentRelay
-import night.lines.todo.ui.main.fragments.task.controller.TaskFragment
-import night.lines.todo.ui.main.fragments.task.TaskFragmentRelay
-=======
-import night.lines.todo.toothpick.DI
-import night.lines.todo.toothpick.main.Counter
+import night.lines.todo.toothpick.app.AppScope
 import night.lines.todo.toothpick.main.MainScope
 import night.lines.todo.toothpick.main.MainModule
 import night.lines.todo.ui.main.addtask.AddTaskFragment
 import night.lines.todo.ui.main.addtask.AddTaskFragmentRelay
 import night.lines.todo.ui.main.task.TaskFragment
 import night.lines.todo.ui.main.task.TaskFragmentRelay
->>>>>>> soso
 import night.lines.todo.util.SchedulerProvider
+import toothpick.Toothpick
 import javax.inject.Inject
 
 /**
  * Created by denisgabyshev on 18/03/2018.
  */
 
-class MainActivity : BaseActivity() {
+class MainActivity : AppCompatActivity() {
 
     private val TAG = "MainActivity"
 
@@ -42,7 +35,6 @@ class MainActivity : BaseActivity() {
     @Inject lateinit var addTaskFragmentRelay: AddTaskFragmentRelay
     @Inject lateinit var taskFragmentRelay: TaskFragmentRelay
     @Inject lateinit var preferencesRepository: PreferencesRepository
-    @Inject lateinit var counter: Counter
 
     private var bottomFrameLayoutId: Int = 0
 
@@ -50,11 +42,16 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        inject()
+
         setMenu()
 
         setToolbarBackground()
 
         addTaskFragmentState()
+
+        supportFragmentManager.beginTransaction().replace(R.id.frameLayout, TaskFragment())
+                .commitAllowingStateLoss()
 
         if(bottomFrameLayoutId != 0) createFrameLayout()
 
@@ -63,17 +60,13 @@ class MainActivity : BaseActivity() {
         }
 
         setFinishedTasksVisibility()
+    }
 
-<<<<<<< HEAD
-        supportFragmentManager.beginTransaction().replace(R.id.frameLayout, TaskFragment())
-                .commitAllowingStateLoss()
-=======
     private fun inject() {
-        Toothpick.openScopes(DI.APP_SCOPE, MainScope::class.java).apply {
+        Toothpick.openScopes(AppScope::class.java, MainScope::class.java).apply {
             installModules(MainModule())
             Toothpick.inject(this@MainActivity, this)
         }
->>>>>>> soso
     }
 
     private fun addTaskFragmentState() {
@@ -206,5 +199,10 @@ class MainActivity : BaseActivity() {
                             taskFragmentRelay.callTaskFragmentAction(TaskFragmentRelay.EnumTaskFragment.FINISHED_ITEMS_VISIBILITY_UPDATED)
                         }
         )
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if(isFinishing) Toothpick.closeScope(MainScope::class.java)
     }
 }

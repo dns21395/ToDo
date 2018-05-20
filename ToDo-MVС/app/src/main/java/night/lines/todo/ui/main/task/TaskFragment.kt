@@ -1,8 +1,9 @@
-package night.lines.todo.ui.main.fragments.task.controller
+package night.lines.todo.ui.main.task
 
 import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import io.reactivex.BackpressureStrategy
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -13,18 +14,12 @@ import night.lines.todo.domain.interactor.main.GetTasksUseCase
 import night.lines.todo.domain.interactor.main.RemoveTaskUseCase
 import night.lines.todo.domain.interactor.main.UpdateTaskUseCase
 import night.lines.todo.domain.repository.PreferencesRepository
-<<<<<<< HEAD:ToDo-MVС/app/src/main/java/night/lines/todo/ui/main/fragments/task/controller/TaskFragment.kt
-=======
-import night.lines.todo.toothpick.DI
-import night.lines.todo.toothpick.main.Counter
 import night.lines.todo.toothpick.main.MainScope
 import night.lines.todo.toothpick.task.TaskScope
->>>>>>> soso:ToDo-MVС/app/src/main/java/night/lines/todo/ui/main/task/TaskFragment.kt
 import night.lines.todo.ui.base.BaseFragment
-import night.lines.todo.ui.main.fragments.addtask.AddTaskFragmentRelay
-import night.lines.todo.ui.main.fragments.task.TaskAdapter
-import night.lines.todo.ui.main.fragments.task.TaskFragmentRelay
+import night.lines.todo.ui.main.addtask.AddTaskFragmentRelay
 import night.lines.todo.util.SchedulerProvider
+import toothpick.Toothpick
 import javax.inject.Inject
 
 /**
@@ -47,32 +42,22 @@ class TaskFragment : BaseFragment() {
     @Inject lateinit var updateTaskUseCase: UpdateTaskUseCase
     @Inject lateinit var removeTaskUseCase: RemoveTaskUseCase
     @Inject lateinit var getTasksUseCase: GetTasksUseCase
-    @Inject lateinit var counter: Counter
-
 
     override val layoutRes = R.layout.fragment_task
 
     var isAddTaskFragmentVisible = false
 
-<<<<<<< HEAD:ToDo-MVС/app/src/main/java/night/lines/todo/ui/main/fragments/task/controller/TaskFragment.kt
-=======
 
     override fun inject() {
             Toothpick.openScopes(MainScope::class.java, TaskScope::class.java).apply {
                 Toothpick.inject(this@TaskFragment, this)
             }
 
-        Log.d(TAG, "tree ${
-            Toothpick.openScope(DI.APP_SCOPE)
-        }")
-
 
     }
 
->>>>>>> soso:ToDo-MVС/app/src/main/java/night/lines/todo/ui/main/task/TaskFragment.kt
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
 
         adapter = TaskAdapter(context!!, recyclerView)
         adapter.taskFragment = this

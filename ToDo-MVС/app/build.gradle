@@ -22,10 +22,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    kapt {
-        generateStubs = true
-        correctErrorTypes = true
-    }
 }
 
 dependencies {
@@ -33,7 +29,7 @@ dependencies {
     implementation project(':domain')
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
     implementation "com.android.support:design:$supportLibraryVersion"
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
@@ -59,18 +55,10 @@ dependencies {
     implementation "android.arch.persistence.room:rxjava2:$roomDatabaseVersion"
     kapt "android.arch.persistence.room:compiler:$roomDatabaseVersion"
 
-<<<<<<< HEAD
-    // DI
-    implementation "com.google.dagger:dagger:$dagger2"
-    kapt "com.google.dagger:dagger-compiler:$dagger2"
-    kapt "com.google.dagger:dagger-android-processor:$dagger2"
-    implementation "com.google.dagger:dagger-android-support:$dagger2"
-=======
     //DI
     implementation "com.github.stephanenicolas.toothpick:toothpick-runtime:$toothpickVersion"
     implementation "com.github.stephanenicolas.toothpick:smoothie:$toothpickVersion"
     kapt "com.github.stephanenicolas.toothpick:toothpick-compiler:$toothpickVersion"
->>>>>>> soso
 
     // Anko
     implementation "org.jetbrains.anko:anko:$anko_version"
@@ -79,15 +67,14 @@ dependencies {
     testImplementation "org.mockito:mockito-core:$mockito"
     testImplementation 'junit:junit:4.12'
 
-<<<<<<< HEAD
     // Log
     implementation "com.jakewharton.timber:timber:$timber"
-=======
+}
+
 kapt {
     generateStubs = true
     arguments {
         arg("toothpick_registry_package_name", "night.lines.todo")
     }
->>>>>>> soso
 }
 
