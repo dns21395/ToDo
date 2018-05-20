@@ -14,6 +14,8 @@ import night.lines.todo.domain.interactor.main.GetTasksUseCase
 import night.lines.todo.domain.interactor.main.RemoveTaskUseCase
 import night.lines.todo.domain.interactor.main.UpdateTaskUseCase
 import night.lines.todo.domain.repository.PreferencesRepository
+import night.lines.todo.toothpick.DI
+import night.lines.todo.toothpick.main.Counter
 import night.lines.todo.toothpick.main.MainScope
 import night.lines.todo.toothpick.task.TaskScope
 import night.lines.todo.ui.base.BaseFragment
@@ -42,6 +44,8 @@ class TaskFragment : BaseFragment() {
     @Inject lateinit var updateTaskUseCase: UpdateTaskUseCase
     @Inject lateinit var removeTaskUseCase: RemoveTaskUseCase
     @Inject lateinit var getTasksUseCase: GetTasksUseCase
+    @Inject lateinit var counter: Counter
+
 
     override val layoutRes = R.layout.fragment_task
 
@@ -52,6 +56,10 @@ class TaskFragment : BaseFragment() {
             Toothpick.openScopes(MainScope::class.java, TaskScope::class.java).apply {
                 Toothpick.inject(this@TaskFragment, this)
             }
+
+        Log.d(TAG, "tree ${
+            Toothpick.openScope(DI.APP_SCOPE)
+        }")
 
 
     }

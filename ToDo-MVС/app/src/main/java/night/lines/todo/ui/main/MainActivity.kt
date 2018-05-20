@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import night.lines.todo.R
 import night.lines.todo.domain.repository.PreferencesRepository
 import night.lines.todo.toothpick.DI
+import night.lines.todo.toothpick.main.Counter
 import night.lines.todo.toothpick.main.MainScope
 import night.lines.todo.toothpick.main.MainModule
 import night.lines.todo.ui.main.addtask.AddTaskFragment
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
     @Inject lateinit var addTaskFragmentRelay: AddTaskFragmentRelay
     @Inject lateinit var taskFragmentRelay: TaskFragmentRelay
     @Inject lateinit var preferencesRepository: PreferencesRepository
+    @Inject lateinit var counter: Counter
 
     private var bottomFrameLayoutId: Int = 0
 
@@ -64,8 +66,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun inject() {
         Toothpick.openScopes(DI.APP_SCOPE, MainScope::class.java).apply {
-            Toothpick.inject(this@MainActivity, this)
             installModules(MainModule())
+            Toothpick.inject(this@MainActivity, this)
         }
     }
 

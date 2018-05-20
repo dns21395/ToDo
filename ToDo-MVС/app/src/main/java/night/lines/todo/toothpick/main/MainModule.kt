@@ -11,5 +11,6 @@ class MainModule : Module() {
     init {
         bind(AddTaskFragmentRelay::class.java).toInstance(AddTaskFragmentRelay())
         bind(TaskFragmentRelay::class.java).toInstance(TaskFragmentRelay())
+        bind(Counter::class.java).toInstance(Counter())
     }
 }

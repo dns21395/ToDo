@@ -57,6 +57,7 @@ dependencies {
 
     //DI
     implementation "com.github.stephanenicolas.toothpick:toothpick-runtime:$toothpickVersion"
+    implementation "com.github.stephanenicolas.toothpick:smoothie:$toothpickVersion"
     kapt "com.github.stephanenicolas.toothpick:toothpick-compiler:$toothpickVersion"
 
     // Anko
@@ -70,6 +71,6 @@ dependencies {
 kapt {
     generateStubs = true
     arguments {
-        arg("toothpick_registry_package_name", "night.lines.todo.app")
+        arg("toothpick_registry_package_name", "night.lines.todo")
     }
 }

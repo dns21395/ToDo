@@ -9,6 +9,9 @@ class TaskFragmentRelay @Inject constructor()  {
 
     private val TAG = "TaskFragmentRelay"
 
+    init {
+        Log.d(TAG, "TaskFragmentRelay created")
+    }
 
     private val taskFragmentStateRelay = PublishRelay.create<EnumTaskFragment>()
 

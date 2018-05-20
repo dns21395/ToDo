@@ -16,6 +16,5 @@ class UseCaseModule : Module() {
         bind(GetTasksUseCase::class.java).toProvider(GetTasksUseCaseProvider::class.java)
         bind(UpdateTaskUseCase::class.java).toProvider(UpdateTaskUseCaseProvider::class.java)
         bind(RemoveTaskUseCase::class.java).toProvider(RemoveTaskUseCaseProvider::class.java)
-
     }
 }

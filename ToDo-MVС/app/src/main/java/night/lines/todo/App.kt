@@ -26,8 +26,8 @@ class App : Application() {
             true -> Toothpick.setConfiguration(Configuration.forDevelopment().preventMultipleRootScopes())
             false -> {
                 Toothpick.setConfiguration(Configuration.forProduction().disableReflection())
-                FactoryRegistryLocator.setRootRegistry(night.lines.todo.app.FactoryRegistry())
-                MemberInjectorRegistryLocator.setRootRegistry(night.lines.todo.app.MemberInjectorRegistry())
+                FactoryRegistryLocator.setRootRegistry(night.lines.todo.FactoryRegistry())
+                MemberInjectorRegistryLocator.setRootRegistry(night.lines.todo.MemberInjectorRegistry())
             }
         }
     }
