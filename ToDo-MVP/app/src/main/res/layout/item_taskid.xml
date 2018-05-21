@@ -16,7 +16,7 @@
         android:id="@+id/image"
         android:padding="16dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:background="@null"
         android:layout_gravity="center"
@@ -28,13 +28,14 @@
     <TextView
         app:layout_constraintStart_toEndOf="@id/image"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:id="@+id/text"
         tools:text="Work"
         android:textColor="@color/black_effective"
         android:layout_gravity="center_vertical"
         android:padding="16dp"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content" />
 
 </android.support.constraint.ConstraintLayout>

@@ -23,6 +23,7 @@ import night.lines.todo.ui.base.BaseActivity
 import night.lines.todo.ui.main.addtask.AddTaskFragment
 import night.lines.todo.ui.main.navigation.MainNavigationAdapter
 import night.lines.todo.ui.main.task.TaskFragment
+import night.lines.todo.util.ScreenUtils
 import toothpick.Toothpick
 import javax.inject.Inject
 import javax.inject.Provider
@@ -152,6 +153,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     }
 
     private fun setNavMenu() {
+        navigationView.setPadding(0, ScreenUtils.getStatusBarHeight(this), 0, 0)
         adapter.presenter = presenter
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = adapter
