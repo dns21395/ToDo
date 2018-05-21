@@ -19,4 +19,6 @@ interface MainView : MvpView {
 
     @StateStrategyType(OneExecutionStateStrategy::class)
     fun updateIconCheckFinishedItemsVisibility(drawable: Int)
+
+    fun updateTaskIDArray()
 }

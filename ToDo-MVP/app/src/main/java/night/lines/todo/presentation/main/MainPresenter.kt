@@ -3,6 +3,8 @@ package night.lines.todo.presentation.main
 import com.arellomobile.mvp.InjectViewState
 import io.reactivex.Observable
 import night.lines.todo.R
+import night.lines.todo.domain.model.TaskID
+import night.lines.todo.domain.repository.DatabaseRepository
 import night.lines.todo.domain.repository.PreferencesRepository
 import night.lines.todo.util.SchedulerProvider
 import night.lines.todo.presentation.base.BasePresenter
@@ -15,13 +17,22 @@ import javax.inject.Inject
  * Created by denisgabyshev on 18/03/2018.
  */
 @InjectViewState
-class MainPresenter @Inject constructor(private val schedulerProvider: SchedulerProvider,
+class MainPresenter @Inject constructor(private val databaseRepository: DatabaseRepository,
+                                        private val preferencesRepository: PreferencesRepository,
+                                        private val schedulerProvider: SchedulerProvider,
                                         private val addTaskFragmentRelay: AddTaskFragmentRelay,
                                         private val taskFragmentRelay: TaskFragmentRelay) : BasePresenter<MainView>() {
 
     private val TAG = "MainPresenter"
 
-    @Inject lateinit var preferencesRepository: PreferencesRepository
+    private var array = ArrayList<TaskID>()
+
+    init {
+        array.add(TaskID(0, "first"))
+        array.add(TaskID(0, "second"))
+        array.add(TaskID(0, "third"))
+
+    }
 
     var bottomFrameLayoutId: Int = 0
 
@@ -36,6 +47,8 @@ class MainPresenter @Inject constructor(private val schedulerProvider: Scheduler
                             checkFinishedItemsVisibility()
                         }
         )
+
+        viewState?.updateTaskIDArray()
     }
 
     private fun handleAddTaskFragmentState(enum: AddTaskFragmentRelay.EnumAddTaskFragment) {
@@ -81,6 +94,26 @@ class MainPresenter @Inject constructor(private val schedulerProvider: Scheduler
                         }
         )
     }
+
+    fun getOnTaskIDList() {
+        compositeDisposable.add(
+                databaseRepository.getTasksList()
+                        .compose(schedulerProvider.ioToMainFlowableScheduler())
+                        .subscribe {
+                            updateTaskIDArray(it)
+                        }
+        )
+    }
+
+    fun updateTaskIDArray(array: ArrayList<TaskID>) {
+        this.array = array
+        viewState?.updateTaskIDArray()
+    }
+
+    fun getTaskIDArrayItemCount(): Int = array.size
+
+    fun getTaskIDByPosition(position: Int): TaskID = array[position]
+
 
     fun onFabButtonClicked() {
         addTaskFragmentRelay.callAddTaskFragmentAction(AddTaskFragmentRelay.EnumAddTaskFragment.SHOW)

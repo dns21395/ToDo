@@ -2,12 +2,14 @@ package night.lines.todo.toothpick.module
 
 import android.arch.persistence.room.Room
 import android.content.Context
+import android.support.v7.widget.LinearLayoutManager
 import night.lines.todo.data.database.db.AppDatabase
 import night.lines.todo.data.database.db.converter.DatabaseConverter
 import night.lines.todo.domain.repository.DatabaseRepository
 import night.lines.todo.domain.repository.PreferencesRepository
 import night.lines.todo.toothpick.provider.DatabaseConverterProvider
 import night.lines.todo.toothpick.provider.DatabaseRepositoryProvider
+import night.lines.todo.toothpick.provider.LinearLayoutManagerProvider
 import night.lines.todo.toothpick.provider.PreferencesRepositoryProvider
 import night.lines.todo.util.SchedulerProvider
 import night.lines.todo.util.SchedulerProviderImpl
@@ -28,6 +30,7 @@ class ApplicationModule(context: Context) : Module() {
         bind(DatabaseRepository::class.java).toProvider(DatabaseRepositoryProvider::class.java).providesSingletonInScope()
         bind(SchedulerProvider::class.java).toInstance(SchedulerProviderImpl())
         bind(PreferencesRepository::class.java).toProvider(PreferencesRepositoryProvider::class.java).providesSingletonInScope()
+        bind(LinearLayoutManager::class.java).toProvider(LinearLayoutManagerProvider::class.java)
 
         //tegorov
     }

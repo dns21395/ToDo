@@ -10,7 +10,7 @@ import night.lines.todo.R
 import night.lines.todo.domain.model.Task
 import night.lines.todo.presentation.main.task.TaskPresenter
 import night.lines.todo.presentation.main.task.TaskView
-import night.lines.todo.toothpick.DI
+import night.lines.todo.toothpick.main.MainScope
 import night.lines.todo.toothpick.task.TaskModule
 import night.lines.todo.toothpick.task.TaskScope
 import night.lines.todo.ui.base.BaseFragment
@@ -26,18 +26,13 @@ class TaskFragment : BaseFragment(), TaskView {
 
     private val layoutManager = LinearLayoutManager(context)
 
-    @InjectPresenter
-    lateinit var presenter: TaskPresenter
-
-    @Inject
-    lateinit var adapter: TaskAdapter
-
+    @InjectPresenter lateinit var presenter: TaskPresenter
+    @Inject lateinit var adapter: TaskAdapter
 
     @ProvidePresenter
-    fun providePresenter(): TaskPresenter
-        =  Toothpick
-            .openScopes(DI.MAIN_ACTIVITY_SCOPE, TaskScope::class.java).apply {
-                TaskModule()
+    fun providePresenter(): TaskPresenter =
+            Toothpick.openScopes(MainScope::class.java, TaskScope::class.java).apply {
+                installModules(TaskModule())
                 Toothpick.inject(this@TaskFragment, this)
             }.getInstance(TaskPresenter::class.java)
 
@@ -46,6 +41,7 @@ class TaskFragment : BaseFragment(), TaskView {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        adapter.presenter = presenter
         adapter.setRecyclerView(recyclerView)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter

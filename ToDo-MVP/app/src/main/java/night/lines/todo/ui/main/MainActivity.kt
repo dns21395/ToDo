@@ -5,21 +5,27 @@ import android.util.Log
 import android.view.View
 import android.support.constraint.ConstraintLayout
 import android.support.constraint.ConstraintSet
-import android.support.v4.view.GravityCompat
-import android.view.Gravity
+import android.support.v7.widget.LinearLayoutManager
 import android.widget.FrameLayout
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.main_navigation.*
 import night.lines.todo.R
 import night.lines.todo.presentation.main.MainPresenter
 import night.lines.todo.presentation.main.MainView
 import night.lines.todo.toothpick.DI
-import night.lines.todo.toothpick.module.MainModule
+import night.lines.todo.toothpick.main.MainModule
+import night.lines.todo.toothpick.main.MainScope
+import night.lines.todo.toothpick.main.provider.MainPresenterProvider
+import night.lines.todo.ui.base.BaseActivity
 import night.lines.todo.ui.main.addtask.AddTaskFragment
+import night.lines.todo.ui.main.navigation.MainNavigationAdapter
 import night.lines.todo.ui.main.task.TaskFragment
 import toothpick.Toothpick
+import javax.inject.Inject
+import javax.inject.Provider
 
 /**
  * Created by denisgabyshev on 18/03/2018.
@@ -29,23 +35,26 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     private val TAG = "MainActivity"
 
-    @InjectPresenter
-    lateinit var presenter: MainPresenter
+    @InjectPresenter lateinit var presenter: MainPresenter
+
+    @Inject lateinit var linearLayoutManager: LinearLayoutManager
+
+    @Inject lateinit var adapter: MainNavigationAdapter
+
 
     @ProvidePresenter
-    fun providePresenter(): MainPresenter {
-        return Toothpick
-                .openScopes(DI.APP_SCOPE, DI.MAIN_ACTIVITY_SCOPE).apply {
-                    installModules(MainModule())
-                    Toothpick.inject(this@MainActivity, this)
-                }.getInstance(MainPresenter::class.java)
-    }
+    fun providePresenter(): MainPresenter =
+            Toothpick.openScopes(DI.APP_SCOPE, MainScope::class.java).apply {
+                installModules(MainModule())
+                Toothpick.inject(this@MainActivity, this)
+            }.getInstance(MainPresenter::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         setMenu()
+        setNavMenu()
 
         supportFragmentManager.beginTransaction().replace(R.id.frameLayout, TaskFragment())
                 .commitAllowingStateLoss()
@@ -56,10 +65,8 @@ class MainActivity : MvpAppCompatActivity(), MainView {
             presenter.onFabButtonClicked()
         }
 
-
         presenter.onViewPrepared()
     }
-
 
     private fun createFrameLayout() {
         fab.hide()
@@ -144,8 +151,18 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         }
     }
 
+    private fun setNavMenu() {
+        adapter.presenter = presenter
+        recyclerView.layoutManager = linearLayoutManager
+        recyclerView.adapter = adapter
+    }
+
     override fun updateIconCheckFinishedItemsVisibility(drawable: Int) {
         toolbar.menu.getItem(0).icon = resources.getDrawable(drawable, null)
+    }
+
+    override fun updateTaskIDArray() {
+        adapter.notifyDataSetChanged()
     }
 
     override fun onDestroy() {

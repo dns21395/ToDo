@@ -21,7 +21,8 @@ import javax.inject.Inject
  */
 class TaskAdapter @Inject constructor(context: Context) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>(){
 
-    @Inject lateinit var presenter: TaskPresenter
+    lateinit var presenter: TaskPresenter
+
     private var recyclerView: RecyclerView? = null
 
     private val swipeCallback = TaskAdapterSwipeCallback(context, this)

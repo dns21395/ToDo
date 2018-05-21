@@ -22,14 +22,16 @@ import javax.inject.Inject
 @InjectViewState
 class TaskPresenter @Inject constructor(private val schedulerProvider: SchedulerProvider,
                                         private val addTaskFragmentRelay: AddTaskFragmentRelay,
-                                        private val taskFragmentRelay: TaskFragmentRelay): BasePresenter<TaskView>() {
+                                        private val taskFragmentRelay: TaskFragmentRelay,
+                                        private val preferencesRepository: PreferencesRepository,
+                                        private val updateTaskUseCase: UpdateTaskUseCase,
+                                        private val removeTaskUseCase: RemoveTaskUseCase,
+                                        private val getTasksUseCase: GetTasksUseCase): BasePresenter<TaskView>() {
 
     private val TAG = "TaskPresenter"
 
-    @Inject lateinit var preferencesRepository: PreferencesRepository
-    @Inject lateinit var updateTaskUseCase: UpdateTaskUseCase
-    @Inject lateinit var removeTaskUseCase: RemoveTaskUseCase
-    @Inject lateinit var getTasksUseCase: GetTasksUseCase
+
+
 
     private var array = ArrayList<Task>()
 
