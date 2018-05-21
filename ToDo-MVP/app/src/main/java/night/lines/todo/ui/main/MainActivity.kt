@@ -22,6 +22,7 @@ import night.lines.todo.toothpick.main.provider.MainPresenterProvider
 import night.lines.todo.ui.base.BaseActivity
 import night.lines.todo.ui.main.addtask.AddTaskFragment
 import night.lines.todo.ui.main.navigation.MainNavigationAdapter
+import night.lines.todo.ui.main.navigation.TaskIdDialog
 import night.lines.todo.ui.main.task.TaskFragment
 import night.lines.todo.util.ScreenUtils
 import toothpick.Toothpick
@@ -157,6 +158,10 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         adapter.presenter = presenter
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = adapter
+        addTaskIDCardView.setOnClickListener {
+            Log.d(TAG, "newListClicked")
+            TaskIdDialog().show(supportFragmentManager)
+        }
     }
 
     override fun updateIconCheckFinishedItemsVisibility(drawable: Int) {

@@ -19,8 +19,9 @@
             android:id="@+id/recyclerView"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/addTaskIDCardView"
+            app:layout_constraintHeight_default="spread"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="0dp"/>
 
         <android.support.v7.widget.CardView
             android:id="@+id/addTaskIDCardView"

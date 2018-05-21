@@ -7,8 +7,6 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <include layout="@layout/main_navigation" />
-
     <android.support.constraint.ConstraintLayout
         android:id="@+id/parentConstraint"
         android:fitsSystemWindows="true"
@@ -85,6 +83,8 @@
             android:layout_height="64dp" />
 
     </android.support.constraint.ConstraintLayout>
+
+    <include layout="@layout/main_navigation" />
 
 </android.support.v4.widget.DrawerLayout>
 
