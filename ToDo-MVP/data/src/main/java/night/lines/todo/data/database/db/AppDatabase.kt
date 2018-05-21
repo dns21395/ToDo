@@ -4,7 +4,9 @@ import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
+import night.lines.todo.data.database.db.dao.TaskIDDao
 import night.lines.todo.data.database.db.dao.TaskDao
+import night.lines.todo.data.database.db.model.TaskIDModel
 import night.lines.todo.data.database.db.model.TaskModel
 
 /**
@@ -19,8 +21,10 @@ fun createAppDatabase(context: Context): AppDatabase =
         ).build()
 
 
-@Database(entities = [TaskModel::class], version = 1)
+@Database(entities = [TaskModel::class, TaskIDModel::class],
+        version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun taskDao(): TaskDao
+    abstract fun taskIDDao(): TaskIDDao
 
 }

@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.View
 import android.support.constraint.ConstraintLayout
 import android.support.constraint.ConstraintSet
+import android.support.v4.view.GravityCompat
+import android.view.Gravity
 import android.widget.FrameLayout
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -34,8 +36,8 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     fun providePresenter(): MainPresenter {
         return Toothpick
                 .openScopes(DI.APP_SCOPE, DI.MAIN_ACTIVITY_SCOPE).apply {
-                    Toothpick.inject(this@MainActivity, this)
                     installModules(MainModule())
+                    Toothpick.inject(this@MainActivity, this)
                 }.getInstance(MainPresenter::class.java)
     }
 
@@ -54,8 +56,10 @@ class MainActivity : MvpAppCompatActivity(), MainView {
             presenter.onFabButtonClicked()
         }
 
+
         presenter.onViewPrepared()
     }
+
 
     private fun createFrameLayout() {
         fab.hide()

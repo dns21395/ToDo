@@ -4,6 +4,9 @@
     <color name="colorPrimaryDark">#393946</color>
     <color name="colorAccent">#464656</color>
 
+    <color name="black_effective">#2A2A2A</color>
+
+
     <color name="swipe_item">#D32F2F</color>
     <color name="item_touch">#d1d1d5</color>
 

@@ -4,13 +4,27 @@ import io.reactivex.Flowable
 import io.reactivex.Observable
 import night.lines.todo.data.database.db.converter.DatabaseConverter
 import night.lines.todo.data.database.db.dao.TaskDao
+import night.lines.todo.data.database.db.dao.TaskIDDao
 import night.lines.todo.domain.model.Task
+import night.lines.todo.domain.model.TaskID
 import night.lines.todo.domain.repository.DatabaseRepository
 
 /**
  * Created by denisgabyshev on 18/03/2018.
  */
-class DatabaseRepositoryImpl constructor(private val converter: DatabaseConverter, private val taskDao: TaskDao) : DatabaseRepository {
+class DatabaseRepositoryImpl constructor(private val converter: DatabaseConverter,
+                                         private val taskDao: TaskDao,
+                                         private val taskIDDao: TaskIDDao) : DatabaseRepository {
+    override fun getTasksList(): Flowable<ArrayList<TaskID>> =
+            taskIDDao.getTaskList().map {
+                val array = ArrayList<TaskID>()
+
+                for(item in it) {
+                    array.add(converter.modelToDomain(item))
+                }
+
+                array
+            }
 
     override fun insertTask(task: Task): Observable<Long> =
             Observable.fromCallable { taskDao.insert(converter.apiToModel(task)) }
@@ -31,4 +45,6 @@ class DatabaseRepositoryImpl constructor(private val converter: DatabaseConverte
 
                 array
             }
+
+
 }

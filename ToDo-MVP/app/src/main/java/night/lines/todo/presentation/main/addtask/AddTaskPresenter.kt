@@ -21,7 +21,7 @@ class AddTaskPresenter @Inject constructor(private val schedulerProvider: Schedu
 
     fun onAddTaskButtonClicked(taskName: String) {
         compositeDisposable.add(
-                addTaskUseCase.execute(Task(0, taskName, Date().time))
+                addTaskUseCase.execute(Task(0, null, taskName, Date().time))
                 .compose(schedulerProvider.ioToMainObservableScheduler())
                         .subscribe {
                             taskFragmentRelay.callTaskFragmentAction(TaskFragmentRelay.EnumTaskFragment.ITEM_ADDED)

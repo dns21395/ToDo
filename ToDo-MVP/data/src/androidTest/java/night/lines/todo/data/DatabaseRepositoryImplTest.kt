@@ -42,7 +42,7 @@ class DatabaseRepositoryImplTest {
     @Test
     @Throws(Exception::class)
     fun shouldInsertNewTask() {
-        val task = Task(DataTestData.TASK_ID, DataTestData.TASK_NAME, DataTestData.TASK_DATE)
+        val task = Task(DataTestData.TASK_ID, 0, DataTestData.TASK_NAME, DataTestData.TASK_DATE)
 
         databaseRepositoryImpl.insertTask(task)
                 .map { taskDao.getTaskByDate(DataTestData.TASK_DATE) }

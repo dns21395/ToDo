@@ -29,7 +29,7 @@ task clean(type: Delete) {
 ext {
     toothpickVersion = "1.0.6"
     rxkotlin = '2.2.0'
-    roomDatabaseVersion = '1.0.0'
+    roomDatabaseVersion = '1.1.0'
     rxandroidVersion = '2.0.2'
     rxrelay = '2.0.0'
     multidex = '1.0.3'

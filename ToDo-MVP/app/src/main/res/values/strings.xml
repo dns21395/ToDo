@@ -5,4 +5,5 @@
     <string name="add_to_do">Add a To-Do</string>
     <string name="text_add_task_empty">You haven\'t written a task text</string>
     <string name="check">Check</string>
+    <string name="newList">New List</string>
 </resources>
