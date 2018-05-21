@@ -10,23 +10,26 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_task.view.*
 import night.lines.todo.R
-import night.lines.todo.data.database.db.model.TaskModel
 import night.lines.todo.domain.model.Task
 import night.lines.todo.presentation.main.task.TaskPresenter
 import org.jetbrains.anko.backgroundColor
 import org.jetbrains.anko.imageResource
+import javax.inject.Inject
 
 /**
  * Created by denisgabyshev on 20/03/2018.
  */
-class TaskAdapter(context: Context, private val recyclerView: RecyclerView) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>(){
+class TaskAdapter @Inject constructor(context: Context) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>(){
 
-    lateinit var presenter: TaskPresenter
+    @Inject lateinit var presenter: TaskPresenter
+    private var recyclerView: RecyclerView? = null
 
     private val swipeCallback = TaskAdapterSwipeCallback(context, this)
     private val itemTouchHelper = ItemTouchHelper(swipeCallback)
 
-    init {
+
+    fun setRecyclerView(recyclerView: RecyclerView) {
+        this.recyclerView = recyclerView
         itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
@@ -50,7 +53,7 @@ class TaskAdapter(context: Context, private val recyclerView: RecyclerView) : Re
     }
 
     fun smoothScrollToPosition() {
-        recyclerView.smoothScrollToPosition(presenter.getTaskArrayItemCount())
+        recyclerView?.smoothScrollToPosition(presenter.getTaskArrayItemCount())
     }
 
     inner class TaskViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
