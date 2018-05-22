@@ -17,10 +17,13 @@ class MainNavigationAdapter @Inject constructor(private val context: Context) : 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskIDViewHolder =
             TaskIDViewHolder(LayoutInflater.from(context).inflate(R.layout.item_taskid, parent, false))
 
-    override fun getItemCount(): Int = presenter.getTaskIDArrayItemCount()
+    override fun getItemCount(): Int = presenter.getTaskIDArrayItemCount() + 1
 
     override fun onBindViewHolder(holder: TaskIDViewHolder, position: Int) {
-        holder.bind(position)
+        when(position) {
+            0 -> holder.bindFirst()
+            else -> holder.bind(position - 1)
+        }
     }
 
     inner class TaskIDViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
@@ -28,6 +31,11 @@ class MainNavigationAdapter @Inject constructor(private val context: Context) : 
             val taskID = presenter.getTaskIDByPosition(position)
 
             text.text = taskID.name
+        }
+
+        fun bindFirst() = with(itemView) {
+            text.text = context.getString(R.string.todo)
+            image.setImageResource(R.drawable.myday)
         }
     }
 }

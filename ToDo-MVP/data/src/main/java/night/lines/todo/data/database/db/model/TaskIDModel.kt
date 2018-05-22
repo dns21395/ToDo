@@ -5,7 +5,7 @@ import android.arch.persistence.room.PrimaryKey
 
 @Entity(tableName = "task_id")
 data class TaskIDModel (
-        @PrimaryKey
+        @PrimaryKey(autoGenerate = true)
         val id: Long,
         var name: String
 )
