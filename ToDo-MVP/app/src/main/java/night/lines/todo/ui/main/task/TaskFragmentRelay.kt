@@ -21,8 +21,8 @@ class TaskFragmentRelay {
     }
 
     enum class EnumTaskFragment {
-        FINISHED_ITEMS_VISIBILITY_UPDATED,
+        UPDATE_ARRAY,
         ITEM_ADDED,
-        SCROLL_TO_END
+        SCROLL_TO_END,
     }
 }

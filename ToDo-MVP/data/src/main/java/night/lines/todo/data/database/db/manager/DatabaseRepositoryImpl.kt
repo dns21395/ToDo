@@ -39,8 +39,8 @@ class DatabaseRepositoryImpl constructor(private val converter: DatabaseConverte
     override fun removeTask(task: Task): Observable<Unit> =
             Observable.fromCallable { taskDao.delete(converter.apiToModel(task)) }
 
-    override fun getTasks(showFinished: Boolean): Flowable<ArrayList<Task>> =
-            taskDao.getTasks(if(showFinished) 1 else 0).map {
+    override fun getTasks(showFinished: Boolean, listId: Long): Flowable<ArrayList<Task>> =
+            taskDao.getTasks(if(showFinished) 1 else 0, listId).map {
                 val array = ArrayList<Task>()
 
                 for(item in it) {

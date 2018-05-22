@@ -6,6 +6,6 @@ import toothpick.config.Module
 
 class TaskIdModule : Module() {
     init {
-        bind(AddTaskIdUseCase::class.java).toProvider(AddTaskIdUseCaseProvider::class.java).singletonInScope()
+        bind(AddTaskIdUseCase::class.java).toProvider(AddTaskIdUseCaseProvider::class.java).providesSingletonInScope()
     }
 }

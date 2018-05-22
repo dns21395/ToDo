@@ -21,4 +21,6 @@ interface MainView : MvpView {
     fun updateIconCheckFinishedItemsVisibility(drawable: Int)
 
     fun updateTaskIDArray()
+
+    fun closeDrawer()
 }

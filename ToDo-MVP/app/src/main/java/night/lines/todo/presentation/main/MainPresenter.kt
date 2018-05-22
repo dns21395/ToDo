@@ -1,11 +1,12 @@
 package night.lines.todo.presentation.main
 
+import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import io.reactivex.Observable
 import night.lines.todo.R
 import night.lines.todo.domain.interactor.main.GetTaskIdListUseCase
+import night.lines.todo.domain.interactor.main.SetTaskListIdUseCase
 import night.lines.todo.domain.model.TaskID
-import night.lines.todo.domain.repository.DatabaseRepository
 import night.lines.todo.domain.repository.PreferencesRepository
 import night.lines.todo.util.SchedulerProvider
 import night.lines.todo.presentation.base.BasePresenter
@@ -22,18 +23,12 @@ class MainPresenter @Inject constructor(private val preferencesRepository: Prefe
                                         private val schedulerProvider: SchedulerProvider,
                                         private val addTaskFragmentRelay: AddTaskFragmentRelay,
                                         private val taskFragmentRelay: TaskFragmentRelay,
-                                        private val getTaskIdListUseCase: GetTaskIdListUseCase) : BasePresenter<MainView>() {
+                                        private val getTaskIdListUseCase: GetTaskIdListUseCase,
+                                        private val setTaskListIdUseCase: SetTaskListIdUseCase) : BasePresenter<MainView>() {
 
     private val TAG = "MainPresenter"
 
     private var array = ArrayList<TaskID>()
-
-//    init {
-//        array.add(TaskID(0, "first"))
-//        array.add(TaskID(0, "second"))
-//        array.add(TaskID(0, "third"))
-//
-//    }
 
     var bottomFrameLayoutId: Int = 0
 
@@ -91,7 +86,7 @@ class MainPresenter @Inject constructor(private val preferencesRepository: Prefe
                         .compose(schedulerProvider.ioToMainObservableScheduler())
                         .subscribe {
                             updateIconCheckFinishedItemsVisibility(it)
-                            taskFragmentRelay.callTaskFragmentAction(TaskFragmentRelay.EnumTaskFragment.FINISHED_ITEMS_VISIBILITY_UPDATED)
+                            taskFragmentRelay.callTaskFragmentAction(TaskFragmentRelay.EnumTaskFragment.UPDATE_ARRAY)
                         }
         )
     }
@@ -101,6 +96,7 @@ class MainPresenter @Inject constructor(private val preferencesRepository: Prefe
                 getTaskIdListUseCase.execute()
                         .compose(schedulerProvider.ioToMainFlowableScheduler())
                         .subscribe {
+                            Log.d(TAG, "array : $it")
                             updateTaskIDArray(it)
                         }
         )
@@ -115,6 +111,17 @@ class MainPresenter @Inject constructor(private val preferencesRepository: Prefe
 
     fun getTaskIDByPosition(position: Int): TaskID = array[position]
 
+
+    fun onListTaskClicked(position: Int) {
+        compositeDisposable.add(
+                setTaskListIdUseCase.execute(array[position].id)
+                        .compose(schedulerProvider.ioToMainObservableScheduler())
+                        .subscribe {
+                            taskFragmentRelay.callTaskFragmentAction(TaskFragmentRelay.EnumTaskFragment.UPDATE_ARRAY)
+                            viewState.closeDrawer()
+                        }
+        )
+    }
 
     fun onFabButtonClicked() {
         addTaskFragmentRelay.callAddTaskFragmentAction(AddTaskFragmentRelay.EnumAddTaskFragment.SHOW)

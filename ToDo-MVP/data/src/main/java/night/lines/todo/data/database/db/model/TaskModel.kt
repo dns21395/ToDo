@@ -16,7 +16,7 @@ import android.arch.persistence.room.PrimaryKey
 data class TaskModel (
         @PrimaryKey(autoGenerate = true)
         val id: Long,
-        val listId: Long?,
+        val listId: Long,
         var taskName: String,
         val date: Long,
         var isDone: Boolean = false

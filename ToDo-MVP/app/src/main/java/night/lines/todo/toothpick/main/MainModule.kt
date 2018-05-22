@@ -19,9 +19,8 @@ class MainModule : Module() {
     init {
         bind(AddTaskFragmentRelay::class.java).toInstance(AddTaskFragmentRelay())
         bind(TaskFragmentRelay::class.java).toInstance(TaskFragmentRelay())
-        bind(GetTaskIdListUseCase::class.java).toProvider(GetTaskIdListUseCaseProvider::class.java).singletonInScope()
-        bind(GetTaskListIdUseCase::class.java).toProvider(GetTaskListIdUseCaseProvider::class.java).singletonInScope()
-        bind(SetTaskListIdUseCase::class.java).toProvider(SetTaskListIdUseCaseProvider::class.java).singletonInScope()
-        bind(MainNavigationAdapter::class.java).toProvider(MainNavigatonAdapterProvider::class.java).singletonInScope()
+        bind(GetTaskListIdUseCase::class.java).toProvider(GetTaskListIdUseCaseProvider::class.java).providesSingletonInScope()
+        bind(SetTaskListIdUseCase::class.java).toProvider(SetTaskListIdUseCaseProvider::class.java).providesSingletonInScope()
+        bind(MainNavigationAdapter::class.java).toProvider(MainNavigatonAdapterProvider::class.java).providesSingletonInScope()
     }
 }

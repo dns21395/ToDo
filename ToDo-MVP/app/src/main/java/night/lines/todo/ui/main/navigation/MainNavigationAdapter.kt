@@ -15,18 +15,17 @@ class MainNavigationAdapter @Inject constructor(private val context: Context) : 
 
     lateinit var presenter: MainPresenter
 
-    @Inject lateinit var setTaskListIdUseCase: SetTaskListIdUseCase
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskIDViewHolder =
             TaskIDViewHolder(LayoutInflater.from(context).inflate(R.layout.item_taskid, parent, false))
 
-    override fun getItemCount(): Int = presenter.getTaskIDArrayItemCount() + 1
+    override fun getItemCount(): Int = presenter.getTaskIDArrayItemCount()
 
     override fun onBindViewHolder(holder: TaskIDViewHolder, position: Int) {
         when(position) {
-            0 -> holder.bindFirst()
-            else -> holder.bind(position - 1)
+            0 -> { holder.bindFirst() }
+            else -> holder.bind(position)
         }
+        holder.itemView.setOnClickListener { presenter.onListTaskClicked(position) }
     }
 
     inner class TaskIDViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {

@@ -5,8 +5,16 @@ import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
 import night.lines.todo.data.database.db.AppDatabase
 import night.lines.todo.data.database.db.converter.DatabaseConverter
+import night.lines.todo.domain.interactor.main.AddTaskIdUseCase
+import night.lines.todo.domain.interactor.main.GetTaskIdListUseCase
+import night.lines.todo.domain.interactor.main.GetTaskListIdUseCase
+import night.lines.todo.domain.interactor.main.SetTaskListIdUseCase
 import night.lines.todo.domain.repository.DatabaseRepository
 import night.lines.todo.domain.repository.PreferencesRepository
+import night.lines.todo.toothpick.main.navigation.provider.AddTaskIdUseCaseProvider
+import night.lines.todo.toothpick.main.provider.GetTaskIdListUseCaseProvider
+import night.lines.todo.toothpick.main.provider.GetTaskListIdUseCaseProvider
+import night.lines.todo.toothpick.main.provider.SetTaskListIdUseCaseProvider
 import night.lines.todo.toothpick.provider.DatabaseConverterProvider
 import night.lines.todo.toothpick.provider.DatabaseRepositoryProvider
 import night.lines.todo.toothpick.provider.LinearLayoutManagerProvider
@@ -31,6 +39,8 @@ class ApplicationModule(context: Context) : Module() {
         bind(SchedulerProvider::class.java).toInstance(SchedulerProviderImpl())
         bind(PreferencesRepository::class.java).toProvider(PreferencesRepositoryProvider::class.java).providesSingletonInScope()
         bind(LinearLayoutManager::class.java).toProvider(LinearLayoutManagerProvider::class.java)
+        bind(GetTaskIdListUseCase::class.java).toProvider(GetTaskIdListUseCaseProvider::class.java).providesSingletonInScope()
+        bind(AddTaskIdUseCase::class.java).toProvider(AddTaskIdUseCaseProvider::class.java).providesSingletonInScope()
 
         //tegorov
     }

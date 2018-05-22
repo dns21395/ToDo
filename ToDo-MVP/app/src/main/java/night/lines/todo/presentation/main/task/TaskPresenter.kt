@@ -4,9 +4,7 @@ import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import io.reactivex.BackpressureStrategy
 import io.reactivex.disposables.Disposable
-import night.lines.todo.domain.interactor.main.GetTasksUseCase
-import night.lines.todo.domain.interactor.main.RemoveTaskUseCase
-import night.lines.todo.domain.interactor.main.UpdateTaskUseCase
+import night.lines.todo.domain.interactor.main.*
 import night.lines.todo.domain.model.Task
 import night.lines.todo.domain.repository.PreferencesRepository
 import night.lines.todo.util.SchedulerProvider
@@ -26,12 +24,10 @@ class TaskPresenter @Inject constructor(private val schedulerProvider: Scheduler
                                         private val preferencesRepository: PreferencesRepository,
                                         private val updateTaskUseCase: UpdateTaskUseCase,
                                         private val removeTaskUseCase: RemoveTaskUseCase,
-                                        private val getTasksUseCase: GetTasksUseCase): BasePresenter<TaskView>() {
+                                        private val getTasksUseCase: GetTasksUseCase,
+                                        private val getTaskListIdUseCase: GetTaskListIdUseCase): BasePresenter<TaskView>() {
 
     private val TAG = "TaskPresenter"
-
-
-
 
     private var array = ArrayList<Task>()
 
@@ -55,6 +51,14 @@ class TaskPresenter @Inject constructor(private val schedulerProvider: Scheduler
         compositeDisposable.add(showOrHideFinishedItems())
 
         compositeDisposable.add(isAddTaskFragmentVisible())
+
+        compositeDisposable.add(
+                getTaskListIdUseCase.execute()
+                        .compose(schedulerProvider.ioToMainObservableScheduler())
+                        .subscribe {
+                            Log.d(TAG, "ID : $it")
+                        }
+        )
     }
 
     private fun isAddTaskFragmentVisible(): Disposable
@@ -75,7 +79,7 @@ class TaskPresenter @Inject constructor(private val schedulerProvider: Scheduler
             .compose(schedulerProvider.ioToMainObservableScheduler())
             .subscribe {
                 when(it) {
-                    TaskFragmentRelay.EnumTaskFragment.FINISHED_ITEMS_VISIBILITY_UPDATED -> {
+                    TaskFragmentRelay.EnumTaskFragment.UPDATE_ARRAY -> {
                         getTasksDisposable.dispose()
                         getTasksDisposable = updateGetTasksDisposable()
                     }
@@ -83,17 +87,33 @@ class TaskPresenter @Inject constructor(private val schedulerProvider: Scheduler
                 }
             }
 
-    private fun updateGetTasksDisposable(): Disposable
-         = preferencesRepository.getFinishedTasksVisibility().toFlowable(BackpressureStrategy.BUFFER)
-            .flatMap {
-                Log.d(TAG, "ipdateGetTasksDisposable() : ${it}")
-                getTasksUseCase.execute(it)
-            }
-            .compose(schedulerProvider.ioToMainFlowableScheduler())
-            .subscribe {
-                Log.d(TAG, "$it")
-                viewState.updateTaskArray(it)
-            }
+    private fun updateGetTasksDisposable(): Disposable {
+        var isFinished = false
+        var listId: Long
+
+        return preferencesRepository.getFinishedTasksVisibility().toFlowable(BackpressureStrategy.BUFFER)
+                .toObservable()
+                .flatMap {
+                    isFinished = it
+                    getTaskListIdUseCase.execute()
+                }
+                .toFlowable(BackpressureStrategy.BUFFER)
+                .flatMap {
+                    listId = it
+                    getTasksUseCase.execute(GetTasksUseCaseData(isFinished, listId))
+                }
+                .compose(schedulerProvider.ioToMainFlowableScheduler())
+                .subscribe {
+                    Log.d(TAG, "array\n$it")
+                    viewState.updateTaskArray(it)
+                }
+
+//        return getTasksUseCase.execute(GetTasksUseCaseData(false, null))
+//                .compose(schedulerProvider.ioToMainFlowableScheduler())
+//                .subscribe {
+//                    viewState.updateTaskArray(it)
+//                }
+    }
 
     fun onStatusButtonClick(task: Task) {
         compositeDisposable.add(

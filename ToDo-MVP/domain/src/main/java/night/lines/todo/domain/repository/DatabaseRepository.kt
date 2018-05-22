@@ -12,7 +12,7 @@ interface DatabaseRepository {
 
     fun removeTask(task: Task): Observable<Unit>
 
-    fun getTasks(showFinished: Boolean): Flowable<ArrayList<Task>>
+    fun getTasks(showFinished: Boolean, listId: Long): Flowable<ArrayList<Task>>
 
     fun getTaskIdList(): Flowable<ArrayList<TaskID>>
 

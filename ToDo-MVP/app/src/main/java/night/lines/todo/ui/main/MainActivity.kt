@@ -173,4 +173,8 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         super.onDestroy()
         if(isFinishing) Toothpick.closeScope(DI.MAIN_ACTIVITY_SCOPE)
     }
+
+    override fun closeDrawer() {
+        drawerLayout.closeDrawers()
+    }
 }
