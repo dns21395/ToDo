@@ -8,11 +8,14 @@ import android.content.Context
 import android.view.LayoutInflater
 import kotlinx.android.synthetic.main.item_taskid.view.*
 import night.lines.todo.R
+import night.lines.todo.domain.interactor.main.SetTaskListIdUseCase
 import night.lines.todo.presentation.main.MainPresenter
 
 class MainNavigationAdapter @Inject constructor(private val context: Context) :  RecyclerView.Adapter<MainNavigationAdapter.TaskIDViewHolder>() {
 
     lateinit var presenter: MainPresenter
+
+    @Inject lateinit var setTaskListIdUseCase: SetTaskListIdUseCase
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskIDViewHolder =
             TaskIDViewHolder(LayoutInflater.from(context).inflate(R.layout.item_taskid, parent, false))
