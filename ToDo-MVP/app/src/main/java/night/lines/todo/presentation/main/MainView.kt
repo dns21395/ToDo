@@ -23,4 +23,6 @@ interface MainView : MvpView {
     fun updateTaskIDArray()
 
     fun closeDrawer()
+
+    fun updateTitle(title: String)
 }

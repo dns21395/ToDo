@@ -64,6 +64,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
             presenter.onFabButtonClicked()
         }
 
+
         presenter.onViewPrepared()
     }
 
@@ -176,5 +177,10 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     override fun closeDrawer() {
         drawerLayout.closeDrawers()
+        app_bar.setExpanded(true)
+    }
+
+    override fun updateTitle(title: String) {
+        toolbar_layout.title = title
     }
 }

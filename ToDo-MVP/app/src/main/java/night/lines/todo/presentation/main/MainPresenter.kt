@@ -118,7 +118,9 @@ class MainPresenter @Inject constructor(private val preferencesRepository: Prefe
                         .compose(schedulerProvider.ioToMainObservableScheduler())
                         .subscribe {
                             taskFragmentRelay.callTaskFragmentAction(TaskFragmentRelay.EnumTaskFragment.UPDATE_ARRAY)
+                            setToolbarBackground()
                             viewState.closeDrawer()
+                            viewState.updateTitle(array[position].name)
                         }
         )
     }
