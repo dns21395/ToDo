@@ -18,8 +18,6 @@ import night.lines.todo.presentation.main.MainView
 import night.lines.todo.toothpick.DI
 import night.lines.todo.toothpick.main.MainModule
 import night.lines.todo.toothpick.main.MainScope
-import night.lines.todo.toothpick.main.provider.MainPresenterProvider
-import night.lines.todo.ui.base.BaseActivity
 import night.lines.todo.ui.main.addtask.AddTaskFragment
 import night.lines.todo.ui.main.navigation.MainNavigationAdapter
 import night.lines.todo.ui.main.navigation.TaskIdDialog
@@ -27,7 +25,6 @@ import night.lines.todo.ui.main.task.TaskFragment
 import night.lines.todo.util.ScreenUtils
 import toothpick.Toothpick
 import javax.inject.Inject
-import javax.inject.Provider
 
 /**
  * Created by denisgabyshev on 18/03/2018.

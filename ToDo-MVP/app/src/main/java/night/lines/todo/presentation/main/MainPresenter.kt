@@ -3,6 +3,7 @@ package night.lines.todo.presentation.main
 import com.arellomobile.mvp.InjectViewState
 import io.reactivex.Observable
 import night.lines.todo.R
+import night.lines.todo.domain.interactor.main.GetTaskIdListUseCase
 import night.lines.todo.domain.model.TaskID
 import night.lines.todo.domain.repository.DatabaseRepository
 import night.lines.todo.domain.repository.PreferencesRepository
@@ -17,22 +18,22 @@ import javax.inject.Inject
  * Created by denisgabyshev on 18/03/2018.
  */
 @InjectViewState
-class MainPresenter @Inject constructor(private val databaseRepository: DatabaseRepository,
-                                        private val preferencesRepository: PreferencesRepository,
+class MainPresenter @Inject constructor(private val preferencesRepository: PreferencesRepository,
                                         private val schedulerProvider: SchedulerProvider,
                                         private val addTaskFragmentRelay: AddTaskFragmentRelay,
-                                        private val taskFragmentRelay: TaskFragmentRelay) : BasePresenter<MainView>() {
+                                        private val taskFragmentRelay: TaskFragmentRelay,
+                                        private val getTaskIdListUseCase: GetTaskIdListUseCase) : BasePresenter<MainView>() {
 
     private val TAG = "MainPresenter"
 
     private var array = ArrayList<TaskID>()
 
-    init {
-        array.add(TaskID(0, "first"))
-        array.add(TaskID(0, "second"))
-        array.add(TaskID(0, "third"))
-
-    }
+//    init {
+//        array.add(TaskID(0, "first"))
+//        array.add(TaskID(0, "second"))
+//        array.add(TaskID(0, "third"))
+//
+//    }
 
     var bottomFrameLayoutId: Int = 0
 
@@ -48,7 +49,7 @@ class MainPresenter @Inject constructor(private val databaseRepository: Database
                         }
         )
 
-        viewState?.updateTaskIDArray()
+        getOnTaskIDList()
     }
 
     private fun handleAddTaskFragmentState(enum: AddTaskFragmentRelay.EnumAddTaskFragment) {
@@ -97,7 +98,7 @@ class MainPresenter @Inject constructor(private val databaseRepository: Database
 
     fun getOnTaskIDList() {
         compositeDisposable.add(
-                databaseRepository.getTaskIdList()
+                getTaskIdListUseCase.execute()
                         .compose(schedulerProvider.ioToMainFlowableScheduler())
                         .subscribe {
                             updateTaskIDArray(it)
