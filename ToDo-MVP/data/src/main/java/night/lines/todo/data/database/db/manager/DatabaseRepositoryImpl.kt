@@ -15,7 +15,8 @@ import night.lines.todo.domain.repository.DatabaseRepository
 class DatabaseRepositoryImpl constructor(private val converter: DatabaseConverter,
                                          private val taskDao: TaskDao,
                                          private val taskIDDao: TaskIDDao) : DatabaseRepository {
-    override fun getTasksList(): Flowable<ArrayList<TaskID>> =
+
+    override fun getTaskIdList(): Flowable<ArrayList<TaskID>> =
             taskIDDao.getTaskList().map {
                 val array = ArrayList<TaskID>()
 
@@ -25,6 +26,9 @@ class DatabaseRepositoryImpl constructor(private val converter: DatabaseConverte
 
                 array
             }
+
+    override fun insertTaskId(taskID: TaskID): Observable<Long> =
+            Observable.fromCallable { taskIDDao.insert(converter.apiToModel(taskID)) }
 
     override fun insertTask(task: Task): Observable<Long> =
             Observable.fromCallable { taskDao.insert(converter.apiToModel(task)) }

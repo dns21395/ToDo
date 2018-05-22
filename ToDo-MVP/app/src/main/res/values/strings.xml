@@ -8,4 +8,5 @@
     <string name="newList">New List</string>
     <string name="add">Add</string>
     <string name="cancel">Cancel</string>
+    <string name="list_added">List \"%1$s\" added</string>
 </resources>

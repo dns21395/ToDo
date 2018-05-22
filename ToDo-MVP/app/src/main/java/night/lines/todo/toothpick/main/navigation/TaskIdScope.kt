@@ -1,4 +1,4 @@
-package night.lines.todo.presentation.main.navigation
+package night.lines.todo.toothpick.main.navigation
 
 import javax.inject.Scope
 

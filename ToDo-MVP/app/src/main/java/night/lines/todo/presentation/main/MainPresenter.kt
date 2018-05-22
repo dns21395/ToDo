@@ -97,7 +97,7 @@ class MainPresenter @Inject constructor(private val databaseRepository: Database
 
     fun getOnTaskIDList() {
         compositeDisposable.add(
-                databaseRepository.getTasksList()
+                databaseRepository.getTaskIdList()
                         .compose(schedulerProvider.ioToMainFlowableScheduler())
                         .subscribe {
                             updateTaskIDArray(it)

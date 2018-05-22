@@ -14,5 +14,7 @@ interface DatabaseRepository {
 
     fun getTasks(showFinished: Boolean): Flowable<ArrayList<Task>>
 
-    fun getTasksList(): Flowable<ArrayList<TaskID>>
+    fun getTaskIdList(): Flowable<ArrayList<TaskID>>
+
+    fun insertTaskId(taskID: TaskID): Observable<Long>
 }
