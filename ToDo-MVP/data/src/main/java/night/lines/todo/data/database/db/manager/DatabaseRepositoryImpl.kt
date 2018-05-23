@@ -16,6 +16,9 @@ class DatabaseRepositoryImpl constructor(private val converter: DatabaseConverte
                                          private val taskDao: TaskDao,
                                          private val taskIDDao: TaskIDDao) : DatabaseRepository {
 
+    override fun getTaskIdById(id: Long): Observable<TaskID>
+        = Observable.fromCallable { converter.modelToDomain(taskIDDao.getTaskIdById(id)) }
+
     override fun getTaskIdList(): Flowable<ArrayList<TaskID>> =
             taskIDDao.getTaskList().map {
                 val array = ArrayList<TaskID>()

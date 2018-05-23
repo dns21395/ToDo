@@ -4,7 +4,9 @@ import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import io.reactivex.Observable
 import night.lines.todo.R
+import night.lines.todo.domain.interactor.main.GetTaskIdByIdUseCase
 import night.lines.todo.domain.interactor.main.GetTaskIdListUseCase
+import night.lines.todo.domain.interactor.main.GetTaskListIdUseCase
 import night.lines.todo.domain.interactor.main.SetTaskListIdUseCase
 import night.lines.todo.domain.model.TaskID
 import night.lines.todo.domain.repository.PreferencesRepository
@@ -24,7 +26,9 @@ class MainPresenter @Inject constructor(private val preferencesRepository: Prefe
                                         private val addTaskFragmentRelay: AddTaskFragmentRelay,
                                         private val taskFragmentRelay: TaskFragmentRelay,
                                         private val getTaskIdListUseCase: GetTaskIdListUseCase,
-                                        private val setTaskListIdUseCase: SetTaskListIdUseCase) : BasePresenter<MainView>() {
+                                        private val setTaskListIdUseCase: SetTaskListIdUseCase,
+                                        private val getTaskIdByIdUseCase: GetTaskIdByIdUseCase,
+                                        private val getTaskListIdUseCase: GetTaskListIdUseCase) : BasePresenter<MainView>() {
 
     private val TAG = "MainPresenter"
 
@@ -45,6 +49,7 @@ class MainPresenter @Inject constructor(private val preferencesRepository: Prefe
         )
 
         getOnTaskIDList()
+        updateTitleOnViewPrepared()
     }
 
     private fun handleAddTaskFragmentState(enum: AddTaskFragmentRelay.EnumAddTaskFragment) {
@@ -122,6 +127,19 @@ class MainPresenter @Inject constructor(private val preferencesRepository: Prefe
                             viewState.closeDrawer()
                             viewState.updateTitle(array[position].name)
                         }
+        )
+    }
+
+    private fun updateTitleOnViewPrepared() {
+        compositeDisposable.add(
+                getTaskListIdUseCase.execute()
+                        .flatMap {
+                            getTaskIdByIdUseCase.execute(it)
+                        }.compose(schedulerProvider.ioToMainObservableScheduler())
+                        .subscribe {
+                            viewState.updateTitle(it.name)
+                        }
+
         )
     }
 
