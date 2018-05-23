@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import android.support.constraint.ConstraintLayout
 import android.support.constraint.ConstraintSet
+import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.FrameLayout
 import com.arellomobile.mvp.MvpAppCompatActivity
@@ -156,10 +157,11 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         adapter.presenter = presenter
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = adapter
-        addTaskIDCardView.setOnClickListener {
-            Log.d(TAG, "newListClicked")
-            TaskIdDialog().show(supportFragmentManager)
-        }
+        addTaskIDCardView.setOnClickListener { TaskIdDialog().show(supportFragmentManager) }
+
+        val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
     }
 
     override fun updateIconCheckFinishedItemsVisibility(drawable: Int) {

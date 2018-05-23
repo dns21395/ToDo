@@ -10,4 +10,6 @@
     <string name="cancel">Cancel</string>
     <string name="list_added">List \"%1$s\" added</string>
     <string name="todo">To-Do</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>
