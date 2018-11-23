@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">ToDo</string>
-    <string name="main_toolbar_title">To-Do</string>
-    <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
-    <string name="add_to_do">Add a To-Do</string>
-    <string name="text_add_task_empty">You haven\'t written a task text</string>
-    <string name="check">Check</string>
-</resources>
